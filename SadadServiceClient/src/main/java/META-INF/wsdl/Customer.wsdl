@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Customer" targetNamespace="http://www.sadad.com/EBPP/wsdl/Customer/1.0" xmlns="http://www.sadad.com/EBPP/wsdl/Customer/1.0" xmlns:cst="http://www.sadad.com/EBPP/scm/schema/Customer/1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.sadad.com/EBPP/wsdl/Customer/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+		
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.sadad.com/EBPP/wsdl/Customer/1.0">
+			<xsd:import namespace="http://www.sadad.com/EBPP/scm/schema/Customer/1.0" schemaLocation="Customer.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+
+
+	
+	<wsdl:message name="CustomerAssociationRq">
+		<wsdl:part element="cst:CustProfileAssnRq" name="CustomerAssociationRq"/>
+	</wsdl:message>
+	<wsdl:message name="CustomerAssociationRs">
+		<wsdl:part element="cst:CustProfileAssnRs" name="CustomerAssociationRs"/>
+	</wsdl:message>
+	<wsdl:message name="CustomerFault">
+		<wsdl:part element="cst:CustomerFault" name="SOAPFault"/>
+	</wsdl:message> 	
+	
+	<wsdl:message name="CustomerDisassociationRq">
+		<wsdl:part element="cst:CustProfileDisassnRq" name="CustomerDisassociationRq"/>
+	</wsdl:message>
+	<wsdl:message name="CustomerDisassociationRs">
+		<wsdl:part element="cst:CustProfileDisassnRs" name="CustomerDisassociationRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="CustomerInquiryRq">
+		<wsdl:part element="cst:CustProfileInqRq" name="CustomerInquiryRq"/>
+	</wsdl:message>
+	<wsdl:message name="CustomerInquiryRs">
+		<wsdl:part element="cst:CustProfileInqRs" name="CustomerInquiryRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ActivateRq">
+		<wsdl:part element="cst:ActivateRq" name="ActivateRq"/>
+	</wsdl:message>
+	<wsdl:message name="ActivateRs">
+		<wsdl:part element="cst:ActivateRs" name="ActivateRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="DeactivateRq">
+		<wsdl:part element="cst:DeactivateRq" name="DeactivateRq"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivateRs">
+		<wsdl:part element="cst:DeactivateRs" name="DeactivateRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="GetByKeyRq">
+		<wsdl:part element="cst:GetByKeyRq" name="GetByKeyRq"/>
+	</wsdl:message>
+	<wsdl:message name="GetByKeyRs">
+		<wsdl:part element="cst:GetByKeyRs" name="GetByKeyRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ListByAccountRq">
+		<wsdl:part element="cst:ListByAccountRq" name="ListByAccountRq"/>
+	</wsdl:message>
+	<wsdl:message name="ListByAccountRs">
+		<wsdl:part element="cst:ListByAccountRs" name="ListByAccountRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ListByBillRq">
+		<wsdl:part element="cst:ListByBillRq" name="ListByBillRq"/>
+	</wsdl:message>
+	<wsdl:message name="ListByBillRs">
+		<wsdl:part element="cst:ListByBillRs" name="ListByBillRs"/>
+	</wsdl:message>	
+	
+	<wsdl:portType name="CustomerPort">
+		<wsdl:operation name="CustomerAssociation">
+			<wsdl:input message="CustomerAssociationRq" name="CustomerAssociation_Input"/>
+			<wsdl:output message="CustomerAssociationRs" name="CustomerAssociation_Output"/>
+			<wsdl:fault message="CustomerFault" name="CustomerAssociation_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="CustomerDisassociation">
+			<wsdl:input message="CustomerDisassociationRq" name="CustomerDisassociation_Input"/>
+			<wsdl:output message="CustomerDisassociationRs" name="CustomerDisassociation_Output"/>
+			<wsdl:fault message="CustomerFault" name="CustomerDisassociation_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="CustomerInquiry">
+			<wsdl:input message="CustomerInquiryRq" name="CustomerInquiry_Input"/>
+			<wsdl:output message="CustomerInquiryRs" name="CustomerInquiry_Output"/>
+			<wsdl:fault message="CustomerFault" name="CustomerInquiry_Fault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="Activate">
+			<wsdl:input message="ActivateRq" name="ActivateRq_Input"/>
+			<wsdl:output message="ActivateRs" name="ActivateRs_Output"/>
+			<wsdl:fault message="CustomerFault" name="Activate_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="Deactivate">
+			<wsdl:input message="DeactivateRq" name="DeactivateRq_Input"/>
+			<wsdl:output message="DeactivateRs" name="DeactivateRs_Output"/>
+			<wsdl:fault message="CustomerFault" name="Deactivate_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetByKey">
+			<wsdl:input message="GetByKeyRq" name="GetByKeyRq_Input"/>
+			<wsdl:output message="GetByKeyRs" name="GetByKeyRs_Output"/>
+			<wsdl:fault message="CustomerFault" name="GetByKey_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ListByAccount">
+			<wsdl:input message="ListByAccountRq" name="ListByAccountRq_Input"/>
+			<wsdl:output message="ListByAccountRs" name="ListByAccountRs_Output"/>
+			<wsdl:fault message="CustomerFault" name="ListByAccount_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ListByBill">
+			<wsdl:input message="ListByBillRq" name="ListByBillRq_Input"/>
+			<wsdl:output message="ListByBillRs" name="ListByBillRs_Output"/>
+			<wsdl:fault message="CustomerFault" name="ListByBill_Fault"/>
+		</wsdl:operation>											
+	</wsdl:portType> 
+	
+	
+
+	<wsdl:binding name="CustomerBinding" type="CustomerPort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="CustomerAssociation">
+			<wsdl:input name="CustomerAssociation_Input">
+				<soap:body parts="CustomerAssociationRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CustomerAssociation_Output">
+				<soap:body parts="CustomerAssociationRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CustomerAssociation_Fault">
+				<soap:fault name="CustomerAssociation_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CustomerDisassociation">
+			<wsdl:input name="CustomerDisassociation_Input">
+				<soap:body parts="CustomerDisassociationRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CustomerDisassociation_Output">
+				<soap:body parts="CustomerDisassociationRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CustomerDisassociation_Fault">
+				<soap:fault name="CustomerDisassociation_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>	
+		<wsdl:operation name="CustomerInquiry">
+			<wsdl:input name="CustomerInquiry_Input">
+				<soap:body parts="CustomerInquiryRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CustomerInquiry_Output">
+				<soap:body parts="CustomerInquiryRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CustomerInquiry_Fault">
+				<soap:fault name="CustomerInquiry_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>	
+		<wsdl:operation name="Activate">
+			<soap:operation soapAction="http://sadad.com/EBPP/service/Customer/1.0/Activate"/>
+			<wsdl:input name="ActivateRq_Input">
+				<soap:body parts="ActivateRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ActivateRs_Output">
+				<soap:body parts="ActivateRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="Activate_Fault">
+				<soap:fault name="Activate_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="Deactivate">
+			<wsdl:input name="DeactivateRq_Input">
+				<soap:body parts="DeactivateRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeactivateRs_Output">
+				<soap:body parts="DeactivateRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="Deactivate_Fault">
+				<soap:fault name="Deactivate_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetByKey">
+			<wsdl:input name="GetByKeyRq_Input">
+				<soap:body parts="GetByKeyRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetByKeyRs_Output">
+				<soap:body parts="GetByKeyRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetByKey_Fault">
+				<soap:fault name="GetByKey_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>	
+		<wsdl:operation name="ListByAccount">
+			<wsdl:input name="ListByAccountRq_Input">
+				<soap:body parts="ListByAccountRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListByAccountRs_Output">
+				<soap:body parts="ListByAccountRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ListByAccount_Fault">
+				<soap:fault name="ListByAccount_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ListByBill">
+			<wsdl:input name="ListByBillRq_Input">
+				<soap:body parts="ListByBillRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListByBillRs_Output">
+				<soap:body parts="ListByBillRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ListByBill_Fault">
+				<soap:fault name="ListByBill_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>													
+	</wsdl:binding> 
+	
+	<wsdl:service name="Customer">
+		<wsdl:port binding="CustomerBinding" name="CustomerBinding">
+			<soap:address location="http://schemas.xmlsoap.org/soap/http"/>
+				<!-- <soap:address location="http://www.sadad.com/EBPP/wsdl/CustomerService/1.0/"/> -->
+		</wsdl:port>  
+	</wsdl:service>
+</wsdl:definitions>

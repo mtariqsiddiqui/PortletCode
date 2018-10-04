@@ -1,0 +1,10 @@
+<%-- <select name="txtPartnerKey" class="outputData" id="cmbPartnerKey" onchange="onChangePartnerKey(this);">
+	<c:forEach items="${BillerList}" var="biller">
+		<option value="<c:out value="${biller.value.partnerKey}" />"><c:out value="${biller.value.partnerName}" /></option>
+	</c:forEach>
+</select>
+<ul>
+<li>${BillerList['001'].partnerKey}</li>
+<li>${BillerList['001'].partnerName}</li>
+<li>${BillerList['001'].partnerDescription}</li>
+</ul> --%>

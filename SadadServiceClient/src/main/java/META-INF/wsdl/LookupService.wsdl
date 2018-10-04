@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="LookupService" targetNamespace="http://www.sadad.com/EBPP/wsdl/LookupService/1.0" xmlns:lk="http://www.sadad.com/EBPP/schema/Lookup/1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.sadad.com/EBPP/wsdl/LookupService/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+		
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.sadad.com/EBPP/wsdl/LookupService/1.0">
+			<xsd:import namespace="http://www.sadad.com/EBPP/schema/Lookup/1.0" schemaLocation="Lookup.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="LookupRq">
+		<wsdl:part element="lk:LookupRq" name="LookupRq"/>
+	</wsdl:message>
+	<wsdl:message name="LookupRs">
+		<wsdl:part element="lk:LookupRs" name="LookupRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="LookupFault">
+		<wsdl:part element="lk:LookupFault" name="SOAPFault"/>
+	</wsdl:message>
+	
+	<wsdl:portType name="LookupServicePort">
+		<wsdl:operation name="Lookup">
+			<wsdl:input message="tns:LookupRq" name="Lookup_Input"/>
+			<wsdl:output message="tns:LookupRs" name="Lookup_Output"/>
+			<wsdl:fault message="tns:LookupFault" name="Lookup_Fault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<wsdl:binding name="LookupServiceBinding" type="tns:LookupServicePort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="Lookup">
+			<wsdl:input name="Lookup_Input">
+				<soap:body parts="LookupRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="Lookup_Output">
+				<soap:body parts="LookupRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="Lookup_Fault">
+				<soap:fault name="Lookup_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		
+	</wsdl:binding>
+	
+	<wsdl:service name="LookupService">
+		<wsdl:port binding="tns:LookupServiceBinding" name="LookupServiceBinding">
+				 <soap:address location="http://www.sadad.com/EBPP/wsdl/LookupService/1.0/"/>
+		</wsdl:port>	
+	</wsdl:service>
+	
+</wsdl:definitions>

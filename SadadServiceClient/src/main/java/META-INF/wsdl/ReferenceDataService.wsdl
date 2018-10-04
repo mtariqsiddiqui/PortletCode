@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="ReferenceDataService" targetNamespace="http://www.sadad.com/EBPP/wsdl/ReferenceDataService/1.0" xmlns:lk="http://www.sadad.com/EBPP/schema/ReferenceData/1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.sadad.com/EBPP/wsdl/ReferenceDataService/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+		
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.sadad.com/EBPP/wsdl/ReferenceDataService/1.0">
+			<xsd:import namespace="http://www.sadad.com/EBPP/schema/ReferenceData/1.0" schemaLocation="ReferenceData.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+
+	
+	<wsdl:message name="ReferenceDataFault">
+		<wsdl:part element="lk:ReferenceDataFault" name="SOAPFault"/>
+	</wsdl:message>
+
+	<wsdl:message name="ListAccessChannelRq">
+		<wsdl:part element="lk:ListAccessChannelRq" name="ListAccessChannelRq"/>
+	</wsdl:message>
+	<wsdl:message name="ListAccessChannelRs">
+		<wsdl:part element="lk:ListAccessChannelRs" name="ListAccessChannelRs"/>
+	</wsdl:message>
+
+	<wsdl:message name="GetAccessChannelRq">
+		<wsdl:part element="lk:GetAccessChannelRq" name="GetAccessChannelRq"/>
+	</wsdl:message>
+	<wsdl:message name="GetAccessChannelRs">
+		<wsdl:part element="lk:GetAccessChannelRs" name="GetAccessChannelRs"/>
+	</wsdl:message>
+
+	<wsdl:message name="CreateAccessChannelRq">
+		<wsdl:part element="lk:CreateAccessChannelRq" name="CreateAccessChannelRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="CreateAccessChannelRs">
+		<wsdl:part element="lk:CreateAccessChannelRs" name="CreateAccessChannelRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="UpdateAccessChannelRq">
+		<wsdl:part element="lk:UpdateAccessChannelRq" name="UpdateAccessChannelRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="UpdateAccessChannelRs">
+		<wsdl:part element="lk:UpdateAccessChannelRs" name="UpdateAccessChannelRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ActivateAccessChannelRq">
+		<wsdl:part element="lk:ActivateAccessChannelRq" name="ActivateAccessChannelRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ActivateAccessChannelRs">
+		<wsdl:part element="lk:ActivateAccessChannelRs" name="ActivateAccessChannelRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="DeactivateAccessChannelRq">
+		<wsdl:part element="lk:DeactivateAccessChannelRq" name="DeactivateAccessChannelRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="DeactivateAccessChannelRs">
+		<wsdl:part element="lk:DeactivateAccessChannelRs" name="DeactivateAccessChannelRs"/>
+	</wsdl:message>
+
+	<wsdl:message name="ListDistrictCodeRq">
+		<wsdl:part element="lk:ListDistrictCodeRq" name="ListDistrictCodeRq"/>
+	</wsdl:message>
+	<wsdl:message name="ListDistrictCodeRs">
+		<wsdl:part element="lk:ListDistrictCodeRs" name="ListDistrictCodeRs"/>
+	</wsdl:message>
+
+	<wsdl:message name="CreateDistrictCodeRq">
+		<wsdl:part element="lk:CreateDistrictCodeRq" name="CreateDistrictCodeRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="CreateDistrictCodeRs">
+		<wsdl:part element="lk:CreateDistrictCodeRs" name="CreateDistrictCodeRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="UpdateDistrictCodeRq">
+		<wsdl:part element="lk:UpdateDistrictCodeRq" name="UpdateDistrictCodeRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="UpdateDistrictCodeRs">
+		<wsdl:part element="lk:UpdateDistrictCodeRs" name="UpdateDistrictCodeRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ActivateDistrictCodeRq">
+		<wsdl:part element="lk:ActivateDistrictCodeRq" name="ActivateDistrictCodeRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ActivateDistrictCodeRs">
+		<wsdl:part element="lk:ActivateDistrictCodeRs" name="ActivateDistrictCodeRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="DeactivateDistrictCodeRq">
+		<wsdl:part element="lk:DeactivateDistrictCodeRq" name="DeactivateDistrictCodeRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="DeactivateDistrictCodeRs">
+		<wsdl:part element="lk:DeactivateDistrictCodeRs" name="DeactivateDistrictCodeRs"/>
+	</wsdl:message>
+
+	<wsdl:message name="ListAccountTypeRq">
+		<wsdl:part element="lk:ListAccountTypeRq" name="ListAccountTypeRq"/>
+	</wsdl:message>
+	<wsdl:message name="ListAccountTypeRs">
+		<wsdl:part element="lk:ListAccountTypeRs" name="ListAccountTypeRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="GetAccountTypeRq">
+		<wsdl:part element="lk:GetAccountTypeRq" name="GetAccountTypeRq"/>
+	</wsdl:message>
+	<wsdl:message name="GetAccountTypeRs">
+		<wsdl:part element="lk:GetAccountTypeRs" name="GetAccountTypeRs"/>
+	</wsdl:message>
+
+	<wsdl:message name="CreateAccountTypeRq">
+		<wsdl:part element="lk:CreateAccountTypeRq" name="CreateAccountTypeRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="CreateAccountTypeRs">
+		<wsdl:part element="lk:CreateAccountTypeRs" name="CreateAccountTypeRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="UpdateAccountTypeRq">
+		<wsdl:part element="lk:UpdateAccountTypeRq" name="UpdateAccountTypeRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="UpdateAccountTypeRs">
+		<wsdl:part element="lk:UpdateAccountTypeRs" name="UpdateAccountTypeRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ActivateAccountTypeRq">
+		<wsdl:part element="lk:ActivateAccountTypeRq" name="ActivateAccountTypeRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ActivateAccountTypeRs">
+		<wsdl:part element="lk:ActivateAccountTypeRs" name="ActivateAccountTypeRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="DeactivateAccountTypeRq">
+		<wsdl:part element="lk:DeactivateAccountTypeRq" name="DeactivateAccountTypeRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="DeactivateAccountTypeRs">
+		<wsdl:part element="lk:DeactivateAccountTypeRs" name="DeactivateAccountTypeRs"/>
+	</wsdl:message>
+
+	<wsdl:message name="ListPaymentMethodRq">
+		<wsdl:part element="lk:ListPaymentMethodRq" name="ListPaymentMethodRq"/>
+	</wsdl:message>
+	<wsdl:message name="ListPaymentMethodRs">
+		<wsdl:part element="lk:ListPaymentMethodRs" name="ListPaymentMethodRs"/>
+	</wsdl:message>
+
+	<wsdl:message name="CreatePaymentMethodRq">
+		<wsdl:part element="lk:CreatePaymentMethodRq" name="CreatePaymentMethodRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="CreatePaymentMethodRs">
+		<wsdl:part element="lk:CreatePaymentMethodRs" name="CreatePaymentMethodRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="UpdatePaymentMethodRq">
+		<wsdl:part element="lk:UpdatePaymentMethodRq" name="UpdatePaymentMethodRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="UpdatePaymentMethodRs">
+		<wsdl:part element="lk:UpdatePaymentMethodRs" name="UpdatePaymentMethodRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ActivatePaymentMethodRq">
+		<wsdl:part element="lk:ActivatePaymentMethodRq" name="ActivatePaymentMethodRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ActivatePaymentMethodRs">
+		<wsdl:part element="lk:ActivatePaymentMethodRs" name="ActivatePaymentMethodRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="DeactivatePaymentMethodRq">
+		<wsdl:part element="lk:DeactivatePaymentMethodRq" name="DeactivatePaymentMethodRq"/>
+	</wsdl:message>
+	
+	<wsdl:message name="DeactivatePaymentMethodRs">
+		<wsdl:part element="lk:DeactivatePaymentMethodRs" name="DeactivatePaymentMethodRs"/>
+	</wsdl:message>
+	
+	<wsdl:portType name="ReferenceDataServicePort">
+		<wsdl:operation name="ListAccessChannel">
+			<wsdl:input message="tns:ListAccessChannelRq" name="ListAccessChannel_Input"/>
+			<wsdl:output message="tns:ListAccessChannelRs" name="ListAccessChannel_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="ListAccessChannel_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAccessChannel">
+			<wsdl:input message="tns:GetAccessChannelRq" name="GetAccessChannel_Input"/>
+			<wsdl:output message="tns:GetAccessChannelRs" name="GetAccessChannel_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="GetAccessChannel_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="CreateAccessChannel">
+			<wsdl:input message="tns:CreateAccessChannelRq" name="CreateAccessChannel_Input"/>
+			<wsdl:output message="tns:CreateAccessChannelRs" name="CreateAccessChannel_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="CreateAccessChannel_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateAccessChannel">
+			<wsdl:input message="tns:UpdateAccessChannelRq" name="UpdateAccessChannel_Input"/>
+			<wsdl:output message="tns:UpdateAccessChannelRs" name="UpdateAccessChannel_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="UpdateAccessChannel_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateAccessChannel">
+			<wsdl:input message="tns:ActivateAccessChannelRq" name="ActivateAccessChannel_Input"/>
+			<wsdl:output message="tns:ActivateAccessChannelRs" name="ActivateAccessChannel_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="ActivateAccessChannel_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateAccessChannel">
+			<wsdl:input message="tns:DeactivateAccessChannelRq" name="DeactivateAccessChannel_Input"/>
+			<wsdl:output message="tns:DeactivateAccessChannelRs" name="DeactivateAccessChannel_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="DeactivateAccessChannel_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ListDistrictCode">
+			<wsdl:input message="tns:ListDistrictCodeRq" name="ListDistrictCode_Input"/>
+			<wsdl:output message="tns:ListDistrictCodeRs" name="ListDistrictCode_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="ListDistrictCode_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="CreateDistrictCode">
+			<wsdl:input message="tns:CreateDistrictCodeRq" name="CreateDistrictCode_Input"/>
+			<wsdl:output message="tns:CreateDistrictCodeRs" name="CreateDistrictCode_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="CreateDistrictCode_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateDistrictCode">
+			<wsdl:input message="tns:UpdateDistrictCodeRq" name="UpdateDistrictCode_Input"/>
+			<wsdl:output message="tns:UpdateDistrictCodeRs" name="UpdateDistrictCode_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="UpdateDistrictCode_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateDistrictCode">
+			<wsdl:input message="tns:ActivateDistrictCodeRq" name="ActivateDistrictCode_Input"/>
+			<wsdl:output message="tns:ActivateDistrictCodeRs" name="ActivateDistrictCode_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="ActivateDistrictCode_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateDistrictCode">
+			<wsdl:input message="tns:DeactivateDistrictCodeRq" name="DeactivateDistrictCode_Input"/>
+			<wsdl:output message="tns:DeactivateDistrictCodeRs" name="DeactivateDistrictCode_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="DeactivateDistrictCode_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ListAccountType">
+			<wsdl:input message="tns:ListAccountTypeRq" name="ListAccountType_Input"/>
+			<wsdl:output message="tns:ListAccountTypeRs" name="ListAccountType_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="ListAccountType_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetAccountType">
+			<wsdl:input message="tns:GetAccountTypeRq" name="GetAccountType_Input"/>
+			<wsdl:output message="tns:GetAccountTypeRs" name="GetAccountType_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="GetAccountType_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="CreateAccountType">
+			<wsdl:input message="tns:CreateAccountTypeRq" name="CreateAccountType_Input"/>
+			<wsdl:output message="tns:CreateAccountTypeRs" name="CreateAccountType_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="CreateAccountType_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateAccountType">
+			<wsdl:input message="tns:UpdateAccountTypeRq" name="UpdateAccountType_Input"/>
+			<wsdl:output message="tns:UpdateAccountTypeRs" name="UpdateAccountType_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="UpdateAccountType_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateAccountType">
+			<wsdl:input message="tns:ActivateAccountTypeRq" name="ActivateAccountType_Input"/>
+			<wsdl:output message="tns:ActivateAccountTypeRs" name="ActivateAccountType_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="ActivateAccountType_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateAccountType">
+			<wsdl:input message="tns:DeactivateAccountTypeRq" name="DeactivateAccountType_Input"/>
+			<wsdl:output message="tns:DeactivateAccountTypeRs" name="DeactivateAccountType_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="DeactivateAccountType_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ListPaymentMethod">
+			<wsdl:input message="tns:ListPaymentMethodRq" name="ListPaymentMethod_Input"/>
+			<wsdl:output message="tns:ListPaymentMethodRs" name="ListPaymentMethod_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="ListPaymentMethod_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="CreatePaymentMethod">
+			<wsdl:input message="tns:CreatePaymentMethodRq" name="CreatePaymentMethod_Input"/>
+			<wsdl:output message="tns:CreatePaymentMethodRs" name="CreatePaymentMethod_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="CreatePaymentMethod_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="UpdatePaymentMethod">
+			<wsdl:input message="tns:UpdatePaymentMethodRq" name="UpdatePaymentMethod_Input"/>
+			<wsdl:output message="tns:UpdatePaymentMethodRs" name="UpdatePaymentMethod_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="UpdatePaymentMethod_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ActivatePaymentMethod">
+			<wsdl:input message="tns:ActivatePaymentMethodRq" name="ActivatePaymentMethod_Input"/>
+			<wsdl:output message="tns:ActivatePaymentMethodRs" name="ActivatePaymentMethod_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="ActivatePaymentMethod_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivatePaymentMethod">
+			<wsdl:input message="tns:DeactivatePaymentMethodRq" name="DeactivatePaymentMethod_Input"/>
+			<wsdl:output message="tns:DeactivatePaymentMethodRs" name="DeactivatePaymentMethod_Output"/>
+			<wsdl:fault message="tns:ReferenceDataFault" name="DeactivatePaymentMethod_Fault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<wsdl:binding name="ReferenceDataServiceBinding" type="tns:ReferenceDataServicePort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="ListAccessChannel">
+			<wsdl:input name="ListAccessChannel_Input">
+				<soap:body parts="ListAccessChannelRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListAccessChannel_Output">
+				<soap:body parts="ListAccessChannelRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ListAccessChannel_Fault">
+				<soap:fault name="ListAccessChannel_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		
+		
+		<wsdl:operation name="GetAccessChannel">
+			<wsdl:input name="GetAccessChannel_Input">
+				<soap:body parts="GetAccessChannelRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetAccessChannel_Output">
+				<soap:body parts="GetAccessChannelRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetAccessChannel_Fault">
+				<soap:fault name="GetAccessChannel_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="CreateAccessChannel">
+			<wsdl:input name="CreateAccessChannel_Input">
+				<soap:body parts="CreateAccessChannelRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreateAccessChannel_Output">
+				<soap:body parts="CreateAccessChannelRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CreateAccessChannel_Fault">
+				<soap:fault name="CreateAccessChannel_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateAccessChannel">
+			<wsdl:input name="UpdateAccessChannel_Input">
+				<soap:body parts="UpdateAccessChannelRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UpdateAccessChannel_Output">
+				<soap:body parts="UpdateAccessChannelRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="UpdateAccessChannel_Fault">
+				<soap:fault name="UpdateAccessChannel_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateAccessChannel">
+			<wsdl:input name="ActivateAccessChannel_Input">
+				<soap:body parts="ActivateAccessChannelRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ActivateAccessChannel_Output">
+				<soap:body parts="ActivateAccessChannelRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ActivateAccessChannel_Fault">
+				<soap:fault name="ActivateAccessChannel_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateAccessChannel">
+			<wsdl:input name="DeactivateAccessChannel_Input">
+				<soap:body parts="DeactivateAccessChannelRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeactivateAccessChannel_Output">
+				<soap:body parts="DeactivateAccessChannelRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DeactivateAccessChannel_Fault">
+				<soap:fault name="DeactivateAccessChannel_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ListDistrictCode">
+			<wsdl:input name="ListDistrictCode_Input">
+				<soap:body parts="ListDistrictCodeRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListDistrictCode_Output">
+				<soap:body parts="ListDistrictCodeRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ListDistrictCode_Fault">
+				<soap:fault name="ListDistrictCode_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CreateDistrictCode">
+			<wsdl:input name="CreateDistrictCode_Input">
+				<soap:body parts="CreateDistrictCodeRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreateDistrictCode_Output">
+				<soap:body parts="CreateDistrictCodeRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CreateDistrictCode_Fault">
+				<soap:fault name="CreateDistrictCode_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateDistrictCode">
+			<wsdl:input name="UpdateDistrictCode_Input">
+				<soap:body parts="UpdateDistrictCodeRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UpdateDistrictCode_Output">
+				<soap:body parts="UpdateDistrictCodeRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="UpdateDistrictCode_Fault">
+				<soap:fault name="UpdateDistrictCode_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateDistrictCode">
+			<wsdl:input name="ActivateDistrictCode_Input">
+				<soap:body parts="ActivateDistrictCodeRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ActivateDistrictCode_Output">
+				<soap:body parts="ActivateDistrictCodeRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ActivateDistrictCode_Fault">
+				<soap:fault name="ActivateDistrictCode_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateDistrictCode">
+			<wsdl:input name="DeactivateDistrictCode_Input">
+				<soap:body parts="DeactivateDistrictCodeRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeactivateDistrictCode_Output">
+				<soap:body parts="DeactivateDistrictCodeRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DeactivateDistrictCode_Fault">
+				<soap:fault name="DeactivateDistrictCode_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ListAccountType">
+			<wsdl:input name="ListAccountType_Input">
+				<soap:body parts="ListAccountTypeRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListAccountType_Output">
+				<soap:body parts="ListAccountTypeRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ListAccountType_Fault">
+				<soap:fault name="ListAccountType_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="GetAccountType">
+			<wsdl:input name="GetAccountType_Input">
+				<soap:body parts="GetAccountTypeRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetAccountType_Output">
+				<soap:body parts="GetAccountTypeRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetAccountType_Fault">
+				<soap:fault name="GetAccountType_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="CreateAccountType">
+			<wsdl:input name="CreateAccountType_Input">
+				<soap:body parts="CreateAccountTypeRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreateAccountType_Output">
+				<soap:body parts="CreateAccountTypeRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CreateAccountType_Fault">
+				<soap:fault name="CreateAccountType_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateAccountType">
+			<wsdl:input name="UpdateAccountType_Input">
+				<soap:body parts="UpdateAccountTypeRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UpdateAccountType_Output">
+				<soap:body parts="UpdateAccountTypeRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="UpdateAccountType_Fault">
+				<soap:fault name="UpdateAccountType_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateAccountType">
+			<wsdl:input name="ActivateAccountType_Input">
+				<soap:body parts="ActivateAccountTypeRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ActivateAccountType_Output">
+				<soap:body parts="ActivateAccountTypeRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ActivateAccountType_Fault">
+				<soap:fault name="ActivateAccountType_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateAccountType">
+			<wsdl:input name="DeactivateAccountType_Input">
+				<soap:body parts="DeactivateAccountTypeRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeactivateAccountType_Output">
+				<soap:body parts="DeactivateAccountTypeRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DeactivateAccountType_Fault">
+				<soap:fault name="DeactivateAccountType_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ListPaymentMethod">
+			<wsdl:input name="ListPaymentMethod_Input">
+				<soap:body parts="ListPaymentMethodRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListPaymentMethod_Output">
+				<soap:body parts="ListPaymentMethodRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ListPaymentMethod_Fault">
+				<soap:fault name="ListPaymentMethod_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CreatePaymentMethod">
+			<wsdl:input name="CreatePaymentMethod_Input">
+				<soap:body parts="CreatePaymentMethodRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreatePaymentMethod_Output">
+				<soap:body parts="CreatePaymentMethodRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CreatePaymentMethod_Fault">
+				<soap:fault name="CreatePaymentMethod_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdatePaymentMethod">
+			<wsdl:input name="UpdatePaymentMethod_Input">
+				<soap:body parts="UpdatePaymentMethodRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UpdatePaymentMethod_Output">
+				<soap:body parts="UpdatePaymentMethodRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="UpdatePaymentMethod_Fault">
+				<soap:fault name="UpdatePaymentMethod_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ActivatePaymentMethod">
+			<wsdl:input name="ActivatePaymentMethod_Input">
+				<soap:body parts="ActivatePaymentMethodRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ActivatePaymentMethod_Output">
+				<soap:body parts="ActivatePaymentMethodRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ActivatePaymentMethod_Fault">
+				<soap:fault name="ActivatePaymentMethod_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivatePaymentMethod">
+			<wsdl:input name="DeactivatePaymentMethod_Input">
+				<soap:body parts="DeactivatePaymentMethodRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeactivatePaymentMethod_Output">
+				<soap:body parts="DeactivatePaymentMethodRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DeactivatePaymentMethod_Fault">
+				<soap:fault name="DeactivatePaymentMethod_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<wsdl:service name="ReferenceDataService">
+		<wsdl:port binding="tns:ReferenceDataServiceBinding" name="ReferenceDataServiceBinding">
+				 <soap:address location="http://www.sadad.com/EBPP/wsdl/ReferenceDataService/1.0/"/>
+		</wsdl:port>	
+	</wsdl:service>
+	
+</wsdl:definitions>

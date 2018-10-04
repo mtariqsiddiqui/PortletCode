@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.sadad.com/EBPP/schema/ReferenceData/1.0" version="1.0" xmlns="http://www.sadad.com/EBPP/schema/ReferenceData/1.0" xmlns:com="http://www.sadad.com/scm/Common/1.0" xmlns:err="http://www.sadad.com/scm/Error/1.0" xmlns:sys="http://www.sadad.com/scm/Common/System/1.0">
+	
+	<xs:import namespace="http://www.sadad.com/scm/Common/1.0" schemaLocation="Common/SADADCommon.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Common/System/1.0" schemaLocation="Common/SADADSystemTypes.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Error/1.0" schemaLocation="Common/Error.xsd"/>
+
+	<xs:element name="AccessChannel" type="AccessChannel_Type"/>
+	<xs:complexType name="AccessChannel_Type">
+		<xs:sequence>
+			<xs:element ref="com:AccessChannel"/>
+			<xs:element name="Description" type="sys:C128_SType"/>
+			<xs:element name="Status" type="com:ConfigurationStatus_Enum"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="DistrictCode" type="DistrictCode_Type"/>
+	<xs:complexType name="DistrictCode_Type">
+		<xs:sequence>
+			<xs:element ref="com:DistrictCode"/>
+			<xs:element name="Description" type="sys:C128_SType"/>
+			<xs:element name="Status" type="com:ConfigurationStatus_Enum"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="PaymentMethod" type="PaymentMethod_Type"/>
+	<xs:complexType name="PaymentMethod_Type">
+		<xs:sequence>
+			<xs:element ref="com:PaymentMethod"/>
+			<xs:element name="Description" type="sys:C128_SType"/>
+			<xs:element name="Status" type="com:ConfigurationStatus_Enum"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="AccountType" type="AccountType_Type"/>
+	<xs:complexType name="AccountType_Type">
+		<xs:sequence>
+			<xs:element name="ServiceType" type="com:ServiceType_SType"/>
+			<xs:element minOccurs="0" name="Description" type="sys:C128_SType"/>
+			<xs:element name="Status" type="com:ConfigurationStatus_Enum"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	
+	<xs:element name="ReferenceDataFault" type="err:Fault_Type">
+		<xs:annotation>
+			<xs:documentation>
+			2019 = Unknown reason
+			2009 = Customer Access Channel not found in Sadad
+			2010 = Access Channel is already active
+			2011 = Access Channel is Already Deactivated
+			2012 = Customer Access Channel already exists in Sadad
+			2013 = The value passed is null or blank
+			2014 = District Code does not exists
+			2015 = District Code is already activated
+			2016 = District Code is already deactivated
+			2017 = District Code is already exists in SADAD
+			2018 = Invalid District Code 
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="ListAccessChannelRq" type="ListAccessChannelRq_Type"/>
+	<xs:element name="ListAccessChannelRs" type="ListAccessChannelRs_Type"/>
+
+	<xs:complexType name="ListAccessChannelRq_Type">
+		<xs:annotation>
+			<xs:documentation>Lookup request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="com:AccessChannel"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+
+	<xs:complexType name="ListAccessChannelRs_Type">
+		<xs:annotation>
+			<xs:documentation>Lookup Response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="AccessChannel"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="GetAccessChannelRq" type="ListAccessChannelRq_Type"/>
+	<xs:element name="GetAccessChannelRs" type="ListAccessChannelRs_Type"/>
+	
+
+	<xs:element name="CreateAccessChannelRq" type="CreateAccessChannelRq_Type"/>
+	<xs:element name="CreateAccessChannelRs" type="CreateAccessChannelRs_Type"/>
+
+	<xs:complexType name="CreateAccessChannelRq_Type">
+		<xs:annotation>
+			<xs:documentation>Create request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="AccessChannel"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreateAccessChannelRs_Type">
+		<xs:annotation>
+			<xs:documentation>Create Response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="UpdateAccessChannelRq" type="UpdateAccessChannelRq_Type"/>
+	<xs:element name="UpdateAccessChannelRs" type="UpdateAccessChannelRs_Type"/>
+
+	<xs:complexType name="UpdateAccessChannelRq_Type">
+		<xs:annotation>
+			<xs:documentation>Update request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="AccessChannel"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UpdateAccessChannelRs_Type">
+		<xs:annotation>
+			<xs:documentation>Update response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="ActivateAccessChannelRq" type="ActivateAccessChannelRq_Type"/>
+	<xs:element name="ActivateAccessChannelRs" type="ActivateAccessChannelRs_Type"/>
+
+	<xs:complexType name="ActivateAccessChannelRq_Type">
+		<xs:annotation>
+			<xs:documentation>Activate request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:AccessChannel"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivateAccessChannelRs_Type">
+		<xs:annotation>
+			<xs:documentation>Activate response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="DeactivateAccessChannelRq" type="DeactivateAccessChannelRq_Type"/>
+	<xs:element name="DeactivateAccessChannelRs" type="DeactivateAccessChannelRs_Type"/>
+
+	<xs:complexType name="DeactivateAccessChannelRq_Type">
+		<xs:annotation>
+			<xs:documentation>Deactivate request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:AccessChannel"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeactivateAccessChannelRs_Type">
+		<xs:annotation>
+			<xs:documentation>Deactivate response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="ListDistrictCodeRq" type="ListDistrictCodeRq_Type"/>
+	<xs:element name="ListDistrictCodeRs" type="ListDistrictCodeRs_Type"/>
+
+	<xs:complexType name="ListDistrictCodeRq_Type">
+		<xs:annotation>
+			<xs:documentation>Lookup request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="com:DistrictCode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+
+	<xs:complexType name="ListDistrictCodeRs_Type">
+		<xs:annotation>
+			<xs:documentation>Lookup Response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="DistrictCode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="CreateDistrictCodeRq" type="CreateDistrictCodeRq_Type"/>
+	<xs:element name="CreateDistrictCodeRs" type="CreateDistrictCodeRs_Type"/>
+
+	<xs:complexType name="CreateDistrictCodeRq_Type">
+		<xs:annotation>
+			<xs:documentation>Create request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="DistrictCode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreateDistrictCodeRs_Type">
+		<xs:annotation>
+			<xs:documentation>Create Response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="UpdateDistrictCodeRq" type="UpdateDistrictCodeRq_Type"/>
+	<xs:element name="UpdateDistrictCodeRs" type="UpdateDistrictCodeRs_Type"/>
+
+	<xs:complexType name="UpdateDistrictCodeRq_Type">
+		<xs:annotation>
+			<xs:documentation>Update request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="DistrictCode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UpdateDistrictCodeRs_Type">
+		<xs:annotation>
+			<xs:documentation>Update response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="ActivateDistrictCodeRq" type="ActivateDistrictCodeRq_Type"/>
+	<xs:element name="ActivateDistrictCodeRs" type="ActivateDistrictCodeRs_Type"/>
+
+	<xs:complexType name="ActivateDistrictCodeRq_Type">
+		<xs:annotation>
+			<xs:documentation>Activate request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:DistrictCode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivateDistrictCodeRs_Type">
+		<xs:annotation>
+			<xs:documentation>Activate response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="DeactivateDistrictCodeRq" type="DeactivateDistrictCodeRq_Type"/>
+	<xs:element name="DeactivateDistrictCodeRs" type="DeactivateDistrictCodeRs_Type"/>
+
+	<xs:complexType name="DeactivateDistrictCodeRq_Type">
+		<xs:annotation>
+			<xs:documentation>Deactivate request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:DistrictCode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeactivateDistrictCodeRs_Type">
+		<xs:annotation>
+			<xs:documentation>Deactivate response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
+	
+	<xs:element name="ListPaymentMethodRq" type="ListPaymentMethodRq_Type"/>
+	<xs:element name="ListPaymentMethodRs" type="ListPaymentMethodRs_Type"/>
+
+	<xs:complexType name="ListPaymentMethodRq_Type">
+		<xs:annotation>
+			<xs:documentation>Lookup request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="com:PaymentMethod"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+
+	<xs:complexType name="ListPaymentMethodRs_Type">
+		<xs:annotation>
+			<xs:documentation>Lookup Response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="PaymentMethod"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="CreatePaymentMethodRq" type="CreatePaymentMethodRq_Type"/>
+	<xs:element name="CreatePaymentMethodRs" type="CreatePaymentMethodRs_Type"/>
+
+	<xs:complexType name="CreatePaymentMethodRq_Type">
+		<xs:annotation>
+			<xs:documentation>Create request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="PaymentMethod"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreatePaymentMethodRs_Type">
+		<xs:annotation>
+			<xs:documentation>Create Response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="UpdatePaymentMethodRq" type="UpdatePaymentMethodRq_Type"/>
+	<xs:element name="UpdatePaymentMethodRs" type="UpdatePaymentMethodRs_Type"/>
+
+	<xs:complexType name="UpdatePaymentMethodRq_Type">
+		<xs:annotation>
+			<xs:documentation>Update request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="PaymentMethod"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UpdatePaymentMethodRs_Type">
+		<xs:annotation>
+			<xs:documentation>Update response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="ActivatePaymentMethodRq" type="ActivatePaymentMethodRq_Type"/>
+	<xs:element name="ActivatePaymentMethodRs" type="ActivatePaymentMethodRs_Type"/>
+
+	<xs:complexType name="ActivatePaymentMethodRq_Type">
+		<xs:annotation>
+			<xs:documentation>Activate request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PaymentMethod"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivatePaymentMethodRs_Type">
+		<xs:annotation>
+			<xs:documentation>Activate response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="DeactivatePaymentMethodRq" type="DeactivatePaymentMethodRq_Type"/>
+	<xs:element name="DeactivatePaymentMethodRs" type="DeactivatePaymentMethodRs_Type"/>
+
+	<xs:complexType name="DeactivatePaymentMethodRq_Type">
+		<xs:annotation>
+			<xs:documentation>Deactivate request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PaymentMethod"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeactivatePaymentMethodRs_Type">
+		<xs:annotation>
+			<xs:documentation>Deactivate response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
+	
+	<xs:element name="ListAccountTypeRq" type="ListAccountTypeRq_Type"/>
+	<xs:element name="ListAccountTypeRs" type="ListAccountTypeRs_Type"/>
+	
+
+	<xs:complexType name="ListAccountTypeRq_Type">
+		<xs:annotation>
+			<xs:documentation>Lookup request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element name="ServiceType" type="com:ServiceType_SType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+
+	<xs:complexType name="ListAccountTypeRs_Type">
+		<xs:annotation>
+			<xs:documentation>Lookup Response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="AccountType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="GetAccountTypeRq" type="ListAccountTypeRq_Type"/>
+	<xs:element name="GetAccountTypeRs" type="ListAccountTypeRs_Type"/>
+	
+
+	<xs:element name="CreateAccountTypeRq" type="CreateAccountTypeRq_Type"/>
+	<xs:element name="CreateAccountTypeRs" type="CreateAccountTypeRs_Type"/>
+
+	<xs:complexType name="CreateAccountTypeRq_Type">
+		<xs:annotation>
+			<xs:documentation>Create request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="AccountType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreateAccountTypeRs_Type">
+		<xs:annotation>
+			<xs:documentation>Create Response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="UpdateAccountTypeRq" type="UpdateAccountTypeRq_Type"/>
+	<xs:element name="UpdateAccountTypeRs" type="UpdateAccountTypeRs_Type"/>
+
+	<xs:complexType name="UpdateAccountTypeRq_Type">
+		<xs:annotation>
+			<xs:documentation>Update request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="AccountType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UpdateAccountTypeRs_Type">
+		<xs:annotation>
+			<xs:documentation>Update response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="ActivateAccountTypeRq" type="ActivateAccountTypeRq_Type"/>
+	<xs:element name="ActivateAccountTypeRs" type="ActivateAccountTypeRs_Type"/>
+
+	<xs:complexType name="ActivateAccountTypeRq_Type">
+		<xs:annotation>
+			<xs:documentation>Activate request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:ServiceType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivateAccountTypeRs_Type">
+		<xs:annotation>
+			<xs:documentation>Activate response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="DeactivateAccountTypeRq" type="DeactivateAccountTypeRq_Type"/>
+	<xs:element name="DeactivateAccountTypeRs" type="DeactivateAccountTypeRs_Type"/>
+
+	<xs:complexType name="DeactivateAccountTypeRq_Type">
+		<xs:annotation>
+			<xs:documentation>Deactivate request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:ServiceType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeactivateAccountTypeRs_Type">
+		<xs:annotation>
+			<xs:documentation>Deactivate response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

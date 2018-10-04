@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.sadad.com/EBPP/scm/schema/PartnerConfigurationService/1.0" xmlns="http://www.sadad.com/EBPP/scm/schema/PartnerConfigurationService/1.0" xmlns:com="http://www.sadad.com/scm/Common/1.0" xmlns:err="http://www.sadad.com/scm/Error/1.0">
+
+	<xs:import namespace="http://www.sadad.com/scm/Common/1.0" schemaLocation="Common/SADADCommon.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Error/1.0" schemaLocation="Common/Error.xsd"/>
+
+	
+	<xs:element name="PartnerConfigurationFault" type="err:Fault_Type"/>
+	
+	
+	<xs:element name="GetConfigurationRq" type="GetConfigurationRq_Type"/>
+	<xs:element name="GetConfigurationRs" type="GetConfigurationRs_Type"/>
+	<xs:complexType name="GetConfigurationRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:ConfigurationName"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetConfigurationRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:Configuration"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+		
+	<xs:element name="CreateConfigurationRq" type="CreateConfigurationRq_Type"/>
+	<xs:element name="CreateConfigurationRs" type="CreateConfigurationRs_Type"/>
+	<xs:complexType name="CreateConfigurationRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:Configuration"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreateConfigurationRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="UpdateConfigurationRq" type="UpdateConfigurationRq_Type"/>
+	<xs:element name="UpdateConfigurationRs" type="UpdateConfigurationRs_Type"/>
+	<xs:complexType name="UpdateConfigurationRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:Configuration"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UpdateConfigurationRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+
+
+	<xs:element name="ActivateConfigurationRq" type="ActivateConfigurationRq_Type"/>
+	<xs:element name="ActivateConfigurationRs" type="ActivateConfigurationRs_Type"/>
+	<xs:complexType name="ActivateConfigurationRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:ConfigurationName"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivateConfigurationRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="DeactivateConfigurationRq" type="DeactivateConfigurationRq_Type"/>
+	<xs:element name="DeactivateConfigurationRs" type="DeactivateConfigurationRs_Type"/>
+	<xs:complexType name="DeactivateConfigurationRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:ConfigurationName"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>
+	<xs:complexType name="DeactivateConfigurationRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="GetConfigurationTemplateRq" type="GetConfigurationTemplateRq_Type"/>
+	<xs:element name="GetConfigurationTemplateRs" type="GetConfigurationTemplateRs_Type"/>
+	<xs:complexType name="GetConfigurationTemplateRq_Type">
+		<xs:annotation>
+			<xs:documentation>
+				one of the Configuration Id or Name Or TemplateId should be provided.
+			</xs:documentation>
+		
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:ConfigurationName"/>
+					<xs:element minOccurs="0" ref="com:TemplateName"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetConfigurationTemplateRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="com:ConfigurationTemplate"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+		
+	<xs:element name="CreateConfigurationTemplateRq" type="CreateConfigurationTemplateRq_Type"/>
+	<xs:element name="CreateConfigurationTemplateRs" type="CreateConfigurationTemplateRs_Type"/>
+	<xs:complexType name="CreateConfigurationTemplateRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:ConfigurationName"/>
+					<xs:element ref="com:ConfigurationTemplate"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreateConfigurationTemplateRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="UpdateConfigurationTemplateRq" type="UpdateConfigurationTemplateRq_Type"/>
+	<xs:element name="UpdateConfigurationTemplateRs" type="UpdateConfigurationTemplateRs_Type"/>
+	<xs:complexType name="UpdateConfigurationTemplateRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:ConfigurationName"/>
+					<xs:element ref="com:ConfigurationTemplate"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UpdateConfigurationTemplateRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+
+	<xs:element name="ActivateConfigurationTemplateRq" type="ActivateConfigurationTemplateRq_Type"/>
+	<xs:element name="ActivateConfigurationTemplateRs" type="ActivateConfigurationTemplateRs_Type"/>
+	<xs:complexType name="ActivateConfigurationTemplateRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:ConfigurationName"/>
+					<xs:element ref="com:TemplateName"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivateConfigurationTemplateRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="DeactivateConfigurationTemplateRq" type="DeactivateConfigurationTemplateRq_Type"/>
+	<xs:element name="DeactivateConfigurationTemplateRs" type="DeactivateConfigurationTemplateRs_Type"/>
+	<xs:complexType name="DeactivateConfigurationTemplateRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:ConfigurationName"/>
+					<xs:element ref="com:TemplateName"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>
+	<xs:complexType name="DeactivateConfigurationTemplateRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

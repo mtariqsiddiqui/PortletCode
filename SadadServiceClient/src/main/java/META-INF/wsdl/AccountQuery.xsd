@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://sadad.com/schema/service/AccountQuery/1.0" version="1.0" xmlns="http://sadad.com/schema/service/AccountQuery/1.0" xmlns:com="http://www.sadad.com/scm/Common/1.0" xmlns:err="http://www.sadad.com/scm/Error/1.0">
+
+	<xs:import namespace="http://www.sadad.com/scm/Common/1.0" schemaLocation="Common/SADADCommon.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Error/1.0" schemaLocation="Common/Error.xsd"/>
+
+	<xs:element name="AccountQueryFault" type="err:Fault_Type">
+		<xs:annotation>
+			<xs:documentation>
+				- Get By Key Operation
+				437 = The specified Biller does not exist in the system
+				438 = Merchant is deactivated from SADAD
+				455 = Account not found.
+				- List By Customer Operation
+				455 = Account not found.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="GetByKeyRq" type="GetByKeyRq_Type"/>
+	<xs:element name="GetByKeyRs" type="GetByKeyRs_Type"/>
+
+	<xs:element name="ListByCustomerRq" type="ListByCustomerRq_Type"/>
+	<xs:element name="ListByCustomerRs" type="ListByCustomerRs_Type"/>
+
+    <xs:complexType name="GetByKeyRq_Type">
+            <xs:complexContent>
+                  <xs:extension base="com:BaseType">
+                        <xs:sequence>
+							<xs:element ref="com:BillerKey"/>
+							<xs:element ref="com:AccountKey"/>
+                        </xs:sequence>
+                  </xs:extension>
+            </xs:complexContent>
+      </xs:complexType>
+
+
+
+	   <xs:complexType name="GetByKeyRs_Type">
+            <xs:complexContent>
+                  <xs:extension base="com:BaseType">
+                        <xs:sequence>
+                            <xs:element ref="com:AccountInfo"/>
+                        </xs:sequence>
+                  </xs:extension>
+            </xs:complexContent>
+      </xs:complexType>
+
+
+    <xs:complexType name="ListByCustomerRq_Type">
+            <xs:complexContent>
+                  <xs:extension base="com:BaseType">
+                        <xs:sequence>
+                        	<xs:element minOccurs="0" ref="com:BillerKey"/>
+							<xs:element ref="com:Payor"/>
+							<xs:element minOccurs="0" name="InclOnlyActive" type="xs:boolean"/>
+							<xs:element minOccurs="0" ref="com:Page"/>
+                        </xs:sequence>
+                  </xs:extension>
+            </xs:complexContent>
+      </xs:complexType>
+
+
+
+	   <xs:complexType name="ListByCustomerRs_Type">
+            <xs:complexContent>
+                  <xs:extension base="com:BaseType">
+                        <xs:sequence>
+                            <xs:element ref="com:CustomerAccountsAssn"/>
+							<xs:element minOccurs="0" ref="com:Pagination"/>
+                        </xs:sequence>
+                  </xs:extension>
+            </xs:complexContent>
+      </xs:complexType>
+
+</xs:schema>

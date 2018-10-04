@@ -1,0 +1,2580 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://www.sadad.com/scm/Common/1.0" version="1.0" xmlns="http://www.sadad.com/scm/Common/1.0" xmlns:err="http://www.sadad.com/scm/Error/1.0" xmlns:sys="http://www.sadad.com/scm/Common/System/1.0" xmlns:tns="http://www.sadad.com/scm/Common/1.0">
+
+	<xs:import namespace="http://www.sadad.com/scm/Error/1.0" schemaLocation="Error.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Common/System/1.0" schemaLocation="SADADSystemTypes.xsd"/>
+
+	<xs:complexType abstract="true" name="BaseType">
+		<xs:annotation>
+			<xs:documentation>This is the base type from which all request and response elements are extended.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="MessageHeader"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MessageHeader" type="MessageHeader_Type"/>
+	<xs:complexType name="MessageHeader_Type">
+		<xs:annotation>
+			<xs:documentation>MessageHeader to be included in all Service request and response </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ServiceInitiatorKey"/>
+			<xs:element ref="ServiceProviderKey"/>
+			<xs:element ref="ServiceConsumerId"/>
+			<xs:element minOccurs="0" ref="RqUID"/>
+			<xs:element ref="UUID"/>
+			<xs:element ref="Date"/>
+			<xs:element ref="Lang"/>
+			<xs:element minOccurs="0" ref="EndUserID"/>
+			<xs:element minOccurs="0" ref="ApplicationID"/>
+			<xs:element minOccurs="0" ref="Compressed"/>
+			<xs:element minOccurs="0" ref="MsgCode"/>
+			<xs:element minOccurs="0" ref="ServiceMsgType"/>
+			<xs:element minOccurs="0" ref="Channel"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LookupData_Type">
+		<xs:annotation>
+			<xs:documentation>Lookup data</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="LookupKey" type="sys:C32_SType"/>
+			<xs:element name="Status" type="ConfigurationStatus_Enum"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="Property" type="Property_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="Property_Type">
+		<xs:annotation>
+			<xs:documentation>To hold additional properties for a Lookup</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="sys:C32_SType"/>
+			<xs:element name="Value" type="sys:C64_SType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="PartnerInfo" type="PartnerInfo_Type"/>
+	<xs:complexType name="PartnerInfo_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Partner in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="PartnerKey"/>
+			<xs:element ref="Name"/>
+			<xs:element minOccurs="0" name="Type" type="PartnerType_Enums"/>
+			<xs:element minOccurs="0" name="Status" type="xs:string"/>
+			<xs:element minOccurs="0" name="Category" type="PartnerCategory_SType"/>
+			<xs:element default="false" minOccurs="0" name="FeeServiceProvider" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Partner_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Partner in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="PartnerInfo_Type">
+					<xs:sequence>
+						<xs:element minOccurs="0" ref="Description"/>
+						<xs:choice minOccurs="0">
+							<xs:element ref="BankFinanicialInfo"/>
+							<xs:element ref="BillerFinanicialInfo"/>
+							<xs:element ref="SADADFinanicialInfo"/>
+						</xs:choice>
+						<xs:element minOccurs="0" ref="CreateTime"/>
+						<xs:element minOccurs="0" ref="LastUpdateTime"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="BankFinanicialInfo" type="BankFinanicialInfo_Type"/>
+	<xs:element name="BillerFinanicialInfo" type="BillerFinanicialInfo_Type"/>
+	<xs:element name="SADADFinanicialInfo" type="SADADFinanicialInfo_Type"/>
+	<xs:complexType name="PartnerDetails_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Partner in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Partner_Type">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="Configurations" type="PartnerConfiguration_Type"/>
+					<xs:element minOccurs="0" name="ServiceSubscription" type="PartnerSubscriptions_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="SADADFinanicialInfo_Type">
+		<xs:sequence>
+			<xs:element name="SADADCurrentAccount" type="FinancialAccount_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="BankFinanicialInfo_Type">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="SarieKey" type="sys:C64_SType"/>
+			<xs:element name="SADADSuspenseAccount" type="sys:C64_SType"/>
+			<xs:element name="SADADRefundAccount" type="sys:C64_SType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="BillerFinanicialInfo_Type">
+		<xs:sequence>
+			<xs:element name="BillingAccount" type="FinancialAccount_Type"/>
+			<xs:element name="RefundAccount" type="FinancialAccount_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FinancialAccount_Type">
+		<xs:sequence>
+			<xs:element ref="BankKey"/>
+			<xs:element minOccurs="0" ref="BankName"/>
+			<xs:element ref="BankAccount"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="RuleType_Enum">
+		<xs:annotation>
+			<xs:documentation>Defines the closed enum for Lookup types</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CIP"/>
+			<xs:enumeration value="DPV"/>
+			<xs:enumeration value="ACCOUNT_OWNER_ID_VALIDATION"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--  Service Registery Event Struture -->
+
+	  <xs:element name="ServiceRegistryMsg" type="ServiceRegistryMsg"/>
+
+  <xs:complexType name="Target">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="bsrURI" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element minOccurs="0" name="creationTimestamp" type="xs:string"/>
+      <xs:element minOccurs="0" name="LastModified" type="xs:string"/>
+      <xs:element minOccurs="0" name="LastModifiedBy" type="xs:string"/>
+      <xs:element minOccurs="0" name="Namespace" type="xs:string"/>
+      <xs:element minOccurs="0" name="Owner" type="xs:string"/>
+      <xs:element minOccurs="0" name="Version" type="xs:string"/>
+      <xs:element name="userProperties">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" name="key" type="xs:string"/>
+                  <xs:element minOccurs="0" name="value" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Relation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="targets" nillable="true" type="Target"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SRObject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="bsruri" type="xs:string"/>
+      <xs:element minOccurs="0" name="type" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element minOccurs="0" name="namespace" type="xs:string"/>
+      <xs:element minOccurs="0" name="version" type="xs:string"/>
+      <xs:element minOccurs="0" name="transition" type="xs:string"/>
+      <xs:element minOccurs="0" name="classificationURIs" type="xs:string"/>
+      <xs:element name="userProperties">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" name="key" type="xs:string"/>
+                  <xs:element minOccurs="0" name="value" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="userRelationships" nillable="true" type="Relation"/>
+      <xs:element minOccurs="0" name="namedQuery" type="NQResult"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="NQResult">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="result" nillable="true" type="ResultEntry"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ResultEntry">
+    <xs:sequence>
+      <xs:element name="resultEntries">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" name="key" type="xs:string"/>
+                  <xs:element minOccurs="0" name="value" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ServiceRegistryMsg">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="event" type="xs:string"/>
+      <xs:element minOccurs="0" name="oldSRObject" type="SRObject"/>
+      <xs:element minOccurs="0" name="newSRObject" type="SRObject"/>
+    </xs:sequence>
+  </xs:complexType>
+
+	<!--  Enterprise Data Event Structure -->
+	<xs:element name="EventKey" type="xs:string"/>
+	<xs:complexType name="EventAttributes_Type">
+		<xs:annotation>
+			<xs:documentation>
+				This will be populated only if the Event is for Partner Related Data
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="PartnerKey"/>
+			<xs:choice>
+				<xs:element minOccurs="0" ref="ConfigurationName">
+					<xs:annotation>
+						<xs:documentation>
+							This will be exist only of the Event is related to a configuration Change
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="ServiceID">
+						<xs:annotation>
+							<xs:documentation>
+								This will be exist only of the Event is related to a Service Subscription
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" ref="Version">
+						<xs:annotation>
+							<xs:documentation>
+								This will exist only of the Event is related to a Service subscription Change
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" ref="MinorVersion">
+						<xs:annotation>
+							<xs:documentation>
+								This will exist only of the Event is related to a configuration Change
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EnterpriseDataEvent_Type">
+		<xs:sequence>
+			<xs:element ref="EventKey">
+				<xs:annotation>
+					<xs:documentation>
+						This will be populated according to the Event Type as follows:
+						AccessChannelList: System Access Channels List Event
+						DisctrictCodeList: System District Codes List Event
+						PaymentMethodList: System Payment Methods List Event
+						BillerServiceCodes: Fee Service Provider Service Codes Event
+						PartnerIdentity: Partner Identity Event
+						ParnerSubscription: Partner Service Subscription Event
+						BankBarachCodes: Bank Branch Codes Even
+
+						Occurnces:
+						Create, Update Status
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element minOccurs="0" name="EventAttributes" type="EventAttributes_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="EnterpriseDataEvent" type="EnterpriseDataEvent_Type"/>
+
+	<xs:simpleType name="ConfigurationStatus_Enum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for Rule Status</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="ACTIVE"/>
+			<xs:enumeration value="INACTIVE"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="PartnerConfigurations" type="PartnerConfigurations_Type"/>
+	<xs:complexType name="PartnerConfigurations_Type">
+		<xs:sequence>
+			<xs:element name="Configuration" type="Configuration_Type"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="PartnerConfiguration" type="PartnerConfiguration_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="PartnerConfiguration" type="PartnerConfiguration_Type"/>
+
+	<xs:complexType name="PartnerConfigurationAttributes_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="Attribute" type="PartnerConfigurationAttribute_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="PartnerConfigurationTemplate_Type">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Id" type="xs:long"/>
+			<xs:element name="Identifier" type="sys:NC20_SType"/>
+			<xs:element name="TemplateId" type="xs:long"/>
+			<xs:element minOccurs="0" ref="TemplateName"/>
+			<xs:element minOccurs="0" name="Status" type="ConfigurationStatus_Enum"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartnerConfiguration_Type">
+		<xs:annotation>
+			<xs:documentation>To hold additional properties for a Lookup</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="ConfigurationId" type="xs:long"/>
+			<xs:element ref="ConfigurationName"/>
+			<xs:element minOccurs="0" name="Template" type="PartnerConfigurationTemplate_Type"/>
+			<xs:element minOccurs="0" name="Attributes" type="PartnerConfigurationAttributes_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="Configuration" type="Configuration_Type"/>
+	<xs:complexType name="Configuration_Type">
+		<xs:annotation>
+			<xs:documentation>To hold additional properties for a Lookup</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Id" type="xs:long"/>
+			<xs:element name="Name" type="sys:NC100_SType"/>
+			<xs:element name="Description" type="sys:NC100_SType"/>
+			<xs:element maxOccurs="unbounded" name="Attributes" type="ConfigurationAttribute_Type"/>
+			<xs:element minOccurs="0" name="TemplatesData" type="ConfigurationTemplateData_Type"/>
+			<xs:element minOccurs="0" name="Status" type="ConfigurationStatus_Enum"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ConfigurationTemplateData_Type">
+		<xs:annotation>
+			<xs:documentation>To hold additional properties for a Configuration Templates</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="IdentifierName"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="Identifiers" type="sys:NC20_SType"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="Templates" type="ConfigurationTemplate_Type"/>
+
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="ConfigurationTemplate" type="ConfigurationTemplate_Type"/>
+	<xs:complexType name="ConfigurationTemplate_Type">
+		<xs:annotation>
+			<xs:documentation>Configuration Template Deifinition</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Id" type="xs:long"/>
+			<xs:element ref="TemplateName"/>
+			<xs:element name="Description" type="sys:C256_SType"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="Attributes" type="TemplateAttribute_Type"/>
+			<xs:element minOccurs="0" name="Status" type="ConfigurationStatus_Enum"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConfigurationAttribute_Type">
+		<xs:annotation>
+			<xs:documentation>To hold additional properties for a Lookup/entity</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Id" type="xs:long"/>
+			<xs:element name="Name" type="sys:NC100_SType"/>
+			<xs:element name="Description" type="sys:C256_SType"/>
+			<xs:element name="DefaultValue" type="sys:C256_SType"/>
+			<xs:element default="false" name="IsTemplateIdentifier" type="xs:boolean"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="PossibleValue" type="sys:C256_SType"/>
+			<xs:element minOccurs="0" name="Status" type="ConfigurationStatus_Enum"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TemplateAttribute_Type">
+		<xs:annotation>
+			<xs:documentation>To hold additional properties for a Lookup/entity</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Id" type="xs:long"/>
+			<xs:element name="AttributeId" type="xs:long"/>
+			<xs:element minOccurs="0" name="AttributeName" type="sys:NC100_SType"/>
+			<xs:element name="Value" type="sys:C256_SType"/>
+			<xs:element name="Status" type="ConfigurationStatus_Enum"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartnerConfigurationAttribute_Type">
+		<xs:annotation>
+			<xs:documentation>To hold additional properties for a Lookup/entity</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Id" type="xs:long"/>
+			<xs:element maxOccurs="unbounded" name="Value" type="sys:C256_SType"/>
+			<xs:element name="AttributeId" type="xs:long"/>
+			<xs:element minOccurs="0" name="AttributeName" type="sys:NC100_SType"/>
+			<xs:element minOccurs="0" name="Status" type="ConfigurationStatus_Enum"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Fault_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Partner in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="FaultCode"/>
+			<xs:element ref="FaultString"/>
+			<xs:element ref="FaultActor"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+
+	<xs:element name="CreateTime" type="sys:Date_SType"/>
+	<xs:element name="LastUpdateTime" type="sys:Date_SType"/>
+	<xs:element name="Fault_Type" type="Fault_Type"/>
+	<xs:element name="FaultCode" type="sys:NC16_SType"/>
+	<xs:element name="FaultString" type="sys:C128_SType"/>
+	<xs:element name="FaultActor" type="xs:long"/>
+	<xs:complexType name="Status_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Status in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="StatusCode"/>
+			<xs:element minOccurs="0" ref="StatusDesc"/>
+			<xs:element ref="err:Severity"/>
+			<xs:element minOccurs="0" ref="err:Parameters"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Status" type="Status_Type"/>
+	<xs:element name="StartDate" type="sys:Date_SType"/>
+	<xs:element name="EndDate" type="sys:Date_SType"/>
+	<xs:element name="ProcessDate" type="sys:Date_SType"/>
+	<xs:element name="TransactionDate" type="sys:Date_SType"/>
+	<xs:element name="AccountSource" type="AccountSource_Enum"/>
+	<xs:complexType name="AccountId_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents an Account in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" ref="AccountKey"/>
+			<xs:element ref="BillerKey"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AccountInfo_Type">
+        <xs:sequence>
+			<xs:element ref="AccountKey"/>
+			<xs:element ref="BillerKey"/>
+			<!-- added for EBPP Query end-->
+			<xs:element minOccurs="0" name="BillerName" type="sys:Identifier_SType"/>
+			<xs:element ref="ServiceType"/>
+			<xs:element minOccurs="0" ref="Lifecycle"/>
+			<xs:element minOccurs="0" ref="AccountSource"/>
+			<xs:element minOccurs="0" ref="Beneficiary"/>
+			<xs:element minOccurs="0" ref="CreateDate"/>
+	    </xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="Lifecycle" type="AccountLifecycle_Enums"/>
+
+	<xs:element name="BeneficiaryPhoneNum" type="sys:Phone_SType"/>
+
+	<xs:complexType name="Bill_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Bill in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" ref="BillKey"/>
+			<xs:element minOccurs="0" ref="AccountKey"/>
+			<xs:element ref="BillerKey"/>
+			<xs:element ref="BillCategory"/>
+			<xs:element ref="ServiceType"/>
+			<xs:element ref="AmountDue"/>
+			<xs:element minOccurs="0" ref="DueDate"/>
+			<xs:element minOccurs="0" ref="BillCycle"/>
+			<xs:element minOccurs="0" ref="GenerationDate"/>
+			<xs:element minOccurs="0" ref="OpenDate"/>
+			<xs:element minOccurs="0" ref="CloseDate"/>
+			<xs:element minOccurs="0" ref="ExpiryDate"/>
+			<xs:element minOccurs="0" ref="MinPartialAmt"/>
+			<xs:element minOccurs="0" ref="MaxAdvanceAmt"/>
+			<xs:element minOccurs="0" ref="MinAdvanceAmt"/>
+			<xs:element minOccurs="0" ref="IsNewCustomer"/>
+			<xs:element minOccurs="0" ref="CheckDigit"/>
+			<xs:element minOccurs="0" ref="BillRefInfo"/>
+			<xs:element minOccurs="0" ref="BillLifecycle"/>
+			<xs:element minOccurs="0" ref="BillType"/>
+			<xs:element minOccurs="0" ref="BillStatusCode"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" ref="BillPmtStatus"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" ref="BillSummAmt"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaymentInfo_Type">
+		<xs:sequence>
+			<xs:element ref="Payment"/>
+			<xs:element ref="PaymentReference"/>
+			<xs:element ref="PaymentExtn"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="PaymentExtn_Type">
+		<xs:annotation>
+			<xs:documentation>-Payment Extension- Biller specific attributes go here </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" ref="ServiceType"/>
+			<xs:element minOccurs="0" ref="PaymentTypeCode"/>
+			<xs:element minOccurs="0" ref="Beneficiary"/>
+			<xs:element default="false" minOccurs="0" name="PickedForRecon" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaymentReference_Type">
+		<xs:sequence>
+			<xs:element ref="BillerKey"/>
+			<!-- added for EBPP Query end-->
+			<xs:element minOccurs="0" name="BillerName" type="sys:Identifier_SType"/>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="AccountKey"/>
+					<xs:element minOccurs="0" ref="BillKey"/>
+					<xs:element minOccurs="0" ref="BeneficiaryPhoneNum"/>
+				</xs:sequence>
+				<xs:element ref="PartnerService"/>
+			</xs:choice>
+			<xs:element minOccurs="0" ref="BillCycle"/>
+			<xs:element minOccurs="0" ref="BillCategory"/>
+			<xs:element minOccurs="0" ref="BillerPmtRefInfo"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VeryShortMsg_Type">
+		<xs:annotation>
+			<xs:documentation>-communicates a localized text string the message recipient</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" ref="Lang"/>
+			<xs:element name="Text" type="sys:C32_SType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BillSummAmt_CType">
+		<xs:annotation>
+			<xs:documentation>-any currency amounts that are distinctly represented in the bill?s due amount</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="CurAmt"/>
+			<xs:element minOccurs="0" ref="BillSummAmtCode"/>
+			<xs:element ref="BillSummAmtType"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" ref="ShortDesc"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="BillSummAmtCode_Type">
+		<xs:annotation>
+			<xs:documentation>Open Enum: Indicates the type of amount being specified in CurAmt</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="sys:NC32_SType BillSummAmtCode_Enum"/>
+	</xs:simpleType>
+	<xs:simpleType name="BillSummAmtType_Enum">
+		<xs:annotation>
+			<xs:documentation>Indicates the type of amount specified in an associated currency value</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="Payable"/>
+			<xs:enumeration value="Supplemental"/>
+			<xs:enumeration value="InfoOnly"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="BillSummAmtCode_Enum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the Open Enum BillSummAmtCode</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="Incentive"/>
+			<xs:enumeration value="Penalty"/>
+			<xs:enumeration value="MinPartialPmt"/>
+			<xs:enumeration value="MinAdvancePmt"/>
+			<xs:enumeration value="MaxAdvancePmt"/>
+			<!-- [26-Jun-2005][PD]:Modified BillSummAmtCode enumeration as per Ext.Msg.Spec r1.7.1c. -->
+			<!-- Deleted <xs:enumeration value="CreditLimit"/>-->
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="BillSummAmtType_Type">
+		<xs:annotation>
+			<xs:documentation>Open Enum: Indicates the type of amount specified in an associated currency value</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="sys:NC32_SType BillSummAmtType_Enum"/>
+	</xs:simpleType>
+	<xs:complexType name="ShortMsg_Type">
+		<xs:annotation>
+			<xs:documentation>-generic mechanism for various messages and aggregates to contain localized text strings</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="LanguagePref" type="sys:LanguagePref_SType"/>
+			<xs:element name="Text" type="sys:C255_SType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="PmtStatusCode_Type">
+		<xs:annotation>
+			<xs:documentation>Closed Enum:  identifies the payment processing status</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="PMT_NEW"/>
+			<xs:enumeration value="PMT_UPDATED"/>
+			<xs:enumeration value="PMT_ANY"/>
+			<xs:enumeration value="PMT_DUPLICATE"/>
+			<xs:enumeration value="PMT_REVERSAL"/>
+			<xs:enumeration value="PMT_TRANSF"/>
+			<xs:enumeration value="PMT_NOT_TRANSF"/>
+			<xs:enumeration value="PMT_NOT_ADVICED"/>
+			<xs:enumeration value="PMT_RECON"/>
+			<xs:enumeration value="PMT_ALREADY_RECON"/>
+			<xs:enumeration value="PMT_NOT_RECON"/>
+			<xs:enumeration value="PMT_NOT_IN_BANK"/>
+			<xs:enumeration value="PMT_NOT_IN_SADAD"/>
+			<xs:enumeration value="PMT_MISMATCH"/>
+			<xs:enumeration value="PMT_COMPLETED"/>
+			<xs:enumeration value="PMT_NOT_COMPLETED"/>
+			<xs:enumeration value="PMT_BILLER_MISMATCH"/>
+			<!--[10-July-2005][PD]:Modified PmtStatusCode simpleType as per Ext.Msg.Spec r1.7.1g -->
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="PaymentInfo" type="PaymentInfo_Type"/>
+	<xs:element name="PaymentReference" type="PaymentReference_Type"/>
+	<xs:element name="PaymentExtn" type="PaymentExtn_Type"/>
+	<xs:element name="Bills" type="Bills_Type"/>
+	<xs:element name="Amount" type="sys:Amount_SType"/>
+	<xs:element name="PartnerTransDate" type="sys:Date_SType"/>
+	<xs:element name="Source" type="PaymentSource_Enums"/>
+	<xs:element name="BLRPTN" type="sys:Identifier_SType"/>
+	<xs:element name="BNKPTN" type="sys:Identifier_SType"/>
+	<xs:element name="BNKRVL" type="sys:Identifier_SType"/>
+	<xs:element name="GroupPaymentId" type="sys:Identifier_SType"/>
+	<xs:element name="AccessChannel" type="AccessChannel_CType"/>
+	<xs:element name="BranchCode" type="sys:NC10_SType"/>
+	<xs:element name="DistrictCode" type="sys:NC10_SType"/>
+	<xs:element name="PaymentMethod" type="PaymentMethod_Type"/>
+	<xs:element name="PaymentTypeCode" type="PaymentType_OpenEnum"/>
+	<xs:element default="CCRD" name="ServiceType" type="ServiceType_SType"/>
+	<xs:element name="CheckDigit" type="sys:NC2_SType"/>
+	<xs:element name="LifecycleState" type="PaymentLifecycle_Enums"/>
+	<xs:element name="LastUpdateDate" type="sys:Date_SType"/>
+	<xs:element name="Payor" type="Party_Type"/>
+	<xs:element name="Payee" type="Party_Type"/>
+	<xs:element name="Beneficiary" type="Party_Type"/>
+	<xs:element name="Customer" type="Party_Type"/>
+	<xs:element name="BillCycle" type="sys:NC16_SType"/>
+	<xs:element name="DueDate" type="sys:Date_SType"/>
+	<xs:element name="EffDate" type="sys:Date_SType"/>
+	<xs:element name="ExpiryDate" type="sys:Date_SType"/>
+	<xs:element name="CustomerName" type="sys:NC80_SType"/>
+	<xs:element name="CustomerLifecycle" type="CustomerLifecycle_Enums"/>
+	<xs:element name="CorrelationId" type="sys:UUID_SType"/>
+	<xs:element default="EBPP" name="Channel" type="SADADChannelType_Enums"/>
+	<xs:element name="ReconType" type="ReconType_Enums"/>
+	<xs:element name="TransactionType" type="ReconType_Enums"/>
+	<xs:element name="BillerPmtRefInfo" type="sys:NC80_SType"/>
+	<xs:element name="BillCategory" type="BillCategory_SType"/>
+	<xs:element name="BankAcct" type="sys:NC32_SType"/>
+	<xs:element name="RefundStatusType" type="RefundStatusType_Enums"/>
+	<xs:element default="false" name="ExtPmtRefund" type="xs:boolean"/>
+	<xs:element name="CollectionStatusType" type="CollectionStatusType_Enums"/>
+	<xs:element name="DisplayStatus" type="Status_Type"/>
+	<xs:element name="CreateDate" type="sys:Date_SType"/>
+	<xs:element name="AmountDue" type="sys:Amount_SType"/>
+	<xs:element name="NetDue" type="sys:Amount_SType"/>
+	<xs:element name="PaidAmount" type="sys:Amount_SType"/>
+	<xs:element name="GenerationDate" type="sys:Date_SType"/>
+	<xs:element name="OpenDate" type="sys:Date_SType"/>
+	<xs:element name="CloseDate" type="sys:Date_SType"/>
+	<xs:element name="MinPartialAmt" type="sys:Amount_SType"/>
+	<xs:element name="MaxAdvanceAmt" type="sys:Amount_SType"/>
+	<xs:element name="MinAdvanceAmt" type="sys:Amount_SType"/>
+	<xs:element name="IsNewCustomer" type="xs:boolean"/>
+	<xs:element name="BillRefInfo" type="sys:NC80_SType"/>
+	<xs:element name="BillLifecycle" type="BillLifecycle_Enums"/>
+	<xs:element name="BillType" type="BillType_Enums"/>
+	<xs:element name="DisplayLabel" type="VeryShortMsg_Type"/>
+	<xs:element name="Msg" type="VeryShortMsg_Type"/>
+	<xs:element name="AsstPayments" type="AsstPayments_Type"/>
+	<xs:element name="SupercedeBillNumber" type="sys:Identifier_SType"/>
+	<xs:element name="CurAmt" type="sys:Amount_SType"/>
+	<xs:element name="BillSummAmtCode" type="BillSummAmtCode_Type"/>
+	<xs:element name="BillSummAmtType" type="BillSummAmtType_Type"/>
+	<xs:element name="ShortDesc" type="ShortMsg_Type"/>
+	<xs:element name="BillSummAmt" type="BillSummAmt_CType"/>
+	<xs:element name="PmtStatusCode" type="PmtStatusCode_Type"/>
+	<xs:element name="BillPmtStatus" type="BillPmtStatus_Type"/>
+	<xs:element name="BillStatusCode" type="BillStatusCode_Type"/>
+
+	<xs:element name="BillPaymentDetail" type="BillPaymentDetail_Type"/>
+	<xs:complexType name="BillPaymentDetail_Type">
+		<xs:sequence>
+			<xs:element name="BillKey" type="xs:long"/>
+			<xs:element ref="BillType"/>
+			<xs:element ref="BillCategory"/>
+			<xs:element ref="AmountDue"/>
+			<xs:element minOccurs="0" ref="MinPartialAmt"/>
+			<xs:element minOccurs="0" ref="MaxAdvanceAmt"/>
+			<xs:element minOccurs="0" ref="MinAdvanceAmt"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" ref="PaymentAmount"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="PaymentAmount" type="PaymentAmount_Type"/>
+	<xs:complexType name="PaymentAmount_Type">
+		<xs:sequence>
+			<xs:element ref="Amount"/>
+			<xs:element ref="LifecycleState"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="BillAmounts" type="BillAmounts_Type"/>
+	<xs:complexType name="BillAmounts_Type">
+		<xs:sequence>
+			<xs:element ref="NetDue"/>
+			<xs:element ref="PaidAmount"/>
+			<xs:element name="PaymentRanges" type="Range_CType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="BillAmountsData" type="BillAmountsData_Type"/>
+	<xs:complexType name="BillAmountsData_Type">
+		<xs:sequence>
+			<xs:element name="BillKey" type="xs:long"/>
+			<xs:element ref="BillType"/>
+			<xs:element ref="BillLifecycle"/>
+			<xs:element minOccurs="0" ref="GenerationDate"/>
+			<xs:element minOccurs="0" ref="ExpiryDate"/>
+			<xs:element name="BillIdentifier" type="xs:string"/>
+			<xs:element ref="BillCategory"/>
+			<xs:element minOccurs="0" ref="MinPartialAmt"/>
+			<xs:element ref="BillAmounts"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Refund_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Refund in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="RefundKey"/>
+			<xs:element minOccurs="0" ref="SadadRefundKey"/>
+			<!--SADAD generated reference key for the refund -->
+			<xs:element minOccurs="0" ref="PartnerRefKey"/>
+			<!-- Bank Refund Transaction number  -->
+			<xs:element minOccurs="0" ref="PaymentKey"/>
+			<xs:element minOccurs="0" ref="RefundPIN"/>
+			<xs:element minOccurs="0" ref="BankKey"/>
+			<xs:element minOccurs="0" ref="BillerKey"/>
+			<xs:element minOccurs="0" ref="AccessChannel"/>
+			<xs:element minOccurs="0" ref="BranchCode"/>
+			<xs:element minOccurs="0" ref="DistrictCode"/>
+			<xs:element minOccurs="0" ref="PartnerTransDate"/>
+			<xs:element minOccurs="0" ref="Amount"/>
+			<xs:element minOccurs="0" ref="DueDate"/>
+			<xs:element minOccurs="0" ref="EffDate"/>
+			<xs:element minOccurs="0" ref="RefundType"/>
+			<xs:element minOccurs="0" ref="Payor"/>
+			<xs:element minOccurs="0" ref="Beneficiary"/>
+			<xs:element minOccurs="0" ref="BankAcct"/>
+			<xs:element minOccurs="0" ref="ServiceCode"/>
+			<xs:element minOccurs="0" ref="CreateDate"/>
+			<xs:element minOccurs="0" ref="ExpiryDate"/>
+			<xs:element minOccurs="0" ref="RefundStatusType"/>
+			<xs:element minOccurs="0" ref="CollectionStatusType"/>
+			<xs:element minOccurs="0" ref="DisplayStatus"/>
+			<xs:element minOccurs="0" ref="CustMobileNumber"/>
+			<xs:element minOccurs="0" ref="RefundLifecycle"/>
+			<xs:element minOccurs="0" ref="BillerRefundStatus"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BankAccount" type="BankAccount_Type"/>
+	<xs:complexType name="BankAccount_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Settlement in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Number" type="sys:NC36_SType"/>
+			<xs:element name="Type" type="AccountType_Type"/>
+			<xs:element ref="BankKey"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Settlement_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Settlement in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+    		<xs:extension base="Settlement_BankStatus_Type">
+				<xs:sequence>
+					<xs:element ref="BankKey"/>
+					<xs:element name="Type" type="SettlementType_Enums"/>
+					<xs:element name="FromAccount" type="BankAccount_Type"/>
+					<xs:element minOccurs="0" name="ToAccount" type="BankAccount_Type"/>
+					<xs:element name="Amount" type="sys:Amount_SType"/>
+					<xs:element minOccurs="0" name="Currency" type="sys:CurrencyType_Enums"/>
+					<xs:sequence minOccurs="0">
+						<xs:element minOccurs="0" ref="RefundKey"/>
+						<xs:element minOccurs="0" ref="Customer"/>
+						<xs:element minOccurs="0" ref="BillerKey"/>
+						<xs:element minOccurs="0" ref="PaymentKey"/>
+				</xs:sequence>
+					<xs:element ref="InstructionStatus"/>
+				</xs:sequence>
+    		</xs:extension>
+    	</xs:complexContent>
+
+	</xs:complexType>
+	<xs:complexType name="Failed_Settlement_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Settlement in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+    		<xs:extension base="Settlement_Type">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="Status">
+						<xs:annotation>
+							<xs:documentation>
+								This will hold the validation of SADAD to the Settlement Result,
+								if Missing then the Instruction is already failed
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+    		</xs:extension>
+    	</xs:complexContent>
+
+	</xs:complexType>
+
+	<xs:complexType name="Party_Type">
+		<xs:annotation>
+			<xs:documentation>-aggregate identifies a specific Customer (Payor/beneficiary) or institution</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="PartyId"/>
+			<xs:element minOccurs="0" ref="PartyType"/>
+			<xs:element minOccurs="0" ref="PartyIdType"/>
+			<xs:element minOccurs="0" ref="PartyName"/>
+			<xs:element minOccurs="0" ref="PartyStatus"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Settlement" type="Settlement_Type"/>
+	<xs:element name="FailedSettlement" type="Failed_Settlement_Type"/>
+	<xs:element name="Settlement_BankStatus" type="Settlement_BankStatus_Type"/>
+	<xs:element name="PartyId" type="sys:C32_SType"/>
+	<xs:element name="PartyType" type="PartyType_Type"/>
+	<xs:element name="PartyIdType" type="PartyIdType_Type"/>
+	<xs:element name="PartyName" type="sys:C64_SType"/>
+	<xs:element name="PartyStatus" type="PartyLifecycle_Enums"/>
+	<xs:simpleType name="PartyIdType_Type">
+		<xs:annotation>
+			<xs:documentation>Closed Enum: An OfficialId is a unique identifier for a bill-paying entity, including people and companies.  </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="NAT"/>
+			<xs:enumeration value="IQA"/>
+			<xs:enumeration value="BIS"/>
+			<xs:enumeration value="ACT"/>
+			<xs:enumeration value="SID"/>
+			<xs:enumeration value="BTL"/>
+			<xs:enumeration value="BED"/>
+			<xs:enumeration value="BIE"/>
+			<xs:enumeration value="SED"/>
+			<xs:enumeration value="PAS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PartyType_Type">
+		<xs:annotation>
+			<xs:documentation>Closed Enum: Party/Customer type - people and companies.  </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="INDIVIDUAL"/>
+			<xs:enumeration value="ORGANIZATION"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PartyLifecycle_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for PartyLifecycle</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="ACTIVE"/>
+			<xs:enumeration value="INACTIVE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Payments_Type">
+		<xs:annotation>
+			<xs:documentation>Multiple payments</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" ref="Payment"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Bills_Type">
+		<xs:annotation>
+			<xs:documentation>Multiple bills</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" ref="Bill"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccountIds_Type">
+		<xs:annotation>
+			<xs:documentation>Multiple accounts</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" ref="Account"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Modified by Chandramouli; Added BillPaymentsAssn_Type-->
+	<xs:complexType name="BillPaymentsAssn_Type">
+		<xs:annotation>
+			<xs:documentation>Bill-Payments association</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="Bill"/>
+			<xs:element maxOccurs="unbounded" ref="Payments"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AsstPayments_Type">
+		<xs:annotation>
+			<xs:documentation>Associated Payments</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<!--<xs:element ref="Bill"/>-->
+			<xs:element maxOccurs="unbounded" ref="Payments"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Modified by Chandramouli; Added BillPaymentsAssn_Type-->
+	<xs:complexType name="CustomerAccountsAssn_Type">
+		<xs:annotation>
+			<xs:documentation>Customer-Accounts association</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="Customer"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" ref="AssociatedAccount"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AccountCustomersAssn_Type">
+		<xs:annotation>
+			<xs:documentation>Account-Customers association</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="AccountInfo"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" ref="AssociatedCustomer"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AssociatedAccount_Type">
+		<xs:sequence>
+			<xs:element ref="AccountInfo"/>
+			<xs:element ref="AssnType"/>
+			<xs:element ref="AssociatedBy"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AssociatedCustomer_Type">
+		<xs:sequence>
+			<xs:element ref="Customer"/>
+			<xs:element ref="AssnType"/>
+			<xs:element ref="AssociatedBy"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AssociatedBy_Type">
+		<xs:sequence>
+			<xs:element minOccurs="0" ref="BankKey"/>
+			<xs:element minOccurs="0" ref="BillerKey"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Both_Type">
+		<xs:sequence>
+			<xs:element ref="BankKey"/>
+			<xs:element ref="BillerKey"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="AccountCustomersAssn" type="AccountCustomersAssn_Type"/>
+	<xs:element name="Both" type="Both_Type"/>
+	<xs:element name="AssociatedAccount" type="AssociatedAccount_Type"/>
+	<xs:element name="AssociatedCustomer" type="AssociatedCustomer_Type"/>
+	<xs:element name="AssociatedBy" type="AssociatedBy_Type"/>
+	<xs:element name="AssnType" type="AssnType_Enum"/>
+	<xs:simpleType name="AssnType_Enum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for PartnerType</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="BANK"/>
+			<xs:enumeration value="BILLER"/>
+			<xs:enumeration value="BOTH"/>
+			<xs:enumeration value="NONE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccountSource_Enum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the source of account creation</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC8_SType">
+			<xs:enumeration value="AUPLRQ"/>
+			<xs:enumeration value="BUPLRQ"/>
+			<xs:enumeration value="BLODRQ"/>
+			<xs:enumeration value="PVALRQ"/>
+			<xs:enumeration value="PORTAL"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="InstructionStatus" type="InstructionStatusCode_Enums"/>
+	<xs:element name="InstructionMessageStatus" type="InstructionStatusCode_Enums"/>
+
+	<xs:simpleType name="InstructionStatusCode_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the bank Instruction State Code</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC18_SType">
+			<xs:enumeration value="GENERATED"/>
+			<xs:enumeration value="SENT"/>
+			<xs:enumeration value="RETRY"/>
+			<xs:enumeration value="DELIVERED"/>
+			<xs:enumeration value="FAILED"/>
+			<xs:enumeration value="RETRY"/>
+			<xs:enumeration value="SUCCESS"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:complexType name="PaymentRanges_CType">
+		<xs:annotation>
+			<xs:documentation>Multiple payment ranges</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="PaymentRange" type="PaymentRangesByBillType_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaymentRangesByBillType_Type">
+		<xs:annotation>
+			<xs:documentation>- payment ranges</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BillType" type="BillType_Enums"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="Range" type="Range_CType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Range_CType">
+		<xs:annotation>
+			<xs:documentation>-Used in payment ranges</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Lower" type="sys:Amount_SType"/>
+			<xs:element minOccurs="0" name="Upper" type="sys:Amount_SType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="FileName" type="xs:string"/>
+	<xs:element name="FilePath" type="xs:string"/>
+	<xs:element name="UserName" type="xs:string"/>
+	<xs:element name="Password" type="xs:string"/>
+	<xs:element name="FileLifecycleState" type="FileLifecycle_Enums"/>
+	<xs:complexType name="File_Type">
+		<xs:sequence>
+			<xs:element ref="FileName"/>
+			<xs:element minOccurs="0" ref="FilePath"/>
+			<xs:element ref="RqUID"/>
+			<xs:element minOccurs="0" ref="UUID"/>
+			<xs:element minOccurs="0" ref="CorrelationId"/>
+			<xs:element ref="PartnerKey"/>
+			<xs:element ref="MsgCode"/>
+			<xs:element minOccurs="0" name="FileSize" type="xs:long"/>
+			<xs:element minOccurs="0" name="RecordCount" type="xs:long"/>
+			<xs:element minOccurs="0" name="FileCreationDate" type="sys:Date_SType"/>
+			<xs:element minOccurs="0" name="FileProcessDate" type="sys:Date_SType"/>
+			<xs:element minOccurs="0" name="Status" type="FileLifecycle_Enums"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="UploadProcessingSummary_Type">
+		<xs:sequence>
+			<xs:element ref="PartnerKey"/>
+			<xs:element ref="MsgCode"/>
+			<xs:element name="OnHoldCount" type="xs:long"/>
+			<xs:element name="InProgressCount" type="xs:long"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:element name="Payments" type="Payments_Type"/>
+	<xs:element name="Refund" type="Refund_Type"/>
+	<xs:element name="RefundRecord" type="RefundRec_Type"/>
+	<xs:element name="Party" type="Party_Type"/>
+	<xs:element name="Account" type="AccountId_Type"/>
+	<xs:element name="AccountInfo" type="AccountInfo_Type"/>
+	<xs:element name="Accounts" type="AccountIds_Type"/>
+	<xs:element name="Partner" type="Partner_Type"/>
+	<xs:element name="Bill" type="Bill_Type"/>
+	<xs:element name="Payment" type="Payment_Type"/>
+	<xs:element name="Service" type="Service_Type"/>
+	<xs:element name="File" type="File_Type"/>
+	<xs:element name="UploadProcessingSummary" type="UploadProcessingSummary_Type"/>
+	<xs:element name="Priority" type="PriorityType_Enum"/>
+	<xs:element name="CustomerAccountsAssn" type="CustomerAccountsAssn_Type"/>
+	<xs:element name="BillPaymentsAssn" type="BillPaymentsAssn_Type"/>
+	<!-- Modified by Chandramouli; Added BillPaymentsAssn_Type-->
+	<xs:element name="BillKey" type="sys:Identifier_SType"/>
+	<xs:element name="BillId" type="sys:Identifier_SType"/>
+	<xs:element name="PartyKey" type="sys:Identifier_SType"/>
+	<xs:element name="AccountKey" type="sys:Identifier_SType"/>
+	<xs:element name="PartnerKey" type="sys:NC11_SType"/>
+	<xs:element name="PartnerKeyList" type="PartnerKeyList_Type"/>
+	<xs:element name="BankName" type="sys:C64_SType"/>
+	<xs:element name="BankKey" type="sys:Identifier_SType"/>
+	<xs:element name="SADADAccount" type="sys:C64_SType"/>
+	<xs:element name="IssuerBankKey" type="sys:Identifier_SType"/>
+	<xs:element name="AcquirerBankKey" type="sys:Identifier_SType"/>
+	<xs:element name="BillerKey" type="sys:Identifier_SType"/>
+	<xs:element name="PaymentKey" type="sys:Identifier_SType"/>
+	<xs:element name="RefundKey" type="sys:Identifier_SType"/>
+	<xs:element name="BillerRefundKey" type="sys:Identifier_SType"/>
+	<xs:element name="TransactionKey" type="sys:Identifier_SType"/>
+	<xs:element name="SettlementKey" type="sys:Identifier_SType"/>
+	<xs:element name="SenderKey" type="sys:Identifier_SType"/>
+	<xs:element name="UUID" type="sys:UUID_SType"/>
+	<xs:element name="Timestamp" type="sys:Date_SType"/>
+	<!--	<xs:element name="SOAPFault" type="xs:string"/>-->
+	<xs:element name="PmtRanges" type="PaymentRanges_CType"/>
+	<xs:element name="PaymentRanges" type="PaymentRanges_CType"/>
+	<xs:element name="RefundStatusCode" type="RefundStatusCodeType_Enums"/>
+	<!-- added for refund type start-->
+	<xs:element name="RefundPIN" type="sys:NC6_SType"/>
+	<xs:element name="RefundType" type="RefundType_Enums"/>
+	<xs:element name="RefundLifecycle" type="RefundLifecycle_Enums"/>
+	<xs:element name="SadadRefundKey" type="sys:Identifier_SType"/>
+	<xs:element name="PartnerRefKey" type="sys:Identifier_SType"/>
+	<xs:element name="CustMobileNumber" type="sys:NC16_SType"/>
+	<xs:element name="StatusCode" type="xs:long"/>
+	<xs:element name="StatusDesc" type="xs:string"/>
+	<!-- added for refund type end-->
+	<xs:element name="ServiceInitiatorKey" type="sys:Identifier_SType"/>
+	<xs:element name="ServiceProviderKey" type="sys:Identifier_SType"/>
+	<xs:element name="ServiceConsumerId" type="sys:C255_SType"/>
+	<xs:element name="RqUID" type="sys:UUID_SType"/>
+	<xs:element name="AsyncRqUID" type="sys:UUID_SType"/>
+	<xs:element name="Date" type="sys:Date_SType"/>
+	<xs:element default="en-gb" name="Lang" type="sys:LanguagePref_SType"/>
+	<xs:element name="EndUserID" type="sys:C255_SType"/>
+	<xs:element default="EBPP" name="ApplicationID" type="sys:C255_SType"/>
+	<xs:element default="false" name="Compressed" type="xs:boolean"/>
+	<xs:element name="MsgCode" type="sys:Identifier_SType"/>
+	<xs:element name="PartnerService" type="PartnerService_Type"/>
+	<xs:element name="ProxyPayor" type="Party_Type"/>
+	<xs:element name="RecordNumber" type="xs:long"/>
+	<xs:element name="Currency" type="sys:CurrencyType_Enums"/>
+	<xs:element name="CrDr" type="TransactionType_Enum"/>
+	<xs:element name="Identifier" type="sys:Identifier_SType"/>
+	<xs:element name="InstructionID" type="sys:Identifier_SType"/>
+	<xs:element name="InstructionSet" type="InstructionSet_Type"/>
+	<xs:element name="BillerRefundStatus" type="BillerRefundStatus_Enums"/>
+	<xs:element name="PrcDate" type="sys:Date_SType"/>
+
+	<xs:element name="Instruction" type="Instruction_Type"/>
+	<xs:element name="UploadDate" type="sys:Date_SType"/>
+	<xs:element name="SuccessCount" type="xs:long"/>
+	<xs:element name="FailureCount" type="xs:long"/>
+	<xs:element name="Page" type="xs:int"/>
+	<xs:element name="Pagination" type="Pagination_Type"/>
+
+	<xs:complexType name="InstructionSet_Type">
+		<xs:annotation>
+			<xs:documentation>Instruction Set to be Updated in SARIE</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" ref="Instruction"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Instruction_Type">
+		<xs:annotation>
+			<xs:documentation>Instruction Type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="InstructionID"/>
+			<xs:element ref="BankKey"/>
+			<xs:element ref="CrDr"/>
+			<xs:element ref="Currency"/>
+			<xs:element ref="Amount"/>
+			<xs:element minOccurs="0" name="BankStatusCode" type="xs:long"/>
+			<xs:element minOccurs="0" name="BankStatusDesc" type="xs:string"/>
+			<xs:element ref="InstructionStatus"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="RefundStatusCodeType_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the closed enum RefundType</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="Accepted"/>
+			<xs:enumeration value="Already_Reconciled"/>
+			<xs:enumeration value="Duplicate"/>
+			<xs:enumeration value="Mismatch"/>
+			<xs:enumeration value="Not_In_Bank"/>
+			<xs:enumeration value="Not_In_Sadad"/>
+			<xs:enumeration value="Pending"/>
+			<xs:enumeration value="Processed"/>
+			<xs:enumeration value="Processing_Failed"/>
+			<xs:enumeration value="Reconciled"/>
+			<xs:enumeration value="Rejected"/>
+			<xs:enumeration value="UnReconciled"/>
+			<xs:enumeration value="Timeout"/>
+			<xs:enumeration value="Expired"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RefundCustomerStatusType_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the closed enum RefundStatus</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="Accepted"/>
+			<xs:enumeration value="Pending"/>
+			<xs:enumeration value="Rejected"/>
+			<xs:enumeration value="Approved"/>
+			<xs:enumeration value="Paid"/>
+			<xs:enumeration value="ReadyForPayment"/>
+			<xs:enumeration value="Expired"/>
+			<xs:enumeration value="Cancelled"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RefundStatusType_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the closed enum RefundStatus</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="REJECTED"/>
+			<xs:enumeration value="PENDING"/>
+			<xs:enumeration value="ACCEPTED"/>
+			<xs:enumeration value="APPROVED"/>
+			<xs:enumeration value="PROCESSING"/>
+			<xs:enumeration value="PROCESSED"/>
+			<xs:enumeration value="RECONCILED"/>
+			<xs:enumeration value="PROCESSING_FAILED"/>
+			<xs:enumeration value="EXPIRED"/>
+			<xs:enumeration value="CANCELLED"/>
+			<xs:enumeration value="REQUESTED_FAILED"/>
+			<xs:enumeration value="FINAL_ATTEMPT_FAILED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CollectionStatusType_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the closed enum CollectionStatus</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="COLLECTED"/>
+			<xs:enumeration value="NOT_COLLECTED"/>
+			<xs:enumeration value="PAID"/>
+			<xs:enumeration value="SETTLED"/>
+			<xs:enumeration value="RETURNED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PriorityType_Enum">
+		<xs:annotation>
+			<xs:documentation>Defines the priority of the files the File processing </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="HIGH"/>
+			<xs:enumeration value="NORMAL"/>
+			<xs:enumeration value="LOW"/>
+			<xs:enumeration value="HOLD"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccountType_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the open enum AccountType</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="CUA"/>
+			<xs:enumeration value="CMA"/>
+			<xs:enumeration value="DDA"/>
+			<xs:enumeration value="LOC"/>
+			<xs:enumeration value="MMA"/>
+			<xs:enumeration value="SDA"/>
+			<xs:enumeration value="SSA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccountType_Type">
+		<xs:annotation>
+			<xs:documentation>Open Enum for bank account types.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="AccountType_Enums sys:NC32_SType"/>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceType_SEnum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the Open Enum ServiceType</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC4_SType">
+			<xs:enumeration value="CIP"/>
+			<xs:enumeration value="ELCT"/>
+			<xs:enumeration value="PHON"/>
+			<xs:enumeration value="GSM"/>
+			<xs:enumeration value="LLIN"/>
+			<xs:enumeration value="INSR"/>
+			<xs:enumeration value="BKSV"/>
+			<xs:enumeration value="GOVT"/>
+			<xs:enumeration value="MED"/>
+			<xs:enumeration value="CCRD"/>
+			<xs:enumeration value="UTIL"/>
+			<xs:enumeration value="PCIN"/>
+			<xs:enumeration value="EXAM"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceType_SType">
+		<xs:annotation>
+			<xs:documentation>Open Enum: A Service Type represents the solitary service category associated with a bill</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="sys:NC4_SType ServiceType_SEnum"/>
+	</xs:simpleType>
+	<xs:simpleType name="AccountLifecycle_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for AccountLifeCycle</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="ACTIVE"/>
+			<xs:enumeration value="INACTIVE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CustomerLifecycle_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for CustomerLifecycle</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="ACTIVE"/>
+			<xs:enumeration value="INACTIVE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RefundLifecycle_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for CustomerLifecycle</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="ACTIVE"/>
+			<xs:enumeration value="INACTIVE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PartnerType_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for PartnerType</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="BANK"/>
+			<xs:enumeration value="BILLER"/>
+			<xs:enumeration value="SADAD"/>
+			<xs:enumeration value="SAMA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PartnerCategory_SType">
+		<xs:annotation>
+			<xs:documentation>Open enum for Partner category</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="PartnerCategory_Enums sys:NC32_SType"/>
+	</xs:simpleType>
+	<xs:simpleType name="PartnerCategory_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for PartnerLifecycle</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="TELECOM"/>
+			<xs:enumeration value="INSURANCE"/>
+			<xs:enumeration value="ELECTRICTY"/>
+			<xs:enumeration value="BANKING"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillCategory_SEnum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the Open Enum BillCategory</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC12_SType">
+			<xs:enumeration value="Recurring"/>
+			<xs:enumeration value="CIP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillCategory_SType">
+		<xs:annotation>
+			<xs:documentation>A bill category assigns behaviour to a bill, thus permitting SADAD to apply rules to bills in varying manner.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="BillCategory_SEnum sys:NC12_SType"/>
+	</xs:simpleType>
+	<xs:simpleType name="BillLifecycle_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for BillLifecycle</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="ACTIVE"/>
+			<xs:enumeration value="SUPERSEDED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FileLifecycle_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for FileLifecycle</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="FAILED_TO_PARSE"/>
+			<xs:enumeration value="DUPLICATE_RQUID"/>
+			<xs:enumeration value="RECEIVED"/>
+			<xs:enumeration value="HOLD"/>
+			<xs:enumeration value="READY_TO_PROCESS"/>
+			<xs:enumeration value="VALIDATING"/>
+			<xs:enumeration value="FAILED_TO_VALIDATE"/>
+			<xs:enumeration value="VALIDATED"/>
+			<xs:enumeration value="INVALID"/>
+			<xs:enumeration value="FAILED_TO_CHUNK"/>
+			<xs:enumeration value="CHUNKING"/>
+			<xs:enumeration value="RECORD_PROCESSING"/>
+			<xs:enumeration value="FAILED_TO_PROCESS"/>
+			<xs:enumeration value="PROCESSED"/>
+			<xs:enumeration value="GENERATED"/>
+			<xs:enumeration value="SENDING"/>
+			<xs:enumeration value="SENT"/>
+			<xs:enumeration value="FAILED_TO_SEND"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PaymentLifecycle_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for PaymentLifecycle </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="NEW"/>
+			<xs:enumeration value="VALIDATED"/>
+			<xs:enumeration value="ADVISED"/>
+			<xs:enumeration value="TERMINATED"/>
+			<xs:enumeration value="LOADED"/>
+			<xs:enumeration value="COMPLETED"/>
+			<xs:enumeration value="RECONCILED"/>
+			<xs:enumeration value="REVERSED"/>
+			<xs:enumeration value="TIMEOUT"/>
+			<xs:enumeration value="CANCELED"/>
+			<xs:enumeration value="SETTLED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PaymentSource_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for Payment source </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="BANK_INITIATED"/>
+			<xs:enumeration value="BILLER_LOADED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccessChannel_SEnum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the Open Enum AccessChannel</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="ATM"/>
+			<xs:enumeration value="IVR"/>
+			<xs:enumeration value="KIOSK"/>
+			<xs:enumeration value="INTERNET"/>
+			<xs:enumeration value="PORTAL"/>
+			<xs:enumeration value="BTELLER"/>
+			<xs:enumeration value="POS"/>
+			<xs:enumeration value="CAM"/>
+			<xs:enumeration value="CORP"/>
+			<xs:enumeration value="CCC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccessChannel_CType">
+		<xs:annotation>
+			<xs:documentation>AccessChannel enum represents the tool in which humans interact with SADAD</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="AccessChannel_SEnum sys:NC32_SType"/>
+	</xs:simpleType>
+	<xs:simpleType name="PaymentMethod_Enum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the Open Enum PmtMethod</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="CASH"/>
+			<xs:enumeration value="CCARD"/>
+			<xs:enumeration value="EFT"/>
+			<xs:enumeration value="ACTDEB"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PaymentMethod_Type">
+		<xs:annotation>
+			<xs:documentation>Open Enum: the method used to pay the bill.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="sys:NC32_SType PaymentMethod_Enum"/>
+	</xs:simpleType>
+	<xs:simpleType name="PaymentType_Enum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the Open Enum PmtType</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC16_SType">
+			<xs:enumeration value="POST_PAID"/>
+			<xs:enumeration value="RECHARGE"/>
+			<xs:enumeration value="RENEW"/>
+			<xs:enumeration value="PRE_PAID"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TransactionType_Enum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the Open Enum TransactionType</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC16_SType">
+			<xs:enumeration value="CREDIT"/>
+			<xs:enumeration value="DEBIT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TimeLimit_Enum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the Closed Enum Payment Type Time Limit</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC16_SType">
+			<xs:enumeration value="TILL_NEXT_DAY"/>
+			<xs:enumeration value="TILL_RECON"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="PaymentType_OpenEnum">
+		<xs:annotation>
+			<xs:documentation>Open Enum: A Payment Type distinguishes the payment's intent as it is possible for a Biller to accept multiple types of pre-payment for the same account.</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="sys:NC10_SType PaymentType_Enum"/>
+	</xs:simpleType>
+
+	<xs:element default="false" name="IsPrepaid" type="xs:boolean"/>
+	<xs:element default="false" name="IsDefault" type="xs:boolean"/>
+	<xs:element default="false" name="CanCustomerInitiate" type="xs:boolean"/>
+	<xs:element default="false" name="CanReverse" type="xs:boolean"/>
+
+	<xs:element name="TimeLimit" type="TimeLimit_Enum"/>
+	<xs:element name="PaymentType" type="PaymentType_Type"/>
+
+	<xs:complexType name="PaymentType_Type">
+		<xs:sequence>
+			<xs:element ref="PaymentTypeCode"/>
+			<xs:element ref="IsPrepaid"/>
+			<xs:element ref="IsDefault"/>
+			<xs:element ref="CanCustomerInitiate"/>
+			<xs:element ref="TimeLimit"/>
+			<xs:element ref="CanReverse"/>
+			<xs:element minOccurs="0" name="AllowedAccessChannel" type="AccessChannelList_Type"/>
+			<xs:element minOccurs="0" name="Status" type="ConfigurationStatus_Enum"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:simpleType name="PaymentIdType_Enum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the Closed Enum PmtIdType</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC8_SType">
+			<xs:enumeration value="SPTN"/>
+			<xs:enumeration value="BNKPTN"/>
+			<xs:enumeration value="BNKRVL"/>
+			<xs:enumeration value="BLRPTN"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccountGenMode_Enum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the Closed Enum Account Generation Mode</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC16_SType">
+			<xs:enumeration value="AUTO_CREATE"/>
+			<xs:enumeration value="PRE_LOAD"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillType_Enums">
+		<xs:annotation>
+			<xs:documentation>Closed enum represents the type of bill received or sent from SADAD</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="RECURRING"/>
+			<xs:enumeration value="HIGHTOLL"/>
+			<xs:enumeration value="ONEOFF"/>
+			<xs:enumeration value="PREPAID"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RefundType_Enums">
+		<xs:annotation>
+			<xs:documentation>Closed enum represents the type of refund</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="CASH"/>
+			<xs:enumeration value="ACCT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SettlementType_Enums">
+		<xs:annotation>
+			<xs:documentation>Closed enum represents the type of settlement</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="IB1_REFUND"/>
+			<xs:enumeration value="IB2_REFUND"/>
+			<xs:enumeration value="IB_PAYMENT"/>
+			<xs:enumeration value="SARIE_REFUND"/>
+			<xs:enumeration value="SARIE_PAYMENT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="CustId_CType">
+		<xs:annotation>
+			<xs:documentation>-aggregate identifies a specific bill paying Customer or institution</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="OfficialId" type="sys:C32_SType"/>
+			<xs:element minOccurs="0" name="OfficialIdType" type="OfficialIdType_CType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="OfficialIdType_CType">
+		<xs:annotation>
+			<xs:documentation>Closed Enum: An OfficialId is a unique identifier for a bill-paying entity, including people and companies.  </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="NAT"/>
+			<xs:enumeration value="IQA"/>
+			<xs:enumeration value="BIS"/>
+			<xs:enumeration value="ACT"/>
+			<xs:enumeration value="SID"/>
+			<xs:enumeration value="BTL"/>
+			<xs:enumeration value="BED"/>
+			<xs:enumeration value="BIE"/>
+			<xs:enumeration value="SED"/>
+			<xs:enumeration value="PAS"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="ServiceCode_SEnum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the Open Enum ServiceCode.
+						[S2] Made it open enum instead of closed</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="ServiceCode_Enum sys:NC32_SType"/>
+	</xs:simpleType>
+
+	<xs:simpleType name="ServiceCode_Enum">
+		<xs:restriction base="sys:NC3_SType">
+			<xs:enumeration value="001"/>
+			<xs:enumeration value="002"/>
+			<xs:enumeration value="003"/>
+			<xs:enumeration value="004"/>
+			<xs:enumeration value="005"/>
+			<xs:enumeration value="006"/>
+			<xs:enumeration value="007"/>
+			<xs:enumeration value="008"/>
+			<xs:enumeration value="009"/>
+			<xs:enumeration value="010"/>
+			<xs:enumeration value="011"/>
+			<xs:enumeration value="012"/>
+			<xs:enumeration value="013"/>
+			<xs:enumeration value="014"/>
+			<xs:enumeration value="015"/>
+			<xs:enumeration value="016"/>
+			<xs:enumeration value="017"/>
+			<xs:enumeration value="018"/>
+			<xs:enumeration value="019"/>
+			<xs:enumeration value="020"/>
+			<xs:enumeration value="021"/>
+			<xs:enumeration value="022"/>
+			<xs:enumeration value="023"/>
+			<xs:enumeration value="024"/>
+			<xs:enumeration value="025"/>
+			<xs:enumeration value="026"/>
+			<xs:enumeration value="027"/>
+			<xs:enumeration value="028"/>
+			<xs:enumeration value="029"/>
+			<xs:enumeration value="030"/>
+			<xs:enumeration value="031"/>
+			<xs:enumeration value="032"/>
+			<xs:enumeration value="035"/>
+			<xs:enumeration value="036"/>
+			<xs:enumeration value="037"/>
+			<xs:enumeration value="038"/>
+			<xs:enumeration value="039"/>
+			<xs:enumeration value="040"/>
+			<xs:enumeration value="041"/>
+			<xs:enumeration value="042"/>
+			<xs:enumeration value="043"/>
+			<xs:enumeration value="044"/>
+			<xs:enumeration value="045"/>
+			<xs:enumeration value="046"/>
+			<xs:enumeration value="047"/>
+			<xs:enumeration value="048"/>
+			<xs:enumeration value="049"/>
+			<xs:enumeration value="050"/>
+			<!-- [02-May-2012][BW] EMS 4.6 -->
+			<!-- [16-Apr-2013][BW] EMS 4.6.7 -->
+			<xs:enumeration value="051"/>
+			<xs:enumeration value="052"/>
+			<xs:enumeration value="053"/>
+			<xs:enumeration value="054"/>
+			<xs:enumeration value="055"/>
+			<xs:enumeration value="056"/>
+			<!-- [27-Sep-2016][MOI CHANGE] EMS 4.8.6 -->
+			<xs:enumeration value="057"/>
+			<!-- [06-Apr-2017][] EMS 4.8.7 - Added - PayAssociateFeeByID -->
+			<xs:enumeration value="058"/>
+			<!-- [06-Apr-2017][] EMS 4.8.7 - Added - PayAllAssociateFees -->
+			<xs:enumeration value="059"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="PartnerService_Type">
+		<xs:annotation>
+			<xs:documentation>This aggregate carries MOI sepcific service information</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="BeneficiaryId"/>
+			<xs:element minOccurs="0" ref="BeneficiaryName"/>
+			<xs:element ref="Service"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BeneficiaryId" type="Party_Type"/>
+	<xs:element name="BeneficiaryName" type="sys:C128_SType"/>
+	<xs:complexType name="Service_Type">
+		<xs:annotation>
+			<xs:documentation>This aggregate carries MOI sepcific service information</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="ServiceCode"/>
+			<xs:element minOccurs="0" ref="ServiceName"/>
+			<xs:element minOccurs="0" ref="ServiceAttributes"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ServiceCode" type="ServiceCode_SEnum"/>
+	<xs:element name="ServiceName" type="sys:C128_SType"/>
+	<xs:element name="ServiceAttributes" type="ServiceAttributes_Type"/>
+	<xs:complexType name="ServiceAttributes_Type">
+		<xs:annotation>
+			<xs:documentation>This aggregate service attributes</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" ref="ServiceAttribute"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ServiceAttribute" type="ServiceAttribute_Type"/>
+	<xs:complexType name="ServiceAttribute_Type">
+		<xs:annotation>
+			<xs:documentation>This aggregate carries attrribute name/value pair</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="AttributeName"/>
+			<xs:element ref="AttributeValue"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AttributeName" type="sys:C128_SType"/>
+	<xs:element name="AttributeValue" type="sys:C128_SType"/>
+	<xs:simpleType name="SubscriptionCode_SEnums">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for Partner Subscription Codes</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="REFUND_RECONCILIATION">
+				<xs:annotation>
+					<xs:documentation>Subscription for Refund Reconciliation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RFD_SRV"/>
+			<xs:enumeration value="RFD_RECON_PRC"/>
+			<xs:enumeration value="PMT_RECON_DETAIL_MISMATCH"/>
+			<xs:enumeration value="CASH_RFD_RPT"/>
+			<xs:enumeration value="ACCT_OWNID_VAL_RULE"/>
+			<xs:enumeration value="RT_CONF"/>
+			<xs:enumeration value="BNK_INIT_RFD"/>
+			<xs:enumeration value="FINQ_PRC"/>
+			<xs:enumeration value="ACT_UPL_RT_NTF"/>
+			<xs:enumeration value="BILL_UPL_RT_NTF"/>
+			<xs:enumeration value="PMT_UPL_RT_NTF"/>
+			<xs:enumeration value="RFD_UPL_RT_NTF"/>
+			<xs:enumeration value="RFD_ADV_NTF"/>
+			<xs:enumeration value="BILLER_SPL_GEN"/>
+			<xs:enumeration value="BILLER_SPL_DLV"/>
+			<xs:enumeration value="BILLER_PMT_RECON_RPT_GEN"/>
+			<xs:enumeration value="BILLER_PMT_RECON_RPT_DLV"/>
+			<xs:enumeration value="RFD_RECON_FL_NTF"/>
+			<xs:enumeration value="BILLER_RFD_RECON_RPT_DLV"/>
+			<xs:enumeration value="BILLER_RFD_RECON_RPT_GEN"/>
+			<xs:enumeration value="BILLER_RPT_GEN"/>
+			<xs:enumeration value="BILLER_PMT_NTF"/>
+			<xs:enumeration value="BATCH_PMT_NTF_GEN"/>
+			<xs:enumeration value="BATCH_PMT_NTF_DLV"/>
+			<xs:enumeration value="BILLER_FLV_PMT_NTF_GEN"/>
+			<xs:enumeration value="BILLER_FLV_PMT_NTF_DLV"/>
+			<xs:enumeration value="RT_PMT_NTF"/>
+			<xs:enumeration value="HIJRI_CALENDAR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProfileTypeEnum_SType">
+		<xs:annotation>
+			<xs:documentation>Closed Enum that identifies the PROFILE TYPE  Type within SADAD</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="BANK"/>
+			<xs:enumeration value="BILLER"/>
+			<xs:enumeration value="ACCESS_CHANNEL"/>
+			<xs:enumeration value="PAYMENT_TYPE"/>
+			<xs:enumeration value="SERVICE_TYPE"/>
+			<xs:enumeration value="PAYMENT_METHOD"/>
+			<xs:enumeration value="BILL_CATEGORY"/>
+			<xs:enumeration value="SUBSCRIPTION"/>
+			<xs:enumeration value="PREPAID_MOBILE_SVC_TYPE"/>
+			<xs:enumeration value="ACCT_OWNER_VALIDATION_RULE"/>
+			<xs:enumeration value="BRANCH_CODE"/>
+			<xs:enumeration value="DISTRICT_CODE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SADADChannelType_Enums">
+		<xs:annotation>
+			<xs:documentation>Closed enum represents the SADAD channels</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="EBPP"/>
+			<xs:enumeration value="OLP"/>
+			<xs:enumeration value="PORTAL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ReconType_Enums">
+		<xs:annotation>
+			<xs:documentation>Closed enum represents the type of Recon</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="REFUND"/>
+			<xs:enumeration value="PAYMENT"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AccountRequestType_SType">
+		<xs:annotation>
+			<xs:documentation>Closed Enum that identifies the AccountUpload Request Type within SADAD</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="NEW"/>
+			<xs:enumeration value="ACTIVATE"/>
+			<xs:enumeration value="DEACTIVATE"/>
+			<xs:enumeration value="DISASSOCIATE"/>
+			<xs:enumeration value="UPDATE"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="PartnerSubscription" type="PartnerSubscription_Type"/>
+	<xs:simpleType name="TransactionScope_SType">
+		<xs:annotation>
+			<xs:documentation>Closed Enum that identifies SADAD Product list</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="GLOBAL"/>
+			<xs:enumeration value="LOCAL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillerAccountStatus_Enums">
+		<xs:annotation>
+			<xs:documentation>Biller Account Status Codes</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="NEW"/>
+			<xs:enumeration value="ACTIVATE"/>
+			<xs:enumeration value="DEACTIVATE"/>
+			<xs:enumeration value="UPDATE"/>
+			<xs:enumeration value="REMOVE_ASSOIAION"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillerBillStatus_Enums">
+		<xs:annotation>
+			<xs:documentation>Biller Bill Status Codes</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="BILL_PAID"/>
+			<xs:enumeration value="BILL_PARTIALLY_PAID"/>
+			<xs:enumeration value="BILL_OVER_PAID"/>
+			<xs:enumeration value="BILL_UNPAID"/>
+			<xs:enumeration value="BILL_DEACTIVATE"/>
+			<xs:enumeration value="BILL_NEW"/>
+			<xs:enumeration value="BILL_UPDATED"/>
+			<xs:enumeration value="BILL_ANY"/>
+			<xs:enumeration value="BILL_EXPIRED"/>
+			<xs:enumeration value="BILL_CREATE"/>
+			<xs:enumeration value="ACCOUNT_ACTIVATE"/>
+			<xs:enumeration value="ACCOUNT_DEACTIVATE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillerPaymentStatus_Enums">
+		<xs:annotation>
+			<xs:documentation>Biller Payment Status Codes</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="PAYMENT_NEW"/>
+			<xs:enumeration value="PAYMENT_UPDATED"/>
+			<xs:enumeration value="PAYMENT_ANY"/>
+			<xs:enumeration value="PAYMENT_DUPLICATE"/>
+			<xs:enumeration value="PAYMENT_REVERSAL"/>
+			<xs:enumeration value="PAYMENT_TRANSFERED"/>
+			<xs:enumeration value="PAYMENT_NOT_TRANSFERED"/>
+			<xs:enumeration value="PAYMENT_NOT_ADVICED"/>
+			<xs:enumeration value="PAYMENT_Recon"/>
+			<xs:enumeration value="PAYMENT_ALREADY_RECONCONCILED"/>
+			<xs:enumeration value="PAYMENT_NOT_RECONCONCILED"/>
+			<xs:enumeration value="PAYMENT_NOT_IN_BANK"/>
+			<xs:enumeration value="PAYMENT_NOT_IN_SADAD"/>
+			<xs:enumeration value="PAYMENT_MISMATCH"/>
+			<xs:enumeration value="PAYMENT_COMPLETED"/>
+			<xs:enumeration value="PAYMENT_NOT_COMPLETED"/>
+			<xs:enumeration value="PAYMENT_BILLER_MISMATCH"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillerRefundStatus_Enums">
+		<xs:annotation>
+			<xs:documentation>Biller Refund Status Codes</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="ACCEPTED"/>
+			<xs:enumeration value="ALREADY_RECONCILED"/>
+			<xs:enumeration value="DUPLICATE"/>
+			<xs:enumeration value="MISMATCH"/>
+			<xs:enumeration value="NOT_IN_BANK"/>
+			<xs:enumeration value="NOT_IN_SADAD"/>
+			<xs:enumeration value="PENDING"/>
+			<xs:enumeration value="PROCESSED"/>
+			<xs:enumeration value="PROCESSING_FAILED"/>
+			<xs:enumeration value="RECONCILED"/>
+			<xs:enumeration value="REJECTED"/>
+			<xs:enumeration value="UNRECONCILED"/>
+			<xs:enumeration value="TIMEOUT"/>
+			<xs:enumeration value="EXPIRED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Name" type="sys:C64_SType"/>
+	<xs:element name="ShortName" type="sys:C32_SType"/>
+	<xs:element name="Description" type="sys:C255_SType"/>
+	<xs:element name="Namespace" type="sys:C255_SType"/>
+	<!-- Partner Service Profile objects-->
+	<xs:complexType name="BankSummary_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Bank in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Partner_Type">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="SARIEBankKey" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="BankDetail" type="BankDetail_Type"/>
+	<xs:complexType name="BankDetail_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Bank in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="PartnerDetails_Type">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="Branches"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Branches" type="Branches_Type"/>
+	<xs:complexType name="Branches_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" ref="BranchDetail"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BranchDetail" type="BranchDetail_Type"/>
+	<xs:complexType name="BranchDetail_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Bank Branch in SADAD systems
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="BankKey"/>
+			<xs:element ref="BankName"/>
+			<xs:element ref="BranchCode"/>
+			<xs:element name="Status" type="ConfigurationStatus_Enum"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BillerSummary_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Biller in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Partner_Type">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="BillerVersion" type="xs:string"/>
+					<xs:element name="BillerExpiryDate" type="sys:Date_SType"/>
+					<xs:element name="SubscribeToHijri" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- Bill Category -->
+	<xs:element name="BillCategoryDetail" type="BillCategoryDetail_Type"/>
+	<xs:complexType name="BillCategoryDetail_Type">
+		<xs:sequence>
+			<xs:element ref="BillCategory"/>
+			<xs:element ref="Description"/>
+			<xs:element minOccurs="0" name="Status" type="ConfigurationStatus_Enum"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="BillCategories" type="BillCategories_Type"/>
+	<xs:complexType name="BillCategories_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" ref="BillCategoryDetail"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="PaymentTypes" type="PaymentTypes_Type"/>
+	<xs:complexType name="PaymentTypes_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" ref="PaymentType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="FeeServiceCodes" type="FeeServiceCodes_Type"/>
+
+	<xs:complexType name="FeeServiceCodes_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" ref="Service"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="FeeServiceProviderDetails" type="FeeServiceProviderDetails_Type"/>
+
+	<xs:complexType name="FeeServiceProviderDetails_Type">
+		<xs:sequence>
+			<xs:element ref="FeeServiceCodes"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="BillerDetail_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Biller in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="PartnerDetails_Type">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="BillCategories"/>
+					<xs:element minOccurs="0" ref="PaymentTypes"/>
+					<xs:element minOccurs="0" ref="FeeServiceProviderDetails"/>
+
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+		<xs:complexType name="SADADDetail_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Biller in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="PartnerDetails_Type">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+<!-- 	<xs:element name="PartnerServiceType" type="PartnerServiceType_Type"/> -->
+	<xs:complexType name="PartnerSubscriptions_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Partner in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="PartnerSubscription" type="PartnerSubscription_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartnerSubscription_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Service subscription information</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="PartnerKey"/>
+			<xs:element ref="ServiceID"/>
+			<xs:element ref="ServiceMsgType"/>
+			<xs:element ref="Version"/>
+			<xs:element minOccurs="0" ref="MinorVersion"/>
+			<xs:element minOccurs="0" ref="Description"/>
+			<xs:element minOccurs="0" name="Priority" type="xs:long"/>
+			<xs:element default="false" name="RequireCompression" type="xs:boolean"/>
+			<!-- <xs:choice>
+				<xs:element name="SADADServiceDetail" type="SADADService_Type"/>
+				<xs:element name="PartnerServiceDetail" type="ExternalPartnerService_Type"/>
+			</xs:choice> -->
+			<xs:element name="Status" type="xs:string"/>
+			<xs:element name="SubscriptionType" type="xs:string"/>
+
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccessChannelList_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" ref="AccessChannel"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ServiceEndPoint_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Service End Point</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="PartnerKey"/>
+			<xs:choice>
+				<xs:element name="MQEndPoint" type="MQEndPoint_Type"/>
+				<xs:element name="SOAPEndPoint" type="SOAPEndPoint_Type"/>
+			</xs:choice>
+			<xs:element minOccurs="0" ref="Platform"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BaseEndPoint_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Base Service End Point</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" ref="Version"/>
+			<xs:element minOccurs="0" ref="Namespace"/>
+			<xs:element name="ServiceName" type="sys:C255_SType"/>
+			<xs:element name="ServiceNamespace" type="sys:C255_SType"/>
+			<xs:element minOccurs="0" name="ServiceVersion" type="sys:NC8_SType"/>
+			<xs:element minOccurs="0" name="PortName" type="sys:NC8_SType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MQEndPoint_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Service MQ End Point</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="BaseEndPoint_Type">
+				<xs:sequence>
+					<xs:element name="RequestQ" type="sys:C255_SType"/>
+					<xs:element name="RequestQMGR" type="sys:C255_SType"/>
+					<xs:element name="ResponseQ" type="sys:C255_SType"/>
+					<xs:element name="ResponseQMGR" type="sys:C255_SType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SOAPEndPoint_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Service MQ End Point</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="BaseEndPoint_Type">
+				<xs:sequence>
+					<xs:element name="EndPointType" type="sys:C255_SType"/>
+					<xs:element name="Address" type="sys:C2048_SType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="SADADServiceCategory_SType">
+		<xs:annotation>
+			<xs:documentation>Closed Enum that identifies the SADAD service categories</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="SADADInternal"/>
+			<xs:enumeration value="SADADExternal"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PartnerServiceCategory_SType">
+		<xs:annotation>
+			<xs:documentation>Closed Enum that identifies the external Partner service categories</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="PartnerExternal"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Product_SType">
+		<xs:annotation>
+			<xs:documentation>Closed Enum that identifies SADAD Product list</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="EBPP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Platform_SType">
+		<xs:annotation>
+			<xs:documentation>Closed Enum that identifies SADAD Product list</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="S2GW"/>
+			<xs:enumeration value="S2EVB"/>
+			<xs:enumeration value="S2ESB"/>
+			<xs:enumeration value="S2WPS"/>
+			<xs:enumeration value="S2WAS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Subscribed_SType">
+		<xs:annotation>
+			<xs:documentation>Closed Enum that identifies Service subscription states</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="SUBSCRIBED"/>
+			<xs:enumeration value="UNSUBSCRIBED"/>
+			<xs:enumeration value="TEMP_UNSUBSCRIBED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceMsgType_SType">
+		<xs:annotation>
+			<xs:documentation>Closed Enum that identifies Service subscription states</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="XML"/>
+			<xs:enumeration value="SOAP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DateRange_CType">
+		<xs:annotation>
+			<xs:documentation>-Represents a date range</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="From" type="sys:Date_SType"/>
+			<xs:element name="To" type="sys:Date_SType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="EBPPFileTypes_Enums">
+		<xs:annotation>
+			<xs:documentation>Closed Enum that identifies SADAD file type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="AUPLRQ">
+				<xs:annotation>
+					<xs:documentation>Account Upload</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ACONRQ">
+				<xs:annotation>
+					<xs:documentation>Account Upload Confirmation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BUPLRQ">
+				<xs:annotation>
+					<xs:documentation>Bill Upload</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BUPRRQ">
+				<xs:annotation>
+					<xs:documentation>Bill Upload Re-generation </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BCONRQ">
+				<xs:annotation>
+					<xs:documentation>Bill Upload Confirmation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BCORRQ">
+				<xs:annotation>
+					<xs:documentation>Bill Upload Re-generation confirmation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PUPLRQ">
+				<xs:annotation>
+					<xs:documentation>Payment Upload</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PCONRQ">
+				<xs:annotation>
+					<xs:documentation>Payment Upload Confirmation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PNOFRQ">
+				<xs:annotation>
+					<xs:documentation>Failover Payment Notification</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PNUPRQ">
+				<xs:annotation>
+					<xs:documentation>Batch Payment Notification</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUPLRQ">
+				<xs:annotation>
+					<xs:documentation>Refund Upload</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RCONRQ">
+				<xs:annotation>
+					<xs:documentation>Refund Upload confirmation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RNOBRQ">
+				<xs:annotation>
+					<xs:documentation>Bulk Refund Notification</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RNOCRQ">
+				<xs:annotation>
+					<xs:documentation>Bulk Refund Notification Confirmation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RNUBRQ">
+				<xs:annotation>
+					<xs:documentation>Batch Refund notification</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RNUCRQ">
+				<xs:annotation>
+					<xs:documentation>Batch Refund Notification Confirmation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BCUTRQ">
+				<xs:annotation>
+					<xs:documentation>Payment Bank cut-off</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BSPLRQ">
+				<xs:annotation>
+					<xs:documentation>Bank SPL Upload</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BKRCRQ">
+				<xs:annotation>
+					<xs:documentation>Bank Reconciliation Report</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RCUTRQ">
+				<xs:annotation>
+					<xs:documentation>Refund Cut-off</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BSRLRQ">
+				<xs:annotation>
+					<xs:documentation>Bank SRL Upload</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BKRRRQ">
+				<xs:annotation>
+					<xs:documentation>Bank Refund Reconciliation Report</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XADDRQ">
+				<xs:annotation>
+					<xs:documentation>Intra-bank Payment Settlement</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XACRRQ">
+				<xs:annotation>
+					<xs:documentation>Intra-bank Customer Refund Settlement </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="XADRRQ">
+				<xs:annotation>
+					<xs:documentation>Intra-bank Biller Account Refund Settlement </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BLRCRQ">
+				<xs:annotation>
+					<xs:documentation>Biller Reconciliation Report - Payments</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BLTLRQ">
+				<xs:annotation>
+					<xs:documentation>Biller SPL Log</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BLRRRQ">
+				<xs:annotation>
+					<xs:documentation>Biller Reconciliation Report - Refunds</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="PartnerKeyList_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" ref="PartnerKey"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ServiceList_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" ref="ServiceID"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConfigurationList_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" ref="ConfigurationName"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element default="false" name="Registered" type="xs:boolean"/>
+	<xs:element name="Subscribed" type="Subscribed_SType"/>
+	<xs:element default="false" name="Active" type="xs:boolean"/>
+	<xs:element name="ServiceID" type="sys:NC36_SType"/>
+	<xs:element name="ServiceIDList" type="ServiceList_Type"/>
+	<xs:element name="ConfigurationList" type="ConfigurationList_Type"/>
+	<xs:element default="1.0" name="Version" type="sys:NC8_SType"/>
+	<xs:element default="1.0" name="MinorVersion" type="sys:NC8_SType"/>
+	<xs:element name="Product" type="Product_SType"/>
+	<xs:element name="Platform" type="Platform_SType"/>
+	<xs:element default="XML" name="ServiceMsgType" type="ServiceMsgType_SType"/>
+	<xs:element name="ConfigurationName" type="sys:NC100_SType"/>
+	<xs:element name="TemplateName" type="sys:NC100_SType"/>
+	<xs:element name="IdentifierName" type="sys:NC100_SType"/>
+
+	<xs:element name="Warnings" type="Warnings_Type"/>
+	<xs:complexType name="Warnings_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="Warnings" type="Warning_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Warning_Type">
+		<xs:sequence>
+			<xs:element name="Message" type="xs:string"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="BillNumbers" type="BillNumbers_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BillNumbers_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="BillNumbers" type="BillNumber_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BillNumber_Type">
+		<xs:sequence>
+			<xs:element name="BillNumber" type="sys:Identifier_SType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="PartnerType" type="PartnerType_Enums"/>
+	<xs:element name="BillerDetail" type="BillerDetail_Type"/>
+	<xs:element name="SADADDetail" type="SADADDetail_Type"/>
+
+	<xs:complexType name="NotificationInfo_Type">
+		<xs:sequence>
+			<xs:element ref="BillerKey"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="TransactionHandle" type="TransactionHandle_Type"/>
+	<xs:complexType name="TransactionHandle_Type">
+		<xs:sequence>
+			<xs:element ref="BankKey"/>
+			<xs:element ref="CorrelationId"/>
+			<xs:element ref="Date"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="NotifStatus" type="NotifStatus_Type"/>
+	<xs:simpleType name="NotifStatus_Type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="REQUIRED"/>
+			<xs:enumeration value="IN_PROGRESS"/>
+			<xs:enumeration value="RETRY"/>
+			<xs:enumeration value="FAILED"/>
+			<xs:enumeration value="COMPLETED"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+    <xs:complexType name="Settlement_BankStatus_Type">
+    	<xs:sequence>
+    		<xs:element ref="SettlementKey"/>
+    		<xs:element minOccurs="0" name="BankStatusCode" type="xs:long"/>
+    		<xs:element minOccurs="0" name="BankStatusDesc" type="xs:string"/>
+    	</xs:sequence>
+    </xs:complexType>
+	<xs:complexType name="RefundRec_Type">
+		<xs:annotation>
+			<xs:documentation>-Refund Record used by  Refund Load/ Upload.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="Customer" type="CustId_CType"/>
+			<xs:element minOccurs="0" ref="RefundKey"/>
+			<xs:element minOccurs="0" ref="BillerKey"/>
+			<xs:element minOccurs="0" ref="BankKey"/>
+			<xs:element minOccurs="0" ref="RefundType"/>
+			<xs:element minOccurs="0" ref="RefundPIN"/>
+			<xs:element minOccurs="0" ref="CurAmt"/>
+			<xs:element minOccurs="0" ref="ExpiryDate"/>
+			<xs:element minOccurs="0" ref="BankAcct"/>
+			<xs:element minOccurs="0" ref="CustMobileNumber"/>
+			<xs:element minOccurs="0" ref="PaymentKey"/>
+			<xs:element minOccurs="0" ref="BLRPTN"/>
+			<xs:element minOccurs="0" ref="BNKPTN"/>
+			<xs:element minOccurs="0" ref="RefundStatusType"/>
+      <!-- this will not come in the service request -->
+			<xs:element minOccurs="0" ref="ExtPmtRefund"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RefundRec" type="RefundRec_Type"/>
+		<xs:complexType name="Payment_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Payment in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" ref="PaymentKey"/>
+			<xs:element minOccurs="0" ref="AcquirerBankKey"/>
+
+			<!-- added for EBPP Query end-->
+			<xs:element minOccurs="0" name="AcquirerBankName" type="sys:Identifier_SType"/>
+			<xs:element minOccurs="0" ref="IssuerBankKey"/>
+
+			<!-- added for EBPP Query end-->
+			<xs:element minOccurs="0" name="IssuerBankName" type="sys:Identifier_SType"/>
+			<xs:element minOccurs="0" ref="Payor"/>
+			<xs:element minOccurs="0" ref="Amount"/>
+			<xs:element minOccurs="0" ref="PartnerTransDate"/>
+			<xs:element minOccurs="0" ref="BLRPTN"/>
+			<xs:element minOccurs="0" ref="BNKPTN"/>
+			<xs:element minOccurs="0" ref="BNKRVL"/>
+			<xs:element minOccurs="0" ref="GroupPaymentId"/>
+			<xs:element minOccurs="0" ref="AccessChannel"/>
+			<xs:element minOccurs="0" ref="BranchCode"/>
+			<xs:element minOccurs="0" ref="DistrictCode"/>
+			<xs:element minOccurs="0" ref="PaymentMethod"/>
+			<xs:element minOccurs="0" ref="DueDate"/>
+			<xs:element minOccurs="0" ref="CheckDigit"/>
+			<xs:element minOccurs="0" ref="LifecycleState"/>
+			<xs:element minOccurs="0" ref="LastUpdateDate"/>
+			<xs:element minOccurs="0" ref="BillerKey"/>
+
+			<!-- added for EBPP Query end-->
+			<xs:element minOccurs="0" name="BillerName" type="sys:Identifier_SType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="BillPmtStatus_Type">
+		<xs:sequence>
+
+			<xs:element ref="PaymentKey"/>
+			<xs:element minOccurs="0" ref="BNKPTN"/>
+			<xs:element minOccurs="0" ref="BLRPTN"/>
+			<xs:element ref="PmtStatusCode"/>
+			<xs:element ref="CurAmt"/>
+			<xs:element minOccurs="0" ref="EffDate"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:simpleType name="BillStatusCode_Type">
+		<xs:annotation>
+			<xs:documentation>Closed Enum that identifies a bill?s payment status within SADAD</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="BILL_PAID"/>
+			<xs:enumeration value="BILL_PARTIAL_PAID"/>
+			<xs:enumeration value="BILL_OVER_PAID"/>
+			<xs:enumeration value="BILL_UNPAID"/>
+			<xs:enumeration value="BILL_DEACTIVE"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="Pagination_Type">
+		<xs:sequence>
+			<xs:element name="CurrentPageNumber" type="xs:int"/>
+			<xs:element name="TotalNumberOfPages" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

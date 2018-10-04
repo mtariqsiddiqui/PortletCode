@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.sadad.com/EBPP/scm/schema/BillSearch/1.0" version="1.0" xmlns="http://www.sadad.com/EBPP/scm/schema/BillSearch/1.0" xmlns:com="http://www.sadad.com/scm/Common/1.0" xmlns:err="http://www.sadad.com/scm/Error/1.0" xmlns:sys="http://www.sadad.com/scm/Common/System/1.0">
+		
+	<xs:import namespace="http://www.sadad.com/scm/Common/1.0" schemaLocation="Common/SADADCommon.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Common/System/1.0" schemaLocation="Common/SADADSystemTypes.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Error/1.0" schemaLocation="Common/Error.xsd"/>
+	
+	<xs:element name="BillSearchFault" type="err:Fault_Type">
+		<xs:annotation>
+			<xs:documentation>
+				Possible error Codes :
+				- GetByBillNumber
+					2040 - No Bill found
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:element name="GetByBillNumberRq" type="GetByBillNumberRq_Type"/>
+	<xs:element name="GetByBillNumberRs" type="GetByBillNumberRs_Type"/>
+	
+	<xs:element name="ListByAccountRq" type="ListByAccountRq_Type"/>
+	<xs:element name="ListByAccountRs" type="ListByAccountRs_Type"/>
+	
+	<xs:element name="ListByCustomerRq" type="ListByCustomerRq_Type"/>
+	<xs:element name="ListByCustomerRs" type="ListByCustomerRs_Type"/>
+	
+	<xs:element name="ListByPaymentRq" type="ListByPaymentRq_Type"/>
+	<xs:element name="ListByPaymentRs" type="ListByPaymentRs_Type"/>
+	
+	<xs:complexType name="GetByBillNumberRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:BillerKey"/>
+					<xs:element ref="com:BillKey"/>
+				 </xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="GetByBillNumberRs_Type">
+		<xs:complexContent>
+     	 <xs:extension base="com:BaseType">
+	  		<xs:sequence>
+				<xs:element name="Bill" type="ExtBill_Type"/>
+			</xs:sequence>
+		 </xs:extension>
+	   </xs:complexContent>
+   	</xs:complexType>
+	
+	<xs:complexType name="ListByAccountRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:BillerKey"/>
+					<xs:element ref="com:AccountKey"/>
+      				<xs:element minOccurs="0" name="Status" type="ListBillStatus_Type"/>
+				 </xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+		
+	<xs:complexType name="ListByAccountRs_Type">
+		<xs:complexContent>
+     	 <xs:extension base="com:BaseType">
+	  		<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" name="Bills" type="ExtBill_Type"/>
+			</xs:sequence>
+		 </xs:extension>
+	   </xs:complexContent>
+   	</xs:complexType>
+	
+	<xs:complexType name="ListByCustomerRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element name="Customer" type="com:CustId_CType"/>
+					<xs:element minOccurs="0" ref="com:BillerKey"/>
+					<xs:element name="Status" type="ListBillStatus_Type"/>
+				 </xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+		
+	<xs:complexType name="ListByCustomerRs_Type">
+		<xs:complexContent>
+     	 <xs:extension base="com:BaseType">
+	  		<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" name="Bills" type="ExtBill_Type"/>
+			</xs:sequence>
+		 </xs:extension>
+	   </xs:complexContent>
+   	</xs:complexType>
+	
+	<xs:complexType name="ListByPaymentRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+						<xs:element ref="com:PaymentKey"/>
+						<xs:element ref="com:BillerKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="ListByPaymentRs_Type">
+		<xs:complexContent>
+     	 <xs:extension base="com:BaseType">
+	  		<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" name="Bills" type="ExtBill_Type"/>
+			</xs:sequence>
+		 </xs:extension>
+	   </xs:complexContent>
+   	</xs:complexType>
+   	
+	<xs:simpleType name="ListBillStatus_Type">
+		<xs:annotation>
+			<xs:documentation>Closed Enum that identifies bill status as in SADAD system</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ACTIVE"/>
+			<xs:enumeration value="INACTIVE"/>
+		</xs:restriction>
+	</xs:simpleType>		
+	
+	<xs:complexType name="ExtBill_Type">
+	   <xs:complexContent>
+	     <xs:extension base="com:Bill_Type">
+			<xs:sequence>
+				<xs:element name="OriginalAmount" type="sys:Amount_SType"/>
+				<xs:element default="0" name="PaymentsCount" type="xs:int"/>
+				<xs:element ref="com:RqUID"/>
+				<xs:element ref="com:BillId"/>
+				<xs:element ref="com:CreateDate"/>
+			</xs:sequence>
+	     </xs:extension>
+	   </xs:complexContent>				
+	</xs:complexType>	
+	
+</xs:schema>

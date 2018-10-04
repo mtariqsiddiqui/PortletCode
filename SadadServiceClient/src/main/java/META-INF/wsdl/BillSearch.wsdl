@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="BillSearch" targetNamespace="http://www.sadad.com/EBPP/wsdl/BillSearch/1.0" xmlns:bill="http://www.sadad.com/EBPP/scm/schema/BillSearch/1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.sadad.com/EBPP/wsdl/BillSearch/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+		
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.sadad.com/EBPP/wsdl/BillSearch/1.0">
+			<xsd:import namespace="http://www.sadad.com/EBPP/scm/schema/BillSearch/1.0" schemaLocation="BillSearch.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="BillSearchFault">
+		<wsdl:part element="bill:BillSearchFault" name="SOAPFault"/>
+	</wsdl:message>
+	<wsdl:message name="GetByBillNumberRq">
+		<wsdl:part element="bill:GetByBillNumberRq" name="GetByBillNumberRq"/>
+	</wsdl:message>
+	<wsdl:message name="GetByBillNumberRs">
+		<wsdl:part element="bill:GetByBillNumberRs" name="GetByBillNumberRs"/>
+	</wsdl:message>
+	<wsdl:message name="ListByAccountRq">
+		<wsdl:part element="bill:ListByAccountRq" name="ListByAccountRq"/>
+	</wsdl:message>
+	<wsdl:message name="ListByAccountRs">
+		<wsdl:part element="bill:ListByAccountRs" name="ListByAccountRs"/>
+	</wsdl:message>
+	<wsdl:message name="ListByCustomerRq">
+		<wsdl:part element="bill:ListByCustomerRq" name="ListByCustomerRq"/>
+	</wsdl:message>
+	<wsdl:message name="ListByCustomerRs">
+		<wsdl:part element="bill:ListByCustomerRs" name="ListByCustomerRs"/>
+	</wsdl:message>
+	<wsdl:message name="ListByPaymentRq">
+		<wsdl:part element="bill:ListByPaymentRq" name="ListByPaymentRq"/>
+	</wsdl:message>
+	<wsdl:message name="ListByPaymentRs">
+		<wsdl:part element="bill:ListByPaymentRs" name="ListByPaymentRs"/>
+	</wsdl:message>
+	
+	<wsdl:portType name="BillSearchPort">
+		<wsdl:operation name="GetByBillNumber">
+			<wsdl:input message="tns:GetByBillNumberRq" name="GetByBillNumberRq_Input"/>
+			<wsdl:output message="tns:GetByBillNumberRs" name="GetByBillNumberRs_Output"/>
+			<wsdl:fault message="tns:BillSearchFault" name="GetByBillNumber_Fault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="ListByAccount">
+			<wsdl:input message="tns:ListByAccountRq" name="ListByAccountRq_Input"/>
+			<wsdl:output message="tns:ListByAccountRs" name="ListByAccountRs_Output"/>
+			<wsdl:fault message="tns:BillSearchFault" name="ListByAccount_Fault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="ListByCustomer">
+			<wsdl:input message="tns:ListByCustomerRq" name="ListByCustomerRq_Input"/>
+			<wsdl:output message="tns:ListByCustomerRs" name="ListByCustomerRs_Output"/>
+			<wsdl:fault message="tns:BillSearchFault" name="ListByCustomer_Fault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="ListByPayment">
+			<wsdl:input message="tns:ListByPaymentRq" name="ListByPaymentRq_Input"/>
+			<wsdl:output message="tns:ListByPaymentRs" name="ListByPaymentRs_Output"/>
+			<wsdl:fault message="tns:BillSearchFault" name="ListByPayment_Fault"/>
+		</wsdl:operation>	
+	</wsdl:portType>
+	
+	<wsdl:binding name="BillSearchBinding" type="tns:BillSearchPort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="GetByBillNumber">
+			<wsdl:input name="GetByBillNumberRq_Input">				
+				<soap:body parts="GetByBillNumberRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetByBillNumberRs_Output">				
+				<soap:body parts="GetByBillNumberRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="GetByBillNumber_Fault">
+				<soap:fault name="GetByBillNumber_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ListByAccount">
+			<wsdl:input name="ListByAccountRq_Input">				
+				<soap:body parts="ListByAccountRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListByAccountRs_Output">				
+				<soap:body parts="ListByAccountRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ListByAccount_Fault">
+				<soap:fault name="ListByAccount_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>	
+			<wsdl:operation name="ListByCustomer">
+			<wsdl:input name="ListByCustomerRq_Input">				
+				<soap:body parts="ListByCustomerRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListByCustomerRs_Output">				
+				<soap:body parts="ListByCustomerRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ListByCustomer_Fault">
+				<soap:fault name="ListByCustomer_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>	
+		<wsdl:operation name="ListByPayment">
+			<wsdl:input name="ListByPaymentRq_Input">				
+				<soap:body parts="ListByPaymentRq" use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListByPaymentRs_Output">				
+				<soap:body parts="ListByPaymentRs" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ListByPayment_Fault">
+				<soap:fault name="ListByPayment_Fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>		
+	</wsdl:binding>
+	<wsdl:service name="BillSearch">
+		 <wsdl:port binding="tns:BillSearchBinding" name="BillSearchPort">
+	  		<soap:address location="http://sadad.com/EBPP/service/BillSearch/1.0"/>
+	  	</wsdl:port>
+ 	</wsdl:service>
+	
+</wsdl:definitions>

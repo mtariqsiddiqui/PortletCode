@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="PartnerConfigurationService" targetNamespace="http://www.sadad.com/EBPP/wsdl/PartnerConfigurationService/1.0" xmlns:pcon="http://www.sadad.com/EBPP/scm/schema/PartnerConfigurationService/1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.sadad.com/EBPP/wsdl/PartnerConfigurationService/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.sadad.com/EBPP/wsdl/PartnerConfigurationService/1.0">
+			<xsd:import namespace="http://www.sadad.com/EBPP/scm/schema/PartnerConfigurationService/1.0" schemaLocation="PartnerConfigurationService.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="PartnerConfigurationFault">
+		<wsdl:part element="pcon:PartnerConfigurationFault" name="PartnerConfigurationFault"/>
+	</wsdl:message>
+
+	<wsdl:message name="GetConfigurationRequest">
+		<wsdl:part element="pcon:GetConfigurationRq" name="GetConfigurationRq"/>
+	</wsdl:message>
+	<wsdl:message name="GetConfigurationResponse">
+		<wsdl:part element="pcon:GetConfigurationRs" name="GetConfigurationRs"/>
+	</wsdl:message>
+	<wsdl:message name="CreateConfigurationRequest">
+		<wsdl:part element="pcon:CreateConfigurationRq" name="CreateConfigurationRq"/>
+	</wsdl:message>
+	<wsdl:message name="CreateConfigurationResponse">
+		<wsdl:part element="pcon:CreateConfigurationRs" name="CreateConfigurationRs"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateConfigurationRequest">
+		<wsdl:part element="pcon:UpdateConfigurationRq" name="UpdateConfigurationRq"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateConfigurationResponse">
+		<wsdl:part element="pcon:UpdateConfigurationRs" name="UpdateConfigurationRs"/>
+	</wsdl:message>
+		
+	<wsdl:message name="ActivateConfigurationRequest">
+		<wsdl:part element="pcon:ActivateConfigurationRq" name="ActivateConfigurationRq"/>
+	</wsdl:message>
+	<wsdl:message name="ActivateConfigurationResponse">
+		<wsdl:part element="pcon:ActivateConfigurationRs" name="ActivateConfigurationRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="DeactivateConfigurationRequest">
+		<wsdl:part element="pcon:DeactivateConfigurationRq" name="DeactivateConfigurationRq"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivateConfigurationResponse">
+		<wsdl:part element="pcon:DeactivateConfigurationRs" name="DeactivateConfigurationRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="GetConfigurationTemplateRequest">
+		<wsdl:part element="pcon:GetConfigurationTemplateRq" name="GetConfigurationTemplateRq"/>
+	</wsdl:message>
+	<wsdl:message name="GetConfigurationTemplateResponse">
+		<wsdl:part element="pcon:GetConfigurationTemplateRs" name="GetConfigurationTemplateRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="CreateConfigurationTemplateRequest">
+		<wsdl:part element="pcon:CreateConfigurationTemplateRq" name="CreateConfigurationTemplateRq"/>
+	</wsdl:message>
+	<wsdl:message name="CreateConfigurationTemplateResponse">
+		<wsdl:part element="pcon:CreateConfigurationTemplateRs" name="CreateConfigurationTemplateRs"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateConfigurationTemplateRequest">
+		<wsdl:part element="pcon:UpdateConfigurationTemplateRq" name="UpdateConfigurationTemplateRq"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateConfigurationTemplateResponse">
+		<wsdl:part element="pcon:UpdateConfigurationTemplateRs" name="UpdateConfigurationTemplateRs"/>
+	</wsdl:message>
+	<wsdl:message name="ActivateConfigurationTemplateRequest">
+		<wsdl:part element="pcon:ActivateConfigurationTemplateRq" name="ActivateConfigurationTemplateRq"/>
+	</wsdl:message>
+	<wsdl:message name="ActivateConfigurationTemplateResponse">
+		<wsdl:part element="pcon:ActivateConfigurationTemplateRs" name="ActivateConfigurationTemplateRs"/>
+	</wsdl:message>
+	
+	<wsdl:message name="DeactivateConfigurationTemplateRequest">
+		<wsdl:part element="pcon:DeactivateConfigurationTemplateRq" name="DeactivateConfigurationTemplateRq"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivateConfigurationTemplateResponse">
+		<wsdl:part element="pcon:DeactivateConfigurationTemplateRs" name="DeactivateConfigurationTemplateRs"/>
+	</wsdl:message>
+	
+	<wsdl:portType name="PartnerConfigurationService">
+		<wsdl:operation name="GetConfiguration">
+			<wsdl:input message="tns:GetConfigurationRequest" name="GetConfigurationRequest"/>
+			<wsdl:output message="tns:GetConfigurationResponse" name="GetConfigurationResponse"/>
+			<wsdl:fault message="tns:PartnerConfigurationFault" name="ConfigurationFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="CreateConfiguration">
+			<wsdl:input message="tns:CreateConfigurationRequest" name="CreateConfigurationRequest"/>
+			<wsdl:output message="tns:CreateConfigurationResponse" name="CreateConfigurationResponse"/>
+			<wsdl:fault message="tns:PartnerConfigurationFault" name="ConfigurationFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateConfiguration">
+			<wsdl:input message="tns:UpdateConfigurationRequest" name="UpdateConfigurationRequest"/>
+			<wsdl:output message="tns:UpdateConfigurationResponse" name="UpdateConfigurationResponse"/>
+			<wsdl:fault message="tns:PartnerConfigurationFault" name="ConfigurationFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateConfiguration">
+			<wsdl:input message="tns:ActivateConfigurationRequest" name="ActivateConfigurationRequest"/>
+			<wsdl:output message="tns:ActivateConfigurationResponse" name="ActivateConfigurationResponse"/>
+			<wsdl:fault message="tns:PartnerConfigurationFault" name="ConfigurationFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateConfiguration">
+			<wsdl:input message="tns:DeactivateConfigurationRequest" name="DeactivateConfigurationRequest"/>
+			<wsdl:output message="tns:DeactivateConfigurationResponse" name="DeactivateConfigurationResponse"/>
+			<wsdl:fault message="tns:PartnerConfigurationFault" name="ConfigurationFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetConfigurationTemplate">
+			<wsdl:input message="tns:GetConfigurationTemplateRequest" name="GetConfigurationTemplateRequest"/>
+			<wsdl:output message="tns:GetConfigurationTemplateResponse" name="GetConfigurationTemplateResponse"/>
+			<wsdl:fault message="tns:PartnerConfigurationFault" name="ConfigurationFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="CreateConfigurationTemplate">
+			<wsdl:input message="tns:CreateConfigurationTemplateRequest" name="CreateConfigurationTemplateRequest"/>
+			<wsdl:output message="tns:CreateConfigurationTemplateResponse" name="CreateConfigurationTemplateResponse"/>
+			<wsdl:fault message="tns:PartnerConfigurationFault" name="ConfigurationFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateConfigurationTemplate">
+			<wsdl:input message="tns:UpdateConfigurationTemplateRequest" name="UpdateConfigurationTemplateRequest"/>
+			<wsdl:output message="tns:UpdateConfigurationTemplateResponse" name="UpdateConfigurationTemplateResponse"/>
+			<wsdl:fault message="tns:PartnerConfigurationFault" name="ConfigurationFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateConfigurationTemplate">
+			<wsdl:input message="tns:ActivateConfigurationTemplateRequest" name="ActivateConfigurationTemplateRequest"/>
+			<wsdl:output message="tns:ActivateConfigurationTemplateResponse" name="ActivateConfigurationTemplateResponse"/>
+			<wsdl:fault message="tns:PartnerConfigurationFault" name="ConfigurationFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateConfigurationTemplate">
+			<wsdl:input message="tns:DeactivateConfigurationTemplateRequest" name="DeactivateConfigurationTemplateRequest"/>
+			<wsdl:output message="tns:DeactivateConfigurationTemplateResponse" name="DeactivateConfigurationTemplateResponse"/>
+			<wsdl:fault message="tns:PartnerConfigurationFault" name="ConfigurationFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="PartnerConfigurationServiceSOAP" type="tns:PartnerConfigurationService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="GetConfiguration">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerConfigurationService/1.0/GetConfiguration"/>
+			<wsdl:input name="GetConfigurationRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetConfigurationResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ConfigurationFault">
+				<soap:fault name="ConfigurationFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CreateConfiguration">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerConfigurationService/1.0/CreateConfiguration"/>
+			<wsdl:input name="CreateConfigurationRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreateConfigurationResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ConfigurationFault">
+				<soap:fault name="ConfigurationFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateConfiguration">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerConfigurationService/1.0/UpdateConfiguration"/>
+			<wsdl:input name="UpdateConfigurationRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UpdateConfigurationResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ConfigurationFault">
+				<soap:fault name="ConfigurationFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateConfiguration">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerConfigurationService/1.0/ActivateConfiguration"/>
+			<wsdl:input name="ActivateConfigurationRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ActivateConfigurationResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ConfigurationFault">
+				<soap:fault name="ConfigurationFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateConfiguration">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerConfigurationService/1.0/DeactivateConfiguration"/>
+			<wsdl:input name="DeactivateConfigurationRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeactivateConfigurationResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ConfigurationFault">
+				<soap:fault name="ConfigurationFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetConfigurationTemplate">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerConfigurationService/1.0/GetConfigurationTemplate"/>
+			<wsdl:input name="GetConfigurationTemplateRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetConfigurationTemplateResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ConfigurationFault">
+				<soap:fault name="ConfigurationFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CreateConfigurationTemplate">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerConfigurationService/1.0/CreateConfigurationTemplate"/>
+			<wsdl:input name="CreateConfigurationTemplateRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreateConfigurationTemplateResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ConfigurationFault">
+				<soap:fault name="ConfigurationFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateConfigurationTemplate">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerConfigurationService/1.0/UpdateConfigurationTemplate"/>
+			<wsdl:input name="UpdateConfigurationTemplateRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UpdateConfigurationTemplateResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ConfigurationFault">
+				<soap:fault name="ConfigurationFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateConfigurationTemplate">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerConfigurationService/1.0/ActivateConfigurationTemplate"/>
+			<wsdl:input name="ActivateConfigurationTemplateRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ActivateConfigurationTemplateResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ConfigurationFault">
+				<soap:fault name="ConfigurationFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateConfigurationTemplate">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerConfigurationService/1.0/DeactivateConfigurationTemplate"/>
+			<wsdl:input name="DeactivateConfigurationTemplateRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeactivateConfigurationTemplateResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="ConfigurationFault">
+				<soap:fault name="ConfigurationFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="PartnerConfigurationService">
+		<wsdl:port binding="tns:PartnerConfigurationServiceSOAP" name="PartnerConfigurationServiceSOAP">
+			<soap:address location="http://www.sadad.com/EBPP/wsdl/PartnerConfigurationService/1.0"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

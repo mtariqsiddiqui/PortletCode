@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Copyright SADAD Paymet System, 2007-2014.
+
+Whilst every effort has been made to ensure that the SADAD message standards contained in this document are correct,
+SADAD,SAMA and any other party involved in the creation of the document
+hereby state that the document is provided without warranty, either expressed or implied, of accuracy or fitness for purpose,
+and hereby disclaim any liability, direct or indirect, for damages or loss relating to the use of this document.
+The document may be modified from time to time, subject to developments in technology, changes to the standards,
+or new legal requirements.
+
+
+Your statutory rights are not affected.
+
+SADAD Payment System
+A Saudi Arabian Monetary Agency Company
+email: info@sadad.com
+
+Version Information:
+Version Number     : 1.0
+Date of creation   : Apr, 2014
+Revision History:
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.sadad.com/EBPP/schema/Lookup/1.0" 
+	targetNamespace="http://www.sadad.com/EBPP/schema/Lookup/1.0" 
+	xmlns:com="http://www.sadad.com/scm/Common/1.0"
+	xmlns:sys="http://www.sadad.com/scm/Common/System/1.0"
+	xmlns:err="http://www.sadad.com/scm/Error/1.0"
+	elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+	<xs:import namespace="http://www.sadad.com/scm/Common/1.0" schemaLocation="Common/SADADCommon.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Common/System/1.0" schemaLocation="Common/SADADSystemTypes.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Error/1.0"	schemaLocation="Common/Error.xsd"/>
+
+	<xs:simpleType name="LookupType_Enums">
+		<xs:annotation>
+			<xs:documentation>Defines the closed enum for Lookup types</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="DISTRICT_CODE" />
+			<xs:enumeration value="ACCESS_CHANNEL" />
+			<xs:enumeration value="PAYMENT_METHOD" />
+			<xs:enumeration value="SERVICE_TYPE" />
+			<xs:enumeration value="MESSAGE_CODES" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="LookupRq" type="LookupRq_Type"/>
+	<xs:element name="LookupRs" type="LookupRs_Type"/>
+	<xs:element name="LookupFault" type="err:Fault_Type">
+		<xs:annotation>
+			<xs:documentation>
+			2019 = Unknown reason
+			2009 = Customer Access Channel not found in Sadad
+			2010 = Access Channel is already active
+			2011 = Access Channel is Already Deactivated
+			2012 = Customer Access Channel already exists in Sadad
+			2013 = The value passed is null or blank
+			2014 = District Code does not exists
+			2015 = District Code is already activated
+			2016 = District Code is already deactivated
+			2017 = District Code is already exists in SADAD
+			2018 = Invalid District Code 
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name="LookupRq_Type">
+		<xs:annotation>
+			<xs:documentation>Lookup request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element name="LookupType" type="LookupType_Enums" />
+					<xs:element name="LookupKey" type="sys:C32_SType" minOccurs="0"/>
+					<xs:element name="LookupCriterias" type="LookupCriterias_Type" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+
+	<xs:complexType name="LookupRs_Type">
+		<xs:annotation>
+			<xs:documentation>Lookup Response</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element name="LookupType" type="LookupType_Enums" />
+					<xs:element name="LookupData" type="com:LookupData_Type" minOccurs="0" maxOccurs="unbounded" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="LookupCriterias_Type">
+		<xs:sequence>
+			<xs:element name="Criteria" type="Criteria_Type" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Criteria_Type">
+		<xs:annotation>
+			<xs:documentation>
+				- the CriteriaKey should be one of the following strings
+					"ServiceMsgType" to be used in MESSAGE_CODES Lookup.
+				- the CriteriaValue should be on the following 
+					in case of CriteriaKey is "ServiceMsgType" the CriteriaValue Should be ["SOAP" or "XML"]					 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CriteriaKey" type="sys:C32_SType" />			
+			<xs:element name="CriteriaValue" type="sys:C32_SType"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

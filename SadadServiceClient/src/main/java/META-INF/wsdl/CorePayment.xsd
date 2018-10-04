@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://sadad.com/schema/service/CorePayment/1.0" version="1.0" xmlns="http://sadad.com/schema/service/CorePayment/1.0" xmlns:com="http://www.sadad.com/scm/Common/1.0" xmlns:err="http://www.sadad.com/scm/Error/1.0">
+	
+	<xs:import namespace="http://www.sadad.com/scm/Error/1.0" schemaLocation="Common/Error.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Common/1.0" schemaLocation="Common/SADADCommon.xsd"/>
+	
+	<xs:element name="PaymentFault" type="err:Fault_Type"> 
+		<xs:annotation>
+			<xs:documentation>
+				Possible error Codes :
+				- Cancel
+					2001 - No matching payment found
+					2005 - Payment cancellation failed, since the payment life cycle state is not validated, timed-out, advised or reversed
+					2002 - Payment cancellation failed, since reconciliation process is in progress
+				- UnCancel
+					2001 - No matching payment found
+					2006 - Payment uncancellation failed, since the payment life cycle state is not cancelled
+					2003 - Payment uncancellation failed, since reconciliation process is in progress
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	
+	<xs:element name="CancelRq" type="CancelRq_Type"/>
+	<xs:element name="CancelRs" type="CancelRs_Type"/>	
+
+	<xs:element name="UncancelRq" type="UncancelRq_Type"/>
+	<xs:element name="UncancelRs" type="UncancelRs_Type"/>	
+
+	<xs:element name="ListByIdRq" type="ListByIdRq_Type"/>
+	<xs:element name="ListByIdRs" type="ListByIdRs_Type"/>	
+
+	<xs:element name="ListByPayorRq" type="ListByPayorRq_Type"/>
+	<xs:element name="ListByPayorRs" type="ListByPayorRs_Type"/>	
+
+	<xs:element name="ListByBeneficiaryRq" type="ListByBeneficiaryRq_Type"/>
+	<xs:element name="ListByBeneficiaryRs" type="ListByBeneficiaryRs_Type"/>
+	
+	<xs:element name="ListByAccountRq" type="ListByAccountRq_Type"/>
+	<xs:element name="ListByAccountRs" type="ListByAccountRs_Type"/>
+
+	<xs:element name="ListByBillIdRq" type="ListByBillIdRq_Type"/>
+	<xs:element name="ListByBillIdRs" type="ListByBillIdRs_Type"/>
+	
+	<xs:complexType name="CancelRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PaymentKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>	
+	
+	<xs:complexType name="CancelRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PaymentKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>	
+	
+	<xs:complexType name="UncancelRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PaymentKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>	
+	
+	<xs:complexType name="UncancelRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PaymentKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>		
+
+	<xs:complexType name="ListByIdRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="com:BillerKey"/>
+					<xs:element minOccurs="0" ref="com:BankKey"/>
+					<xs:choice>
+						<xs:element ref="com:PaymentKey"/>
+						<xs:element ref="com:BNKPTN"/>
+						<xs:element ref="com:BNKRVL"/>
+						<xs:element ref="com:BLRPTN"/>
+						<xs:element ref="com:GroupPaymentId"/>
+					</xs:choice>
+					<xs:element minOccurs="0" name="Payor" type="com:CustId_CType"/>
+					<xs:element minOccurs="0" name="Beneficiary" type="com:CustId_CType"/>
+					<xs:element minOccurs="0" name="DateRange" type="com:DateRange_CType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>
+	
+	<xs:complexType name="ListByIdRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="com:PaymentInfo"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>	
+	
+	<xs:complexType name="ListByPayorRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element name="Payor" type="com:CustId_CType"/>
+					<xs:element minOccurs="0" name="Billers" type="Billers_Type"/>
+					<xs:element minOccurs="0" ref="com:BankKey"/>
+					<xs:element minOccurs="0" name="Beneficiary" type="com:CustId_CType"/>
+					<xs:element minOccurs="0" ref="com:Page"/>
+					<xs:element minOccurs="0" name="DateRange" type="com:DateRange_CType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>	
+	
+	<xs:complexType name="Billers_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" ref="com:BillerKey"/>
+		</xs:sequence>
+	</xs:complexType>	
+	
+	<xs:complexType name="ListByPayorRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="com:PaymentInfo"/>
+					<xs:element minOccurs="0" ref="com:Pagination"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>						
+	
+	<xs:complexType name="ListByAccountRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="com:BankKey"/>
+					<xs:element ref="com:AccountKey"/>
+					<xs:element ref="com:BillerKey"/>
+					<xs:element minOccurs="0" name="Payor" type="com:CustId_CType"/>
+					<xs:element minOccurs="0" name="Beneficiary" type="com:CustId_CType"/>
+					<xs:element minOccurs="0" ref="com:Page"/>
+					<xs:element minOccurs="0" name="DateRange" type="com:DateRange_CType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>
+	
+	<xs:complexType name="ListByAccountRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="com:PaymentInfo"/>
+					<xs:element minOccurs="0" ref="com:Pagination"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>
+	
+	<xs:complexType name="ListByBillIdRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="com:BillerKey"/>
+					<xs:element minOccurs="0" ref="com:BankKey"/>
+					<xs:element ref="com:BillId"/>
+					<xs:element minOccurs="0" name="Payor" type="com:CustId_CType"/>
+					<xs:element minOccurs="0" name="Beneficiary" type="com:CustId_CType"/>
+					<xs:element minOccurs="0" ref="com:Page"/>
+					<xs:element minOccurs="0" name="DateRange" type="com:DateRange_CType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>
+	
+	<xs:complexType name="ListByBillIdRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="com:PaymentInfo"/>
+					<xs:element minOccurs="0" ref="com:Pagination"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>
+	
+	
+	<xs:complexType name="ListByBeneficiaryRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element name="Beneficiary" type="com:CustId_CType"/>
+					<xs:element ref="com:BillerKey"/>
+					<xs:element minOccurs="0" ref="com:BankKey"/>
+					<xs:element minOccurs="0" ref="com:Page"/>
+					<xs:element minOccurs="0" name="DateRange" type="com:DateRange_CType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>	
+	
+	<xs:complexType name="ListByBeneficiaryRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="com:PaymentInfo"/>
+					<xs:element minOccurs="0" ref="com:Pagination"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>	
+
+</xs:schema>

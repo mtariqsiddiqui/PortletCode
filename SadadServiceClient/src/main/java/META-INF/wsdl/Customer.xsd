@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.sadad.com/EBPP/scm/schema/Customer/1.0" version="1.0" xmlns="http://www.sadad.com/EBPP/scm/schema/Customer/1.0" xmlns:com="http://www.sadad.com/scm/Common/1.0" xmlns:err="http://www.sadad.com/scm/Error/1.0">
+
+	<xs:import namespace="http://www.sadad.com/scm/Common/1.0" schemaLocation="Common/SADADCommon.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Error/1.0" schemaLocation="Common/Error.xsd"/>
+
+	<xs:element name="CustomerFault" type="err:Fault_Type">
+		<xs:annotation>
+			<xs:documentation>	
+
+				Inquiry
+				270 = Query validation failed, since Bank ID is inactive.
+				271 = Query validation failed, since Bank ID is invalid.
+				272 = Query validation failed, since Customer ID is invalid.
+				273 = Query validation failed, since One or more associations between the customer and its accounts not found.
+				274 = Query validation failed, since Billing Account ID is invalid.				
+				
+				Association
+				210 = Accounts association failed, since Bank ID is not provided in the message.
+				211 = Accounts association failed, since Bank ID is not valid.
+				212 = Accounts association failed, since Bank ID is inactive.
+				213 = Accounts association failed, since customer profile is inactive.
+				214 = Accounts association failed, since one of the accounts does not exist.
+				225 = Accounts association failed, since account not found.
+				2013 = Customer not found
+				Dissassociation
+				216 = Accounts disassociation failed, since Bank ID is not provided in the message. 
+				217 = Accounts disassociation failed, since Bank ID is not valid.
+				218 = Accounts disassociation failed, since Bank ID is inactive.
+				219 = Accounts disassociation failed, since customer profile is inactive.
+				220 = Accounts disassociation failed, since one of the accounts does not exist.
+				221 = Accounts disassociation failed, since one of the accounts is inactive.
+				222 = Accounts disassociation failed, since previous account association does not exist for this account.
+				224 = Accounts disassociation failed, since customer profile does not exist
+				Activate	
+				2013 = Customer not found
+				2014 = Customer is already activated
+				Deactivate
+				2013 = Customer not found
+				2015 = Customer is already deactivated
+				Get By Key
+				2013 = Customer not found
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="CustProfileAssnRq" type="CustProfileAssnRq_Type"/>
+	<xs:element name="CustProfileAssnRs" type="CustProfileAssnRs_Type"/>
+
+	<xs:element name="CustProfileDisassnRq" type="CustProfileDisassnRq_Type"/>
+	<xs:element name="CustProfileDisassnRs" type="CustProfileDisassnRs_Type"/>
+	
+	<xs:element name="CustProfileInqRq" type="CustProfileInqRq_Type"/>
+	<xs:element name="CustProfileInqRs" type="CustProfileInqRs_Type"/>
+	
+	<xs:element name="ActivateRq" type="ActivateRq_Type"/>
+	<xs:element name="ActivateRs" type="ActivateRs_Type"/>
+
+	<xs:element name="DeactivateRq" type="DeactivateRq_Type"/>
+	<xs:element name="DeactivateRs" type="DeactivateRs_Type"/>
+	
+	<xs:element name="GetByKeyRq" type="GetByKeyRq_Type"/>
+	<xs:element name="GetByKeyRs" type="GetByKeyRs_Type"/>
+	
+	<xs:element name="ListByAccountRq" type="ListByAccountRq_Type"/>
+	<xs:element name="ListByAccountRs" type="ListByAccountRs_Type"/>
+	
+	<xs:element name="ListByBillRq" type="ListByBillRq_Type"/>
+	<xs:element name="ListByBillRs" type="ListByBillRs_Type"/>	
+		
+	
+	<xs:element name="AccountAssnStatus" type="AccountAssnStatus_Type"/>
+	<xs:element name="AccountDisassnStatus" type="AccountAssnStatus_Type"/>
+	<xs:element name="AccountAssnInqStatus" type="AccountAssnInqStatus_Type"/>
+
+	
+	<xs:complexType name="AccountAssnStatus_Type">
+		<xs:annotation>
+			<xs:documentation> Status response from each account
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AccountAssnInqStatus_Type">
+				<xs:sequence>
+					<xs:element ref="com:Status"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>	
+	
+	<xs:complexType name="AccountAssnInqStatus_Type">
+		<xs:annotation>
+			<xs:documentation> Status response from each account
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element ref="com:RecordNumber"/>
+			<xs:element ref="com:Account"/>
+			<xs:element ref="IsInProfile"/>
+		</xs:sequence>
+	</xs:complexType>				
+
+	<xs:complexType name="Accounts_Type">
+		<xs:sequence>
+			<xs:element ref="com:RecordNumber"/>
+			<xs:element ref="com:Account"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CustProfileAssnRq_Type">
+		<xs:annotation>
+			<xs:documentation> Customer Profile Association Request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:Payor"/>
+					<xs:element maxOccurs="unbounded" name="Accounts" type="Accounts_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="CustProfileAssnRs_Type">
+		<xs:annotation>
+			<xs:documentation>Customer Profile Association Response </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:Status"/>
+					<xs:element ref="com:Payor"/>
+					<xs:element maxOccurs="unbounded" ref="AccountAssnStatus"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>	
+	
+	<xs:complexType name="CustProfileDisassnRq_Type">
+		<xs:annotation>
+			<xs:documentation> Customer Profile Disassociation Request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:Payor"/>
+					<xs:element maxOccurs="unbounded" name="Accounts" type="Accounts_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="CustProfileDisassnRs_Type">
+		<xs:annotation>
+			<xs:documentation>Customer Profile Association Response </xs:documentation>
+		</xs:annotation>
+		
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:Status"/>
+					<xs:element ref="com:Payor"/>
+					<xs:element maxOccurs="unbounded" ref="AccountDisassnStatus"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>	
+	
+	<xs:complexType name="CustProfileInqRq_Type">
+		<xs:annotation>
+			<xs:documentation> Customer Profile Inquiry Request</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:Payor"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="Accounts" type="Accounts_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+
+	<xs:complexType name="CustProfileInqRs_Type">
+		<xs:annotation>
+			<xs:documentation>Customer Profile Inquiry Response </xs:documentation>
+		</xs:annotation>
+		
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:Status"/>
+					<xs:element ref="com:Payor"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="AccountAssnInqStatus"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>	
+
+	<xs:element name="IsInProfile" type="xs:boolean"/>
+
+    <xs:complexType name="ActivateRq_Type">
+            <xs:complexContent>
+                  <xs:extension base="com:BaseType">
+                        <xs:sequence>
+							<xs:element ref="com:Payor"/>
+                        </xs:sequence>
+                  </xs:extension>
+            </xs:complexContent>
+      </xs:complexType>
+      
+	   <xs:complexType name="ActivateRs_Type">
+            <xs:complexContent>
+                  <xs:extension base="com:BaseType">
+                        <xs:sequence/>
+                  </xs:extension>
+            </xs:complexContent>
+      </xs:complexType>  	
+      
+    <xs:complexType name="DeactivateRq_Type">
+            <xs:complexContent>
+                  <xs:extension base="com:BaseType">
+                        <xs:sequence>
+							<xs:element ref="com:Payor"/>
+                        </xs:sequence>
+                  </xs:extension>
+            </xs:complexContent>
+      </xs:complexType>
+      
+
+	
+	   <xs:complexType name="DeactivateRs_Type">
+            <xs:complexContent>
+                  <xs:extension base="com:BaseType">
+                        <xs:sequence/>
+                  </xs:extension>
+            </xs:complexContent>
+      </xs:complexType>   
+      
+      
+	
+    <xs:complexType name="GetByKeyRq_Type">
+            <xs:complexContent>
+                  <xs:extension base="com:BaseType">
+                        <xs:sequence>
+							<xs:element ref="com:Payor"/>
+                        </xs:sequence>
+                  </xs:extension>
+            </xs:complexContent>
+      </xs:complexType>
+      
+
+	
+	   <xs:complexType name="GetByKeyRs_Type">
+            <xs:complexContent>
+                  <xs:extension base="com:BaseType">
+                        <xs:sequence>
+                            <xs:element name="Status" type="com:PartyLifecycle_Enums"/>
+                        </xs:sequence>
+                  </xs:extension>
+            </xs:complexContent>
+      </xs:complexType> 
+      
+    <xs:complexType name="ListByAccountRq_Type">
+            <xs:complexContent>
+                  <xs:extension base="com:BaseType">
+                        <xs:sequence>
+                        	<xs:element ref="com:BillerKey"/>
+							<xs:element ref="com:AccountKey"/>
+							<xs:element minOccurs="0" ref="com:Page"/>
+                        </xs:sequence>
+                  </xs:extension>
+            </xs:complexContent>
+      </xs:complexType>
+      
+	   <xs:complexType name="ListByAccountRs_Type">
+            <xs:complexContent>
+                  <xs:extension base="com:BaseType">
+                        <xs:sequence>
+                        	<xs:element ref="com:AccountCustomersAssn"/>
+                        	<xs:element minOccurs="0" ref="com:Pagination"/>
+                        </xs:sequence>
+                  </xs:extension>
+            </xs:complexContent>
+      </xs:complexType>  
+      
+    <xs:complexType name="ListByBillRq_Type">
+            <xs:complexContent>
+                  <xs:extension base="com:BaseType">
+                        <xs:sequence>
+                        	<xs:element ref="com:BillerKey"/>
+							<xs:element ref="com:BillKey"/>
+							<xs:element minOccurs="0" ref="com:Page"/>
+                        </xs:sequence>
+                  </xs:extension>
+            </xs:complexContent>
+      </xs:complexType>
+      
+	   <xs:complexType name="ListByBillRs_Type">
+            <xs:complexContent>
+                  <xs:extension base="com:BaseType">
+                        <xs:sequence>
+                        	<xs:element ref="com:AccountCustomersAssn"/>
+                        	<xs:element minOccurs="0" ref="com:Pagination"/>
+                        </xs:sequence>
+                  </xs:extension>
+            </xs:complexContent>
+      </xs:complexType>        
+
+</xs:schema>

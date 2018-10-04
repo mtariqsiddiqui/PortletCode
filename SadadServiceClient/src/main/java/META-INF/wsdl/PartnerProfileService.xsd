@@ -1,0 +1,1152 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.sadad.com/EBPP/scm/schema/PartnerProfileService/1.0" xmlns="http://www.sadad.com/EBPP/scm/schema/PartnerProfileService/1.0" xmlns:com="http://www.sadad.com/scm/Common/1.0" xmlns:err="http://www.sadad.com/scm/Error/1.0" xmlns:sys="http://www.sadad.com/scm/Common/System/1.0">
+
+	<xs:import namespace="http://www.sadad.com/scm/Error/1.0" schemaLocation="Common/Error.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Common/System/1.0" schemaLocation="Common/SADADSystemTypes.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Common/1.0" schemaLocation="Common/SADADCommon.xsd"/>
+	<!-- Common Partner Related
+
+	<xs:simpleType name="ConnectionProtocol_Enum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PING"/>
+			<xs:enumeration value="TELNET"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Event_Enum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CREATE"/>
+			<xs:enumeration value="UPDATE"/>
+			<xs:enumeration value="DELETE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EntityType_Enum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="BANK"/>
+			<xs:enumeration value="BILLER"/>
+			<xs:enumeration value="SERVICE_SUBSCRIBTION"/>
+			<xs:enumeration value="PARTNER_CONFIGURATION"/>
+			<xs:enumeration value="BRANCH_CODE"/>
+			<xs:enumeration value="PAYMENT_TYPE"/>
+		</xs:restriction>
+	</xs:simpleType> -->
+	
+	
+		<!-- Service related -->
+	<!-- Test connectivity to Partner -->
+	<!-- <xs:element name="TestConnectionRequest" type="TestConnectionRequest_Type"/>
+	<xs:element name="TestConnectionResponse" type="TestConnectionResponse_Type"/>
+	<xs:complexType name="TestConnectionRequest_Type">
+		<xs:annotation>
+			<xs:documentation>To test connection with partners - implemented in
+				ESB / GW</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element name="ConnectionProtocol" type="ConnectionProtocol_Enum"/>
+					<xs:choice>
+						<xs:element name="ManualTest" type="ManualTest_Type"/>
+						<xs:element name="PartnerTest" type="PartnerTest_Type"/>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TestConnectionResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:choice>
+						<xs:element name="ManualTestResponse" type="ManualTestResponse_Type"/>
+						<xs:element name="PartnerTestResponse" type="PartnerTestResponse_Type"/>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="ManualTestResponse_Type">
+		<xs:sequence>
+			<xs:element ref="com:Status"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ManualTest_Type">
+		<xs:sequence>
+			<xs:element name="IPAddress" type="IPAddress_Type"/>
+			<xs:element name="Port" type="xs:int" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="IPAddress_Type">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="PartnerTestResponse_Type">
+		<xs:sequence>
+			<xs:element name="PartnerStatus" type="PartnerStatus_Type"
+				maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartnerStatus_Type">
+		<xs:sequence>
+			<xs:element ref="com:Partner"/>
+			<xs:element ref="com:Status"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartnerTest_Type">
+		<xs:sequence>
+			<xs:element name="PartnerType" type="PartnerType_Enums"/>
+			<xs:element name="PartnerList" type="PartnerList_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartnerList_Type">
+		<xs:sequence>
+			<xs:element ref="com:Partner" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType> 
+	
+	
+	
+	<xs:element name="Namespace" type="sys:C255_SType"/>
+	<xs:element name="ServiceOwner" type="sys:Identifier_SType"/>
+	<xs:element name="PartnerType" type="com:PartnerType_Enums"/>
+	
+	-->
+	<!-- Partner Service Profile objects -->
+
+	<xs:element name="Name" type="sys:C64_SType"/>
+	<!-- <xs:element name="ShortName" type="sys:C32_SType"/> -->
+	<xs:element name="Description" type="sys:C255_SType"/>
+	<xs:element name="ServiceID" type="sys:NC12_SType"/>
+
+	<xs:element default="false" name="ActiveOnly" type="xs:boolean"/>
+
+	<xs:complexType name="PartnerConfigurationSubscriptions_Type">
+		<xs:sequence>
+			<xs:element ref="com:PartnerKey"/>
+			<xs:element ref="com:ConfigurationName"/>
+			<xs:element name="Subscribed" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartnerServiceSubscriptions_Type">
+		<xs:sequence>
+			<xs:element ref="com:PartnerKey"/>
+			<xs:element ref="ServiceID"/>
+			<xs:element name="Subscribed" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="PartnerServiceSubscriptionsType_Type">
+		<xs:sequence>
+			<xs:element ref="com:PartnerKey"/>
+			<xs:element ref="ServiceID"/>
+			<xs:element name="Subscribed" type="sys:C32_SType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:element name="PartnerProfileFault" type="err:Fault_Type"/>
+	
+	<xs:element name="ListPartnerSummaryRequest" type="ListPartnerSummaryRequest_Type"/>
+	<xs:element name="ListPartnerSummaryResponse" type="ListPartnerSummaryResponse_Type"/>
+	<xs:complexType name="ListPartnerSummaryRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="com:PartnerKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ListPartnerSummaryResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="com:PartnerInfo"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="GetFeeServiceProviderDetailsRequest" type="GetFeeServiceProviderDetailsRequest_Type"/>
+	<xs:element name="GetFeeServiceProviderDetailsResponse" type="GetFeeServiceProviderDetailsResponse_Type"/>
+	<xs:complexType name="GetFeeServiceProviderDetailsRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetFeeServiceProviderDetailsResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="com:FeeServiceProviderDetails"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- Get list of subscribed services -->
+	<xs:complexType name="GetSubscribedServiceListRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:PartnerType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetSubscribedServiceListResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="com:PartnerSubscription"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetSubscribedServiceListRequest" type="GetSubscribedServiceListRequest_Type"/>
+	<xs:element name="GetSubscribedServiceListResponse" type="GetSubscribedServiceListResponse_Type"/>
+	<xs:complexType name="GetSubscribedServiceRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:PartnerType"/>
+					<xs:element ref="ServiceID"/>
+					<xs:element minOccurs="0" ref="com:Version"/>
+					<xs:element minOccurs="0" ref="com:Subscribed"/>
+					<xs:element minOccurs="0" ref="com:ServiceMsgType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetSubscribedServiceResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="com:PartnerSubscription"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetSubscribedServiceRequest" type="GetSubscribedServiceRequest_Type"/>
+	<xs:element name="GetSubscribedServiceResponse" type="GetSubscribedServiceResponse_Type"/>
+
+	<xs:element name="GetPartnerConfigurationRequest" type="GetPartnerConfigurationRequest_Type"/>
+	<xs:element name="GetPartnerConfigurationResponse" type="GetPartnerConfigurationResponse_Type"/>
+	<!-- Get List of Partner Configuration -->
+	<xs:complexType name="GetPartnerConfigurationRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element default="false" name="IncludePossibleValues" type="xs:boolean"/>
+					<xs:element minOccurs="0" ref="com:ConfigurationName">
+						<xs:annotation>
+							<xs:documentation>
+								If Provided only the configuration related to
+								this Configuration will be retrieved
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" name="Identifier" type="sys:C64_SType">
+						<xs:annotation>
+							<xs:documentation>
+								If Provided only the configuration related to
+								this identifier will be retrieved
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element minOccurs="0" ref="ActiveOnly">
+						<xs:annotation>
+							<xs:documentation>
+								If Provided only the Active configuration will be retrieved
+								omitting it will get all 
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetPartnerConfigurationResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="PartnerConfigurations" type="com:PartnerConfigurations_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="CreatePartnerConfigurationRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element name="PartnerConfiguration" type="com:PartnerConfiguration_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreatePartnerConfigurationResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element name="PartnerConfiguration" type="com:PartnerConfiguration_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CreatePartnerConfigurationRequest" type="CreatePartnerConfigurationRequest_Type"/>
+	<xs:element name="CreatePartnerConfigurationResponse" type="CreatePartnerConfigurationResponse_Type"/>
+	<xs:complexType name="UpdatePartnerConfigurationRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element name="PartnerConfiguration" type="com:PartnerConfiguration_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UpdatePartnerConfigurationResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element name="PartnerConfiguration" type="com:PartnerConfiguration_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UpdatePartnerConfigurationRequest" type="UpdatePartnerConfigurationRequest_Type"/>
+	<xs:element name="UpdatePartnerConfigurationResponse" type="UpdatePartnerConfigurationResponse_Type"/>
+	<xs:complexType name="ActivatePartnerConfigurationRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:ConfigurationName"/>
+					<xs:element minOccurs="0" name="PartnerConfigId" type="xs:long"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivatePartnerConfigurationResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ActivatePartnerConfigurationRequest" type="ActivatePartnerConfigurationRequest_Type"/>
+	<xs:element name="ActivatePartnerConfigurationResponse" type="ActivatePartnerConfigurationResponse_Type"/>
+	<xs:complexType name="DeactivatePartnerConfigurationRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:ConfigurationName"/>
+					<xs:element minOccurs="0" name="PartnerConfigId" type="xs:long"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeactivatePartnerConfigurationResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DeactivatePartnerConfigurationRequest" type="DeactivatePartnerConfigurationRequest_Type"/>
+	<xs:element name="DeactivatePartnerConfigurationResponse" type="DeactivatePartnerConfigurationResponse_Type"/>
+	<xs:complexType name="DeletePartnerConfigurationRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:ConfigurationName"/>
+					<xs:element minOccurs="0" name="PartnerConfigId" type="xs:long"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeletePartnerConfigurationResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DeletePartnerConfigurationRequest" type="DeletePartnerConfigurationRequest_Type"/>
+	<xs:element name="DeletePartnerConfigurationResponse" type="DeletePartnerConfigurationResponse_Type"/>
+	<!-- Bank Related -->
+	<!-- Get List of Banks -->
+	<xs:complexType name="GetBankListRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="ActiveOnly"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetBankListResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="com:Partner"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetBankListRequest" type="GetBankListRequest_Type"/>
+	<xs:element name="GetBankListResponse" type="GetBankListResponse_Type"/>
+	<!-- Get List of (Details) Banks -->
+	<xs:complexType name="GetBankDetailListRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="ActiveOnly"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetBankDetailListResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="com:BankDetail"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetBankDetailListRequest" type="GetBankDetailListRequest_Type"/>
+	<xs:element name="GetBankDetailListResponse" type="GetBankDetailListResponse_Type"/>
+	<!-- Get a Bank detail -->
+	<xs:complexType name="GetBankByKeyRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetBankByKeyResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="com:Partner"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetBankByKeyRequest" type="GetBankByKeyRequest_Type"/>
+	<xs:element name="GetBankByKeyResponse" type="GetBankByKeyResponse_Type"/>
+	<!-- Create Bank -->
+	<xs:complexType name="CreateBankRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:Partner"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreateBankResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CreateBankRequest" type="CreateBankRequest_Type"/>
+	<xs:element name="CreateBankResponse" type="CreateBankResponse_Type"/>
+	<!-- Update Bank -->
+	<xs:complexType name="UpdateBankRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:Partner"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UpdateBankResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UpdateBankRequest" type="UpdateBankRequest_Type"/>
+	<xs:element name="UpdateBankResponse" type="UpdateBankResponse_Type"/>
+	<!-- Activate/Deactivate bank -->
+	<xs:complexType name="ActivateBankRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivateBankResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ActivateBankRequest" type="ActivateBankRequest_Type"/>
+	<xs:element name="ActivateBankResponse" type="ActivateBankResponse_Type"/>
+	<xs:complexType name="DeactivateBankRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeactivateBankResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DeactivateBankRequest" type="DeactivateBankRequest_Type"/>
+	<xs:element name="DeactivateBankResponse" type="DeactivateBankResponse_Type"/>
+	<!-- bank branch code -->
+	<xs:complexType name="GetBranchCodeRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:BranchCode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetBranchCodeResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:BranchDetail"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetBranchCodeRequest" type="GetBranchCodeRequest_Type"/>
+	<xs:element name="GetBranchCodeResponse" type="GetBranchCodeResponse_Type"/>
+	<xs:complexType name="ListBankBranchRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ListBankBranchResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:Name"/>
+					<xs:element ref="com:Branches"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ListBankBranchRequest" type="ListBankBranchRequest_Type"/>
+	<xs:element name="ListBankBranchResponse" type="ListBankBranchResponse_Type"/>
+	<xs:complexType name="CreateBankBranchRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:BranchCode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreateBankBranchResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CreateBankBranchRequest" type="CreateBankBranchRequest_Type"/>
+	<xs:element name="CreateBankBranchResponse" type="CreateBankBranchResponse_Type"/>
+	<xs:complexType name="ActivateBankBranchRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:BranchCode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivateBankBranchResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ActivateBankBranchRequest" type="ActivateBankBranchRequest_Type"/>
+	<xs:element name="ActivateBankBranchResponse" type="ActivateBankBranchResponse_Type"/>
+	<xs:complexType name="DeactivateBankBranchRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:BranchCode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeactivateBankBranchResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DeactivateBankBranchRequest" type="DeactivateBankBranchRequest_Type"/>
+	<xs:element name="DeactivateBankBranchResponse" type="DeactivateBankBranchResponse_Type"/>
+	<!--Biller related request/response -->
+	<!-- Get List of Billers -->
+	<xs:complexType name="GetBillerListRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="ActiveOnly"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetBillerListResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="com:Partner"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetBillerListRequest" type="GetBillerListRequest_Type"/>
+	<xs:element name="GetBillerListResponse" type="GetBillerListResponse_Type"/>
+	<!-- Get a Biller detail -->
+	<xs:complexType name="GetBillerByKeyRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetBillerByKeyResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="com:Partner"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetBillerByKeyRequest" type="GetBillerByKeyRequest_Type"/>
+	<xs:element name="GetBillerByKeyResponse" type="GetBillerByKeyResponse_Type"/>
+	
+		<!-- Get List of (Details) Banks -->
+	<xs:complexType name="GetBillerDetailListRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="ActiveOnly"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetBillerDetailListResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="com:BillerDetail"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetBillerDetailListRequest" type="GetBillerDetailListRequest_Type"/>
+	<xs:element name="GetBillerDetailListResponse" type="GetBillerDetailListResponse_Type"/>
+	
+	<!-- Create Biller -->
+	<xs:complexType name="CreateBillerRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:Partner"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreateBillerResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CreateBillerRequest" type="CreateBillerRequest_Type"/>
+	<xs:element name="CreateBillerResponse" type="CreateBillerResponse_Type"/>
+	<!-- Update Biller -->
+	<xs:complexType name="UpdateBillerRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:Partner"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UpdateBillerResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<!--<xs:element ref="BillerDetail" minOccurs="0"/> -->
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UpdateBillerRequest" type="UpdateBillerRequest_Type"/>
+	<xs:element name="UpdateBillerResponse" type="UpdateBillerResponse_Type"/>
+	<!-- Activate/Deactivate Biller -->
+	<xs:complexType name="ActivateBillerRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivateBillerResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ActivateBillerRequest" type="ActivateBillerRequest_Type"/>
+	<xs:element name="ActivateBillerResponse" type="ActivateBillerResponse_Type"/>
+	<xs:complexType name="DeactivateBillerRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeactivateBillerResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DeactivateBillerRequest" type="DeactivateBillerRequest_Type"/>
+	<xs:element name="DeactivateBillerResponse" type="DeactivateBillerResponse_Type"/>
+
+	<xs:complexType name="CreateBillCategoryRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element name="BillCategoryDetail" type="com:BillCategoryDetail_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreateBillCategoryResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CreateBillCategoryRequest" type="CreateBillCategoryRequest_Type"/>
+	<xs:element name="CreateBillCategoryResponse" type="CreateBillCategoryResponse_Type"/>
+	<xs:complexType name="GetBillCategoryRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:BillCategory"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetBillCategoryResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:Name"/>
+					<xs:element name="BillCategoryDetail" type="com:BillCategoryDetail_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetBillCategoryRequest" type="GetBillCategoryRequest_Type"/>
+	<xs:element name="GetBillCategoryResponse" type="GetBillCategoryResponse_Type"/>
+	<xs:complexType name="ListBillCategoryRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element minOccurs="0" ref="ActiveOnly"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ListBillCategoryResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:Name"/>
+					<xs:element minOccurs="0" ref="com:BillCategories"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ListBillCategoryRequest" type="ListBillCategoryRequest_Type"/>
+	<xs:element name="ListBillCategoryResponse" type="ListBillCategoryResponse_Type"/>
+	<xs:complexType name="UpdateBillCategoryRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element name="BillCategoryDetail" type="com:BillCategoryDetail_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UpdateBillCategoryResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UpdateBillCategoryRequest" type="UpdateBillCategoryRequest_Type"/>
+	<xs:element name="UpdateBillCategoryResponse" type="UpdateBillCategoryResponse_Type"/>
+	<xs:complexType name="ActivateBillCategoryRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:BillCategory"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivateBillCategoryResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ActivateBillCategoryRequest" type="ActivateBillCategoryRequest_Type"/>
+	<xs:element name="ActivateBillCategoryResponse" type="ActivateBillCategoryResponse_Type"/>
+	<xs:complexType name="DeactivateBillCategoryRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:BillCategory"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeactivateBillCategoryResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DeactivateBillCategoryRequest" type="DeactivateBillCategoryRequest_Type"/>
+	<xs:element name="DeactivateBillCategoryResponse" type="DeactivateBillCategoryResponse_Type"/>
+	<xs:complexType name="CreatePaymentTypeRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:PaymentType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreatePaymentTypeResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CreatePaymentTypeRequest" type="CreatePaymentTypeRequest_Type"/>
+	<xs:element name="CreatePaymentTypeResponse" type="CreatePaymentTypeResponse_Type"/>
+
+	<xs:complexType name="GetPaymentTypeRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:PaymentTypeCode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetPaymentTypeResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:Name"/>
+					<xs:element ref="com:PaymentType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="GetPaymentTypeRequest" type="GetPaymentTypeRequest_Type"/>
+	<xs:element name="GetPaymentTypeResponse" type="GetPaymentTypeResponse_Type"/>
+
+	<xs:complexType name="ListPaymentTypeRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element minOccurs="0" ref="ActiveOnly"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ListPaymentTypeResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:Name"/>
+					<xs:element minOccurs="0" ref="com:PaymentTypes"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ListPaymentTypeRequest" type="ListPaymentTypeRequest_Type"/>
+	<xs:element name="ListPaymentTypeResponse" type="ListPaymentTypeResponse_Type"/>
+
+	<xs:complexType name="ActivatePaymentTypeRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:PaymentTypeCode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivatePaymentTypeResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ActivatePaymentTypeRequest" type="ActivatePaymentTypeRequest_Type"/>
+	<xs:element name="ActivatePaymentTypeResponse" type="ActivatePaymentTypeResponse_Type"/>
+	<xs:complexType name="DeactivatePaymentTypeRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:PaymentTypeCode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeactivatePaymentTypeResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="DeactivatePaymentTypeRequest" type="DeactivatePaymentTypeRequest_Type"/>
+	<xs:element name="DeactivatePaymentTypeResponse" type="DeactivatePaymentTypeResponse_Type"/>
+	<xs:complexType name="UpdatePaymentTypeRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:PartnerKey"/>
+					<xs:element ref="com:PaymentType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UpdatePaymentTypeResponse_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UpdatePaymentTypeRequest" type="UpdatePaymentTypeRequest_Type"/>
+	<xs:element name="UpdatePaymentTypeResponse" type="UpdatePaymentTypeResponse_Type"/>
+
+	
+	<xs:element name="IsSubscribedToConfigurationRequest" type="IsSubscribedToConfigurationRequest_Type"/>
+	<xs:element name="IsSubscribedToConfigurationResponse" type="IsSubscribedToConfigurationResponse_Type"/>
+
+	<xs:complexType name="IsSubscribedToConfigurationRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Partners" type="com:PartnerKeyList_Type"/>
+					<xs:element name="Configurations" type="com:ConfigurationList_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="IsSubscribedToConfigurationResponse_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="PartnerConfigurationSubscriptions" type="PartnerConfigurationSubscriptions_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="IsSubscribedToServiceRequest" type="IsSubscribedToServiceRequest_Type"/>
+	<xs:element name="IsSubscribedToServiceResponse" type="IsSubscribedToServiceResponse_Type"/>
+	
+	<xs:element name="GetSubscriptionToServiceRequest" type="GetSubscriptionToServiceRequest_Type"/>
+	<xs:element name="GetSubscriptionToServiceResponse" type="GetSubscriptionToServiceResponse_Type"/>
+
+	<xs:complexType name="IsSubscribedToServiceRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element name="Services" type="com:ServiceList_Type"/>
+					<xs:element minOccurs="0" name="Partners" type="com:PartnerKeyList_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="IsSubscribedToServiceResponse_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="PartnerServiceSubscriptions" type="PartnerServiceSubscriptions_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="GetSubscriptionToServiceRequest_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element name="Services" type="com:ServiceList_Type"/>
+					<xs:element minOccurs="0" name="Partners" type="com:PartnerKeyList_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="GetSubscriptionToServiceResponse_Type">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="PartnerServiceSubscriptions" type="PartnerServiceSubscriptionsType_Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="GetSADADRequest" type="GetSADADRequest_Type"/>
+	<xs:element name="GetSADADResponse" type="GetSADADResponse_Type"/>
+	
+    <xs:complexType name="GetSADADRequest_Type">
+        <xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="GetSADADResponse_Type">
+    	<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:SADADDetail"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+    
+    <xs:element name="UpdateSADADRequest" type="UpdateSADADRequest_Type"/>
+    <xs:element name="UpdateSADADResponse" type="UpdateSADADResponse_Type"/>
+    
+    <xs:complexType name="UpdateSADADRequest_Type">
+    	<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:SADADAccount"/>
+					<xs:element ref="com:BankKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateSADADResponse_Type">
+    	<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+	
+	<xs:element name="GetSAMARequest" type="GetSAMARequest_Type"/>
+	<xs:element name="GetSAMAResponse" type="GetSAMAResponse_Type"/>
+	
+    <xs:complexType name="GetSAMARequest_Type">
+        <xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+				<xs:element ref="com:PartnerKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="GetSAMAResponse_Type">
+    	<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:Partner"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+    
+    
+</xs:schema>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="AccountQuery" targetNamespace="http://www.sadad.com/EBPP/wsdl/AccountQuery/1.0" xmlns="http://www.sadad.com/EBPP/wsdl/AccountQuery/1.0" xmlns:acc="http://sadad.com/schema/service/AccountQuery/1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.sadad.com/EBPP/wsdl/AccountQuery/1.0">
+
+    <wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="http://sadad.com/schema/service/AccountQuery/1.0" schemaLocation="AccountQuery.xsd"/>
+		</xsd:schema>
+    </wsdl:types>
+
+	<wsdl:message name="AccountQueryFault">
+		<wsdl:part element="acc:AccountQueryFault" name="AccountQueryFault"/>
+	</wsdl:message>
+
+	<wsdl:message name="GetByKeyRq">
+		<wsdl:part element="acc:GetByKeyRq" name="GetByKeyRq"/>
+	</wsdl:message>
+	<wsdl:message name="GetByKeyRs">
+		<wsdl:part element="acc:GetByKeyRs" name="GetByKeyRs"/>
+	</wsdl:message>
+
+	<wsdl:message name="ListByCustomerRq">
+		<wsdl:part element="acc:ListByCustomerRq" name="ListByCustomerRq"/>
+	</wsdl:message>
+	<wsdl:message name="ListByCustomerRs">
+		<wsdl:part element="acc:ListByCustomerRs" name="ListByCustomerRs"/>
+	</wsdl:message>
+
+   <wsdl:portType name="AccountQueryPort">
+		<wsdl:operation name="GetByKey">
+			<wsdl:input message="GetByKeyRq" name="GetByKeyRq_Input"/>
+			<wsdl:output message="GetByKeyRs" name="GetByKeyRs_Output"/>
+			<wsdl:fault message="AccountQueryFault" name="GetByKey_Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ListByCustomer">
+			<wsdl:input message="ListByCustomerRq" name="ListByCustomerRq_Input"/>
+			<wsdl:output message="ListByCustomerRs" name="ListByCustomerRs_Output"/>
+			<wsdl:fault message="AccountQueryFault" name="ListByCustomer_Fault"/>
+		</wsdl:operation>
+  </wsdl:portType>
+
+ <wsdl:binding name="AccountQueryBinding" type="AccountQueryPort">
+  	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+	<wsdl:operation name="GetByKey">
+		<soap:operation soapAction="http://sadad.com/EBPP/service/AccountQuery/1.0/GetByKey"/>
+		<wsdl:input name="GetByKeyRq_Input">
+			<soap:body parts="GetByKeyRq" use="literal"/>
+		</wsdl:input>
+		<wsdl:output name="GetByKeyRs_Output">
+			<soap:body parts="GetByKeyRs" use="literal"/>
+		</wsdl:output>
+		<wsdl:fault name="GetByKey_Fault">
+			<soap:fault name="GetByKey_Fault" use="literal"/>
+		</wsdl:fault>
+	</wsdl:operation>
+	<wsdl:operation name="ListByCustomer">
+		<soap:operation soapAction="http://sadad.com/EBPP/service/AccountQuery/1.0/ListByCustomer"/>
+		<wsdl:input name="ListByCustomerRq_Input">
+			<soap:body parts="ListByCustomerRq" use="literal"/>
+		</wsdl:input>
+		<wsdl:output name="ListByCustomerRs_Output">
+			<soap:body parts="ListByCustomerRs" use="literal"/>
+		</wsdl:output>
+		<wsdl:fault name="ListByCustomer_Fault">
+			<soap:fault name="ListByCustomer_Fault" use="literal"/>
+		</wsdl:fault>
+	</wsdl:operation>
+  </wsdl:binding>
+
+
+  <wsdl:service name="AccountQuery">
+    <wsdl:port binding="AccountQueryBinding" name="AccountQueryPort">
+  		<soap:address location="http://sadad.com/EBPP/service/AccountQuery/1.0"/>
+  	</wsdl:port>
+  </wsdl:service>
+
+
+</wsdl:definitions>

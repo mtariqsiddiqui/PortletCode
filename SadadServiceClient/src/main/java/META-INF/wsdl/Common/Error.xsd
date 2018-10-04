@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.0" targetNamespace="http://www.sadad.com/scm/Error/1.0" xmlns="http://www.sadad.com/scm/Error/1.0" xmlns:tns="http://www.sadad.com/scm/Error/1.0">
+	
+	 <xs:annotation>
+	    <xs:appinfo>
+	      <jaxb:globalBindings>
+	        <jaxb:serializable uid="1"/>
+	     </jaxb:globalBindings>
+	    </xs:appinfo>
+	  </xs:annotation>
+
+	<xs:complexType name="Parameter_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Status Parameter in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Key" type="xs:long"/>
+			<xs:element name="Value" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Parameters_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Status in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" ref="Parameter"/>
+		</xs:sequence>
+	</xs:complexType>
+	  
+	<xs:simpleType name="Severity_Type">
+		<xs:annotation>
+			<xs:documentation>Closed Enum: The Severity enum classifies XML documents transferred between Banks/Billers and SADAD into distinct groups</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Fatal"/>
+			<xs:enumeration value="Error"/>
+			<xs:enumeration value="Warning"/>
+			<xs:enumeration value="Success"/>
+			<xs:enumeration value="Info"/>
+		</xs:restriction>
+	</xs:simpleType>
+		
+	<xs:simpleType name="Error_Type">
+		<xs:annotation>
+			<xs:documentation>Closed Enum: The Error Type enum classifies XML documents transferred between Banks/Billers and SADAD into distinct groups</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="System"/>
+			<xs:enumeration value="Business"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="Fault_Type">
+		<xs:sequence>
+			<xs:element name="Code" type="xs:long"/>
+			<xs:element ref="Type"/>	
+			<xs:element ref="Severity"/>
+			<xs:element minOccurs="0" name="Description" type="xs:string"/>
+			<xs:element minOccurs="0" ref="Parameters"/>
+			<xs:element minOccurs="0" name="Reason" type="xs:string"/>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="Trace" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="Fault" type="Fault_Type"/>
+	<xs:element name="Type" type="Error_Type"/>
+	<xs:element name="Severity" type="Severity_Type"/>
+	<xs:element name="Parameter" type="Parameter_Type"/>
+	<xs:element name="Parameters" type="Parameters_Type"/>
+</xs:schema>

@@ -1,0 +1,1360 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="PartnerProfileService" targetNamespace="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0" xmlns:profile="http://www.sadad.com/EBPP/scm/schema/PartnerProfileService/1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0">
+			<xsd:import namespace="http://www.sadad.com/EBPP/scm/schema/PartnerProfileService/1.0" schemaLocation="PartnerProfileService.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="ListPartnerSummaryRequestMsg">
+		<wsdl:part element="profile:ListPartnerSummaryRequest" name="ListPartnerSummaryRequest"/>
+	</wsdl:message>
+	<wsdl:message name="ListPartnerSummaryResponseMsg">
+		<wsdl:part element="profile:ListPartnerSummaryResponse" name="ListPartnerSummaryResponse"/>
+	</wsdl:message>	
+	
+	<wsdl:message name="GetFeeServiceProviderDetailsRequestMsg">
+		<wsdl:part element="profile:GetFeeServiceProviderDetailsRequest" name="GetFeeServiceProviderDetailsRequest"/>
+	</wsdl:message>
+	<wsdl:message name="GetFeeServiceProviderDetailsResponseMsg">
+		<wsdl:part element="profile:GetFeeServiceProviderDetailsResponse" name="GetFeeServiceProviderDetailsResponse"/>
+	</wsdl:message>	
+	
+	<wsdl:message name="GetSubscribedServiceListRequestMsg">
+		<wsdl:part element="profile:GetSubscribedServiceListRequest" name="GetSubscribedServiceList"/>
+	</wsdl:message>
+	<wsdl:message name="GetSubscribedServiceListResponseMsg">
+		<wsdl:part element="profile:GetSubscribedServiceListResponse" name="GetSubscribedServiceListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetSubscribedServiceRequestMsg">
+		<wsdl:part element="profile:GetSubscribedServiceRequest" name="GetSubscribedService"/>
+	</wsdl:message>
+	<wsdl:message name="GetSubscribedServiceResponseMsg">
+		<wsdl:part element="profile:GetSubscribedServiceResponse" name="GetSubscribedServiceResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetPartnerConfigurationRequestMsg">
+		<wsdl:part element="profile:GetPartnerConfigurationRequest" name="GetPartnerConfigurationRq"/>
+	</wsdl:message>
+	<wsdl:message name="GetPartnerConfigurationResponseMsg">
+		<wsdl:part element="profile:GetPartnerConfigurationResponse" name="GetPartnerConfigurationRs"/>
+	</wsdl:message>
+	<wsdl:message name="CreatePartnerConfigurationRequestMsg">
+		<wsdl:part element="profile:CreatePartnerConfigurationRequest" name="CreatePartnerConfiguration"/>
+	</wsdl:message>
+	<wsdl:message name="CreatePartnerConfigurationResponseMsg">
+		<wsdl:part element="profile:CreatePartnerConfigurationResponse" name="CreatePartnerConfigurationResponse"/>
+	</wsdl:message>
+	<wsdl:message name="UpdatePartnerConfigurationRequestMsg">
+		<wsdl:part element="profile:UpdatePartnerConfigurationRequest" name="UpdatePartnerConfiguration"/>
+	</wsdl:message>
+	<wsdl:message name="UpdatePartnerConfigurationResponseMsg">
+		<wsdl:part element="profile:UpdatePartnerConfigurationResponse" name="UpdatePartnerConfigurationResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ActivatePartnerConfigurationRequestMsg">
+		<wsdl:part element="profile:ActivatePartnerConfigurationRequest" name="ActivatePartnerConfiguration"/>
+	</wsdl:message>
+	<wsdl:message name="ActivatePartnerConfigurationResponseMsg">
+		<wsdl:part element="profile:ActivatePartnerConfigurationResponse" name="ActivatePartnerConfigurationResponse"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivatePartnerConfigurationRequestMsg">
+		<wsdl:part element="profile:DeactivatePartnerConfigurationRequest" name="DeactivatePartnerConfigurationRq"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivatePartnerConfigurationResponseMsg">
+		<wsdl:part element="profile:DeactivatePartnerConfigurationResponse" name="DeactivatePartnerConfigurationRs"/>
+	</wsdl:message>
+	<wsdl:message name="DeletePartnerConfigurationRequestMsg">
+		<wsdl:part element="profile:DeletePartnerConfigurationRequest" name="DeletePartnerConfigurationRq"/>
+	</wsdl:message>
+	<wsdl:message name="DeletePartnerConfigurationResponseMsg">
+		<wsdl:part element="profile:DeletePartnerConfigurationResponse" name="DeletePartnerConfigurationRs"/>
+	</wsdl:message>
+	<wsdl:message name="GetBankListRequestMsg">
+		<wsdl:part element="profile:GetBankListRequest" name="GetBankList"/>
+	</wsdl:message>
+	<wsdl:message name="GetBankListResponseMsg">
+		<wsdl:part element="profile:GetBankListResponse" name="GetBankListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetBankDetailListRequestMsg">
+		<wsdl:part element="profile:GetBankDetailListRequest" name="GetBankDetailList"/>
+	</wsdl:message>
+	<wsdl:message name="GetBankDetailListResponseMsg">
+		<wsdl:part element="profile:GetBankDetailListResponse" name="GetBankDetailListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetBankByKeyRequestMsg">
+		<wsdl:part element="profile:GetBankByKeyRequest" name="GetBankByKey"/>
+	</wsdl:message>
+	<wsdl:message name="GetBankByKeyResponseMsg">
+		<wsdl:part element="profile:GetBankByKeyResponse" name="GetBankByKeyResponse"/>
+	</wsdl:message>
+	<wsdl:message name="CreateBankRequestMsg">
+		<wsdl:part element="profile:CreateBankRequest" name="CreateBank"/>
+	</wsdl:message>
+	<wsdl:message name="CreateBankResponseMsg">
+		<wsdl:part element="profile:CreateBankResponse" name="CreateBankResponse"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateBankRequestMsg">
+		<wsdl:part element="profile:UpdateBankRequest" name="UpdateBank"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateBankResponseMsg">
+		<wsdl:part element="profile:UpdateBankResponse" name="UpdateBankResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ActivateBankRequestMsg">
+		<wsdl:part element="profile:ActivateBankRequest" name="ActivateBank"/>
+	</wsdl:message>
+	<wsdl:message name="ActivateBankResponseMsg">
+		<wsdl:part element="profile:ActivateBankResponse" name="ActivateBankResponse"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivateBankRequestMsg">
+		<wsdl:part element="profile:DeactivateBankRequest" name="DeactivateBank"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivateBankResponseMsg">
+		<wsdl:part element="profile:DeactivateBankResponse" name="DeactivateBankResponse"/>
+	</wsdl:message>
+	
+	<!-- Branch code related-->
+	
+	<wsdl:message name="GetBankBranchRequestMsg">
+		<wsdl:part element="profile:GetBranchCodeRequest" name="GetBankBranch"/>
+	</wsdl:message>
+	<wsdl:message name="GetBankBranchResponseMsg">
+		<wsdl:part element="profile:GetBranchCodeResponse" name="GetBankBranchResponse"/>
+	</wsdl:message>	
+	<wsdl:message name="CreateBankBranchRequestMsg">
+		<wsdl:part element="profile:CreateBankBranchRequest" name="CreateBankBranch"/>
+	</wsdl:message>
+	<wsdl:message name="CreateBankBranchResponseMsg">
+		<wsdl:part element="profile:CreateBankBranchResponse" name="CreateBankBranchResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ListBankBranchRequestMsg">
+		<wsdl:part element="profile:ListBankBranchRequest" name="ListBankBranch"/>
+	</wsdl:message>
+	<wsdl:message name="ListBankBranchResponseMsg">
+		<wsdl:part element="profile:ListBankBranchResponse" name="ListBankBranchResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ActivateBankBranchRequestMsg">
+		<wsdl:part element="profile:ActivateBankBranchRequest" name="ActivateBankBranch"/>
+	</wsdl:message>
+	<wsdl:message name="ActivateBankBranchResponseMsg">
+		<wsdl:part element="profile:ActivateBankBranchResponse" name="ActivateBankBranchResponse"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivateBankBranchRequestMsg">
+		<wsdl:part element="profile:DeactivateBankBranchRequest" name="DeactivateBankBranch"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivateBankBranchResponseMsg">
+		<wsdl:part element="profile:DeactivateBankBranchResponse" name="DeactivateBankBranchResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="GetBillerListRequestMsg">
+		<wsdl:part element="profile:GetBillerListRequest" name="GetBillerList"/>
+	</wsdl:message>
+	<wsdl:message name="GetBillerListResponseMsg">
+		<wsdl:part element="profile:GetBillerListResponse" name="GetBillerListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetBillerByKeyRequestMsg">
+		<wsdl:part element="profile:GetBillerByKeyRequest" name="GetBillerByKeyRequest"/>
+	</wsdl:message>
+	<wsdl:message name="GetBillerByKeyResponseMsg">
+		<wsdl:part element="profile:GetBillerByKeyResponse" name="GetBillerByKeyResponse"/>
+	</wsdl:message>	
+	<wsdl:message name="GetBillerDetailListRequestMsg">
+		<wsdl:part element="profile:GetBillerDetailListRequest" name="GetBillerDetailList"/>
+	</wsdl:message>
+	<wsdl:message name="GetBillerDetailListResponseMsg">
+		<wsdl:part element="profile:GetBillerDetailListResponse" name="GetBillerDetailListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="CreateBillerRequestMsg">
+		<wsdl:part element="profile:CreateBillerRequest" name="CreateBillerRequest"/>
+	</wsdl:message>
+	<wsdl:message name="CreateBillerResponseMsg">
+		<wsdl:part element="profile:CreateBillerResponse" name="CreateBillerResponse"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateBillerRequestMsg">
+		<wsdl:part element="profile:UpdateBillerRequest" name="UpdateBiller"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateBillerResponseMsg">
+		<wsdl:part element="profile:UpdateBillerResponse" name="UpdateBillerResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ActivateBillerRequestMsg">
+		<wsdl:part element="profile:ActivateBillerRequest" name="ActivateBiller"/>
+	</wsdl:message>
+	<wsdl:message name="ActivateBillerResponseMsg">
+		<wsdl:part element="profile:ActivateBillerResponse" name="ActivateBillerResponse"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivateBillerRequestMsg">
+		<wsdl:part element="profile:DeactivateBillerRequest" name="DeactivateBiller"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivateBillerResponseMsg">
+		<wsdl:part element="profile:DeactivateBillerResponse" name="DeactivateBillerResponse"/>
+	</wsdl:message>
+	
+	<!-- Bill Category-->
+	
+	
+	<wsdl:message name="ListBillCategoryRequestMsg">
+		<wsdl:part element="profile:ListBillCategoryRequest" name="ListBillCategory"/>
+	</wsdl:message>
+	<wsdl:message name="ListBillCategoryResponseMsg">
+		<wsdl:part element="profile:ListBillCategoryResponse" name="ListBillCategoryResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetBillCategoryRequestMsg">
+		<wsdl:part element="profile:GetBillCategoryRequest" name="GetBillCategory"/>
+	</wsdl:message>
+	<wsdl:message name="GetBillCategoryResponseMsg">
+		<wsdl:part element="profile:GetBillCategoryResponse" name="GetBillCategoryResponse"/>
+	</wsdl:message>	
+	<wsdl:message name="CreateBillCategoryRequestMsg">
+		<wsdl:part element="profile:CreateBillCategoryRequest" name="CreateBillCategory"/>
+	</wsdl:message>
+	<wsdl:message name="CreateBillCategoryResponseMsg">
+		<wsdl:part element="profile:CreateBillCategoryResponse" name="CreateBillCategoryResponse"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateBillCategoryRequestMsg">
+		<wsdl:part element="profile:UpdateBillCategoryRequest" name="UpdateBillCategory"/>
+	</wsdl:message>
+	<wsdl:message name="UpdateBillCategoryResponseMsg">
+		<wsdl:part element="profile:UpdateBillCategoryResponse" name="UpdateBillCategoryResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ActivateBillCategoryRequestMsg">
+		<wsdl:part element="profile:ActivateBillCategoryRequest" name="ActivateBillCategory"/>
+	</wsdl:message>
+	<wsdl:message name="ActivateBillCategoryResponseMsg">
+		<wsdl:part element="profile:ActivateBillCategoryResponse" name="ActivateBillCategoryResponse"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivateBillCategoryRequestMsg">
+		<wsdl:part element="profile:DeactivateBillCategoryRequest" name="DeactivateBiller"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivateBillCategoryResponseMsg">
+		<wsdl:part element="profile:DeactivateBillCategoryResponse" name="DeactivateBillCategoryResponse"/>
+	</wsdl:message>
+		
+	<!-- Payment Type-->
+	
+	<wsdl:message name="ListPaymentTypeRequestMsg">
+		<wsdl:part element="profile:ListPaymentTypeRequest" name="ListPaymentType"/>
+	</wsdl:message>
+	<wsdl:message name="ListPaymentTypeResponseMsg">
+		<wsdl:part element="profile:ListPaymentTypeResponse" name="ListPaymentTypeResponse"/>
+	</wsdl:message>
+	<wsdl:message name="GetPaymentTypeRequestMsg">
+		<wsdl:part element="profile:GetPaymentTypeRequest" name="GetPaymentType"/>
+	</wsdl:message>
+	<wsdl:message name="GetPaymentTypeResponseMsg">
+		<wsdl:part element="profile:GetPaymentTypeResponse" name="GetPaymentTypeResponse"/>
+	</wsdl:message>	
+	<wsdl:message name="CreatePaymentTypeRequestMsg">
+		<wsdl:part element="profile:CreatePaymentTypeRequest" name="CreatePaymentType"/>
+	</wsdl:message>
+	<wsdl:message name="CreatePaymentTypeResponseMsg">
+		<wsdl:part element="profile:CreatePaymentTypeResponse" name="CreatePaymentTypeResponse"/>
+	</wsdl:message>
+	<wsdl:message name="UpdatePaymentTypeRequestMsg">
+		<wsdl:part element="profile:UpdatePaymentTypeRequest" name="UpdatePaymentType"/>
+	</wsdl:message>
+	<wsdl:message name="UpdatePaymentTypeResponseMsg">
+		<wsdl:part element="profile:UpdatePaymentTypeResponse" name="UpdatePaymentTypeResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ActivatePaymentTypeRequestMsg">
+		<wsdl:part element="profile:ActivatePaymentTypeRequest" name="ActivatePaymentType"/>
+	</wsdl:message>
+	<wsdl:message name="ActivatePaymentTypeResponseMsg">
+		<wsdl:part element="profile:ActivatePaymentTypeResponse" name="ActivatePaymentTypeResponse"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivatePaymentTypeRequestMsg">
+		<wsdl:part element="profile:DeactivatePaymentTypeRequest" name="DeactivateBiller"/>
+	</wsdl:message>
+	<wsdl:message name="DeactivatePaymentTypeResponseMsg">
+		<wsdl:part element="profile:DeactivatePaymentTypeResponse" name="DeactivatePaymentTypeResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="IsSubscribedToConfigurationRequestMsg">
+		<wsdl:part element="profile:IsSubscribedToConfigurationRequest" name="IsSubscribedToConfiguration"/>
+	</wsdl:message>
+	<wsdl:message name="IsSubscribedToConfigurationResponseMsg">
+		<wsdl:part element="profile:IsSubscribedToConfigurationResponse" name="IsSubscribedToConfigurationResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="IsSubscribedToServiceRequestMsg">
+		<wsdl:part element="profile:IsSubscribedToServiceRequest" name="IsSubscribedToService"/>
+	</wsdl:message>
+	<wsdl:message name="IsSubscribedToServiceResponseMsg">
+		<wsdl:part element="profile:IsSubscribedToServiceResponse" name="IsSubscribedToServiceResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="GetSubscriptionToServiceRequestMsg">
+		<wsdl:part element="profile:GetSubscriptionToServiceRequest" name="GetSubscriptionToService"/>
+	</wsdl:message>
+	<wsdl:message name="GetSubscriptionToServiceResponseMsg">
+		<wsdl:part element="profile:GetSubscriptionToServiceResponse" name="GetSubscriptionToServiceResponse"/>
+	</wsdl:message>
+	
+	<!-- SADAD Service -->
+	<wsdl:message name="GetSADADRequestMsg">
+		<wsdl:part element="profile:GetSADADRequest" name="GetSADAD"/>
+	</wsdl:message>
+	
+	<wsdl:message name="GetSADADResponseMsg">
+		<wsdl:part element="profile:GetSADADResponse" name="GetSADADResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="UpdateSADADRequestMsg">
+		<wsdl:part element="profile:UpdateSADADRequest" name="UpdateSADAD"/>
+	</wsdl:message>
+	
+	<wsdl:message name="UpdateSADADResponseMsg">
+		<wsdl:part element="profile:UpdateSADADResponse" name="UpdateSADADResponse"/>
+	</wsdl:message>
+	
+		<!-- SAMA Service -->
+	<wsdl:message name="GetSAMARequestMsg">
+		<wsdl:part element="profile:GetSAMARequest" name="GetSAMA"/>
+	</wsdl:message>
+	
+	<wsdl:message name="GetSAMAResponseMsg">
+		<wsdl:part element="profile:GetSAMAResponse" name="GetSAMAResponse"/>
+	</wsdl:message>
+	<!-- Partner Profile Fault Message -->
+	<wsdl:message name="PartnerProfileFaultMsg">
+		<wsdl:part element="profile:PartnerProfileFault" name="PartnerProfileFault"/>
+	</wsdl:message>
+	<wsdl:portType name="PartnerProfileService">
+		<wsdl:operation name="ListPartnerSummary">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:ListPartnerSummaryRequestMsg" name="ListPartnerSummaryRequest"/>
+			<wsdl:output message="tns:ListPartnerSummaryResponseMsg" name="ListPartnerSummaryResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetFeeServiceProviderDetails">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetFeeServiceProviderDetailsRequestMsg" name="GetFeeServiceProviderDetailsRequest"/>
+			<wsdl:output message="tns:GetFeeServiceProviderDetailsResponseMsg" name="GetFeeServiceProviderDetailsResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetSubscribedServiceList">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetSubscribedServiceListRequestMsg" name="GetSubscribedServiceList"/>
+			<wsdl:output message="tns:GetSubscribedServiceListResponseMsg" name="GetSubscribedServiceListResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetSubscribedService">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetSubscribedServiceRequestMsg" name="GetSubscribedService"/>
+			<wsdl:output message="tns:GetSubscribedServiceResponseMsg" name="GetSubscribedServiceResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetPartnerConfiguration">
+			<wsdl:documentation>
+				This Operation Used to Get a specific Partner Configuration , or All of the Configurations
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetPartnerConfigurationRequestMsg" name="GetPartnerConfiguration"/>
+			<wsdl:output message="tns:GetPartnerConfigurationResponseMsg" name="GetPartnerConfigurationResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="CreatePartnerConfiguration">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:CreatePartnerConfigurationRequestMsg" name="CreatePartnerConfiguration"/>
+			<wsdl:output message="tns:CreatePartnerConfigurationResponseMsg" name="CreatePartnerConfigurationResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="UpdatePartnerConfiguration">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:UpdatePartnerConfigurationRequestMsg" name="UpdatePartnerConfiguration"/>
+			<wsdl:output message="tns:UpdatePartnerConfigurationResponseMsg" name="UpdatePartnerConfigurationResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ActivatePartnerConfiguration">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:ActivatePartnerConfigurationRequestMsg" name="ActivatePartnerConfiguration"/>
+			<wsdl:output message="tns:ActivatePartnerConfigurationResponseMsg" name="ActivatePartnerConfigurationResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivatePartnerConfiguration">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:DeactivatePartnerConfigurationRequestMsg" name="DeactivatePartnerConfiguration"/>
+			<wsdl:output message="tns:DeactivatePartnerConfigurationResponseMsg" name="DeactivatePartnerConfigurationResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeletePartnerConfiguration">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:DeletePartnerConfigurationRequestMsg" name="DeletePartnerConfigurationRequest"/>
+			<wsdl:output message="tns:DeletePartnerConfigurationResponseMsg" name="DeletePartnerConfigurationResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetBankList">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetBankListRequestMsg" name="GetBankList"/>
+			<wsdl:output message="tns:GetBankListResponseMsg" name="GetBankListResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetBankByKey">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetBankByKeyRequestMsg" name="GetBankByKey"/>
+			<wsdl:output message="tns:GetBankByKeyResponseMsg" name="GetBankByKeyResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetBankDetailList">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetBankDetailListRequestMsg" name="GetBankDetailList"/>
+			<wsdl:output message="tns:GetBankDetailListResponseMsg" name="GetBankDetailListResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="CreateBank">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:CreateBankRequestMsg" name="CreateBank"/>
+			<wsdl:output message="tns:CreateBankResponseMsg" name="CreateBankResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="UpdateBank">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:UpdateBankRequestMsg" name="UpdateBank"/>
+			<wsdl:output message="tns:UpdateBankResponseMsg" name="UpdateBankResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="ActivateBank">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:ActivateBankRequestMsg" name="ActivateBank"/>
+			<wsdl:output message="tns:ActivateBankResponseMsg" name="ActivateBankResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateBank">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:DeactivateBankRequestMsg" name="DeactivateBank"/>
+			<wsdl:output message="tns:DeactivateBankResponseMsg" name="DeactivateBankResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetBankBranch">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetBankBranchRequestMsg" name="GetBankBranch"/>
+			<wsdl:output message="tns:GetBankBranchResponseMsg" name="GetBankBranchResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ListBankBranch">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:ListBankBranchRequestMsg" name="ListBankBranch"/>
+			<wsdl:output message="tns:ListBankBranchResponseMsg" name="ListBankBranchResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="CreateBankBranch">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:CreateBankBranchRequestMsg" name="CreateBankBranch"/>
+			<wsdl:output message="tns:CreateBankBranchResponseMsg" name="CreateBankBranchResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateBankBranch">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:ActivateBankBranchRequestMsg" name="ActivateBankBranch"/>
+			<wsdl:output message="tns:ActivateBankBranchResponseMsg" name="ActivateBankBranchResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateBankBranch">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:DeactivateBankBranchRequestMsg" name="DeactivateBankBranch"/>
+			<wsdl:output message="tns:DeactivateBankBranchResponseMsg" name="DeactivateBankBranchResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetBillerList">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetBillerListRequestMsg" name="GetBillerList"/>
+			<wsdl:output message="tns:GetBillerListResponseMsg" name="GetBillerListResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetBillerByKey">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetBillerByKeyRequestMsg" name="GetBillerByKeyRequest"/>
+			<wsdl:output message="tns:GetBillerByKeyResponseMsg" name="GetBillerByKeyResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="GetBillerDetailList">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetBillerDetailListRequestMsg" name="GetBillerDetailList"/>
+			<wsdl:output message="tns:GetBillerDetailListResponseMsg" name="GetBillerDetailListResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="CreateBiller">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:CreateBillerRequestMsg" name="CreateBillerRequest"/>
+			<wsdl:output message="tns:CreateBillerResponseMsg" name="CreateBillerResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="UpdateBiller">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:UpdateBillerRequestMsg" name="UpdateBillerRequest"/>
+			<wsdl:output message="tns:UpdateBillerResponseMsg" name="UpdateBillerResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="ActivateBiller">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:ActivateBillerRequestMsg" name="ActivateBillerRequest"/>
+			<wsdl:output message="tns:ActivateBillerResponseMsg" name="ActivateBillerResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateBiller">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:DeactivateBillerRequestMsg" name="DeactivateBillerRequest"/>
+			<wsdl:output message="tns:DeactivateBillerResponseMsg" name="DeactivateBillerResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>	
+		
+		<wsdl:operation name="ListBillCategory">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:ListBillCategoryRequestMsg" name="ListBillCategory"/>
+			<wsdl:output message="tns:ListBillCategoryResponseMsg" name="ListBillCategoryResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetBillCategory">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetBillCategoryRequestMsg" name="GetBillCategory"/>
+			<wsdl:output message="tns:GetBillCategoryResponseMsg" name="GetBillCategoryResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="CreateBillCategory">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:CreateBillCategoryRequestMsg" name="CreateBillCategory"/>
+			<wsdl:output message="tns:CreateBillCategoryResponseMsg" name="CreateBillCategoryResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="UpdateBillCategory">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:UpdateBillCategoryRequestMsg" name="UpdateBillCategory"/>
+			<wsdl:output message="tns:UpdateBillCategoryResponseMsg" name="UpdateBillCategoryResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="ActivateBillCategory">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:ActivateBillCategoryRequestMsg" name="ActivateBillCategory"/>
+			<wsdl:output message="tns:ActivateBillCategoryResponseMsg" name="ActivateBillCategoryResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateBillCategory">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:DeactivateBillCategoryRequestMsg" name="DeactivateBillCategory"/>
+			<wsdl:output message="tns:DeactivateBillCategoryResponseMsg" name="DeactivateBillCategoryResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>	
+		
+		<wsdl:operation name="ListPaymentType">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:ListPaymentTypeRequestMsg" name="ListPaymentType"/>
+			<wsdl:output message="tns:ListPaymentTypeResponseMsg" name="ListPaymentTypeResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetPaymentType">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetPaymentTypeRequestMsg" name="GetPaymentType"/>
+			<wsdl:output message="tns:GetPaymentTypeResponseMsg" name="GetPaymentTypeResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="CreatePaymentType">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:CreatePaymentTypeRequestMsg" name="CreatePaymentType"/>
+			<wsdl:output message="tns:CreatePaymentTypeResponseMsg" name="CreatePaymentTypeResponse"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="UpdatePaymentType">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:UpdatePaymentTypeRequestMsg" name="UpdatePaymentTypeRq"/>
+			<wsdl:output message="tns:UpdatePaymentTypeResponseMsg" name="UpdatePaymentTypeRs"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>	
+		<wsdl:operation name="ActivatePaymentType">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:ActivatePaymentTypeRequestMsg" name="ActivatePaymentTypeRq"/>
+			<wsdl:output message="tns:ActivatePaymentTypeResponseMsg" name="ActivatePaymentTypeRs"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivatePaymentType">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:DeactivatePaymentTypeRequestMsg" name="DeactivatePaymentTypeRq"/>
+			<wsdl:output message="tns:DeactivatePaymentTypeResponseMsg" name="DeactivatePaymentTypeRs"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="IsSubscribedToConfiguration">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:IsSubscribedToConfigurationRequestMsg" name="IsSubscribedToConfigurationRq"/>
+			<wsdl:output message="tns:IsSubscribedToConfigurationResponseMsg" name="IsSubscribedToConfigurationRs"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="IsSubscribedToService">
+			<wsdl:documentation>
+				Operation to get list of Partner Summary . it has optional field of partner key, if filled only that partner will be retrieved
+				Possible Erro Codes:
+				Partner not Found in SADAD
+			</wsdl:documentation>
+			<wsdl:input message="tns:IsSubscribedToServiceRequestMsg" name="IsSubscribedToServiceRq"/>
+			<wsdl:output message="tns:IsSubscribedToServiceResponseMsg" name="IsSubscribedToServiceRs"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+		
+		<wsdl:operation name="GetSubscriptionToService">
+			<wsdl:documentation>
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetSubscriptionToServiceRequestMsg" name="GetSubscriptionToServiceRq"/>
+			<wsdl:output message="tns:GetSubscriptionToServiceResponseMsg" name="GetSubscriptionToServiceRs"/>
+			<wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+		</wsdl:operation>
+
+		<!-- SADAD Service -->
+		<wsdl:operation name="GetSADAD">
+			<wsdl:documentation>
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetSADADRequestMsg" name="GetSADADRq"/>
+			<wsdl:output message="tns:GetSADADResponseMsg" name="GetSADADRs"/>
+            <wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+        </wsdl:operation>
+        
+        <wsdl:operation name="UpdateSADAD">
+			<wsdl:documentation>
+			</wsdl:documentation>
+			<wsdl:input message="tns:UpdateSADADRequestMsg" name="UpdateSADADRq"/>
+			<wsdl:output message="tns:UpdateSADADResponseMsg" name="UpdateSADADRs"/>
+            <wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+        </wsdl:operation>
+		
+		<!-- SAMA Service -->
+		<wsdl:operation name="GetSAMA">
+			<wsdl:documentation>
+			</wsdl:documentation>
+			<wsdl:input message="tns:GetSAMARequestMsg" name="GetSAMARq"/>
+			<wsdl:output message="tns:GetSAMAResponseMsg" name="GetSAMARs"/>
+            <wsdl:fault message="tns:PartnerProfileFaultMsg" name="PartnerProfileFault"/>
+        </wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="PartnerProfileServiceSOAP" type="tns:PartnerProfileService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="ListPartnerSummary">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/ListPartnerSummary"/>
+			<wsdl:input name="ListPartnerSummaryRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListPartnerSummaryResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetFeeServiceProviderDetails">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetFeeServiceProviderDetails"/>
+			<wsdl:input name="GetFeeServiceProviderDetailsRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetFeeServiceProviderDetailsResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetSubscribedServiceList">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetSubscribedServiceList"/>
+			<wsdl:input name="GetSubscribedServiceList">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetSubscribedServiceListResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetSubscribedService">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetSubscribedService"/>
+			<wsdl:input name="GetSubscribedService">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetSubscribedServiceResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetPartnerConfiguration">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetPartnerConfiguration"/>
+			<wsdl:input name="GetPartnerConfiguration">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetPartnerConfigurationResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CreatePartnerConfiguration">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/CreatePartnerConfiguration"/>
+			<wsdl:input name="CreatePartnerConfiguration">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreatePartnerConfigurationResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdatePartnerConfiguration">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/UpdatePartnerConfiguration"/>
+			<wsdl:input name="UpdatePartnerConfiguration">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UpdatePartnerConfigurationResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ActivatePartnerConfiguration">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/ActivatePartnerConfiguration"/>
+			<wsdl:input name="ActivatePartnerConfiguration">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ActivatePartnerConfigurationResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivatePartnerConfiguration">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/DeactivatePartnerConfiguration"/>
+			<wsdl:input name="DeactivatePartnerConfiguration">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeactivatePartnerConfigurationResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeletePartnerConfiguration">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/DeletePartnerConfiguration"/>
+			<wsdl:input name="DeletePartnerConfigurationRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeletePartnerConfigurationResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetBankList">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetBankList"/>
+			<wsdl:input name="GetBankList">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetBankListResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetBankDetailList">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetBankDetailList"/>
+			<wsdl:input name="GetBankDetailList">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetBankDetailListResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetBankByKey">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetBankByKey"/>
+			<wsdl:input name="GetBankByKey">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetBankByKeyResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CreateBank">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/CreateBank"/>
+			<wsdl:input name="CreateBank">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreateBankResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateBank">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/UpdateBank"/>
+			<wsdl:input name="UpdateBank">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UpdateBankResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateBank">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/ActivateBank"/>
+			<wsdl:input name="ActivateBank">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ActivateBankResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateBank">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/DeactivateBank"/>
+			<wsdl:input name="DeactivateBank">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeactivateBankResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetBankBranch">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetBankBranch"/>
+			<wsdl:input name="GetBankBranch">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetBankBranchResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ListBankBranch">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/ListBankBranch"/>
+			<wsdl:input name="ListBankBranch">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListBankBranchResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CreateBankBranch">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/CreateBankBranch"/>
+			<wsdl:input name="CreateBankBranch">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreateBankBranchResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateBankBranch">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/ActivateBankBranch"/>
+			<wsdl:input name="ActivateBankBranch">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ActivateBankBranchResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateBankBranch">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/DeactivateBankBranch"/>
+			<wsdl:input name="DeactivateBankBranch">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeactivateBankBranchResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetBillerList">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetBillerList"/>
+			<wsdl:input name="GetBillerList">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetBillerListResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetBillerDetailList">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetBillerDetailList"/>
+			<wsdl:input name="GetBillerDetailList">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetBillerDetailListResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetBillerByKey">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetBillerByKey"/>
+			<wsdl:input name="GetBillerByKeyRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetBillerByKeyResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CreateBiller">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/CreateBiller"/>
+			<wsdl:input name="CreateBillerRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreateBillerResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateBiller">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/UpdateBiller"/>
+			<wsdl:input name="UpdateBillerRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UpdateBillerResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateBiller">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/ActivateBiller"/>
+			<wsdl:input name="ActivateBillerRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ActivateBillerResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateBiller">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/DeactivateBiller"/>
+			<wsdl:input name="DeactivateBillerRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeactivateBillerResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetBillCategory">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetBillCategory"/>
+			<wsdl:input name="GetBillCategory">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetBillCategoryResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ListBillCategory">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/ListBillCategory"/>
+			<wsdl:input name="ListBillCategory">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListBillCategoryResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CreateBillCategory">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/CreateBillCategory"/>
+			<wsdl:input name="CreateBillCategory">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreateBillCategoryResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateBillCategory">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/UpdateBillCategory"/>
+			<wsdl:input name="UpdateBillCategory">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UpdateBillCategoryResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ActivateBillCategory">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/ActivateBillCategory"/>
+			<wsdl:input name="ActivateBillCategory">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ActivateBillCategoryResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivateBillCategory">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/DeactivateBillCategory"/>
+			<wsdl:input name="DeactivateBillCategory">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeactivateBillCategoryResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetPaymentType">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetPaymentType"/>
+			<wsdl:input name="GetPaymentType">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetPaymentTypeResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ListPaymentType">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/ListPaymentType"/>
+			<wsdl:input name="ListPaymentType">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListPaymentTypeResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="CreatePaymentType">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/CreatePaymentType"/>
+			<wsdl:input name="CreatePaymentType">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="CreatePaymentTypeResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdatePaymentType">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/UpdatePaymentType"/>
+			<wsdl:input name="UpdatePaymentTypeRq">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UpdatePaymentTypeRs">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ActivatePaymentType">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/ActivatePaymentType"/>
+			<wsdl:input name="ActivatePaymentTypeRq">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ActivatePaymentTypeRs">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="DeactivatePaymentType">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/DeactivatePaymentType"/>
+			<wsdl:input name="DeactivatePaymentTypeRq">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeactivatePaymentTypeRs">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="IsSubscribedToConfiguration">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/IsSubscribedToConfiguration"/>
+			<wsdl:input name="IsSubscribedToConfigurationRq">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="IsSubscribedToConfigurationRs">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="IsSubscribedToService">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/IsSubscribedToService"/>
+			<wsdl:input name="IsSubscribedToServiceRq">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="IsSubscribedToServiceRs">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetSubscriptionToService">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetSubscriptionToService"/>
+			<wsdl:input name="GetSubscriptionToServiceRq">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetSubscriptionToServiceRs">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<!-- SADAD Service -->
+		<wsdl:operation name="GetSADAD">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetSADAD"/>
+			<wsdl:input name="GetSADADRq">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetSADADRs">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="UpdateSADAD">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/UpdateSADAD"/>
+			<wsdl:input name="UpdateSADADRq">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="UpdateSADADRs">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		
+		<!-- SAMA Service -->
+		<wsdl:operation name="GetSAMA">
+			<soap:operation soapAction="http://www.sadad.com/EBPP/wsdl/PartnerProfileService/1.0/PartnerProfileService/GetSAMA"/>
+			<wsdl:input name="GetSAMARq">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetSAMARs">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="PartnerProfileFault">
+				<soap:fault name="PartnerProfileFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ServicePartnerProfileService">
+		<wsdl:port binding="tns:PartnerProfileServiceSOAP" name="ServicePartnerProfileService">
+			<soap:address location="http://www.sadad.com/EBPP/scm/schema/ServicePartnerProfileService/1.0"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

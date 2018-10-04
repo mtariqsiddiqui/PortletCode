@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://sadad.com/wsdl/CorePayment/1.0" xmlns="http://sadad.com/wsdl/CorePayment/1.0" xmlns:pmt="http://sadad.com/schema/service/CorePayment/1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+		<wsdl:types>
+			<xsd:schema targetNamespace="http://sadad.com/wsdl/CorePayment/1.0">
+				<xsd:import namespace="http://sadad.com/schema/service/CorePayment/1.0" schemaLocation="CorePayment.xsd"/>
+			</xsd:schema>
+		</wsdl:types>
+		
+		<wsdl:message name="PaymentFault">
+			<wsdl:part element="pmt:PaymentFault" name="SOAPFault"/>
+		</wsdl:message>
+		
+		
+		<wsdl:message name="CancelRq">
+			<wsdl:part element="pmt:CancelRq" name="CancelRq"/>
+		</wsdl:message>
+		<wsdl:message name="CancelRs">
+			<wsdl:part element="pmt:CancelRs" name="CancelRs"/>
+		</wsdl:message>
+			
+		
+		<wsdl:message name="UncancelRq">
+			<wsdl:part element="pmt:UncancelRq" name="UncancelRq"/>
+		</wsdl:message>
+		<wsdl:message name="UncancelRs">
+			<wsdl:part element="pmt:UncancelRs" name="UncancelRs"/>
+		</wsdl:message>
+		
+		<wsdl:message name="ListByIdRq">
+			<wsdl:part element="pmt:ListByIdRq" name="ListByIdRq"/>
+		</wsdl:message>
+		<wsdl:message name="ListByIdRs">
+			<wsdl:part element="pmt:ListByIdRs" name="ListByIdRs"/>
+		</wsdl:message>
+
+		<wsdl:message name="ListByPayorRq">
+			<wsdl:part element="pmt:ListByPayorRq" name="ListByPayorRq"/>
+		</wsdl:message>
+		<wsdl:message name="ListByPayorRs">
+			<wsdl:part element="pmt:ListByPayorRs" name="ListByPayorRs"/>
+		</wsdl:message>
+	
+		<wsdl:message name="ListByAccountRq">
+			<wsdl:part element="pmt:ListByAccountRq" name="ListByAccountRq"/>
+		</wsdl:message>
+		<wsdl:message name="ListByAccountRs">
+			<wsdl:part element="pmt:ListByAccountRs" name="ListByAccountRs"/>
+		</wsdl:message>
+		
+		<wsdl:message name="ListByBillIdRq">
+			<wsdl:part element="pmt:ListByBillIdRq" name="ListByBillIdRq"/>
+		</wsdl:message>
+		<wsdl:message name="ListByBillIdRs">
+			<wsdl:part element="pmt:ListByBillIdRs" name="ListByBillIdRs"/>
+		</wsdl:message>
+		
+		<wsdl:message name="ListByBeneficiaryRq">
+			<wsdl:part element="pmt:ListByBeneficiaryRq" name="ListByBeneficiaryRq"/>
+		</wsdl:message>
+		<wsdl:message name="ListByBeneficiaryRs">
+			<wsdl:part element="pmt:ListByBeneficiaryRs" name="ListByBeneficiaryRs"/>
+		</wsdl:message>
+				
+		<wsdl:portType name="CorePaymentPort">
+			<wsdl:operation name="Cancel">
+				<wsdl:input message="CancelRq" name="CancelRq_Input"/>
+				<wsdl:output message="CancelRs" name="CancelRs_Output"/>
+				<wsdl:fault message="PaymentFault" name="Cancel_Fault"/>
+			</wsdl:operation>
+			<wsdl:operation name="Uncancel">
+				<wsdl:input message="UncancelRq" name="UncancelRq_Input"/>
+				<wsdl:output message="UncancelRs" name="UncancelRs_Output"/>
+				<wsdl:fault message="PaymentFault" name="Uncancel_Fault"/>
+			</wsdl:operation>
+			<wsdl:operation name="ListById">
+				<wsdl:input message="ListByIdRq" name="ListByIdRq_Input"/>
+				<wsdl:output message="ListByIdRs" name="ListByIdRs_Output"/>
+				<wsdl:fault message="PaymentFault" name="ListById_Fault"/>
+			</wsdl:operation>
+			<wsdl:operation name="ListByPayor">
+				<wsdl:input message="ListByPayorRq" name="ListByPayorRq_Input"/>
+				<wsdl:output message="ListByPayorRs" name="ListByPayorRs_Output"/>
+				<wsdl:fault message="PaymentFault" name="ListByPayor_Fault"/>
+			</wsdl:operation>
+			<wsdl:operation name="ListByAccount">
+				<wsdl:input message="ListByAccountRq" name="ListByAccountRq_Input"/>
+				<wsdl:output message="ListByAccountRs" name="ListByAccountRs_Output"/>
+				<wsdl:fault message="PaymentFault" name="ListByAccount_Fault"/>
+			</wsdl:operation>	
+			<wsdl:operation name="ListByBillId">
+				<wsdl:input message="ListByBillIdRq" name="ListByBillIdRq_Input"/>
+				<wsdl:output message="ListByBillIdRs" name="ListByBillIdRs_Output"/>
+				<wsdl:fault message="PaymentFault" name="ListByBillId_Fault"/>
+			</wsdl:operation>			
+			<wsdl:operation name="ListByBeneficiary">
+				<wsdl:input message="ListByBeneficiaryRq" name="ListByBeneficiaryRq_Input"/>
+				<wsdl:output message="ListByBeneficiaryRs" name="ListByBeneficiaryRs_Output"/>
+				<wsdl:fault message="PaymentFault" name="ListByBeneficiary_Fault"/>
+			</wsdl:operation>					
+		</wsdl:portType>
+		
+		<wsdl:binding name="CorePaymentBinding" type="CorePaymentPort">
+			<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+			<wsdl:operation name="Cancel">
+				<soap:operation soapAction="http://sadad.com/EBPP/CorePayment/Cancel"/>
+				<wsdl:input name="CancelRq_Input">
+					<soap:body parts="CancelRq" use="literal"/>
+				</wsdl:input>
+				<wsdl:output name="CancelRs_Output">
+					<soap:body parts="CancelRs" use="literal"/>
+				</wsdl:output>
+				<wsdl:fault name="Cancel_Fault">
+					<soap:fault name="Cancel_Fault" use="literal"/>
+				</wsdl:fault>
+			</wsdl:operation>	
+			<wsdl:operation name="Uncancel">
+				<soap:operation soapAction="http://sadad.com/EBPP/CorePayment/Uncancel"/>
+				<wsdl:input name="UncancelRq_Input">
+					<soap:body parts="UncancelRq" use="literal"/>
+				</wsdl:input>
+				<wsdl:output name="UncancelRs_Output">
+					<soap:body parts="UncancelRs" use="literal"/>
+				</wsdl:output>
+				<wsdl:fault name="Uncancel_Fault">
+					<soap:fault name="Uncancel_Fault" use="literal"/>
+				</wsdl:fault>
+			</wsdl:operation>			
+			<wsdl:operation name="ListById">
+				<soap:operation soapAction="http://sadad.com/EBPP/CorePayment/ListById"/>
+				<wsdl:input name="ListByIdRq_Input">
+					<soap:body parts="ListByIdRq" use="literal"/>
+				</wsdl:input>
+				<wsdl:output name="ListByIdRs_Output">
+					<soap:body parts="ListByIdRs" use="literal"/>
+				</wsdl:output>
+				<wsdl:fault name="ListById_Fault">
+					<soap:fault name="ListById_Fault" use="literal"/>
+				</wsdl:fault>
+			</wsdl:operation>
+			<wsdl:operation name="ListByPayor">
+				<soap:operation soapAction="http://sadad.com/EBPP/CorePayment/ListByPayor"/>
+				<wsdl:input name="ListByPayorRq_Input">
+					<soap:body parts="ListByPayorRq" use="literal"/>
+				</wsdl:input>
+				<wsdl:output name="ListByPayorRs_Output">
+					<soap:body parts="ListByPayorRs" use="literal"/>
+				</wsdl:output>
+				<wsdl:fault name="ListByPayor_Fault">
+					<soap:fault name="ListByPayor_Fault" use="literal"/>
+				</wsdl:fault>
+			</wsdl:operation>
+			<wsdl:operation name="ListByAccount">
+				<soap:operation soapAction="http://sadad.com/EBPP/CorePayment/ListByAccount"/>
+				<wsdl:input name="ListByAccountRq_Input">
+					<soap:body parts="ListByAccountRq" use="literal"/>
+				</wsdl:input>
+				<wsdl:output name="ListByAccountRs_Output">
+					<soap:body parts="ListByAccountRs" use="literal"/>
+				</wsdl:output>
+				<wsdl:fault name="ListByAccount_Fault">
+					<soap:fault name="ListByAccount_Fault" use="literal"/>
+				</wsdl:fault>
+			</wsdl:operation>	
+			<wsdl:operation name="ListByBillId">
+				<soap:operation soapAction="http://sadad.com/EBPP/CorePayment/ListByBillId"/>
+				<wsdl:input name="ListByBillIdRq_Input">
+					<soap:body parts="ListByBillIdRq" use="literal"/>
+				</wsdl:input>
+				<wsdl:output name="ListByBillIdRs_Output">
+					<soap:body parts="ListByBillIdRs" use="literal"/>
+				</wsdl:output>
+				<wsdl:fault name="ListByBillId_Fault">
+					<soap:fault name="ListByBillId_Fault" use="literal"/>
+				</wsdl:fault>
+			</wsdl:operation>
+			<wsdl:operation name="ListByBeneficiary">
+				<soap:operation soapAction="http://sadad.com/EBPP/CorePayment/ListByBillId"/>
+				<wsdl:input name="ListByBeneficiaryRq_Input">
+					<soap:body parts="ListByBeneficiaryRq" use="literal"/>
+				</wsdl:input>
+				<wsdl:output name="ListByBeneficiaryRs_Output">
+					<soap:body parts="ListByBeneficiaryRs" use="literal"/>
+				</wsdl:output>
+				<wsdl:fault name="ListByBeneficiary_Fault">
+					<soap:fault name="ListByBeneficiary_Fault" use="literal"/>
+				</wsdl:fault>
+			</wsdl:operation>							
+		</wsdl:binding>
+		
+		<wsdl:service name="CorePayment">
+			<wsdl:port binding="CorePaymentBinding" name="CorePaymentPort">
+				<soap:address location="http://sadad.com/EBPP/service/CorePayment/1.0"/>
+			</wsdl:port>
+		</wsdl:service>		
+			
+	</wsdl:definitions>
