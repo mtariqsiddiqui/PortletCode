@@ -15,7 +15,6 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
 import com.sadad.portal.SadadGenericPortlet;
-import com.sadad.portal.admin.banks.BankHelper;
 import com.sadad.portal.beans.BankSessionBean;
 import com.sadad.portal.constant.PortalConstant;
 
@@ -135,7 +134,7 @@ public class CreateBankPortlet extends SadadGenericPortlet
 		request.setAttribute(PortalConstant.PORTLET_SESSION_BEAN, bSesObj);
 		request.getPortletSession().setAttribute(PortalConstant.PORTLET_SESSION_BEAN, bSesObj, PortletSession.PORTLET_SCOPE);
 		
-		response.setContentType("text/html");
+		response.setContentType("text/html; charset=UTF-8");
 		PortletRequestDispatcher rd = getPortletContext().getRequestDispatcher(getJspFilePath(JSP_FOLDER, jspResourceId));
 		rd.include(request, response);
 

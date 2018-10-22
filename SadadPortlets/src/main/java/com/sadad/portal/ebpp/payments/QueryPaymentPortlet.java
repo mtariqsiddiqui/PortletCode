@@ -1,26 +1,27 @@
 package com.sadad.portal.ebpp.payments;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Logger;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequestDispatcher;
-import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
-import com.sadad.portal.SadadGenericPortlet;
+import com.sadad.portal.SadadEbppGenericPortlet;
+import com.sadad.portal.beans.CoreEbppSessionBean;
 import com.sadad.portal.constant.PortalConstant;
 
 /**
  * @author Tariq Siddiqui
  * 
  */
-public class QueryPaymentPortlet extends SadadGenericPortlet
+public class QueryPaymentPortlet extends SadadEbppGenericPortlet
 {
 	private static final String CLASS_NAME = QueryPaymentPortlet.class.getName();
 	private static Logger logger = Logger.getLogger(CLASS_NAME);
@@ -29,24 +30,7 @@ public class QueryPaymentPortlet extends SadadGenericPortlet
 	private static final String VIEW_JSP_INDEX = "QueryPaymentIndex"; // JSP file name to be rendered on the view mode
 	private static final String VIEW_JSP_QUERY_PAYMENT_FORM = "QueryPaymentForm"; // JSP file name to be rendered on the view mode
 	
-	private static final String VIEW_JSP_CORE_ACCOUNT_SUMMARY = "core_AccountSummary"; // JSP file name to be rendered on the view mode
-	private static final String VIEW_JSP_CORE_ACCOUNT_DETAILS = "core_AccountDetails"; // JSP file name to be rendered on the view mode
-	private static final String VIEW_JSP_CORE_BILLER_SUMMARY = "core_BillerSummary"; // JSP file name to be rendered on the view mode
-	private static final String VIEW_JSP_CORE_BILLS_SUMMARY = "core_BillsSummary"; // JSP file name to be rendered on the view mode
-	private static final String VIEW_JSP_CORE_BILLS_DETAILS = "core_BillsDetails"; // JSP file name to be rendered on the view mode
-	private static final String VIEW_JSP_CORE_CSUTOMER_SUMMARY = "core_CustomerSummary"; // JSP file name to be rendered on the view mode
-	private static final String VIEW_JSP_CORE_CSUTOMER_DETAILS = "core_CustomerDetails"; // JSP file name to be rendered on the view mode
-	private static final String VIEW_JSP_CORE_ASSOCIATIONS_SUMMARY = "core_AssociationsSummary"; // JSP file name to be rendered on the view mode
-	private static final String VIEW_JSP_CORE_ASSOCIATIONS_DETAILS = "core_AssociationsDetails"; // JSP file name to be rendered on the view mode
-	private static final String VIEW_JSP_CORE_PAYMENTS_SUMMARY = "core_PaymentsSummary"; // JSP file name to be rendered on the view mode
-	private static final String VIEW_JSP_CORE_PAYMENTS_DETAILS = "core_PaymentsDetails"; // JSP file name to be rendered on the view mode
-	private static final String VIEW_JSP_CORE_REFUND_SUMMARY = "core_RefundsSummary"; // JSP file name to be rendered on the view mode
-	private static final String VIEW_JSP_CORE_REFUND_DETAILS = "core_RefundsDetails"; // JSP file name to be rendered on the view mode
-	private static final String VIEW_JSP_CORE_AUDIT_SUMMARY = "core_AuditSummary"; // JSP file name to be rendered on the view mode
-	private static final String VIEW_JSP_CORE_BUISNESS_RULES_SUMMARY = "core_BusinessRulesSummary"; // JSP file name to be rendered on the view mode
-
-	private PaymentsHelper ph = new PaymentsHelper();
-	private QueryPaymentSessionBean qpSesObj;
+	private CoreEbppSessionBean sesObj;
 	
 	/**
 	 * @see javax.portlet.Portlet#init()
@@ -70,17 +54,17 @@ public class QueryPaymentPortlet extends SadadGenericPortlet
 		// Set the MIME type for the render response
 		response.setContentType(request.getResponseContentType());
 
-		qpSesObj = (QueryPaymentSessionBean) request.getPortletSession().getAttribute(PortalConstant.PORTLET_SESSION_BEAN, PortletSession.PORTLET_SCOPE);
-		if (qpSesObj == null)
+		sesObj = getSessionBeanObject(request, CoreEbppSessionBean.class);
+		if (sesObj == null)
 		{
-			qpSesObj = ph.getQueryPaymentObject();
-			qpSesObj.getScreen().setContainer1(getJspFilePath(JSP_FOLDER, VIEW_JSP_QUERY_PAYMENT_FORM));
-			qpSesObj.getScreen().setContainer2(null);
-			request.getPortletSession().setAttribute(PortalConstant.PORTLET_SESSION_BEAN, qpSesObj, PortletSession.PORTLET_SCOPE);
+			sesObj = new CoreEbppSessionBean();
+			sesObj.getScreen().setContainer1(getJspFilePath(JSP_FOLDER, VIEW_JSP_QUERY_PAYMENT_FORM));
+			sesObj.getScreen().setContainer2(null);
 		}
 
 		// Setting attributes in Request scope
-		request.setAttribute(PortalConstant.PORTLET_SESSION_BEAN, qpSesObj);
+		request.setAttribute(PortalConstant.PORTLET_SESSION_BEAN, sesObj);
+		setSessionBeanObject(request, sesObj);
 
 		// Invoke the JSP to render
 		PortletRequestDispatcher rd = getPortletContext().getRequestDispatcher(getJspFilePath(JSP_FOLDER, VIEW_JSP_INDEX));
@@ -101,15 +85,15 @@ public class QueryPaymentPortlet extends SadadGenericPortlet
 		final String methodName = "processAction";
 		logger.entering(CLASS_NAME, methodName);
 		
-		qpSesObj = (QueryPaymentSessionBean) request.getPortletSession().getAttribute(PortalConstant.PORTLET_SESSION_BEAN, PortletSession.PORTLET_SCOPE);
+		sesObj = getSessionBeanObject(request, CoreEbppSessionBean.class);
 
 		String whereTo = request.getParameter("fpWhereTo");
 		if(whereTo.equals(PortalConstant.BACK))
-			qpSesObj.setScreen(qpSesObj.navigate(whereTo));
+			sesObj.setScreen(sesObj.navigate(whereTo));
 		else if(whereTo.equals(PortalConstant.FINISH))
-			qpSesObj = null;
+			sesObj = null;
 		
-		request.getPortletSession().setAttribute(PortalConstant.PORTLET_SESSION_BEAN, qpSesObj, PortletSession.PORTLET_SCOPE);		
+		setSessionBeanObject(request, sesObj);
 		logger.exiting(CLASS_NAME, methodName);	
 	}
 
@@ -130,65 +114,38 @@ public class QueryPaymentPortlet extends SadadGenericPortlet
 		// 3 - Call Helper WebService method
 		// 4 - Set Same BeanObject in Session and Request
 
-		qpSesObj = (QueryPaymentSessionBean) request.getPortletSession().getAttribute(PortalConstant.PORTLET_SESSION_BEAN, PortletSession.PORTLET_SCOPE);
-		ph.setQueryPaymentObject(qpSesObj);
+		sesObj = getSessionBeanObject(request, CoreEbppSessionBean.class);
+		sesObj = populateRequestParamsInSessionBean(request, sesObj, CoreEbppSessionBean.class);
 
 		if (jspResourceId.equals(VIEW_JSP_QUERY_PAYMENT_FORM))
 		{}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_BILLER_SUMMARY))
-		{}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_ACCOUNT_SUMMARY))
+		else if(jspResourceId.startsWith("core_"))
 		{
-			//ah.getByKey(request.getParameter("txtPartnerKey"), request.getParameter("txtAccountKey"));			
-			qpSesObj.setPartnerKey(qpSesObj.getAccount().getBillerId());
-			qpSesObj.setAccountNumber(qpSesObj.getAccount().getAccountNumber());
+			sesObj = serveCoreResources(jspResourceId, sesObj);
 		}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_ACCOUNT_DETAILS))
-		{
-		}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_BILLS_SUMMARY))
-		{}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_BILLS_DETAILS))
-		{
-			qpSesObj.setBillKey(request.getParameter("fpBillNumber"));
-		}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_CSUTOMER_SUMMARY))
-		{}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_CSUTOMER_DETAILS))
-		{
-		}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_ASSOCIATIONS_SUMMARY))
-		{}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_ASSOCIATIONS_DETAILS))
-		{
-		}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_PAYMENTS_SUMMARY))
-		{}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_PAYMENTS_DETAILS))
-		{
-			qpSesObj.setPaymentKey(request.getParameter("rpPaymentKey"));
-		}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_REFUND_SUMMARY))
-		{}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_REFUND_DETAILS))
-		{
-			qpSesObj.setRefundKey(request.getParameter("rpRefundKey"));
-		}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_AUDIT_SUMMARY))
-		{}
-		else if (jspResourceId.equals(VIEW_JSP_CORE_BUISNESS_RULES_SUMMARY))
-		{}
 		
 		// Handling of Screen Rendering
-		screenHandling(qpSesObj, JSP_FOLDER, jspResourceId);
-		
-		// Setting the same session object in request Attribute and Portlet Session Attribute
-		request.setAttribute(PortalConstant.PORTLET_SESSION_BEAN, qpSesObj);
-		request.getPortletSession().setAttribute(PortalConstant.PORTLET_SESSION_BEAN, qpSesObj, PortletSession.PORTLET_SCOPE);
+		screenHandling(sesObj, JSP_FOLDER, jspResourceId);
 
-		response.setContentType("text/html");
-		PortletRequestDispatcher rd = getPortletContext().getRequestDispatcher(getJspFilePath(JSP_FOLDER, jspResourceId));
-		rd.include(request, response);
+		// Setting the same session object in request Attribute and Portlet Session Attribute
+		request.setAttribute(PortalConstant.PORTLET_SESSION_BEAN, sesObj);
+		setSessionBeanObject(request, sesObj);
+
+		// Error occurred during backend service call, render JSON error message
+		if (sesObj.getMessageToDisplay() != null)
+		{
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter pw = response.getWriter();
+			pw.print(composeJsonResponse(sesObj));
+			pw.close();
+		}
+		// Backend service call response completed successfully, render JSP
+		else
+		{
+			response.setContentType("text/html; charset=UTF-8");
+			PortletRequestDispatcher rd = getPortletContext().getRequestDispatcher(getJspFilePath(JSP_FOLDER, jspResourceId));
+			rd.include(request, response);
+		}
 
 		logger.exiting(CLASS_NAME, methodName);
 	}	

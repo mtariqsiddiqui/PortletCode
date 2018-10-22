@@ -365,4 +365,19 @@ public class Bill
 	{
 		this.fileName = fileName;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "Bill [" + (billKey != null ? "billKey=" + billKey + ", " : "") + (billerId != null ? "billerId=" + billerId + ", " : "") + (serviceType != null ? "serviceType=" + serviceType + ", " : "")
+				+ (accountNumber != null ? "accountNumber=" + accountNumber + ", " : "") + (rquid != null ? "rquid=" + rquid + ", " : "") + (billNumber != null ? "billNumber=" + billNumber + ", " : "")
+				+ (billType != null ? "billType=" + billType + ", " : "") + (billCycle != null ? "billCycle=" + billCycle + ", " : "") + (billStatus != null ? "billStatus=" + billStatus + ", " : "")
+				+ (billCategory != null ? "billCategory=" + billCategory + ", " : "") + "paymentCount=" + paymentCount + ", " + (origianlAmount != null ? "origianlAmount=" + origianlAmount + ", " : "")
+				+ (netAmount != null ? "netAmount=" + netAmount + ", " : "") + (dueDate != null ? "dueDate=" + dueDate + ", " : "") + (expiryDate != null ? "expiryDate=" + expiryDate + ", " : "")
+				+ (billGeneratedDate != null ? "billGeneratedDate=" + billGeneratedDate + ", " : "") + (billCreateionDate != null ? "billCreateionDate=" + billCreateionDate + ", " : "")
+				+ (errorCode != null ? "errorCode=" + errorCode + ", " : "") + (errorDesc != null ? "errorDesc=" + errorDesc + ", " : "") + (fileName != null ? "fileName=" + fileName : "") + "]";
+	}
 }

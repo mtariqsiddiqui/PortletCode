@@ -35,7 +35,7 @@ public class AccountQueryDelegateImpl implements AccountQueryDelegate
 	private String getEndPointUrl()
 	{
 		// TODO - Get the URL from WSRR
-		return "http://localhost:8091/mockAccountQueryBinding";
+		return "http://localhost:8090/AccountQueryComponent/AccountQueryRemotable/";
 	}
 
 	/**

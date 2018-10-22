@@ -17,7 +17,7 @@
 						<label class="label" for="fpRquid"><fmt:message key="ebpp.portlet.label.refund-id" bundle="${bndlLang}"/> *</label>
 					</td>
 					<td class="outputDataCell" style="width: 80%; vertical-align: top;" nowrap>
-						<input class="outputData" value="${psb.refundId}" name="fpRefundId" id="fpRefundId" autocomplete="off" maxlength="256" type="text" required/>
+						<input class="outputData" value="${psb.refundId}" name="param_refundId" id="txtRefundId" autocomplete="off" maxlength="256" type="text" required/>
 					</td>
 				</tr>
 				<tr>

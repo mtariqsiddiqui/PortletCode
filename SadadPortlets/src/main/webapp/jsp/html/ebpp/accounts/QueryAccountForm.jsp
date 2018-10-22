@@ -6,15 +6,7 @@
 		<tbody>
 			<tr>
 				<td>
-					<table style="width: 100%">
-						<tbody>
-							<tr>
-								<td>
-									<p class="attnbox"><fmt:message key="ebpp.portlet.marked-fields-are-mandatory" bundle="${bndlLang}"/></p>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+					<p class="attnbox"><fmt:message key="ebpp.portlet.marked-fields-are-mandatory" bundle="${bndlLang}"/></p>
 				</td>
 			</tr>
 			<tr>
@@ -41,12 +33,12 @@
 														</label>
 													</td>
 													<td class="outputDataCell" style="width: 100%" valign="top" nowrap>
-														<select name="txtPartnerKey" class="outputData" required="true" id="cmbPartnerKey" onchange="onChangePartnerKey(this);">
+														<select name="param_billerId" class="outputData" required="true" id="cmbPartnerKey" onchange="onChangePartnerKey(this);">
 															<option value="">
 																<fmt:message key="ebpp.portlet.label.please-select" bundle="${bndlLang}"/>
 															</option>
 															<c:forEach items="${BillerList}" var="biller">
-																<option <c:if test="${psb.partnerKey == biller.value.partnerKey}">selected</c:if>
+																<option <c:if test="${psb.billerId == biller.value.partnerKey}">selected</c:if>
 																	value="<c:out value="${biller.value.partnerKey}" />">
 																	<c:out value="${biller.value.partnerName}" />
 																</option>
@@ -61,7 +53,7 @@
 														</label>
 													</td>
 													<td class="outputDataCell" style="width: 100%; vertical-align:top" nowrap>
-														<input name="txtAccountNumber" class="outputData" value="${psb.accountNumber}" required="true" id="txtAccountNumber" autocomplete="off" maxlength="256" type="text">
+														<input name="param_accountNumber" class="outputData" value="${psb.accountNumber}" required="true" id="txtAccountNumber" autocomplete="off" maxlength="256" type="text">
 													</td>
 												</tr>
 												<!-- End: Data entry fields -->

@@ -48,17 +48,28 @@ function makePageUnBusy()
 }
 
 /**
- * Display error or success messages on page (#msgContainer)
+ * Display or Clear error or success messages on page (#msgContainer)
  * 
- * @param txt
+ * @param txt - message to display (optional if undefined then any previous message will be cleared)
+ * @param cls - CSS class (optional if undefined then ERROR class will be applied)
  */
-function displayErrorOrMessage(txt)
+function displayErrorOrMessage(txt, cls)
 {
-  $('#msgContainer').html(txt);
-  $('#msgContainer').removeClass();
-  $('#msgContainer').addClass('ERROR_Message');
+	if(typeof txt === "undefined")
+	{
+		$('#msgContainer').html('');
+		$('#msgContainer').removeClass();
+	}
+	else
+	{
+		$('#msgContainer').html(txt);
+		$('#msgContainer').removeClass();
+		if(typeof cls === "undefined")
+			$('#msgContainer').addClass('ERROR_Message');
+		else
+			$('#msgContainer').addClass(cls+'_Message');
+	}
 }
-
 
 /**
  * Submits the form to the server
@@ -73,13 +84,14 @@ function doQueryFormSubmission(formName, responseContainer, applyFilter, filterV
 //	doQueryFormValidation();
 	console.log("doQueryFormSubmission >>  " + formName, responseContainer, applyFilter, filterValue);
 
-    $('#' + formName).submit(function (e)
+	$('#' + formName).submit(function (e)
     {
         e.preventDefault(); // avoid to execute the actual submit of the form.
         e.stopImmediatePropagation();
 
         makePageBusy();
-        
+        displayErrorOrMessage();
+
         $.ajax({
             type: $(this).attr('method'),
             url: $(this).attr('action'),
@@ -105,6 +117,10 @@ function doQueryFormSubmission(formName, responseContainer, applyFilter, filterV
                 		}
                 	}
                 }
+                else
+                {
+                	displayErrorOrMessage(response.displayMessage, response.messageType);
+                }
                 makePageUnBusy();
             },
             error: function (xhr, textStatus, errorThrown)
@@ -129,6 +145,7 @@ function doPostUrl(pUrl, container)
 	console.log("doPostUrl >>  " + pUrl);
 
     makePageBusy();
+    displayErrorOrMessage();
     
     $.ajax({
         type: 'post',
@@ -151,6 +168,10 @@ function doPostUrl(pUrl, container)
 					$("#container_2").html(response);
 					onContainer2Loads();
 				}
+            }
+            else
+            {
+            	displayErrorOrMessage(response.displayMessage, response.messageType);
             }
             makePageUnBusy();
         },

@@ -44,7 +44,7 @@
 						<!-- Buttons Group -->
 						<tr>
 							<td>
-								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-associations" bundle="${bndlLang}"/>"  onclick='doPostUrl("<portlet:resourceURL id="core_AssociationsSummary"/>", 2);'/>
+								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-associations" bundle="${bndlLang}"/>"  onclick='doPostUrl("<portlet:resourceURL id="core_AssociationsSummaryListAccounts"/>", 2);'/>
 								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-active-bills" bundle="${bndlLang}"/>" onclick='doPostUrl("<portlet:resourceURL id="core_BillsSummary"/>", 2);'/>
 								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-inactive-bills" bundle="${bndlLang}"/>" onclick='doPostUrl("<portlet:resourceURL id="core_BillsSummary"/>", 2);'/>
 								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-moi-payments" bundle="${bndlLang}"/>" onclick='doPostUrl("<portlet:resourceURL id="core_PaymentsSummary"/>", 2);'/><br>

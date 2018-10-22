@@ -241,4 +241,10 @@ public class ServiceTypeHelper extends PortalServiceCallHelper
 		}	
 		logger.exiting(CLASS_NAME, methodName);
 	}
+
+	public void callUpdateAccountType(String parameter, String parameter2)
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }

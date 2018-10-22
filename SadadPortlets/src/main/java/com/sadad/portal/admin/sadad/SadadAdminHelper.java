@@ -22,23 +22,6 @@ public class SadadAdminHelper extends PortalServiceCallHelper
 	public static boolean CACHE_REFRESH_FLAG = true;
 	private static final String CLASS_NAME = SadadAdminHelper.class.getName();
 	private static Logger logger = Logger.getLogger(CLASS_NAME);
-	private SadadAdminSessionBean sadadAdminObject ;
-	
-	/**
-	 * @return the sadadAdminObject
-	 */
-	public SadadAdminSessionBean getSadadAdminObject()
-	{
-		return sadadAdminObject;
-	}
-
-	/**
-	 * @param sadadAdminObject the sadadAdminObject to set
-	 */
-	public void setSadadAdminObject(SadadAdminSessionBean sadadAdminObject)
-	{
-		this.sadadAdminObject = sadadAdminObject;
-	}
 	
 	/**
 	 * Calls the backend webservice to retrieve the data from database and populate it in local List object
@@ -46,7 +29,7 @@ public class SadadAdminHelper extends PortalServiceCallHelper
 	 * @throws DatatypeConfigurationException
 	 * @throws PartnerProfileFaultMsg
 	 */
-	public void callGetSADAD()
+	public SadadAdminSessionBean callGetSADAD(SadadAdminSessionBean sadadAdminObject)
 	{
 		final String methodName = "callGetSADAD";
 		logger.entering(CLASS_NAME, methodName);
@@ -60,12 +43,11 @@ public class SadadAdminHelper extends PortalServiceCallHelper
 				GetSADADResponseType sadadResponseType = partnerProfileServices.getSADAD(sadadRequestType);
 				sadadAdminObject.setSadadId(sadadResponseType.getSADADDetail().getPartnerKey());
 				sadadAdminObject.setSadadName(sadadResponseType.getSADADDetail().getName());
-				sadadAdminObject.setSadadDescription("SADAD ORGANIZATION ENTITY");
+				sadadAdminObject.setSadadDescription("SADAD ORGANIZATION ENTITY"); // TODO - remote the hardcoded value
 				sadadAdminObject.setSadadCurrentAccount(sadadResponseType.getSADADDetail().getSADADFinanicialInfo().getSADADCurrentAccount().getBankAccount().getNumber());
 				sadadAdminObject.setAccountBankId(sadadResponseType.getSADADDetail().getSADADFinanicialInfo().getSADADCurrentAccount().getBankKey());
 				sadadAdminObject.setAccountBankName(sadadResponseType.getSADADDetail().getSADADFinanicialInfo().getSADADCurrentAccount().getBankName());
 				sadadAdminObject.setRefundMaxLimit(5); // TODO read it from the call response
-				setSadadAdminObject(sadadAdminObject);
 			}
 			catch (PartnerProfileFaultMsg e)
 			{
@@ -73,13 +55,6 @@ public class SadadAdminHelper extends PortalServiceCallHelper
 				logger.logp(Level.SEVERE, CLASS_NAME, methodName, e.getMessage());
 				logger.logp(Level.SEVERE, CLASS_NAME, "getSadadAdmin", e.getFaultInfo().getDescription());
 
-				if (logger.isLoggable(Level.FINEST))
-					e.printStackTrace();
-			}
-			catch (DatatypeConfigurationException e)
-			{
-				sadadAdminObject.setGenericErrorMessage();
-				logger.logp(Level.SEVERE, CLASS_NAME, methodName, e.getMessage());
 				if (logger.isLoggable(Level.FINEST))
 					e.printStackTrace();
 			}
@@ -93,6 +68,7 @@ public class SadadAdminHelper extends PortalServiceCallHelper
 			CACHE_REFRESH_FLAG = false;
 		}
 		logger.exiting(CLASS_NAME, methodName);
+		return sadadAdminObject;
 	}
 	
 	/**
@@ -100,7 +76,7 @@ public class SadadAdminHelper extends PortalServiceCallHelper
 	 * @param accountNumber - Bank account number to be updated
 	 * @param bankId - Bank ID of SADAD current account
 	 */
-	public void callUpdateSADAD(String accountNumber, String bankId)
+	public SadadAdminSessionBean callUpdateSADAD(String accountNumber, String bankId, SadadAdminSessionBean sadadAdminObject)
 	{
 		final String methodName = "callUpdateSADAD";
 		logger.entering(CLASS_NAME, methodName);
@@ -124,13 +100,6 @@ public class SadadAdminHelper extends PortalServiceCallHelper
 			if (logger.isLoggable(Level.FINEST))
 				e.printStackTrace();
 		}
-		catch (DatatypeConfigurationException e)
-		{
-			sadadAdminObject.setGenericErrorMessage();
-			logger.logp(Level.SEVERE, CLASS_NAME, methodName, e.getMessage());
-			if (logger.isLoggable(Level.FINEST))
-				e.printStackTrace();
-		}
 		catch (Exception e)
 		{
 			sadadAdminObject.setGenericErrorMessage();
@@ -140,5 +109,6 @@ public class SadadAdminHelper extends PortalServiceCallHelper
 		}
 		CACHE_REFRESH_FLAG = true;
 		logger.exiting(CLASS_NAME, methodName);
+		return sadadAdminObject;
 	}
 }

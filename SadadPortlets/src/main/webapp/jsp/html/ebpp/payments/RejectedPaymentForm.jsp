@@ -18,7 +18,7 @@
 						<label class="label" for="fpRquid"><fmt:message key="ebpp.portlet.label.rquid" bundle="${bndlLang}"/> *</label>
 					</td>
 					<td class="outputDataCell" style="width: 80%; vertical-align: top;" nowrap>
-						<input class="outputData" value="${psb.rquid}" id="fpRquid" autocomplete="off" maxlength="256" type="text" required/>
+						<input class="outputData" value="${psb.rquid}" name="param_rquid" id="txtRquid" autocomplete="off" maxlength="256" type="text" required="required"/>
 					</td>
 				</tr>
 				<tr>

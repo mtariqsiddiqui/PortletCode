@@ -28,4 +28,12 @@ public interface PortalConstant
 
 	/// Use to access Global Session bean Object
 	public static final String GLOBAL_SESSION_BEAN = "gsb";
+	
+	public static final String MESSAGE_TYPE = "messageType";
+	public static final String DISPLAY_MESSAGE = "displayMessage";
+	
+	/// Use as the initial for all request parameter sends to server from JSP
+	/// All request parameter which starts with params_ will be populate in SessionBean object 
+	/// based on criteria startsWith("param_"), if the same field is present there in SessionBean
+	public static final String REQUEST_PARAMETER_INITIALS = "param_";
 }

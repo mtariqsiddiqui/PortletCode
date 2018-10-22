@@ -3,6 +3,7 @@ package com.sadad.portal.beans;
 public class Association
 {
 	private String accountNumber;
+	private String accountStatus;
 	private String billerId;
 	private String officialIdType;
 	private String officialIdNumber;
@@ -25,6 +26,22 @@ public class Association
 	public void setAccountNumber(String accountNumber)
 	{
 		this.accountNumber = accountNumber;
+	}
+
+	/**
+	 * @return the accountStatus
+	 */
+	public String getAccountStatus()
+	{
+		return accountStatus;
+	}
+
+	/**
+	 * @param accountStatus the accountStatus to set
+	 */
+	public void setAccountStatus(String accountStatus)
+	{
+		this.accountStatus = accountStatus;
 	}
 
 	/**
@@ -127,5 +144,16 @@ public class Association
 	public void setAssigningOrganization(String assigningOrganization)
 	{
 		this.assigningOrganization = assigningOrganization;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "Association [" + (accountNumber != null ? "accountNumber=" + accountNumber + ", " : "") + (billerId != null ? "billerId=" + billerId + ", " : "") + (officialIdType != null ? "officialIdType=" + officialIdType + ", " : "")
+				+ (officialIdNumber != null ? "officialIdNumber=" + officialIdNumber + ", " : "") + (customerStatus != null ? "customerStatus=" + customerStatus + ", " : "")
+				+ (associationType != null ? "associationType=" + associationType + ", " : "") + (assigningOrganization != null ? "assigningOrganization=" + assigningOrganization : "") + "]";
 	}
 }

@@ -25,7 +25,7 @@
 		<!-- Begin: repeated data rows -->
 		<c:forEach items="${psb.bills}" var="bill">
 			<tr>
-				<td>${BillerList[psb.partnerKey].partnerName}</td>
+				<td>${BillerList[psb.billerId].partnerName}</td>
 				<td>${bill.value.accountNumber}</td>
 				<td>${bill.value.billNumber}</td>
 				<td>${bill.value.billCycle}</td>
@@ -37,7 +37,7 @@
 				<td>${bill.value.paymentCount}</td>
 				<td>
 					<portlet:resourceURL var="billDetailsUrl" id="core_BillsDetails">
-						<portlet:param name="fpBillNumber" value="${bill.key}"/>
+						<portlet:param name="param_billNumber" value="${bill.key}"/>
 					</portlet:resourceURL>
 					<a href="#" title="Click to see more details" onclick='doPostUrl("${billDetailsUrl}", 1);'>
 						<img width="25" height="25" border="0" alt="Account Details" src='${thisRequest.getContextPath()}/static/images/option_icon.png'>

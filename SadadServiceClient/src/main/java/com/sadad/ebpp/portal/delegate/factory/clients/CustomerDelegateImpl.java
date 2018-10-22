@@ -44,7 +44,7 @@ public class CustomerDelegateImpl implements CustomerDelegate
 	private String getEndPointUrl()
 	{
 		// TODO - Get the URL from WSRR
-		return "http://localhost:8093/mockCustomerBinding";
+		return "http://localhost:8090/CusromerProfileCom/CustomerPort/";
 	}
 
 	/**

@@ -5,32 +5,17 @@
 		<!-- Form or Details container -->
 		<tbody>
 			<tr>
-				<td>
-					<table style="width: 100%">
-						<tbody>
-							
-							<tr>
-								<td>
-									<p class="attnbox"><fmt:message key="ebpp.portlet.marked-fields-are-mandatory" bundle="${bndlLang}"/></p>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
+				<td><p class="attnbox"><fmt:message key="ebpp.portlet.marked-fields-are-mandatory" bundle="${bndlLang}"/></p></td>
 			</tr>
 			<tr>
 				<td>
 				<!-- Query Segment -->
 					<fieldset>
 						<legend>
-							<fmt:message key="ebpp.portlet.label.search-for-bill" bundle="${bndlLang}"/>
-							
+							<fmt:message key="ebpp.portlet.label.search-for-bill" bundle="${bndlLang}"/>							
 						</legend>
 						<table>
 							<tbody>
-								<tr>
-									<td class="myCaption"></td>
-								</tr>
 								<tr>
 									<td>
 										<table  style="width: 100%">
@@ -43,12 +28,12 @@
 														</label>
 													</td>
 													<td class="outputDataCell" style="width: 100%" valign="top" nowrap>
-														<select name="txtPartnerKey" class="outputData" required="true" id="cmbPartnerKey" onchange="onChangePartnerKey(this);">
+														<select name="param_billerId" class="outputData" required="true" id="cmbPartnerKey" onchange="onChangePartnerKey(this);">
 															<option value="">
 																<fmt:message key="ebpp.portlet.label.please-select" bundle="${bndlLang}"/>
 															</option>
 															<c:forEach items="${BillerList}" var="biller">
-																<option <c:if test="${psb.partnerKey == biller.value.partnerKey}">selected</c:if>
+																<option <c:if test="${psb.billerId == biller.value.partnerKey}">selected</c:if>
 																	value="<c:out value="${biller.value.partnerKey}" />">
 																	<c:out value="${biller.value.partnerName}" />
 																</option>
@@ -63,7 +48,7 @@
 														</label>
 													</td>
 													<td class="outputDataCell" style="width: 100%; vertical-align:top" nowrap>
-														<input name="txtBillNumber" class="outputData" value="${psb.bills[psb.billKey].billNumber}" required="true" id="txtBillNumber" autocomplete="off" maxlength="256" type="text">
+														<input name="param_billNumber" class="outputData" value="${psb.bills[psb.billKey].billNumber}" required="true" id="txtBillNumber" autocomplete="off" maxlength="256" type="text">
 													</td>
 												</tr>
 												<!-- End: Data entry fields -->
@@ -83,12 +68,6 @@
 					</fieldset>
 					<!-- END Query Segment --></td>
 			</tr>
-			<!-- End Form/Details container -->
-			<!-- List Container -->
-			<tr>
-				<td></td>
-			</tr>
-			<!-- END List Container -->
 		</tbody>
 	</table>
 	<!-- END Main Table -->

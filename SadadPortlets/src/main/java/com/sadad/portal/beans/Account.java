@@ -188,4 +188,16 @@ public class Account
 	{
 		this.fileName = fileName;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "Account [" + (accountNumber != null ? "accountNumber=" + accountNumber + ", " : "") + (billerId != null ? "billerId=" + billerId + ", " : "") + (serviceType != null ? "serviceType=" + serviceType + ", " : "")
+				+ (lifecycle != null ? "lifecycle=" + lifecycle + ", " : "") + (accountSource != null ? "accountSource=" + accountSource + ", " : "") + (beneficiary != null ? "beneficiary=" + beneficiary + ", " : "")
+				+ (createDate != null ? "createDate=" + createDate + ", " : "") + (errorCode != null ? "errorCode=" + errorCode + ", " : "") + (errorDesc != null ? "errorDesc=" + errorDesc + ", " : "")
+				+ (fileName != null ? "fileName=" + fileName : "") + "]";
+	}	
 }

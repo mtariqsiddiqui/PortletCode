@@ -69,5 +69,15 @@ public class Customer
 	public void setCustomerType(String customerType)
 	{
 		this.customerType = customerType;
-	}	
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "Customer [" + (officialIdNumber != null ? "officialIdNumber=" + officialIdNumber + ", " : "") + (officialIdType != null ? "officialIdType=" + officialIdType + ", " : "")
+				+ (customerStatus != null ? "customerStatus=" + customerStatus + ", " : "") + (customerType != null ? "customerType=" + customerType : "") + "]";
+	}
 }

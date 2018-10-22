@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>S2ServiceDefinitions-validator</artifactId>
+	<version>6.3.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Services Interfaces POM Project</name>
+	<parent>
+		<groupId>com.sadad.ebpp</groupId>
+		<artifactId>sadad-root-parent</artifactId>
+		<version>5.3.0.0</version>
+	</parent>
+	<build>
+		<defaultGoal>install</defaultGoal>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-wsdl-validator-plugin</artifactId>
+				<version>3.1.4</version>
+				<configuration>
+					<verbose>true</verbose>
+					<quiet>false</quiet>
+					<wsdlRoot>./</wsdlRoot>
+					<testWsdlRoot>./</testWsdlRoot>
+					<failOnError>false</failOnError>
+				</configuration>
+				<executions>
+					<execution>
+						<id>B</id>
+						<goals>
+							<goal>wsdlvalidator</goal>
+						</goals>
+						<phase>test</phase>
+						<configuration>
+							<includes>
+								<include>**/*.wsdl</include>
+							</includes>
+							<excludes>
+								<exclude>FileSchemaValidation.wsdl</exclude>
+								<exclude>AccountUploadRealtimeProcessing.wsdl</exclude>
+						<!-- 		
+								<exclude>AccountUploadRealtimeProcessing.wsdl</exclude>
+								<exclude>RefundAdviceMediation.wsdl</exclude>
+								<exclude>RefundRTNotifyMediation.wsdl</exclude>
+								<exclude>RefundValidationMediation.wsdl</exclude>
+								<exclude>UtilityServices.wsdl</exclude>
+								<exclude>ConfigurationService.wsdl</exclude>
+								<exclude>FileService.wsdl</exclude>
+								<exclude>ConfigurationService.wsdl</exclude>
+								<exclude>MultiFileOutbound.wsdl</exclude>
+								<exclude>NotificationService.wsdl</exclude>
+								-->
+							</excludes>
+						</configuration>
+					</execution>
+				
+					<!-- <include>G*.wsdl</include>
+					<include>P*.wsdl</include>
+					<include>R*.wsdl</include>
+					<include>S*.wsdl</include>
+					<include>T*.wsdl</include>
+					<include>U*.wsdl</include> -->
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+
+</project>

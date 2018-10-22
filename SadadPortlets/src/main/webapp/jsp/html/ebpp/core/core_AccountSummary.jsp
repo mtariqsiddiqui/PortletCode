@@ -19,13 +19,13 @@
 		<!-- Begin: repeated data rows -->
 <%-- 		<c:forEach items="${psb.accounts}" var="acc"> --%>
 			<tr>
-				<td>${BillerList[psb.partnerKey].partnerName}</td>
+				<td>${BillerList[psb.billerId].partnerName}</td>
 				<td>${psb.account.serviceType}</td>
 				<td>${psb.account.accountNumber}</td>
 				<td>${psb.account.lifecycle}</td>
 				<td>
 				<portlet:resourceURL var="accountDetailsUrl" id="core_AccountDetails">
-					<portlet:param name="accountKey" value="${psb.account.accountNumber}"/>
+					<portlet:param name="param_accountNumber" value="${psb.account.accountNumber}"/>
 				</portlet:resourceURL>
 				<a href="#" title="Click to see more details"
 					onclick='doPostUrl("${accountDetailsUrl}", 1);'>

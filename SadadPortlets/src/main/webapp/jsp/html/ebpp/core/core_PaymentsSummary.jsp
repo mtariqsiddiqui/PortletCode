@@ -23,7 +23,7 @@
 		<!-- Begin: repeated data rows -->
 		<c:forEach items="${psb.payments}" var="pay">
 			<tr>
-				<td>${BillerList[psb.partnerKey].partnerName}</td>
+				<td>${BillerList[psb.billerId].partnerName}</td>
 				<td>${pay.value.bankName}</td>
 				<td>${pay.value.accountNumber}</td>
 				<td>${pay.value.sadadNumber}</td>
@@ -33,7 +33,7 @@
 				<td>${pay.value.refundId}refund-id</td>
 				<td>
 					<portlet:resourceURL var="paymentDetailsUrl" id="core_PaymentsDetails">
-						<portlet:param name="rpPaymentKey" value="${pay.key}"/>
+						<portlet:param name="param_paymentKey" value="${pay.key}"/>
 					</portlet:resourceURL>
 					<a href="#" title="Click to see more details" onclick='doPostUrl("${paymentDetailsUrl}", 1);'>
 						<img width="25" height="25" border="0" alt="Account Details" src='${thisRequest.getContextPath()}/static/images/option_icon.png'>

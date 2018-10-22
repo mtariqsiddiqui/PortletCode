@@ -1,5 +1,9 @@
-<jsp:directive.include file="../../common/JspDeclarations.jspf" />
+<%@ page import="com.sadad.scm.common._1.RefundStatusCodeTypeEnums"%>
+<%@ page import="com.sadad.schema.service.refundsearch._1.ReconciliationStatusTypeEnum"%>
+<% pageContext.setAttribute("refundStatusCodeTypeEnums", RefundStatusCodeTypeEnums.values()); %>
+<% pageContext.setAttribute("reconciliationStatusTypeEnum", ReconciliationStatusTypeEnum.values()); %>
 
+<jsp:directive.include file="../../common/JspDeclarations.jspf" />
 <table style="width: 100%;">
 	<tbody>
 		<tr>
@@ -21,7 +25,7 @@
 						</label>
 					</td>
 					<td class="outputDataCell" style="width: 80%; vertical-align: top;" nowrap>
-						<select name="fpBillerId" class="outputData" required="true" id="fpBillerId" onchange="onChangePartnerKey(this);">
+						<select name="param_billerId" class="outputData" required="true" id="cmbBillerId" onchange="onChangePartnerKey(this);">
 							<option value="">
 								<fmt:message key="ebpp.portlet.label.please-select" bundle="${bndlLang}"/>
 							</option>
@@ -40,7 +44,7 @@
 						</label>
 					</td>
 					<td class="outputDataCell" style="width: 80%; vertical-align: top;" nowrap>
-						<select name="fpBankId" class="outputData" required="true" id="fpBankId" onchange="onChangePartnerKey(this);">
+						<select name="param_bankId" class="outputData" required="true" id="cmbBankId" onchange="onChangePartnerKey(this);">
 							<option value="">
 								<fmt:message key="ebpp.portlet.label.please-select" bundle="${bndlLang}"/>
 							</option>
@@ -67,12 +71,12 @@
 						</label>
 					</td>
 					<td class="outputDataCell" style="width: 80%; vertical-align: top;" nowrap>
-						<select name="fpBillerId" class="outputData" required="true" id="fpBillerId" onchange="onChangePartnerKey(this);">
+						<select name="fpBillerId" class="outputData" required="required" id="fpBillerId" onchange="onChangePartnerKey(this);">
 							<option value="">
 								<fmt:message key="ebpp.portlet.label.please-select" bundle="${bndlLang}"/>
 							</option>
 							<c:forEach items="${BillerList}" var="biller">
-								<option <c:if test="${psb.partnerKey == biller.value.partnerKey}">selected</c:if>
+								<option <c:if test="${psb.billerId == biller.value.partnerKey}">selected</c:if>
 									value="<c:out value="${biller.value.partnerKey}" />">
 									<c:out value="${biller.value.partnerName}" />
 								</option>
@@ -91,11 +95,8 @@
 							<option value="">
 								<fmt:message key="ebpp.portlet.label.please-select" bundle="${bndlLang}"/>
 							</option>
-							<c:forEach items="${BillerList}" var="biller">
-								<option <c:if test="${psb.partnerKey == biller.value.partnerKey}">selected</c:if>
-									value="<c:out value="${biller.value.partnerKey}" />">
-									<c:out value="${biller.value.partnerName}" />
-								</option>
+							<c:forEach items="${refundStatusCodeTypeEnums}" var="refundStatus">
+								<option value="${refundStatus}">${refundStatus}</option>
 							</c:forEach>
 						</select>
 					</td>
@@ -111,12 +112,9 @@
 							<option value="">
 								<fmt:message key="ebpp.portlet.label.please-select" bundle="${bndlLang}"/>
 							</option>
-							<c:forEach items="${BillerList}" var="biller">
-								<option <c:if test="${psb.partnerKey == biller.value.partnerKey}">selected</c:if>
-									value="<c:out value="${biller.value.partnerKey}" />">
-									<c:out value="${biller.value.partnerName}" />
-								</option>
-							</c:forEach>
+							<c:forEach items="${reconciliationStatusTypeEnum}" var="reconStatus">
+								<option value="${reconStatus}">${reconStatus}</option>
+							</c:forEach>							
 						</select>
 					</td>
 				</tr>
@@ -133,7 +131,7 @@
 								<fmt:message key="ebpp.portlet.label.please-select" bundle="${bndlLang}"/>
 							</option>
 							<c:forEach items="${BillerList}" var="biller">
-								<option <c:if test="${psb.partnerKey == biller.value.partnerKey}">selected</c:if>
+								<option <c:if test="${psb.billerId == biller.value.partnerKey}">selected</c:if>
 									value="<c:out value="${biller.value.partnerKey}" />">
 									<c:out value="${biller.value.partnerName}" />
 								</option>

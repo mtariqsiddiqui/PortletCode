@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://sadad.com/schema/service/RefundSearch/1.0" version="1.0" xmlns="http://sadad.com/schema/service/RefundSearch/1.0" xmlns:com="http://www.sadad.com/scm/Common/1.0" xmlns:err="http://www.sadad.com/scm/Error/1.0" xmlns:sys="http://www.sadad.com/scm/Common/System/1.0">
+	
+	<xs:import namespace="http://www.sadad.com/scm/Error/1.0" schemaLocation="Common/Error.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Common/1.0" schemaLocation="Common/SADADCommon.xsd"/>
+	<xs:import namespace="http://www.sadad.com/scm/Common/System/1.0" schemaLocation="Common/SADADSystemTypes.xsd"/>
+	
+	<xs:element name="RefundFault" type="err:Fault_Type"> 
+		<xs:annotation>
+			<xs:documentation>
+				Possible error Codes :
+				- GetRefund
+					16004 - The Value passed is null or blank
+					17001 - The Refund ID provided does not match an existing Refund record in SADAD
+				- ListRefund
+					16011 - When From/ to dates are null or invalid.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:element name="GetRefundRq" type="GetRefundRq_Type"/>
+	<xs:element name="GetRefundRs" type="GetRefundRs_Type"/>
+	
+	<xs:element name="ListRefundRq" type="ListRefundRq_Type"/>
+	<xs:element name="ListRefundRs" type="ListRefundRs_Type"/>	
+
+	<xs:complexType name="GetRefundRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element ref="com:RefundKey"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>
+	
+	<xs:complexType name="GetRefundRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="Refund" type="Refund_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>	
+	
+	<xs:complexType name="ListRefundRq_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="com:BankKey"/>
+					<xs:element minOccurs="0" ref="com:BillerKey"/>
+					<xs:element name="FromDate" type="sys:Date_SType"/>
+					<xs:element name="ToDate" type="sys:Date_SType"/>
+					<xs:choice>
+						<xs:element name="RefundStatus" type="sys:NC32_SType"/>
+						<xs:element name="NotifyStatus" type="sys:NC32_SType"/>
+						<xs:element name="ReconStatus" type="sys:NC32_SType"/>
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>
+	
+	<xs:complexType name="ListRefundRs_Type">
+		<xs:complexContent>
+			<xs:extension base="com:BaseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="Refunds" type="Refunds_Type"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>	
+	</xs:complexType>	
+	
+	<xs:simpleType name="NotificationStatusType_Enum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the closed enum Notification Status</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="REJECTED"/>
+			<xs:enumeration value="REQUIRED"/>
+			<xs:enumeration value="RETRY"/>
+			<xs:enumeration value="COMPLETED"/>
+			<xs:enumeration value="FAILED"/>
+			<xs:enumeration value="IN_PROGRESS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="ReconciliationStatusType_Enum">
+		<xs:annotation>
+			<xs:documentation>Defines the known values for the closed enum Reconciliation Status</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="sys:NC32_SType">
+			<xs:enumeration value="Already_Reconciled"/>
+			<xs:enumeration value="Mismatch"/>
+			<xs:enumeration value="Reconciled"/>
+			<xs:enumeration value="Not_In_Sadad"/>
+			<xs:enumeration value="Not_In_Bank"/>
+			<xs:enumeration value="Duplicate"/>
+			<xs:enumeration value="Error"/>
+		</xs:restriction>
+	</xs:simpleType>
+		
+	<xs:complexType name="Refunds_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Refund in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<!--  Partner Ref Key -->
+			<xs:element ref="com:RefundKey"/>
+			<xs:element ref="com:BankKey"/>
+			<xs:element ref="com:BankName"/>
+			<xs:element minOccurs="0" ref="com:BillerKey"/>
+			<xs:element minOccurs="0" name="BillerName" type="sys:C64_SType"/>
+			<xs:element minOccurs="0" name="OfficialId" type="sys:C32_SType"/>
+			<xs:element minOccurs="0" name="OfficialIdType" type="com:OfficialIdType_CType"/>
+			<xs:element minOccurs="0" name="SADADTransactionNumber" type="sys:Identifier_SType"/>
+			<xs:element ref="com:RefundStatusType"/>
+			<xs:element minOccurs="0" name="NotificationStatusType" type="NotificationStatusType_Enum"/>
+			<xs:element minOccurs="0" name="ReconciliationStatusType" type="ReconciliationStatusType_Enum"/>
+			<xs:element ref="com:RefundType"/>
+			<xs:element minOccurs="0" ref="com:CurAmt"/>
+			<xs:element minOccurs="0" ref="com:ExpiryDate"/>
+			<xs:element name="IsIntrabankAvailable" type="xs:boolean"/>
+			<xs:element name="ExternalRefundKey" type="sys:Identifier_SType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="Refund_Type">
+		<xs:annotation>
+			<xs:documentation>-Represents a Refund in SADAD systems   </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Refunds_Type">
+				<xs:sequence>
+					<xs:element minOccurs="0" ref="com:BankAcct"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+</xs:schema>

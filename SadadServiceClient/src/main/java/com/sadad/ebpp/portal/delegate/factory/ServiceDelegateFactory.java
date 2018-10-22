@@ -6,6 +6,7 @@ import com.sadad.ebpp.portal.delegate.factory.clients.CorePaymentDelegate;
 import com.sadad.ebpp.portal.delegate.factory.clients.CustomerDelegate;
 import com.sadad.ebpp.portal.delegate.factory.clients.PartnerProfileServiceDelegate;
 import com.sadad.ebpp.portal.delegate.factory.clients.ReferenceDataServiceDelegate;
+import com.sadad.ebpp.portal.delegate.factory.clients.RefundSearchDelegate;
 
 /**
  * @author Tariq Siddiqui
@@ -21,12 +22,11 @@ public abstract class ServiceDelegateFactory
 	{}
 
 	/**
-	 * This method get the configuration object from the ConfigurationCache class. This method returns the singleton instance of the target Delegate factory implementation using the configuration object which takes the CONFIGURATION_KEY as
+	 * This method get the configuration object from the ConfigurationCache class. 
+	 * This method returns the singleton instance of the target Delegate factory implementation using the configuration object which takes the CONFIGURATION_KEY as
 	 * input. The Delegate factory implementation will be determined at runtime based on a configuration property file having the CONFIGURATION_KEY.
 	 * 
 	 * @return ServiceDelegateFactory the singleton instance of the factory.
-	 * @throws IllegalAccessException
-	 * @throws InstantiationException
 	 */
 	public static ServiceDelegateFactory getInstance()
 	{
@@ -69,4 +69,6 @@ public abstract class ServiceDelegateFactory
 	public abstract CorePaymentDelegate getCorePaymentDelegate(); 
 	
 	public abstract ReferenceDataServiceDelegate getReferenceDataServiceDelegate();
+	
+	public abstract RefundSearchDelegate getRefundSearchDelegate();
 }

@@ -20,7 +20,7 @@
 		<tbody>
 			<c:forEach items="${psb.rejectedAccounts}" var="ra">
 			<tr>				
-				<td>${BillerList[psb.partnerKey].partnerName}</td>
+				<td>${BillerList[psb.billerId].partnerName}</td>
 				<td>${ra.accountNumber}</td>
 				<td>${ra.errorCode}</td>
 				<td>${ra.errorDesc}</td>

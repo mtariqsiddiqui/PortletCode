@@ -18,7 +18,7 @@
 						<label class="label" for="fpRquid"><fmt:message key="ebpp.portlet.label.rquid" bundle="${bndlLang}"/> *</label>
 					</td>
 					<td class="outputDataCell" style="width: 80%; vertical-align: top;" nowrap>
-						<input class="outputData" value="${psb.rquid}" id="fpRquid" autocomplete="off" maxlength="256" type="text" required/>
+						<input class="outputData" value="${psb.rquid}" id="fpRquid" autocomplete="off" maxlength="256" type="text" required name="param_rquid"/>
 					</td>
 				</tr>
 					<tr class="DataEntryFieldRow">
@@ -28,12 +28,12 @@
 							</label>
 						</td>
 						<td class="outputDataCell" style="width: 80%; vertical-align: top;" nowrap>
-							<select name="fpBillerId" class="outputData" required="true" id="fpBillerId" onchange="onChangePartnerKey(this);">
+							<select name="param_billerId" class="outputData" required="true" id="fpBillerId" onchange="onChangePartnerKey(this);">
 								<option value="">
 									<fmt:message key="ebpp.portlet.label.please-select" bundle="${bndlLang}"/>
 								</option>
 								<c:forEach items="${BillerList}" var="biller">
-									<option <c:if test="${psb.partnerKey == biller.value.partnerKey}">selected</c:if>
+									<option <c:if test="${psb.billerId == biller.value.partnerKey}">selected</c:if>
 										value="<c:out value="${biller.value.partnerKey}" />">
 										<c:out value="${biller.value.partnerName}" />
 									</option>
@@ -46,7 +46,7 @@
 							<label class="label" for="fpAccountNumber"><fmt:message key="ebpp.portlet.label.bill-number" bundle="${bndlLang}"/> *</label>
 						</td>
 						<td class="outputDataCell" width="100%" valign="top" nowrap="">
-							<input name="fpAccountNumber" class="outputData" value="${psb.ebppEntityKey}" id="fpAccountNumber" autocomplete="off" maxlength="256" type="text" required/>
+							<input name="param_ebppEntityKey" class="outputData" value="${psb.ebppEntityKey}" id="txtEntityKey" autocomplete="off" maxlength="256" type="text" required/>
 						</td>
 					</tr>
 					<tr>

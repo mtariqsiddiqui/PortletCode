@@ -31,7 +31,7 @@
 				<td>${rfd.value.refundStatus}</td>
 				<td>
 					<portlet:resourceURL var="refundDetailsUrl" id="core_RefundsDetails">
-						<portlet:param name="rpRefundKey" value="${rfd.key}"/>
+						<portlet:param name="param_refundKey" value="${rfd.key}"/>
 					</portlet:resourceURL>
 					<a href="#" title="Click to see more details" onclick='doPostUrl("${refundDetailsUrl}", 1);'>
 						<img width="25" height="25" border="0" alt="Refund Details" src='${thisRequest.getContextPath()}/static/images/option_icon.png'>

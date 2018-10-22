@@ -4,7 +4,14 @@
 package com.sadad.portal.beans;
 
 import java.util.ArrayDeque;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.sadad.portal.constant.PortalConstant;
 
@@ -14,7 +21,7 @@ import com.sadad.portal.constant.PortalConstant;
  */
 public abstract class SadadPortalSessionBean
 {
-	private static ResourceBundle rb = ResourceBundle.getBundle(PortalConstant.SADAD_COMMOM_RESOURCE);
+	private static final ResourceBundle rb = ResourceBundle.getBundle(PortalConstant.SADAD_COMMOM_RESOURCE);
 
 	protected Screen screen;
 	protected String partnerKey;
@@ -165,5 +172,27 @@ public abstract class SadadPortalSessionBean
 		m.setMessageType(MessageType.INFO);
 		m.setDisplayMessage(rb.getString(PortalConstant.SADAD_GENERIC_INFO));
 		setMessageToDisplay(m);
+	}
+	
+	/**
+	 * Use to get the date in XML format
+	 * @param diff - difference, pass 0 to get current date, -1 for yesterday and 1 for tomorrow
+	 * @return
+	 */
+	protected XMLGregorianCalendar getXmlDate(int diff)
+	{
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(new Date());
+		gc.add(Calendar.DATE, diff);
+		XMLGregorianCalendar cd = null;
+		try
+		{
+			cd = DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
+		}
+		catch (DatatypeConfigurationException e)
+		{
+			e.printStackTrace();
+		}
+		return cd;
 	}
 }

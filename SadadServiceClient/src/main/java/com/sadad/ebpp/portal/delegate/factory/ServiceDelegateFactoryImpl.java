@@ -12,6 +12,8 @@ import com.sadad.ebpp.portal.delegate.factory.clients.PartnerProfileServiceDeleg
 import com.sadad.ebpp.portal.delegate.factory.clients.PartnerProfileServiceDelegateImpl;
 import com.sadad.ebpp.portal.delegate.factory.clients.ReferenceDataServiceDelegate;
 import com.sadad.ebpp.portal.delegate.factory.clients.ReferenceDataServiceDelegateImpl;
+import com.sadad.ebpp.portal.delegate.factory.clients.RefundSearchDelegate;
+import com.sadad.ebpp.portal.delegate.factory.clients.RefundSearchDelegateImpl;
 
 /**
  * @author Tariq Siddiqui
@@ -53,5 +55,11 @@ public class ServiceDelegateFactoryImpl extends ServiceDelegateFactory
 	public ReferenceDataServiceDelegate getReferenceDataServiceDelegate()
 	{
 		return ReferenceDataServiceDelegateImpl.getInstance();
+	}
+
+	@Override
+	public RefundSearchDelegate getRefundSearchDelegate()
+	{
+		return RefundSearchDelegateImpl.getInstance();
 	}
 }

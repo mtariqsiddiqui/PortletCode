@@ -14,7 +14,9 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
 import com.sadad.portal.SadadGenericPortlet;
+import com.sadad.portal.beans.RejectedEbppSessionBean;
 import com.sadad.portal.constant.PortalConstant;
+import com.sadad.portal.helper.CoreEbppHelper;
 
 public class RejectedBillsPortlet extends SadadGenericPortlet
 {
@@ -27,8 +29,8 @@ public class RejectedBillsPortlet extends SadadGenericPortlet
 	private static final String VIEW_JSP_ADV_FORM = "RejectedBillAdvanceForm"; // JSP file name to be rendered on the view mode
 	private static final String VIEW_JSP_REJECTED_LIST = "RejectedBillsList"; // JSP file name to be rendered on the view mode
 
-	private BillsHelper bh = new BillsHelper();
-	private RejectedBillsSessionBean rbSesObj;
+	private CoreEbppHelper ch = new CoreEbppHelper();
+	private RejectedEbppSessionBean sesObj;
 	
 	/**
 	 * @see javax.portlet.Portlet#init()
@@ -52,16 +54,16 @@ public class RejectedBillsPortlet extends SadadGenericPortlet
 		// Set the MIME type for the render response
 		response.setContentType(request.getResponseContentType());
 
-		rbSesObj = (RejectedBillsSessionBean) request.getPortletSession().getAttribute(PortalConstant.PORTLET_SESSION_BEAN, PortletSession.PORTLET_SCOPE);
-		if (rbSesObj == null)
+		sesObj = getSessionBeanObject(request, RejectedEbppSessionBean.class);
+		if (sesObj == null)
 		{
-			rbSesObj = bh.getRejectedBillsObject();
-			rbSesObj.getScreen().setContainer1(getJspFilePath(JSP_FOLDER, VIEW_JSP_FORM));
-			request.getPortletSession().setAttribute(PortalConstant.PORTLET_SESSION_BEAN, rbSesObj, PortletSession.PORTLET_SCOPE);
+			sesObj = new RejectedEbppSessionBean();
+			sesObj.getScreen().setContainer1(getJspFilePath(JSP_FOLDER, VIEW_JSP_FORM));
+			request.getPortletSession().setAttribute(PortalConstant.PORTLET_SESSION_BEAN, sesObj, PortletSession.PORTLET_SCOPE);
 		}
 
 		// Setting attributes in Request scope
-		request.setAttribute(PortalConstant.PORTLET_SESSION_BEAN, rbSesObj);
+		request.setAttribute(PortalConstant.PORTLET_SESSION_BEAN, sesObj);
 
 		// Invoke the JSP to render
 		PortletRequestDispatcher rd = getPortletContext().getRequestDispatcher(getJspFilePath(JSP_FOLDER, VIEW_JSP_INDEX));
@@ -102,8 +104,7 @@ public class RejectedBillsPortlet extends SadadGenericPortlet
 		// 3 - Call Helper WebService method
 		// 4 - Set Same BeanObject in Session and Request
 
-		rbSesObj = (RejectedBillsSessionBean) request.getPortletSession().getAttribute(PortalConstant.PORTLET_SESSION_BEAN, PortletSession.PORTLET_SCOPE);
-		bh.setRejectedBillsObject(rbSesObj);
+		sesObj = getSessionBeanObject(request, RejectedEbppSessionBean.class);
 
 		if (jspResourceId.equals(VIEW_JSP_FORM))
 		{}
@@ -113,13 +114,13 @@ public class RejectedBillsPortlet extends SadadGenericPortlet
 		{}
 
 		// Handling of Screen Rendering
-		screenHandling(rbSesObj, JSP_FOLDER, jspResourceId);
+		screenHandling(sesObj, JSP_FOLDER, jspResourceId);
 
 		// Setting the same session object in request Attribute and Portlet Session Attribute
-		request.setAttribute(PortalConstant.PORTLET_SESSION_BEAN, rbSesObj);
-		request.getPortletSession().setAttribute(PortalConstant.PORTLET_SESSION_BEAN, rbSesObj, PortletSession.PORTLET_SCOPE);
+		request.setAttribute(PortalConstant.PORTLET_SESSION_BEAN, sesObj);
+		setSessionBeanObject(request, sesObj);
 
-		response.setContentType("text/html");
+		response.setContentType("text/html; charset=UTF-8");
 		PortletRequestDispatcher rd = getPortletContext().getRequestDispatcher(getJspFilePath(JSP_FOLDER, jspResourceId));
 		rd.include(request, response);
 

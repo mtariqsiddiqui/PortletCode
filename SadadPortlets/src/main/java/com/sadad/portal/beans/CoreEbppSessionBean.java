@@ -12,23 +12,38 @@ import java.util.List;
  * 
  */
 
-public abstract class CoreEbppSessionBean extends SadadPortalSessionBean
+public class CoreEbppSessionBean extends SadadPortalSessionBean
 {
-	protected String accountNumber;
-	protected Account account;
-	protected Customer customer;
-	protected String associationKey;
-	protected HashMap<String, Association> association;
-	protected String billKey;
-	protected HashMap<String, Bill> bills;
-	protected String paymentKey;
-	protected HashMap<String, Payment> payments;
-	protected String refundKey;
-	protected HashMap<String, Refund> refunds;
-	protected List<BusinessRule> businessRules;
-	protected List<Audit> audits;
-
+	private String accountNumber;
+	private String bankId;
+	private String billerId;
+	private String billNumber;
+	private String refundId;
+	private String paymentId;
+	private String paymentIdType;
+	private String customerId;
+	private String customerIdType;
+	private String fromDate;
+	private String dateRange;
 	
+	private Account account;
+	private Customer customer;
+	
+	private String associationKey;
+	private HashMap<String, Association> association;
+	
+	private String billKey;
+	private HashMap<String, Bill> bills;
+	
+	private String paymentKey;
+	private HashMap<String, Payment> payments;
+	
+	private String refundKey;
+	private HashMap<String, Refund> refunds;
+
+	private List<BusinessRule> businessRules;
+	private List<Audit> audits;
+
 	public CoreEbppSessionBean()
 	{
 		super();
@@ -49,6 +64,176 @@ public abstract class CoreEbppSessionBean extends SadadPortalSessionBean
 	public void setAccountNumber(String accountNumber)
 	{
 		this.accountNumber = accountNumber;
+	}
+
+	/**
+	 * @return the bankId
+	 */
+	public String getBankId()
+	{
+		return bankId;
+	}
+
+	/**
+	 * @param bankId
+	 *            the bankId to set
+	 */
+	public void setBankId(String bankId)
+	{
+		this.bankId = bankId;
+	}
+
+	/**
+	 * @return the billerId
+	 */
+	public String getBillerId()
+	{
+		return billerId;
+	}
+
+	/**
+	 * @param billerId
+	 *            the billerId to set
+	 */
+	public void setBillerId(String billerId)
+	{
+		this.billerId = billerId;
+	}
+
+	/**
+	 * @return the billNumber
+	 */
+	public String getBillNumber()
+	{
+		return billNumber;
+	}
+
+	/**
+	 * @param billNumber
+	 *            the billNumber to set
+	 */
+	public void setBillNumber(String billNumber)
+	{
+		this.billNumber = billNumber;
+	}
+
+	/**
+	 * @return the refundId
+	 */
+	public String getRefundId()
+	{
+		return refundId;
+	}
+
+	/**
+	 * @param refundId
+	 *            the refundId to set
+	 */
+	public void setRefundId(String refundId)
+	{
+		this.refundId = refundId;
+	}
+
+	/**
+	 * @return the paymentId
+	 */
+	public String getPaymentId()
+	{
+		return paymentId;
+	}
+
+	/**
+	 * @param paymentId
+	 *            the paymentId to set
+	 */
+	public void setPaymentId(String paymentId)
+	{
+		this.paymentId = paymentId;
+	}
+
+	/**
+	 * @return the paymentIdType
+	 */
+	public String getPaymentIdType()
+	{
+		return paymentIdType;
+	}
+
+	/**
+	 * @param paymentIdType
+	 *            the paymentIdType to set
+	 */
+	public void setPaymentIdType(String paymentIdType)
+	{
+		this.paymentIdType = paymentIdType;
+	}
+
+	/**
+	 * @return the customerId
+	 */
+	public String getCustomerId()
+	{
+		return customerId;
+	}
+
+	/**
+	 * @param customerId
+	 *            the customerId to set
+	 */
+	public void setCustomerId(String customerId)
+	{
+		this.customerId = customerId;
+	}
+
+	/**
+	 * @return the customerIdType
+	 */
+	public String getCustomerIdType()
+	{
+		return customerIdType;
+	}
+
+	/**
+	 * @param customerIdType
+	 *            the customerIdType to set
+	 */
+	public void setCustomerIdType(String customerIdType)
+	{
+		this.customerIdType = customerIdType;
+	}
+
+	/**
+	 * @return the fromDate
+	 */
+	public String getFromDate()
+	{
+		return fromDate;
+	}
+
+	/**
+	 * @param fromDate
+	 *            the fromDate to set
+	 */
+	public void setFromDate(String fromDate)
+	{
+		this.fromDate = fromDate;
+	}
+
+	/**
+	 * @return the dateRange
+	 */
+	public String getDateRange()
+	{
+		return dateRange;
+	}
+
+	/**
+	 * @param dateRange
+	 *            the dateRange to set
+	 */
+	public void setDateRange(String dateRange)
+	{
+		this.dateRange = dateRange;
 	}
 
 	/**
@@ -167,6 +352,14 @@ public abstract class CoreEbppSessionBean extends SadadPortalSessionBean
 	}
 
 	/**
+	 * @param association the association to set
+	 */
+	public void setAssociation(HashMap<String, Association> association)
+	{
+		this.association = association;
+	}
+
+	/**
 	 * @return the refundKey
 	 */
 	public String getRefundKey()
@@ -198,7 +391,7 @@ public abstract class CoreEbppSessionBean extends SadadPortalSessionBean
 	 */
 	public List<Audit> getAudits()
 	{
-		if(audits == null)
+		if (audits == null)
 			audits = new ArrayList<Audit>();
 		return audits;
 	}

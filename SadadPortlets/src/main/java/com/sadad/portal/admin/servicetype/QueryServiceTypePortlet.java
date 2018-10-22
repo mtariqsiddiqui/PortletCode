@@ -143,8 +143,7 @@ import com.sadad.portal.constant.PortalConstant;
 					// reqAction is requested Action parameter to decide here which server to call
 					if(request.getParameter("reqAction").equalsIgnoreCase("Save")) // Save button is pressed call update service
 					{
-						ach.callUpdateAccountType(request.getParameter("txtServiceType"), request.getParameter("txtDescription"));
-						
+						ach.callUpdateAccountType(request.getParameter("txtServiceType"), request.getParameter("txtDescription"));						
 					}
 					else if(request.getParameter("reqAction").equalsIgnoreCase("Cancel")) // Cancel button is pressed ; do nothing
 					{}
@@ -168,7 +167,7 @@ import com.sadad.portal.constant.PortalConstant;
 			request.setAttribute(PortalConstant.PORTLET_SESSION_BEAN, ptSesObj);
 			request.getPortletSession().setAttribute(PortalConstant.PORTLET_SESSION_BEAN, ptSesObj, PortletSession.PORTLET_SCOPE);
 			
-			response.setContentType("text/html");
+			response.setContentType("text/html; charset=UTF-8");
 			PortletRequestDispatcher rd = getPortletContext().getRequestDispatcher(getJspFilePath(JSP_FOLDER, jspResourceId));
 			rd.include(request, response);
 

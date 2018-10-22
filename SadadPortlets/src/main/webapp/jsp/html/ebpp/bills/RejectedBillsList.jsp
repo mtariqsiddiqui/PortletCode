@@ -20,7 +20,7 @@
 		<tbody>
 			<c:forEach items="${psb.rejectedBills}" var="rb">
 			<tr>				
-				<td>${BillerList[psb.partnerKey].partnerName}</td>
+				<td>${BillerList[psb.billerId].partnerName}</td>
 				<td>${rb.billNumber}</td>
 				<td>${rb.errorCode}</td>
 				<td>${rb.errorDesc}</td>

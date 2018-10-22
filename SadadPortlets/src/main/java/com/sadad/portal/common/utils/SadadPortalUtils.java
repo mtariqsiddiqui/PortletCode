@@ -28,7 +28,6 @@ public class SadadPortalUtils
 	 */
 	private static String logFormatter(String str, int len)
 	{
-		len = 60; // TODO remove this, this is for testing purpose only
 		StringBuilder sb = new StringBuilder(str);
 		char sp = ' ';
 		char co = ':';
@@ -43,7 +42,7 @@ public class SadadPortalUtils
 				sb.append(sp);
 			}
 		}
-		sb.append(co);
+		sb.append(co).append(sp);
 		return sb.toString();
 	}
 
@@ -69,7 +68,7 @@ public class SadadPortalUtils
 			{
 				String attrName = e.nextElement();
 				Object attrValue = (Object) request.getPortletSession().getAttribute(attrName);
-				attrName = logFormatter(attrName, 25);
+				attrName = logFormatter(attrName, 50);
 				sb.append(attrName).append(attrValue).append(lsp);
 			}
 
@@ -80,7 +79,7 @@ public class SadadPortalUtils
 			{
 				String attrName = e.nextElement();
 				Object attrValue = (Object) request.getPortletSession().getAttribute(attrName);
-				attrName = logFormatter(attrName, 25);
+				attrName = logFormatter(attrName, 50);
 				sb.append(attrName).append(attrValue).append(lsp);
 			}
 
@@ -92,6 +91,28 @@ public class SadadPortalUtils
 			{
 				String attrName = e.nextElement();
 				Object attrValue = (Object) sc.getAttribute(attrName);
+				attrName = logFormatter(attrName, 50);
+				sb.append(attrName).append(attrValue).append(lsp);
+			}
+			
+			sb.append(lsp).append(ln).append(lsp);
+			sb.append("Displaying all the Request Attributes Name / Values").append(lsp).append(ln).append(lsp);			
+			e = request.getAttributeNames();
+			while (e.hasMoreElements())
+			{
+				String attrName = e.nextElement();
+				Object attrValue = (Object) request.getAttribute(attrName);
+				attrName = logFormatter(attrName, 25);
+				sb.append(attrName).append(attrValue).append(lsp);
+			}
+			
+			sb.append(lsp).append(ln).append(lsp);
+			sb.append("Displaying all the Request Parameter Name / Values").append(lsp).append(ln).append(lsp);			
+			e = request.getParameterNames();
+			while (e.hasMoreElements())
+			{
+				String attrName = e.nextElement();
+				Object attrValue = (Object) request.getParameter(attrName);
 				attrName = logFormatter(attrName, 25);
 				sb.append(attrName).append(attrValue).append(lsp);
 			}

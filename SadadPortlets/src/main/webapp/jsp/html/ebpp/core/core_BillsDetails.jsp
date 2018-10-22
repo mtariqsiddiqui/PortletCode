@@ -19,7 +19,7 @@
 												<tbody>
 													<tr>
 														<th style="width: 25%"><fmt:message key="ebpp.portlet.label.biller-name" bundle="${bndlLang}"/></th>
-														<td style="width: 25%">${BillerList[psb.partnerKey].partnerName}</td>
+														<td style="width: 25%">${BillerList[psb.billerId].partnerName}</td>
 													</tr>
 													<tr>
 														<th style="width: 25%"><fmt:message key="ebpp.portlet.label.account-number" bundle="${bndlLang}"/></th>

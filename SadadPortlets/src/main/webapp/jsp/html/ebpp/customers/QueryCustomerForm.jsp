@@ -9,21 +9,7 @@
 		<tbody>
 			<tr>
 				<td>
-					<table style="width: 100%">
-						<tbody>
-							<tr>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-							</tr>
-							<tr>
-								<td>
-									<p class="attnbox"><fmt:message key="ebpp.portlet.marked-fields-are-mandatory" bundle="${bndlLang}"/></p>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+					<p class="attnbox"><fmt:message key="ebpp.portlet.marked-fields-are-mandatory" bundle="${bndlLang}"/></p>
 				</td>
 			</tr>
 			<tr>
@@ -37,9 +23,6 @@
 						<table>
 							<tbody>
 								<tr>
-									<td class="myCaption"></td>
-								</tr>
-								<tr>
 									<td>
 										<table  style="width: 100%">
 											<!-- Begin: Data entry fields -->
@@ -51,12 +34,12 @@
 														</label>
 													</td>
 													<td class="outputDataCell" style="width: 100%" valign="top" nowrap>
-														<select name="txtOfficialIdType" class="outputData" required="true" id="cmbOfficialIdType">
+														<select name="param_customerIdType" class="outputData" required="true" id="cmbOfficialIdType">
 															<option value="">
 																<fmt:message key="ebpp.portlet.label.please-select" bundle="${bndlLang}"/>
 															</option>
 															<c:forEach items="${partyIdTypeType}" var="idType">
-																<option <c:if test="${psb.customer.officialIdType == idType}">selected</c:if> 
+																<option <c:if test="${psb.customerIdType == idType}">selected</c:if> 
 																	value="${idType}">${idType}</option>
 															</c:forEach>
 														</select>
@@ -64,12 +47,12 @@
 												</tr>
 												<tr class="DataEntryFieldRow">
 													<td class="labelCell" nowrap style="width:200px; vertical-align:top; height: 27;">
-														<label class="label" for="txtAccountNumber">
+														<label class="label" for="txtOfficialIdNumber">
 															<fmt:message key="ebpp.portlet.label.official-id-number" bundle="${bndlLang}"/>&nbsp;:&nbsp;*
 														</label>
 													</td>
 													<td class="outputDataCell" style="width: 100%; vertical-align:top" nowrap>
-														<input name="txtAccountNumber" class="outputData" value="${psb.customer.officialIdNumber}" required="true" id="txtAccountNumber" autocomplete="off" maxlength="256" type="text">
+														<input name="param_customerId" class="outputData" value="${psb.customerId}" required="true" id="txtOfficialIdNumber" autocomplete="off" maxlength="256" type="text">
 													</td>
 												</tr>
 												<!-- End: Data entry fields -->
@@ -80,21 +63,15 @@
 								<!-- Buttons Group -->
 								<tr>
 									<td>
-										<input type="submit" class="button" value="<fmt:message key="ebpp.portlet.button.submit" bundle="${bndlLang}"/>" onclick="doQueryFormSubmission('frmQueryCustomer');" />
-										<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.clear" bundle="${bndlLang}"/>" onclick="doQueryFormReset();" />
+										<input type="submit" class="button" value='<fmt:message key="ebpp.portlet.button.submit" bundle="${bndlLang}"/>' onclick="doQueryFormSubmission('frmQueryCustomer');" />
+										<input type="reset" class="button" value='<fmt:message key="ebpp.portlet.button.clear" bundle="${bndlLang}"/>' />
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</fieldset>
-					<!-- END Query Segment --></td>
+				</td>
 			</tr>
-			<!-- End Form/Details container -->
-			<!-- List Container -->
-			<tr>
-				<td></td>
-			</tr>
-			<!-- END List Container -->
 		</tbody>
 	</table>
 	<!-- END Main Table -->

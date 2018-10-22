@@ -475,4 +475,21 @@ public class Payment
 	{
 		this.fileName = fileName;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString()
+	{
+		return "Payment [" + (sadadNumber != null ? "sadadNumber=" + sadadNumber + ", " : "") + (bankNumber != null ? "bankNumber=" + bankNumber + ", " : "") + (reversalNumber != null ? "reversalNumber=" + reversalNumber + ", " : "")
+				+ (groupNumber != null ? "groupNumber=" + groupNumber + ", " : "") + (billerTransactionNumber != null ? "billerTransactionNumber=" + billerTransactionNumber + ", " : "")
+				+ (billerId != null ? "billerId=" + billerId + ", " : "") + (billNumber != null ? "billNumber=" + billNumber + ", " : "") + (accountNumber != null ? "accountNumber=" + accountNumber + ", " : "")
+				+ (billCycle != null ? "billCycle=" + billCycle + ", " : "") + (bankName != null ? "bankName=" + bankName + ", " : "") + (accessChannel != null ? "accessChannel=" + accessChannel + ", " : "")
+				+ (checkDigit != null ? "checkDigit=" + checkDigit + ", " : "") + (branchCode != null ? "branchCode=" + branchCode + ", " : "") + (districtCode != null ? "districtCode=" + districtCode + ", " : "")
+				+ (paymentType != null ? "paymentType=" + paymentType + ", " : "") + (paymentMethod != null ? "paymentMethod=" + paymentMethod + ", " : "") + (serviceId != null ? "serviceId=" + serviceId + ", " : "")
+				+ (beneficiaryId != null ? "beneficiaryId=" + beneficiaryId + ", " : "") + (customerId != null ? "customerId=" + customerId + ", " : "") + (refundId != null ? "refundId=" + refundId + ", " : "")
+				+ (paymentStatus != null ? "paymentStatus=" + paymentStatus + ", " : "") + (amount != null ? "amount=" + amount + ", " : "") + (processingDate != null ? "processingDate=" + processingDate + ", " : "")
+				+ (errorCode != null ? "errorCode=" + errorCode + ", " : "") + (errorDesc != null ? "errorDesc=" + errorDesc + ", " : "") + (fileName != null ? "fileName=" + fileName : "") + "]";
+	}
 }

@@ -17,10 +17,10 @@
 	<tbody>
 		<!-- Begin: repeated data rows -->
 		<tr>
-			<td>${psb.partnerKey}</td>
-			<td>${BillerList[psb.partnerKey].partnerName}</td>
-			<td>${BillerList[psb.partnerKey].partnerDescription}</td>
-			<td>${BillerList[psb.partnerKey].partnerStatus}</td>
+			<td>${psb.billerId}</td>
+			<td>${BillerList[psb.billerId].partnerName}</td>
+			<td>${BillerList[psb.billerId].partnerDescription}</td>
+			<td>${BillerList[psb.billerId].partnerStatus}</td>
 		</tr>
 		<!-- End: repeated data rows -->
 	</tbody>

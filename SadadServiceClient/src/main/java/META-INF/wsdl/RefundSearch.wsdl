@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://sadad.com/wsdl/RefundSearch/1.0" xmlns="http://sadad.com/wsdl/RefundSearch/1.0" xmlns:rfd="http://sadad.com/schema/service/RefundSearch/1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+		<wsdl:types>
+			<xsd:schema targetNamespace="http://sadad.com/wsdl/RefundSearch/1.0">
+				<xsd:import namespace="http://sadad.com/schema/service/RefundSearch/1.0" schemaLocation="RefundSearch.xsd"/>
+			</xsd:schema>
+		</wsdl:types>
+		
+		<wsdl:message name="RefundFault">
+			<wsdl:part element="rfd:RefundFault" name="SOAPFault"/>
+		</wsdl:message>
+		
+		<wsdl:message name="GetRefundRq">
+			<wsdl:part element="rfd:GetRefundRq" name="GetRefundRq"/>
+		</wsdl:message>
+		<wsdl:message name="GetRefundRs">
+			<wsdl:part element="rfd:GetRefundRs" name="GetRefundRs"/>
+		</wsdl:message>
+		
+		<wsdl:message name="ListRefundRq">
+			<wsdl:part element="rfd:ListRefundRq" name="ListRefundRq"/>
+		</wsdl:message>
+		<wsdl:message name="ListRefundRs">
+			<wsdl:part element="rfd:ListRefundRs" name="ListRefundRs"/>
+		</wsdl:message>
+		
+		<wsdl:portType name="RefundSearchPort">
+
+
+			<wsdl:operation name="GetRefund">
+				<wsdl:input message="GetRefundRq" name="GetRefundRq_Input"/>
+				<wsdl:output message="GetRefundRs" name="GetRefundRs_Output"/>
+				<wsdl:fault message="RefundFault" name="GetRefund_Fault"/>
+			</wsdl:operation>
+
+	
+			<wsdl:operation name="ListRefund">
+				<wsdl:input message="ListRefundRq" name="ListRefundRq_Input"/>
+				<wsdl:output message="ListRefundRs" name="ListRefundRs_Output"/>
+				<wsdl:fault message="RefundFault" name="ListRefund_Fault"/>
+			</wsdl:operation>				
+		</wsdl:portType>
+		
+		<wsdl:binding name="RefundSearchBinding" type="RefundSearchPort">
+			<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>				
+			<wsdl:operation name="GetRefund">
+				<soap:operation soapAction="http://sadad.com/EBPP/RefundSearch/GetRefund"/>
+				<wsdl:input name="GetRefundRq_Input">
+					<soap:body parts="GetRefundRq" use="literal"/>
+				</wsdl:input>
+				<wsdl:output name="GetRefundRs_Output">
+					<soap:body parts="GetRefundRs" use="literal"/>
+				</wsdl:output>
+				<wsdl:fault name="GetRefund_Fault">
+					<soap:fault name="GetRefund_Fault" use="literal"/>
+				</wsdl:fault>
+			</wsdl:operation>
+			<wsdl:operation name="ListRefund">
+				<soap:operation soapAction="http://sadad.com/EBPP/RefundSearch/ListRefund"/>
+				<wsdl:input name="ListRefundRq_Input">
+					<soap:body parts="ListRefundRq" use="literal"/>
+				</wsdl:input>
+				<wsdl:output name="ListRefundRs_Output">
+					<soap:body parts="ListRefundRs" use="literal"/>
+				</wsdl:output>
+				<wsdl:fault name="ListRefund_Fault">
+					<soap:fault name="ListRefund_Fault" use="literal"/>
+				</wsdl:fault>
+			</wsdl:operation>			
+		</wsdl:binding>
+		
+		<wsdl:service name="RefundSearch">
+			<wsdl:port binding="RefundSearchBinding" name="RefundSearchPort">
+				<soap:address location="http://sadad.com/EBPP/service/RefundSearch/1.0"/>
+			</wsdl:port>
+		</wsdl:service>		
+			
+	</wsdl:definitions>

@@ -1,7 +1,5 @@
 package com.sadad.ebpp.portal.delegate.factory.clients;
 
-import javax.jws.WebParam;
-
 import com.sadad.ebpp.scm.schema.partnerprofileservice._1.ActivateBankBranchRequestType;
 import com.sadad.ebpp.scm.schema.partnerprofileservice._1.ActivateBankBranchResponseType;
 import com.sadad.ebpp.scm.schema.partnerprofileservice._1.ActivateBankRequestType;

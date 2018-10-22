@@ -162,7 +162,7 @@ public class QueryBillCategoryPortlet extends SadadGenericPortlet
 		request.setAttribute(PortalConstant.PORTLET_SESSION_BEAN, bcSesObj);
 		request.getPortletSession().setAttribute(PortalConstant.PORTLET_SESSION_BEAN, bcSesObj, PortletSession.PORTLET_SCOPE);
 		
-		response.setContentType("text/html");
+		response.setContentType("text/html; charset=UTF-8");
 		PortletRequestDispatcher rd = getPortletContext().getRequestDispatcher(getJspFilePath(JSP_FOLDER, jspResourceId));
 		rd.include(request, response);
 		

@@ -163,7 +163,7 @@ import com.sadad.portal.constant.PortalConstant;
 			request.setAttribute(PortalConstant.PORTLET_SESSION_BEAN, acSesObj);
 			request.getPortletSession().setAttribute(PortalConstant.PORTLET_SESSION_BEAN, acSesObj, PortletSession.PORTLET_SCOPE);
 			
-			response.setContentType("text/html");
+			response.setContentType("text/html; charset=UTF-8");
 			PortletRequestDispatcher rd = getPortletContext().getRequestDispatcher(getJspFilePath(JSP_FOLDER, jspResourceId));
 			rd.include(request, response);
 

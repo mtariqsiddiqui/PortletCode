@@ -23,12 +23,12 @@
 																<tr >
 																	<th style="width: 25%">
 																	<fmt:message key="ebpp.portlet.label.biller-name" bundle="${bndlLang}" /></th>
-																	<td style="width: 25%">${BillerList[psb.partnerKey].partnerName}</td>
+																	<td style="width: 25%">${BillerList[psb.billerId].partnerName}</td>
 																</tr>
 
 																<tr >
 																	<th style="width: 25%"><fmt:message key="ebpp.portlet.label.biller" bundle="${bndlLang}" /></th>
-																	<td style="width: 25%">${psb.partnerKey}</td>
+																	<td style="width: 25%">${psb.billerId}</td>
 																</tr>
 
 																<tr >
@@ -66,16 +66,16 @@
 								<td>
 									
 									<input type="button" class="button" onclick="doPostUrl('<portlet:resourceURL id="core_BillerSummary"/>', 2);" value="<fmt:message key="ebpp.portlet.label.biller" bundle="${bndlLang}"/>" />
-									<input type="button" class="button" onclick="doPostUrl('<portlet:resourceURL id="core_AssociationsSummary"/>', 2);" value="<fmt:message key="ebpp.portlet.button.list-associations" bundle="${bndlLang}"/>"/>
+									<input type="button" class="button" onclick="doPostUrl('<portlet:resourceURL id="core_AssociationsSummaryListCustomers"/>', 2);" value="<fmt:message key="ebpp.portlet.button.list-associations" bundle="${bndlLang}"/>"/>
 									<portlet:resourceURL var="listBillByAccount" id="core_BillsSummary">
-										<portlet:param name="txtPartnerKey" value="${psb.partnerKey}"/>
-										<portlet:param name="txtAccountKey" value="${psb.account.accountNumber}"/>
+										<portlet:param name="param_billerId" value="${psb.billerId}"/>
+										<portlet:param name="param_accountNumber" value="${psb.account.accountNumber}"/>
 									</portlet:resourceURL>
 									<input type="button" class="button" onclick="doPostUrl('${listBillByAccount}', 2);" value="<fmt:message key="ebpp.portlet.button.bills" bundle="${bndlLang}"/>"/>
 
 									<portlet:resourceURL var="listPaymentsByAccount" id="core_PaymentsSummary">
-										<portlet:param name="txtPartnerKey" value="${psb.partnerKey}"/>
-										<portlet:param name="txtAccountKey" value="${psb.account.accountNumber}"/>
+										<portlet:param name="param_billerId" value="${psb.billerId}"/>
+										<portlet:param name="param_accountNumber" value="${psb.account.accountNumber}"/>
 									</portlet:resourceURL>									
 									<input type="button" class="button" onclick="doPostUrl('${listPaymentsByAccount}', 2);" value="<fmt:message key="ebpp.portlet.button.payments" bundle="${bndlLang}"/>"/>
 									<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.audit" bundle="${bndlLang}"/>" onclick='doPostUrl("<portlet:resourceURL id="core_AuditSummary"/>", 2);'/>

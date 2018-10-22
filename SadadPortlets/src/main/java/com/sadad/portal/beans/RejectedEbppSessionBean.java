@@ -3,22 +3,24 @@
  */
 package com.sadad.portal.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Tariq Siddiqui
  * 
  */
 
-public abstract class RejectedEbppSessionBean extends SadadPortalSessionBean
+public class RejectedEbppSessionBean extends SadadPortalSessionBean
 {
-	protected String rquid;
-	protected String ebppEntityKey;
-
+	private String rquid;
+	private String ebppEntityKey;
 	
 	public RejectedEbppSessionBean()
 	{
 		super();
 	}
-
+	
 	/**
 	 * @return the rquid
 	 */
@@ -35,7 +37,7 @@ public abstract class RejectedEbppSessionBean extends SadadPortalSessionBean
 	{
 		this.rquid = rquid;
 	}
-
+	
 	/**
 	 * @return the ebppEntityKey
 	 */
@@ -51,5 +53,42 @@ public abstract class RejectedEbppSessionBean extends SadadPortalSessionBean
 	public void setEbppEntityKey(String ebppEntityKey)
 	{
 		this.ebppEntityKey = ebppEntityKey;
+	}
+
+	private List<Bill> rejectedBills;
+
+	/**
+	 * @return the rejectedBills
+	 */
+	public List<Bill> getRejectedBills()
+	{
+		if(rejectedBills == null)
+			rejectedBills = new ArrayList<Bill>();
+		return rejectedBills;
+	}
+
+	private List<Payment> rejectedPayments;
+
+	/**
+	 * @return the rejectedPayments
+	 */
+	public List<Payment> getRejectedPayments()
+	{
+		if(rejectedPayments == null)
+			rejectedPayments = new ArrayList<Payment>();
+		return rejectedPayments;
+	}
+
+
+	private List<Account> rejectedAccounts;
+	
+	/**
+	 * @return the rejectedAccounts
+	 */
+	public List<Account> getRejectedAccounts()
+	{
+		if (rejectedAccounts == null)
+			rejectedAccounts = new ArrayList<Account>();
+		return rejectedAccounts;
 	}
 }
