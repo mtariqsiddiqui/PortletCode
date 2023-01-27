@@ -15,17 +15,22 @@
 			<tbody>
 				<tr class="DataEntryFieldRow">
 					<td class="labelCell" style="width: 20%; vertical-align: top; height: 27" nowrap>
-						<label class="label" for="fpRquid"><fmt:message key="ebpp.portlet.label.rquid" bundle="${bndlLang}"/> *</label>
+						<label class="label" for="txtRquid"><fmt:message key="ebpp.portlet.label.rquid" bundle="${bndlLang}"/> *</label>
 					</td>
 					<td class="outputDataCell" style="width: 80%; vertical-align: top;" nowrap>
-						<input class="outputData" value="${psb.rquid}" name="param_rquid" id="txtRquid" autocomplete="off" maxlength="256" type="text" required="required"/>
+						<input type="text" name="param_rquid" id="txtRquid" value="${psb.rquid}" autocomplete="off" maxlength="36" class="rqf"/>
+						<input type="hidden" name="param_operation" value="callBulkUploadService_ListRejected" />
+						<input type="hidden" name="param_searchType" value="PAYMENT" />
 					</td>
 				</tr>
 				<tr>
-					<td align="left" colspan="2">
+					<td colspan="2">
+						<input type="hidden" name="param_billerId" value=""/>
 						<input class="button" value="<fmt:message key="ebpp.portlet.button.search" bundle="${bndlLang}"/>" onclick="doQueryFormSubmission('frmRejectedPayments', 2)" type="submit"/>
-						<input class="button" value="<fmt:message key="ebpp.portlet.button.clear" bundle="${bndlLang}"/>" onclick=";" type="button"/>
-						<div style="display: inline;">
+						<portlet:resourceURL id="RejectedPaymentForm" var="clearURL"><portlet:param name="param_operation" value="clearSessionBeanObject"/></portlet:resourceURL>
+						<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.clear" bundle="${bndlLang}"/>" onclick="doQueryFormReset('${clearURL}');" />
+					&nbsp;&nbsp;
+						<div style="display: inline-block;">
 							<a href="#" onclick="doPostUrl('<portlet:resourceURL id="RejectedPaymentAdvanceForm"/>', 1);"><fmt:message key="ebpp.portlet.label.advanced-search" bundle="${bndlLang}"/> </a>
 						</div>
 					</td>

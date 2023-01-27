@@ -15,7 +15,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>SadadEBPPPortal</groupId>
 	<artifactId>SadadPortlets</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>10.0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,41 +35,290 @@
 			<type>pom</type>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- ### SADAD DEPENDENCIES ### -->
+		<!-- SADAD Common will pull, Error Common, and System Types -->
+
+		<!-- AccountService.EndPoint = http://localhost:8090/AccountQueryComponent/AccountQueryRemotable/ -->
 		<dependency>
-			<groupId>SadadEBPPPortal</groupId>
-			<artifactId>SadadServiceClient</artifactId>
+			<groupId>com.sadad.ebpp.account.services.interfaces</groupId>
+			<artifactId>account-query-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- AuditService.EndPoint = http://localhost:8090/AuditComponent/AuditServicePort -->
+		<dependency>
+			<groupId>com.sadad.ebpp.service.business.utils.interface</groupId>
+			<artifactId>audit-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- BillService.EndPoint = http://localhost:8090/BillSearchComponent/BillSearchRemotable/ -->
+		<dependency>
+			<groupId>com.sadad.ebpp.bill.service.interface</groupId>
+			<artifactId>bill-search-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- BillerNotificationService.EndPoint = http://localhost:8090/BillerNotificationComponent/BillerNotificationService -->
+		<dependency>
+			<groupId>com.sadad.ebpp.notification.service.interface</groupId>
+			<artifactId>biller-payment-notification</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- BulkUploadService.EndPoint = http://localhost:8090/BulkUploadQueryComponent/BulkUploadQueryRemotable/ -->
+		<dependency>
+			<groupId>com.sadad.ebpp.bulk.service.interface</groupId>
+			<artifactId>bulk-upload-query-service</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- BulkUploadConfirmationAccountsService.EndPoint = http://localhost:8090/AccountMessageBuilder/BulkUploadConfirmationService -->
+		<!-- BulkUploadConfirmationBillsService.EndPoint = http://localhost:8090/BillMessageBuilder/BulkUploadConfirmationService -->
+		<!-- BulkUploadConfirmationPaymentsService.EndPoint = http://localhost:8090/PmtUploadMessageBuilder/BulkUploadConfirmationService -->
+		<dependency>
+			<groupId>com.sadad.ebpp.bulk.service.interface</groupId>
+			<artifactId>bulk-upload-confirmation-service</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- CacheService.EndPoint = http://localhost:8090/CacheServiceComponent/CacheServiceInterface/ -->
+		<dependency>
+			<groupId>com.sadad.ebpp.service.business.utils.interface</groupId>
+			<artifactId>cache-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- CustomerService.EndPoint = http://localhost:8090/CusromerProfileCom/CustomerPort/ -->
+		<dependency>
+			<groupId>com.sadad.ebpp.cp.service.interface</groupId>
+			<artifactId>customer-profile-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- FileManagementService.EndPoint = http://localhost:8090/FileManagementComponent/FileManagementServicePort/ -->
+		<dependency>
+			<groupId>com.sadad.ebpp.service.business.utils.fms.interface</groupId>
+			<artifactId>file-management-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- FileOutboundService ==> Drop message in MQ Queue to be processed by 
+			IIB -->
+		<dependency>
+			<groupId>com.sadad.ebpp.service.business.utils.interface</groupId>
+			<artifactId>file-outbound-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- IbanManagementService.EndPoint = http://localhost:8090/IBANManagementComponent/IBANManagementInterface -->
+		<dependency>
+			<groupId>com.sadad.ebpp.iban.service.interface</groupId>
+			<artifactId>iban-management-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- PartnerConfigurationService.EndPoint = http://localhost:8090/PartnerConfigurationComponent/PartnerConfigurationInterface -->
+		<dependency>
+			<groupId>com.sadad.ebpp.partner.profile.service.interface</groupId>
+			<artifactId>partner-configuration-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- PartnerManagementService.EndPoint = http://localhost:8091/PartnerManagemengtComponent/PartnerManagementService -->
+		<dependency>
+			<groupId>com.sadad.ebpp.partner.profile.service.interface</groupId>
+			<artifactId>partner-management-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- PartnerProfileService.EndPoint = http://localhost:8090/PartnerProfileComponent/PartnerProfileServiceInterface/ -->
+		<dependency>
+			<groupId>com.sadad.ebpp.partner.profile.service.interface</groupId>
+			<artifactId>partner-profile-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- PaymentService.EndPoint = http://localhost:8090/PaymentCoreCom/CorePaymentRemotable/ -->
+		<dependency>
+			<groupId>com.sadad.ebpp.payment.service.interface</groupId>
+			<artifactId>payment-core-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- ReconciliationCutoffService.EndPoint = http://localhost:8090/CutOffMBComponent/ReconciliationCutoffService -->
+		<dependency>
+			<groupId>com.sadad.ebpp.service.reconcilation.interfaces</groupId>
+			<artifactId>cutoff-message-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- ReconciliationReportBankService.EndPoint = http://localhost:8090/BankReconReportComponent/ReconciliationReportService -->
+		<!-- ReconciliationReportBillerService.EndPoint = http://localhost:8090/BillerReconReportComponent/ReconciliationReportService -->
+		<dependency>
+			<groupId>com.sadad.ebpp.service.reconcilation.interfaces</groupId>
+			<artifactId>report-services-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- ReferenceDataService.EndPoint = http://localhost:8090/referenceData/ReferenceDataServicePort -->
+		<dependency>
+			<groupId>com.sadad.ebpp.service.business.utils.interface</groupId>
+			<artifactId>reference-data-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- RefundService.EndPoint = http://localhost:8090/RefundSearchCom/RefundSearchRemotable/ -->
+		<dependency>
+			<groupId>com.sadad.ebpp.refund.service.interface</groupId>
+			<artifactId>refund-search-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- RefundUpdateService.EndPoint = http://localhost:8090/RefundManagementComponent/RefundManagementServicePort/ -->
+		<dependency>
+			<groupId>com.sadad.ebpp.refund.service.interface</groupId>
+			<artifactId>refund-management-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- SettlementInstructuionsReportService.EndPoint = http://localhost:8090/SettlementInstructionsReportComponent/SettlementInstructuionsReportServiceRemotable -->
+		<dependency>
+			<groupId>com.sadad.ebpp.settlement.services.interfaces</groupId>
+			<artifactId>settlement-instructions-report-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- TestConnectivityService.EndPoint = http://dpvip.sadad.com:4043/S2/PartnerConnectvityTest -->
+		<dependency>
+			<groupId>com.sadad.ebpp.service.business.utils.interface</groupId>
+			<artifactId>test-connectivity-service-interface</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<!-- SADAD Common Interfaces -->
+		<dependency>
+			<groupId>com.sadad.ebpp.common.interface</groupId>
+			<artifactId>sadad-common</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sadad.ebpp.common.interface</groupId>
+			<artifactId>sadad-system-types</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sadad.ebpp.common.interface</groupId>
+			<artifactId>error-common</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- <dependency>
+			<groupId>com.sadad.ebpp.common.interface</groupId>
+			<artifactId>account-common</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sadad.ebpp.common.interface</groupId>
+			<artifactId>bill-common</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sadad.ebpp.common.interface</groupId>
+			<artifactId>fees-common</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sadad.ebpp.common.interface</groupId>
+			<artifactId>moi-common</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sadad.ebpp.common.interface</groupId>
+			<artifactId>notification-common</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sadad.ebpp.common.interface</groupId>
+			<artifactId>payment-common</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency> -->
+		<!-- <dependency>
+			<groupId>com.sadad.ebpp.common.interface</groupId>
+			<artifactId>refund-common</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sadad.ebpp.common.interface</groupId>
+			<artifactId>rules-common</artifactId>
+			<version>10.0.0.1-SNAPSHOT</version>
+		</dependency> -->
+		
+		<!-- Microsoft Playwright and JUnit Testing Dependency -->
+		<dependency>
+			<groupId>com.microsoft.playwright</groupId>
+			<artifactId>playwright</artifactId>
+			<version>1.28.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.9.1</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>
+		<finalName>${project.groupId}_${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
+				<version>3.10.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.2</version>
+				<version>3.3.2</version>
 				<configuration>
 					<archiveClasses>true</archiveClasses>
 					<archive>
-						<addMavenDescriptor>false</addMavenDescriptor>
+						<addMavenDescriptor>true</addMavenDescriptor>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
 					</archive>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>SadadEBPPPortal</groupId>
-				<artifactId>SadadServiceClient</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+
+	<organization>
+		<name>Saudi Payments</name>
+		<url>https://www.saudipayments.com/</url>
+	</organization>
+	<name>SadadPortlets</name>
+	<description>The SadadPortlets project contains all the EBPP, Admin, Configuration and Workbench portlets for SADAD EBPP Portal.</description>
+	<scm>
+		<url>https://bitbapp.gdps.gov.sa:8443/scm/sb/sadadportlets.git</url>
+	</scm>
+	<profiles>
+		<profile>
+			<id>portal</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<distributionManagement>
+				<repository>
+					<id>releases</id>
+					<url>http://10.2.140.11:9090/nexus/content/repositories/releases</url>
+				</repository>
+				<snapshotRepository>
+					<id>snapshots</id>
+					<url>http://10.2.140.11:9090/nexus/content/repositories/snapshots</url>
+				</snapshotRepository>
+			</distributionManagement>
+		</profile>
+	</profiles>
 </project>

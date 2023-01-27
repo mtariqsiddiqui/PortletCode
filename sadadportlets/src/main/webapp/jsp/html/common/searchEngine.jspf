@@ -1,0 +1,200 @@
+<jsp:directive.include file="./JspDeclarations.jspf" />
+<script type="text/javascript">
+var __se_data;
+var _seDialog;
+
+function callSearchEngine(inputName, q, o_cbf, o_cbf_pUrl ) {
+	$('#txtReturnValueTo').val(inputName);
+
+	if(q !== 'undefined')
+		$.when(getJsonData(_objKV['contextPath'] + '/jsonData?q=' + q)).then(showSearchEngine());
+
+	if(o_cbf !== 'undefined') { $('#txtCallBackFunction').val(o_cbf); }
+	if(o_cbf_pUrl !== 'undefined') { $('#txtCallBackUrl').val(o_cbf_pUrl); }
+}
+
+function getJsonData(dataUrl) {
+	$.ajax({ type: 'get', url: dataUrl, cache: false,
+		success:function(data) {
+			__se_data = data.sort(function (a, b) { if (a.Name < b.Name) { return -1; } if (a.Name > b.Name) { return 1; } return 0; });
+			loadJsonData(__se_data);
+		}
+	});
+}
+
+function loadJsonData(__se_data) {
+	$.each(__se_data, function(index, obj){
+		$('#partnerList').append(
+			$("<option></option>").attr("value", obj.Code).text(addPadding(obj.Code) + obj.Name)
+		);
+		// if(index > 50) return false;
+	});
+}
+
+function showSearchEngine() {
+	_seDialog = $('#searchWindow').dialog({
+		width: 433,
+		height: 347,
+		modal: true,
+		dialogClass: "no-close",
+		closeOnEscape: false,
+		close: function(event, ui){ exitSearchEngine(); }
+	});
+}
+
+function changeSearchField(v) {
+	$('#txtSearchField').val(v);
+	if(v === 'Code')
+		__se_data = __se_data.sort(function (a, b) {  if (a.Code < b.Code) { return -1;}   if (a.Code > b.Code) { return 1; } return 0; });
+
+	if(v === 'Name')
+		__se_data = __se_data.sort(function (a, b) {  if (a.Name < b.Name) { return -1;}   if (a.Name > b.Name) { return 1; } return 0; });		
+
+	$('#partnerList').empty();
+	loadJsonData(__se_data);
+	$('#txtSearch').focus();
+	filterJsonData($('#txtSearch').val());
+}
+
+function changeSearchPattern(v) {
+	$('#txtSearchPattern').val(v);
+	$('#txtSearch').focus();
+	filterJsonData($('#txtSearch').val());
+}
+
+function addPadding(str) {
+	let cl = str.length;
+	for(i = cl ; i <= 12; i++)
+		str = str + '.';
+
+	return str + '.|...';
+}
+
+function syncValues(v) {
+	$('#partnerList').val(v);
+}
+
+function doneSearching(event) {
+	if (event.keyCode === 13) {
+		if ($('#partnerList option').length > 0)
+			exitSearchEngine($('#partnerList option')[0].value);
+		else
+			return false;
+	}
+	else
+		return;
+}
+
+function selectItem() {
+	exitSearchEngine($("#partnerList option:selected" ).val());
+}
+
+function filterJsonData(exp) {
+	let e = exp;
+	let p = 'i';
+	if ($('#txtSearchPattern').val() === '^')
+		e = '^' + exp;
+	if ($('#txtSearchPattern').val() === 'g')
+		p = 'gi';
+
+	let patt = new RegExp(e, p);
+	$('#partnerList').empty();
+	if($('#txtSearchField').val() === 'Code') {
+		$.each(__se_data, function(index, obj){
+			if (patt.test(obj.Code))
+				$('#partnerList').append(
+					$("<option></option>").attr("value", obj.Code).text(addPadding(obj.Code) + obj.Name)
+				);
+		});
+	} else if ($('#txtSearchField').val() === 'Name') {
+		$.each(__se_data, function(index, obj){
+		if (patt.test(obj.Name))
+			$('#partnerList').append(
+				$("<option></option>").attr("value", obj.Code).text(addPadding(obj.Code) + obj.Name)
+			);
+		});
+	}
+	$('#txtSearch').focus();
+}
+
+function exitSearchEngine(outputValue) {
+	__se_data = undefined;
+	// Reset Search Engine
+	$('#txtSearch').val('');
+	$('#rdbName').prop("checked", true);
+	$('#rdbStart').prop("checked", true);
+	$('#txtSearchField').val('Name');
+	$('#txtSearchPattern').val('^');
+	$('#partnerList option').remove();
+
+	// Render the output value to the caller field and fade Out
+	if(typeof outputValue !== "undefined") {
+		$('#' + $('#txtReturnValueTo').val()).val(outputValue);
+
+		let fn = window[$('#txtCallBackFunction').val()];
+		if(typeof fn === 'function') {
+			if(fn.length == 2) 
+				fn($('#' + $('#txtReturnValueTo').val())[0], $('#txtCallBackUrl').val());
+			else
+				fn($('#' + $('#txtReturnValueTo').val())[0]);
+		}
+	}
+	_seDialog.dialog("close");
+}
+</script>
+<div id="searchWindow" class="srchEngnWindow" title="Partner Search Engine">
+    <input type="hidden" id="txtReturnValueTo" value="">
+    <input type="hidden" id="txtCallBackFunction" value="">
+    <input type="hidden" id="txtCallBackUrl" value="">
+    <table>
+        <tr>
+            <td style="width: 110px;"><fmt:message key="sadad.common.search-keyword" bundle="${bndlCommon}" /></td>
+            <td>
+                <input type="text" name="txtSearch" id="txtSearch" class="srchEngnLabelInput" autofocus="autofocus"
+					style="width: 265px; font-family: 'Lucida Console', Monaco, monospace;"
+					oninput="filterJsonData(this.value);" onkeyup="doneSearching(event)" />
+            </td>
+        </tr>
+        <tr>
+            <td><fmt:message key="sadad.common.search-in-field" bundle="${bndlCommon}" /></td>
+            <td>
+                <label for="rdbCode" class="srchEngnLabelInput">
+                	<input id="rdbCode" type="radio" name="searchField" value="Code" class="srchEngnLabelInput" onclick="changeSearchField(this.value);">
+					<fmt:message key="sadad.common.code" bundle="${bndlCommon}" />
+                </label>
+                <label for="rdbName" class="srchEngnLabelInput">
+                	<input id="rdbName" type="radio" name="searchField" value="Name" class="srchEngnLabelInput" onclick="changeSearchField(this.value);" checked>
+                	<fmt:message key="sadad.common.name" bundle="${bndlCommon}" />
+                </label>
+                <input type="hidden" id="txtSearchField" value="Name" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div>
+                    <select id="partnerList" multiple size="10" class="srchEngnSelect" 
+						style='font-family: "Lucida Console", Monaco, monospace;'
+                    	onchange="syncValues(this.value);"
+                        ondblclick="selectItem();">
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><fmt:message key="sadad.common.serach-criteria" bundle="${bndlCommon}" /></td>
+            <td>
+                <label for="rdbStart" class="srchEngnLabelInput">
+                	<input id="rdbStart" type="radio" name="searchCriteria" value="^" class="srchEngnLabelInput" onclick="changeSearchPattern(this.value);" checked>
+                	<fmt:message key="sadad.common.starts-with" bundle="${bndlCommon}" />
+                </label>
+                <label for="rdbGlobal" class="srchEngnLabelInput">
+                	<input id="rdbGlobal" type="radio" name="searchCriteria" value="g" class="srchEngnLabelInput" onclick="changeSearchPattern(this.value);">
+                	<fmt:message key="sadad.common.global" bundle="${bndlCommon}" />
+                </label>
+                <input type="hidden" id="txtSearchPattern" value="^" />&nbsp;&nbsp;
+                <button type="button" style='font-family: "Lucida Console", Monaco, monospace;' onclick="exitSearchEngine();">
+				<fmt:message key="sadad.common.close" bundle="${bndlCommon}" />&nbsp;<img style="width:16px; height: 16px;" src="/static/images/close.svg"></button>
+            </td>
+        </tr>
+    </table>
+</div>

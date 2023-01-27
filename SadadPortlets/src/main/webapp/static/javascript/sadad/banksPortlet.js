@@ -9,23 +9,9 @@
  * @param srcObj - select or combobox object it self
  * @param pUrl - Url to be called in ajax call
  */
-function onChangePartnerKey(srcObj) 
-{
-	console.log('>> onChangePartnerKey');
-
+function onChangePartnerKey(srcObj) {
 	if(srcObj.value === "")
 		$('#txtBankStatus').prop('disabled', false);
 	else
 		$('#txtBankStatus').prop('disabled', true);			
-
-	console.log('<< onChangePartnerKey');
 }
-
-/**
- * 
- */
-function onContainer1LoadsFromModule()
-{ return; }
-
-function onContainer2LoadsFromModule()
-{ return; }

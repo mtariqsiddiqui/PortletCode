@@ -23,25 +23,29 @@
 												<table class="tableclass">
 													<tbody>
 														<tr>
-															<th style="width: 25%"><fmt:message key="biller.portlet.label.biller-id" bundle="${bndlLang}" />:</th>
-															<td style="width: 25%">${psb.partnerKey}</td>
+															<th style="width: 25%"><fmt:message key="biller.portlet.label.biller-id" bundle="${bndlLang}" /></th>
+															<td style="width: 25%">${psb.billerId}</td>
 														</tr>
 														<tr>
-															<th style="width: 25%"><fmt:message key="biller.portlet.label.description" bundle="${bndlLang}" />:</th>
+															<th style="width: 25%"><fmt:message key="biller.portlet.label.description" bundle="${bndlLang}" /></th>
 															<td style="width: 25%">${psb.selectedBiller.description}</td>
 														</tr>
 														<tr>
-															<th style="width: 25%"><fmt:message key="biller.portlet.label.account-bank-id" bundle="${bndlLang}" />:</th>
+															<th style="width: 25%"><fmt:message key="biller.portlet.label.account-bank-id" bundle="${bndlLang}" /></th>
 															<td style="width: 25%">${psb.selectedBiller.billingAccountBankId}</td>
 														</tr>
 														<tr>
-															<th style="width: 25%"><fmt:message key="biller.portlet.label.account-bank-name" bundle="${bndlLang}" />:</th>
+															<th style="width: 25%"><fmt:message key="biller.portlet.label.account-bank-name" bundle="${bndlLang}" /></th>
 															<td style="width: 25%">${BankList[psb.selectedBiller.billingAccountBankId].partnerName}</td>
 														</tr>
 														<tr>
-															<th style="width: 25%"><fmt:message key="biller.portlet.label.sadad-biller-account-number" bundle="${bndlLang}" />:</th>
+															<th style="width: 25%"><fmt:message key="biller.portlet.label.sadad-biller-account-number" bundle="${bndlLang}" /></th>
 															<td style="width: 25%">${psb.selectedBiller.billingAccountNumber}</td>
-														</tr>														
+														</tr>
+														<tr>
+															<th style="width: 25%"><fmt:message key="biller.portlet.label.default-settlement-settlement-id" bundle="${bndlLang}" /></th>
+															<td style="width: 25%">${psb.selectedBiller.defaultSettlementSettlementId}</td>
+														</tr>
 														<!-- End: Data display fields -->
 													</tbody>
 												</table>
@@ -50,26 +54,31 @@
 												<table class="tableclass">
 													<tbody>
 														<tr>
-															<th style="width: 25%"><fmt:message key="biller.portlet.label.biller" bundle="${bndlLang}" />:</th>
-															<td style="width: 25%">${BillerList[psb.partnerKey].partnerName}</td>
+															<th style="width: 25%"><fmt:message key="biller.portlet.label.biller-name" bundle="${bndlLang}" /></th>
+															<td style="width: 25%">${psb.selectedBiller.billerName}</td>
 														</tr>
+														
 														<tr>
-															<th style="width: 25%"><fmt:message key="biller.portlet.label.status" bundle="${bndlLang}" />:</th>
+															<th style="width: 25%"><fmt:message key="biller.portlet.label.biller-arabic-name" bundle="${bndlLang}" /></th>
+															<td style="width: 25%">${psb.selectedBiller.billerArabicName}</td>
+														</tr>
+														
+														<tr>
+															<th style="width: 25%"><fmt:message key="biller.portlet.label.status" bundle="${bndlLang}" /></th>
 															<td style="width: 25%">${psb.selectedBiller.status}</td>
-															
 														</tr>
 														
 														<tr>
-															<th style="width: 25%"><fmt:message key="biller.portlet.label.biller-refund-bank-id" bundle="${bndlLang}" />:</th>
+															<th style="width: 25%"><fmt:message key="biller.portlet.label.biller-refund-bank-id" bundle="${bndlLang}" /></th>
 															<td style="width: 25%">${psb.selectedBiller.refundAccountBankId}</td>
 														</tr>
 														
 														<tr>
-															<th style="width: 25%"><fmt:message key="biller.portlet.label.biller-refund-bank-name" bundle="${bndlLang}" />:</th>
-															<td style="width: 25%">${psb.selectedBiller.refundAccountBankId}</td>
+															<th style="width: 25%"><fmt:message key="biller.portlet.label.biller-refund-bank-name" bundle="${bndlLang}" /></th>
+															<td style="width: 25%">${BankList[psb.selectedBiller.refundAccountBankId].partnerName}</td>
 														</tr>
 														<tr>
-															<th style="width: 25%"><fmt:message key="biller.portlet.label.biller-refund-account" bundle="${bndlLang}" />:</th>
+															<th style="width: 25%"><fmt:message key="biller.portlet.label.biller-refund-account" bundle="${bndlLang}" /></th>
 															<td style="width: 25%">${psb.selectedBiller.refundAccountNumber}</td>
 														</tr>
 														<!-- End: Data display fields -->
@@ -94,7 +103,7 @@
 									<fmt:message var="btnStatusLabel" key="biller.portlet.button.activate" bundle="${bndlLang}" />								
 								</c:if>
 								<portlet:resourceURL id="QueryBillerDetails" var="toggleStatusUrl">
-									<portlet:param name="reqAction" value="toggleStatus"/>
+									<portlet:param name="param_operation" value="callUpdatePartnerStatus"/>
 								</portlet:resourceURL>
 								<input type="button" class="button" value="${btnStatusLabel}"
 									onclick="doPostUrl('${toggleStatusUrl}', 1);" /> 

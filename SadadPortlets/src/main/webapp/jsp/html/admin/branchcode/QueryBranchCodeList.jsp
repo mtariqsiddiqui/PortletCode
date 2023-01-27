@@ -2,7 +2,7 @@
 <fieldset>
 <table id="detailTable" class="tableclass" style="width:100%">
 	<caption class="myCaption">
-		<span class="caption"><fmt:message key="branch-code.portlet.label.branch-code-list" bundle="${bndlLang}" />:</span>
+		<span class="caption"><fmt:message key="branch-code.portlet.label.branch-code-list" bundle="${bndlLang}" /></span>
 	</caption>
 	<!-- Begin: table header row -->
 	<thead>
@@ -11,7 +11,7 @@
 			<th><fmt:message key="branch-code.portlet.label.bank-name" bundle="${bndlLang}" /></th>
 			<th><fmt:message key="branch-code.portlet.label.branch-code" bundle="${bndlLang}" /></th>
 			<th><fmt:message key="branch-code.portlet.label.status" bundle="${bndlLang}" /></th>
-			<th><fmt:message key="branch-code.portlet.label.action" bundle="${bndlLang}" />:</th>
+			<th><fmt:message key="branch-code.portlet.label.action" bundle="${bndlLang}" /></th>
 		</tr>
 	</thead>
 	<!-- End: table header row -->
@@ -19,15 +19,20 @@
 		<!-- Begin: repeated data rows -->
 		<c:forEach items="${psb.branchCodeList}" var="branchCode">
 			<tr>
-				<td>${psb.partnerKey}</td>
-				<td>${BankList[psb.partnerKey].partnerName}</td>
+				<td>${psb.bankId}</td>
+				<td>${BankList[psb.bankId].partnerName}</td>
 				<td>${branchCode.branchCode}</td>
 				<td>${branchCode.status}</td>
 				<td>
+				<portlet:resourceURL id="QueryBranchCodeDetails" var="queryBranchCodeDetailsUrl">
+					<portlet:param name="param_bankId" value="${psb.bankId}"/>
+					<portlet:param name="param_branchCode" value="${branchCode.branchCode}"/>
+					<portlet:param name="param_operation" value="callGetBankBranch"/>
+				</portlet:resourceURL>
 				<a href="#" title='<fmt:message key="branch-code.portlet.more-details" bundle="${bndlLang}"/>'
-					onclick='doPostUrl("<portlet:resourceURL id="QueryBranchCodeDetails"><portlet:param name="txtPartnerKey" value="${psb.partnerKey}"/><portlet:param name="txtBranchCode" value="${branchCode.branchCode}"/></portlet:resourceURL>", 1);'>
+					onclick='doPostUrl("${queryBranchCodeDetailsUrl}", 1);' style="display: inline-block;">
 						<img border="0"
-						src='${thisRequest.getContextPath()}/static/images/item_details.png'/>
+						src='/static/images/item_details.png'/>
 				</a></td>
 			</tr>
 		</c:forEach>

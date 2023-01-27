@@ -18,13 +18,13 @@
 							<tr class="DataEntryFieldRow">
 								<td class="labelCell" valign="top" nowrap height="27">
 									<label class="label" for="cmbDistrictCode">
-										<fmt:message key="district-code.portlet.label.district-code" bundle="${bndlLang}" />&nbsp;:&nbsp;*
+										<fmt:message key="district-code.portlet.label.district-code" bundle="${bndlLang}" /> *
 									</label>
 								</td>
 								<td class="outputDataCell" style="width: 100%;" valign="top" nowrap>
-									<select name="txtDistrictCode" class="outputData" id="cmbDistrictCode">
+									<select name="param_districtCode" id="cmbDistrictCode">
 										<option value="">
-											<fmt:message key="district-code.portlet.label.please-select" bundle="${bndlLang}" />
+											<fmt:message key="district-code.portlet.label.all" bundle="${bndlLang}" />
 										</option>
 										<c:forEach items="${DistrictList}" var="district">
 											<option <c:if test="${psb.districtCode == district.value.code}">selected</c:if>

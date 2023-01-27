@@ -17,15 +17,15 @@
 								<table class="tableclass">
 									<tbody>
 										<tr>
-											<th style="width: 25%"><fmt:message key="service-type.portlet.label.service-type-code" bundle="${bndlLang}" />:</th>
-											<td style="width: 25%">${psb.selectedServiceType.serviceType}</td>
+											<th style="width: 25%"><fmt:message key="service-type.portlet.label.service-type-code" bundle="${bndlLang}" /></th>
+											<td style="width: 25%">${psb.selectedServiceType.serviceTypeCode}</td>
 										</tr>
 										<tr>
-											<th style="width: 25%"><fmt:message key="service-type.portlet.label.parent-service-type-code" bundle="${bndlLang}" />:</th>
-											<td style="width: 25%"></td>
+											<th style="width: 25%"><fmt:message key="service-type.portlet.label.parent-service-type-code" bundle="${bndlLang}" /></th>
+											<td style="width: 25%">${psb.selectedServiceType.parentServiceTypeCode}</td>
 										</tr>
 										<tr>
-											<th style="width: 25%"><fmt:message key="service-type.portlet.label.description" bundle="${bndlLang}" />:</th>
+											<th style="width: 25%"><fmt:message key="service-type.portlet.label.description" bundle="${bndlLang}" /></th>
 											<td style="width: 25%">${psb.selectedServiceType.description}</td>
 										</tr>
 										<!-- End: Data display fields -->
@@ -36,17 +36,17 @@
 								<table class="tableclass">
 									<tbody>
 										<tr>
-											<th style="width: 25%"><fmt:message key="service-type.portlet.label.service-type-tag" bundle="${bndlLang}" />:</th>
-											<td style="width: 25%">${psb.selectedServiceType.serviceType}</td>
+											<th style="width: 25%"><fmt:message key="service-type.portlet.label.service-type-tag" bundle="${bndlLang}" /></th>
+											<td style="width: 25%">${psb.selectedServiceType.serviceTypeCode}</td>
 										</tr>
 										<tr>
-											<th style="width: 25%"><fmt:message key="service-type.portlet.label.parent-service-type-tag" bundle="${bndlLang}" />:</th>
-											<td style="width: 25%"></td>
+											<th style="width: 25%"><fmt:message key="service-type.portlet.label.parent-service-type-tag" bundle="${bndlLang}" /></th>
+											<td style="width: 25%">${psb.selectedServiceType.parentServiceTypeTag}</td>
 											
 										</tr>
 										
 										<tr>
-											<th style="width: 25%"><fmt:message key="service-type.portlet.label.status" bundle="${bndlLang}" />:</th>
+											<th style="width: 25%"><fmt:message key="service-type.portlet.label.status" bundle="${bndlLang}" /></th>
 											<td style="width: 25%">${psb.selectedServiceType.status}</td>
 										</tr>
 										<!-- End: Data display fields -->
@@ -69,7 +69,7 @@
 					<fmt:message var="btnStatusLabel" key="service-type.portlet.button.activate" bundle="${bndlLang}" />								
 				</c:if>
 				<portlet:resourceURL id="QueryServiceTypeDetails" var="toggleStatusUrl">
-					<portlet:param name="reqAction" value="toggleStatus"/>
+					<portlet:param name="param_operation" value="callActivateOrDeActivateAccountType"/>
 				</portlet:resourceURL>
 				<input type="button" class="button" value="${btnStatusLabel}"
 					onclick="doPostUrl('${toggleStatusUrl}', 1);" /> 

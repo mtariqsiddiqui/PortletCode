@@ -1,3 +1,5 @@
+<%@ page import="com.sadad.portal.constant.SadadDynamicDataConfiguration"%>
+<% pageContext.setAttribute("moi_billers", SadadDynamicDataConfiguration.MOI_BILLERS); %>
 <jsp:directive.include file="../../common/JspDeclarations.jspf" />
 <table style="width: 100%">
 	<tbody>
@@ -44,13 +46,70 @@
 						<!-- Buttons Group -->
 						<tr>
 							<td>
-								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-associations" bundle="${bndlLang}"/>"  onclick='doPostUrl("<portlet:resourceURL id="core_AssociationsSummaryListAccounts"/>", 2);'/>
-								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-active-bills" bundle="${bndlLang}"/>" onclick='doPostUrl("<portlet:resourceURL id="core_BillsSummary"/>", 2);'/>
-								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-inactive-bills" bundle="${bndlLang}"/>" onclick='doPostUrl("<portlet:resourceURL id="core_BillsSummary"/>", 2);'/>
-								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-moi-payments" bundle="${bndlLang}"/>" onclick='doPostUrl("<portlet:resourceURL id="core_PaymentsSummary"/>", 2);'/><br>
-								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-refunds" bundle="${bndlLang}"/>" onclick='#' />
+								<portlet:resourceURL id="core_ByAccountsAssociationsSummaryList" var="associationsSummaryListAccountsUrl">
+									<portlet:param name="param_customerId" value="${psb.customer.officialIdNumber}"/>
+									<portlet:param name="param_customerIdType" value="${psb.customer.officialIdType}"/>
+									<portlet:param name="param_operation" value="callAccountService_ListByCustomer"/>
+								</portlet:resourceURL>
+								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-associations" bundle="${bndlLang}"/>" onclick='doPostUrl("${associationsSummaryListAccountsUrl}", 2);'/>
+								
+								<portlet:resourceURL id="core_BillsSummary" var="activeBillsSummaryUrl">
+									<portlet:param name="param_customerId" value="${psb.customer.officialIdNumber}"/>
+									<portlet:param name="param_customerIdType" value="${psb.customer.officialIdType}"/>
+									<portlet:param name="param_status" value="ACTIVE"/>
+									<portlet:param name="param_operation" value="callBillService_ListByCustomer"/>
+								</portlet:resourceURL>
+								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-active-bills" bundle="${bndlLang}"/>" onclick='doPostUrl("${activeBillsSummaryUrl}", 2);'/>
+								
+								<portlet:resourceURL id="core_BillsSummary" var="inActiveBillsSummaryUrl">
+									<portlet:param name="param_customerId" value="${psb.customer.officialIdNumber}"/>
+									<portlet:param name="param_customerIdType" value="${psb.customer.officialIdType}"/>
+									<portlet:param name="param_status" value="INACTIVE"/>
+									<portlet:param name="param_operation" value="callBillService_ListByCustomer"/>
+								</portlet:resourceURL>
+								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-inactive-bills" bundle="${bndlLang}"/>" onclick='doPostUrl("${inActiveBillsSummaryUrl}", 2);'/>
+
+								<c:set var="blrMatch" value="0" scope="page"/>
+								<c:if test="${psb.partnerType == 'bank' || psb.partnerType == 'sadad'}">
+									<c:set var="blrMatch" value="${blrMatch + 1}" scope="page"/>
+								</c:if>
+
+								<c:if test="${psb.partnerType == 'biller'}">
+									<c:forEach items="${moi_billers}" var="mblr">
+										<c:if test="${psb.partnerKey == mblr}">
+											<c:set var="blrMatch" value="${blrMatch + 1}" scope="page"/>
+										</c:if>
+									</c:forEach>
+								</c:if>
+								<c:if test="${blrMatch > 0}">
+									<portlet:resourceURL var="moiPayments" id="core_PaymentsSummary">
+										<portlet:param name="param_pageNumber" value="0"/>
+										<portlet:param name="param_operation" value="callPaymentService_ListByPayor"/>
+									</portlet:resourceURL>
+									<input type='button' class='button' value='<fmt:message key="ebpp.portlet.button.list-moi-payments" bundle="${bndlLang}"/>' onclick='doPostUrl("${moiPayments}", 2);'/>
+								</c:if>
+								<br>
+								<portlet:resourceURL var="customerRefunds" id="core_RefundSummary">
+									<portlet:param name="param_customerId" value="${psb.customer.officialIdNumber}"/>
+									<portlet:param name="param_customerIdType" value="${psb.customer.officialIdType}"/>
+									<portlet:param name="param_operation" value="callRefundService_ListRefundPortal"/>
+								</portlet:resourceURL>
+								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-refunds" bundle="${bndlLang}"/>" onclick='doPostUrl("${customerRefunds}", 2);' />
 								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.list-incomplete-payments" bundle="${bndlLang}"/>" onclick='doPostUrl("<portlet:resourceURL id="core_PaymentsSummary"/>", 2);'/>
-								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.deactivate" bundle="${bndlLang}"/>" onclick="doPost" />
+								
+								<c:if test="${psb.partnerType == 'sadad' && psb.userType == 'admin'}">
+									<fmt:message var="btnStatusLabel" key="ebpp.portlet.button.deactivate" bundle="${bndlLang}" />
+									<c:if test="${psb.customer.customerStatus == 'INACTIVE'}">
+										<fmt:message var="btnStatusLabel" key="ebpp.portlet.button.activate" bundle="${bndlLang}" />
+									</c:if>
+									<portlet:resourceURL id="core_CustomerDetails" var="customerDetailsUrl">
+										<portlet:param name="param_customerId" value="${psb.customer.officialIdNumber}"/>
+										<portlet:param name="param_customerIdType" value="${psb.customer.officialIdType}"/>
+										<portlet:param name="param_operation" value="callCustomerService_ActivateOrDeActivateCustomer"/>
+									</portlet:resourceURL>
+									<input type="button" class="button" value="${btnStatusLabel}" onclick="doPostUrl('${customerDetailsUrl}', 1);" />
+								</c:if>
+								
 								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.audit" bundle="${bndlLang}"/>" onclick='doPostUrl("<portlet:resourceURL id="core_AuditSummary"/>", 2);'/>
 								<form method="post" action="<portlet:actionURL/>">
 									<input type="hidden" name="fpWhereTo" id="fpWhereTo" value=""/>

@@ -11,74 +11,82 @@
 							</tr>
 							<tr>
 								<td>
-										<table  style="width: 100%">
-											<!-- Begin: Data display fields -->
-											<tbody>
-												<tr class="NewsColumnWrapper">
-													<td 
-														class="NewsColumnCell" style="width: 33%" valign="top">
-														<!-- Begin: Data display fields -->													
-													<table class="tableclass">
-															<tbody>
-																<tr >
-																	<th style="width: 25%">
-																	<fmt:message key="ebpp.portlet.label.biller-name" bundle="${bndlLang}" /></th>
-																	<td style="width: 25%">${BillerList[psb.billerId].partnerName}</td>
-																</tr>
+									<table  style="width: 100%">
+										<!-- Begin: Data display fields -->
+										<tbody>
+											<tr class="NewsColumnWrapper">
+												<td 
+													class="NewsColumnCell" style="width: 33%" valign="top">
+													<!-- Begin: Data display fields -->													
+												<table class="tableclass">
+														<tbody>
+															<tr >
+																<th style="width: 25%">
+																<fmt:message key="ebpp.portlet.label.biller-name" bundle="${bndlLang}" /></th>
+																<td style="width: 25%">${BillerList[psb.billerId].partnerName}</td>
+															</tr>
 
-																<tr >
-																	<th style="width: 25%"><fmt:message key="ebpp.portlet.label.biller" bundle="${bndlLang}" /></th>
-																	<td style="width: 25%">${psb.billerId}</td>
-																</tr>
+															<tr >
+																<th style="width: 25%"><fmt:message key="ebpp.portlet.label.biller" bundle="${bndlLang}" /></th>
+																<td style="width: 25%">${psb.billerId}</td>
+															</tr>
 
-																<tr >
-																<th style="width: 25%"><fmt:message key="ebpp.portlet.label.status" bundle="${bndlLang}" /></th>
-																	<td style="width: 25%">${psb.account.lifecycle}</td>																	
-																</tr>
-																<!-- End: Data display fields -->
-															</tbody>
-														</table></td>
-													<td class="NewsColumnCell" style="width: 33%" valign="top">
-													<!-- Begin: Data display fields -->
-													<table class="tableclass">
-															<tbody>
-																<tr >
-																	<th style="width: 25%"><fmt:message key="ebpp.portlet.label.service-type" bundle="${bndlLang}" /></th>
-																	<td style="width: 25%">${psb.account.serviceType}</td>
-																</tr>
+															<tr >
+															<th style="width: 25%"><fmt:message key="ebpp.portlet.label.status" bundle="${bndlLang}" /></th>
+																<td style="width: 25%">${psb.accounts[psb.accountKey].lifecycle}</td>																	
+															</tr>
+															<!-- End: Data display fields -->
+														</tbody>
+													</table></td>
+												<td class="NewsColumnCell" style="width: 33%" valign="top">
+												<!-- Begin: Data display fields -->
+												<table class="tableclass">
+														<tbody>
+															<tr >
+																<th style="width: 25%"><fmt:message key="ebpp.portlet.label.service-type" bundle="${bndlLang}" /></th>
+																<td style="width: 25%">${psb.accounts[psb.accountKey].serviceType}</td>
+															</tr>
 
-																<tr >
-																	<th style="width: 25%"><fmt:message key="ebpp.portlet.label.account-number" bundle="${bndlLang}" /></th>
-																	<td style="width: 25%">${psb.account.accountNumber}</td>
-																</tr>
-																<!-- End: Data display fields -->
-															</tbody>
-														</table></td>
-												</tr>
-												<!-- End: Data display fields -->
-												<!-- End: PageContentsContainer -->
-											</tbody>
-										</table>
+															<tr >
+																<th style="width: 25%"><fmt:message key="ebpp.portlet.label.account-number" bundle="${bndlLang}" /></th>
+																<td style="width: 25%">${psb.accountKey}</td>
+															</tr>
+															<!-- End: Data display fields -->
+														</tbody>
+													</table></td>
+											</tr>
+											<!-- End: Data display fields -->
+											<!-- End: PageContentsContainer -->
+										</tbody>
+									</table>
 								</td>
 							</tr>
 							<!-- Buttons Group -->
 							<tr>
 								<td>
-									
 									<input type="button" class="button" onclick="doPostUrl('<portlet:resourceURL id="core_BillerSummary"/>', 2);" value="<fmt:message key="ebpp.portlet.label.biller" bundle="${bndlLang}"/>" />
-									<input type="button" class="button" onclick="doPostUrl('<portlet:resourceURL id="core_AssociationsSummaryListCustomers"/>', 2);" value="<fmt:message key="ebpp.portlet.button.list-associations" bundle="${bndlLang}"/>"/>
+
+									<portlet:resourceURL var="listAssociationByCustomerUrl" id="core_ByCustomersAssociationsSummaryList">
+										<portlet:param name="param_operation" value="callCustomerService_ListByAccount"/>
+									</portlet:resourceURL>
+									<input type="button" class="button" onclick="doPostUrl('${listAssociationByCustomerUrl}', 2);" value="<fmt:message key="ebpp.portlet.button.list-associations" bundle="${bndlLang}"/>"/>
+									
 									<portlet:resourceURL var="listBillByAccount" id="core_BillsSummary">
 										<portlet:param name="param_billerId" value="${psb.billerId}"/>
-										<portlet:param name="param_accountNumber" value="${psb.account.accountNumber}"/>
+										<portlet:param name="param_accountNumber" value="${psb.accountKey}"/>
+										<portlet:param name="param_operation" value="callBillService_ListByAccount"/>
 									</portlet:resourceURL>
 									<input type="button" class="button" onclick="doPostUrl('${listBillByAccount}', 2);" value="<fmt:message key="ebpp.portlet.button.bills" bundle="${bndlLang}"/>"/>
 
 									<portlet:resourceURL var="listPaymentsByAccount" id="core_PaymentsSummary">
 										<portlet:param name="param_billerId" value="${psb.billerId}"/>
-										<portlet:param name="param_accountNumber" value="${psb.account.accountNumber}"/>
+										<portlet:param name="param_accountNumber" value="${psb.accountKey}"/>
+										<portlet:param name="param_operation" value="callPaymentService_ListByAccount"/>
 									</portlet:resourceURL>									
 									<input type="button" class="button" onclick="doPostUrl('${listPaymentsByAccount}', 2);" value="<fmt:message key="ebpp.portlet.button.payments" bundle="${bndlLang}"/>"/>
+									
 									<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.audit" bundle="${bndlLang}"/>" onclick='doPostUrl("<portlet:resourceURL id="core_AuditSummary"/>", 2);'/>
+									
 									<form method="post" action="<portlet:actionURL/>">
 										<input type="hidden" name="fpWhereTo" id="fpWhereTo" value="" />
 										<input type="submit" class="button" onclick="navigate(this);" name="back" value="<fmt:message key="ebpp.portlet.button.back" bundle="${bndlLang}"/>"/>

@@ -19,15 +19,15 @@
 										<tbody>
 											<tr class="DataEntryFieldRow">
 												<td class="labelCell" valign="top" nowrap height="27">
-													<label class="label" for="cmbServiceType"><fmt:message key="service-type.portlet.label.service-type" bundle="${bndlLang}" />&nbsp;:&nbsp;*</label>
+													<label class="label" for="cmbServiceType"><fmt:message key="service-type.portlet.label.service-type" bundle="${bndlLang}" /> *</label>
 												</td>
 												<td class="outputDataCell" style="width: 100%;" valign="top" nowrap>
-													<select name="txtServiceType" class="outputData" id="cmbServiceType" >
+													<select name="param_serviceTypeCode" id="cmbServiceType" >
 														<option value="">
-															<fmt:message key="service-type.portlet.label.please-select" bundle="${bndlLang}"/>
+															<fmt:message key="service-type.portlet.label.all" bundle="${bndlLang}"/>
 														</option>												
 														<c:forEach items="${AccountTypeList}" var="serviceType">
-															<option  <c:if test="${psb.serviceType == serviceType.value.code}">selected</c:if> 
+															<option  <c:if test="${psb.serviceTypeCode == serviceType.value.code}">selected</c:if> 
 																value="<c:out value="${serviceType.value.code}" />">
 																<c:out value="${serviceType.value.code}" />
 															</option>
@@ -42,6 +42,7 @@
 							<!-- Buttons Group -->
 							<tr>
 								<td>
+									<!-- input type="hidden" name="param_operation" value="callListAccountType" /-->
 									<input type="submit" id="btnSearch" class="button" 
 										value="<fmt:message key="service-type.portlet.button.search" bundle="${bndlLang}" />" 
 										onclick="doQueryFormSubmission('frmQueryServiceType', 2);" />

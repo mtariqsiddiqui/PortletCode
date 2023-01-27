@@ -8,6 +8,7 @@ public class Audit
 	private String auditAction;
 	private String auditType;
 	private String auditSource;
+	private String auditSourceId;
 	private String auditOption;
 
 	/**
@@ -78,6 +79,16 @@ public class Audit
 		this.auditSource = auditSource;
 	}
 
+	public String getAuditSourceId()
+	{
+		return auditSourceId;
+	}
+
+	public void setAuditSourceId(String auditSourceId)
+	{
+		this.auditSourceId = auditSourceId;
+	}
+
 	/**
 	 * @return the auditOption
 	 */
@@ -93,14 +104,5 @@ public class Audit
 	public void setAuditOption(String auditOption)
 	{
 		this.auditOption = auditOption;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString()
-	{
-		return "Audit [auditDate=" + auditDate + ", auditAction=" + auditAction + ", auditType=" + auditType + ", auditSource=" + auditSource + ", auditOption=" + auditOption + "]";
 	}
 }

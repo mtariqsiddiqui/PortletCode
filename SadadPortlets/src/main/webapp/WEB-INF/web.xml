@@ -14,4 +14,16 @@
 		<display-name>ApplicationCacheInitializer</display-name>
 		<listener-class>com.sadad.portal.common.cache.ApplicationCacheInitializer</listener-class>
 	</listener>
+	<servlet>
+		<description>Provides the list of banks or billers in form of JSON</description>
+		<display-name>JSON Data Provider</display-name>
+		<servlet-name>JsonData</servlet-name>
+		<servlet-class>com.sadad.portal.common.servlet.JsonData</servlet-class>
+		<enabled>true</enabled>
+		<async-supported>true</async-supported>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>JsonData</servlet-name>
+		<url-pattern>/jsonData/*</url-pattern>
+	</servlet-mapping>
 </web-app>

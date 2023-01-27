@@ -17,7 +17,7 @@ public class Payment
 	private String billNumber;
 	private String accountNumber;
 	private String billCycle;
-	private String bankName;
+	private String bankId;
 	private String accessChannel;
 	private String checkDigit;
 	private String branchCode;
@@ -34,6 +34,51 @@ public class Payment
 	private String errorCode;
 	private String errorDesc;
 	private String fileName;
+	
+	private static String ADVISED_OPTIONS;
+	private static String TIMEOUT_OPTIONS;
+	private static String CANCELED_OPTIONS;
+	
+	
+	static 
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("<select onchange=\"changeMap.set('_pay_key_'.toString(), this.value);\">")
+		.append("<option selected value='ADVISED'>ADVISED</option>")
+		.append("<option value='CANCELED'>CANCEL</option>")
+		.append("</select>");
+		ADVISED_OPTIONS = sb.toString();
+		
+		sb = new StringBuilder();
+		sb.append("<select onchange=\"changeMap.set('_pay_key_'.toString(), this.value);\">")
+		.append("<option selected value='TIMEOUT'>TIMEOUT</option>")
+		.append("<option value='CANCELED'>CANCEL</option>")
+		.append("</select>");
+		TIMEOUT_OPTIONS = sb.toString();
+		
+		sb = new StringBuilder();
+		sb.append("<select onchange=\"changeMap.set('_pay_key_'.toString(), this.value);\">")
+		.append("<option selected value='CANCELED'>CANCEL</option>")
+		.append("<option value='UNCANCEL'>UN CANCEL</option>")
+		.append("</select>");
+		CANCELED_OPTIONS = sb.toString();
+		sb = null;
+	}
+	
+	public String ADVISED_OPTIONS(String paymentKey)
+	{
+		return ADVISED_OPTIONS.replaceFirst("_pay_key_", paymentKey);
+	}
+	
+	public String TIMEOUT_OPTIONS(String paymentKey)
+	{
+		return TIMEOUT_OPTIONS.replaceFirst("_pay_key_", paymentKey);
+	}
+	
+	public String CANCELED_OPTIONS(String paymentKey)
+	{
+		return CANCELED_OPTIONS.replaceFirst("_pay_key_", paymentKey);
+	}
 	
 	/**
 	 * @return the sadadNumber
@@ -189,20 +234,20 @@ public class Payment
 	}
 
 	/**
-	 * @return the bankName
+	 * @return the bankId
 	 */
-	public String getBankName()
+	public String getBankId()
 	{
-		return bankName;
+		return bankId;
 	}
 
 	/**
-	 * @param bankName
+	 * @param bankId
 	 *            the bankName to set
 	 */
-	public void setBankName(String bankName)
+	public void setBankId(String bankId)
 	{
-		this.bankName = bankName;
+		this.bankId = bankId;
 	}
 
 	/**
@@ -474,22 +519,5 @@ public class Payment
 	public void setFileName(String fileName)
 	{
 		this.fileName = fileName;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString()
-	{
-		return "Payment [" + (sadadNumber != null ? "sadadNumber=" + sadadNumber + ", " : "") + (bankNumber != null ? "bankNumber=" + bankNumber + ", " : "") + (reversalNumber != null ? "reversalNumber=" + reversalNumber + ", " : "")
-				+ (groupNumber != null ? "groupNumber=" + groupNumber + ", " : "") + (billerTransactionNumber != null ? "billerTransactionNumber=" + billerTransactionNumber + ", " : "")
-				+ (billerId != null ? "billerId=" + billerId + ", " : "") + (billNumber != null ? "billNumber=" + billNumber + ", " : "") + (accountNumber != null ? "accountNumber=" + accountNumber + ", " : "")
-				+ (billCycle != null ? "billCycle=" + billCycle + ", " : "") + (bankName != null ? "bankName=" + bankName + ", " : "") + (accessChannel != null ? "accessChannel=" + accessChannel + ", " : "")
-				+ (checkDigit != null ? "checkDigit=" + checkDigit + ", " : "") + (branchCode != null ? "branchCode=" + branchCode + ", " : "") + (districtCode != null ? "districtCode=" + districtCode + ", " : "")
-				+ (paymentType != null ? "paymentType=" + paymentType + ", " : "") + (paymentMethod != null ? "paymentMethod=" + paymentMethod + ", " : "") + (serviceId != null ? "serviceId=" + serviceId + ", " : "")
-				+ (beneficiaryId != null ? "beneficiaryId=" + beneficiaryId + ", " : "") + (customerId != null ? "customerId=" + customerId + ", " : "") + (refundId != null ? "refundId=" + refundId + ", " : "")
-				+ (paymentStatus != null ? "paymentStatus=" + paymentStatus + ", " : "") + (amount != null ? "amount=" + amount + ", " : "") + (processingDate != null ? "processingDate=" + processingDate + ", " : "")
-				+ (errorCode != null ? "errorCode=" + errorCode + ", " : "") + (errorDesc != null ? "errorDesc=" + errorDesc + ", " : "") + (fileName != null ? "fileName=" + fileName : "") + "]";
 	}
 }

@@ -105,8 +105,19 @@
 						<!-- Buttons Group -->
 						<tr>
 							<td>
-								<input type="button" class="button" onclick="doPostUrl('<portlet:resourceURL id="core_PaymentsSummary"/>', 2)" value="<fmt:message key="ebpp.portlet.button.payments" bundle="${bndlLang}" />" />
-								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.audit" bundle="${bndlLang}"/>" onclick='doPostUrl("<portlet:resourceURL id="core_AuditSummary"/>", 2);'/>
+								<portlet:resourceURL id="core_PaymentsSummary" var="paymentSummaryUrl">
+									<portlet:param name="param_paymentId" value="${psb.refunds[psb.refundKey].paymentSptn}"/>
+									<portlet:param name="param_paymentIdType" value="SPTN"/>
+									<portlet:param name="param_operation" value="callPaymentService_ListById"/>
+								</portlet:resourceURL>
+								<input type="button" class="button" onclick="doPostUrl('${paymentSummaryUrl}', 2)" value="<fmt:message key="ebpp.portlet.button.payments" bundle="${bndlLang}" />" <c:out value="${empty psb.refunds[psb.refundKey].paymentSptn ? 'disabled' : ''}" /> />
+								
+								<portlet:resourceURL id="core_AuditSummary" var="audit4Refund">
+									<portlet:param name="param_auditEntity" value="REFUND"/>
+									<portlet:param name="param_auditSadadKey" value="${psb.refunds[psb.refundKey].refundId}"/>
+									<portlet:param name="param_operation" value="callAuditService_ListAudit"/>
+								</portlet:resourceURL>
+								<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.audit" bundle="${bndlLang}"/>" onclick='doPostUrl("${audit4Refund}", 2);'/>
 								<form method="post" action="<portlet:actionURL/>">
 									<input type="hidden" name="fpWhereTo" id="fpWhereTo" value=""/>
 									<input type="submit" class="button" onclick="navigate(this);" name="back" value="<fmt:message key="ebpp.portlet.button.back" bundle="${bndlLang}"/>"/>

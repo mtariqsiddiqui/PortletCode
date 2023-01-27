@@ -16,8 +16,8 @@
 									<table class="tableclass">
 										<tbody>
 											<tr>
-												<th style="width: 25%"><fmt:message key="district-code.portlet.label.district-code" bundle="${bndlLang}" />:</th>
-												<td style="width: 25%">${DistrictList[psb.districtCode].code}</td>
+												<th style="width: 25%"><fmt:message key="district-code.portlet.label.district-code" bundle="${bndlLang}" /></th>
+												<td style="width: 25%">${psb.selectedDistrictCode.districtCode}</td>
 											</tr>
 											<!-- End: Data display fields -->
 										</tbody>
@@ -27,10 +27,9 @@
 									<table class="tableclass">
 										<tbody>
 											<tr>
-												<th style="width: 25%"><fmt:message key="district-code.portlet.label.status" bundle="${bndlLang}" />:</th>
-												<td style="width: 25%">${DistrictList[psb.districtCode].status}</td>
-											</tr>
-											
+												<th style="width: 25%"><fmt:message key="district-code.portlet.label.status" bundle="${bndlLang}" /></th>
+												<td style="width: 25%">${psb.selectedDistrictCode.status}</td>
+											</tr>											
 											<!-- End: Data display fields -->
 										</tbody>
 									</table>
@@ -39,8 +38,7 @@
 							<!-- End: Data display fields -->
 							<!-- End: PageContentsContainer -->
 						</tbody>
-					</table>
-							
+					</table>							
 				</td>
 			</tr>
 			<!-- Buttons Group -->
@@ -51,9 +49,9 @@
 						<fmt:message var="btnStatusLabel" key="district-code.portlet.button.activate" bundle="${bndlLang}" />								
 					</c:if>
 					<portlet:resourceURL id="QueryDistrictCodeDetails" var="toggleStatusUrl">
-						<portlet:param name="reqAction" value="toggleStatus"/>
+						<portlet:param name="param_operation" value="callActivateOrDeActivateDistrictCode"/>
 					</portlet:resourceURL>
-					<input type="button" class="button" value="${btnStatusLabel}" onclick="doPostUrl('${toggleStatusUrl}', 1);" /> 
+					<input type="button" class="button" value="${btnStatusLabel}" onclick="doPostUrl('${toggleStatusUrl}', 1);" />
 					<input type="button" class="button" value="<fmt:message key="district-code.portlet.button.audit" bundle="${bndlLang}" />" onclick="" />
 					<form method="post" action='<portlet:actionURL/>'>
 						<input type="hidden" name="fpWhereTo" id="fpWhereTo" value=""/>
@@ -62,7 +60,6 @@
 				</td>
 			</tr>
 			<!-- END Buttons Group -->
-		</tr>
 		<!-- End Details container -->
 	</tbody>
 </table>

@@ -2,7 +2,7 @@
 <fieldset>
 <table id="detailTable" class="tableclass" style="width:100%">
 	<caption class="myCaption">
-		<span class="caption"><fmt:message key="district-code.portlet.label.district-code-list" bundle="${bndlLang}" />:</span>
+		<span class="caption"><fmt:message key="district-code.portlet.label.district-code-list" bundle="${bndlLang}" /></span>
 	</caption>
 	<!-- Begin: table header row -->
 	<thead>
@@ -16,15 +16,15 @@
 	<tbody>
 		<!-- Begin: repeated data rows -->
 		<c:choose>
-			<c:when test="${empty psb.selectedDistrictCode}">
+			<c:when test="${empty psb.districtCode}">
 				<c:forEach items="${DistrictList}" var="dstCode">
 					<tr>
 						<td>${dstCode.value.code}</td>
 						<td>${dstCode.value.status}</td>
 						<td>
 						<a href="#" title='<fmt:message key="district-code.portlet.more-details" bundle="${bndlLang}"/>'
-							onclick='doPostUrl("<portlet:resourceURL id="QueryDistrictCodeDetails"><portlet:param name="txtDistrictCode" value="${dstCode.value.code}"/></portlet:resourceURL>", 1);'>
-								<img border="0" src='${thisRequest.getContextPath()}/static/images/item_details.png'/>
+							onclick='doPostUrl("<portlet:resourceURL id="QueryDistrictCodeDetails"><portlet:param name="param_districtCode" value="${dstCode.value.code}"/><portlet:param name="param_operation" value="callGetDistrictCode"/></portlet:resourceURL>", 1);' style="display: inline-block;">
+								<img border="0" src='/static/images/item_details.png'/>
 						</a></td>
 					</tr>
 				</c:forEach>	
@@ -35,8 +35,8 @@
 					<td>${DistrictList[psb.districtCode].status}</td>
 					<td>
 					<a href="#" title='<fmt:message key="district-code.portlet.more-details" bundle="${bndlLang}"/>'
-						onclick='doPostUrl("<portlet:resourceURL id="QueryDistrictCodeDetails"><portlet:param name="txtDistrictCode" value="${psb.districtCode}"/></portlet:resourceURL>", 1);'>
-							<img border="0" src='${thisRequest.getContextPath()}/static/images/item_details.png'/>
+						onclick='doPostUrl("<portlet:resourceURL id="QueryDistrictCodeDetails"><portlet:param name="param_districtCode" value="${psb.districtCode}"/><portlet:param name="param_operation" value="callGetDistrictCode"/></portlet:resourceURL>", 1);' style="display: inline-block;">
+							<img border="0" src='/static/images/item_details.png'/>
 					</a></td>
 				</tr>
 			</c:otherwise>
