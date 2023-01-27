@@ -11,7 +11,7 @@ public class Refund
 	private String billerId;
 	private String customerId;
 	private String refundType;
-	private int notificationStatus;
+	private String notificationStatus;
 	private XMLGregorianCalendar expiryDate;
 	private String refundTransactionNumber;
 	private String paymentSptn;
@@ -109,7 +109,7 @@ public class Refund
 	/**
 	 * @return the notificationStatus
 	 */
-	public int getNotificationStatus()
+	public String getNotificationStatus()
 	{
 		return notificationStatus;
 	}
@@ -118,7 +118,7 @@ public class Refund
 	 * @param notificationStatus
 	 *            the notificationStatus to set
 	 */
-	public void setNotificationStatus(int notificationStatus)
+	public void setNotificationStatus(String notificationStatus)
 	{
 		this.notificationStatus = notificationStatus;
 	}

@@ -11,6 +11,7 @@
 			<th><fmt:message key="ebpp.portlet.label.audit-action" bundle="${bndlLang}" /></th>
 			<th><fmt:message key="ebpp.portlet.label.audit-type" bundle="${bndlLang}" /></th>
 			<th><fmt:message key="ebpp.portlet.label.audit-source" bundle="${bndlLang}" /></th>
+			<th><fmt:message key="ebpp.portlet.label.audit-source-id" bundle="${bndlLang}" /></th>
 			<th><fmt:message key="ebpp.portlet.label.options" bundle="${bndlLang}" /></th>
 		</tr>
 	</thead>
@@ -19,11 +20,12 @@
 		<!-- Begin: repeated data rows -->
 		<c:forEach items="${psb.audits}" var="ad">
 			<tr>
-				<td>${ad.auditDate}</td>
-				<td>${ad.auditAction}</td>
-				<td>${ad.auditType}</td>
-				<td>${ad.auditSource}</td>
-				<td>${ad.auditOption}</td>
+				<td>${ad.value.auditDate}</td>
+				<td>${ad.value.auditAction}</td>
+				<td>${ad.value.auditType}</td>
+				<td>${ad.value.auditSource}</td>
+				<td>${ad.value.auditSourceId}</td>
+				<td>${ad.value.auditOption}</td>
 			</tr>
 		</c:forEach>
 		<!-- End: repeated data rows -->

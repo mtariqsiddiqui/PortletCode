@@ -7,23 +7,6 @@
 				<table style="width: 100%">
 					<tbody>
 						<tr>
-							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-						</tr>
-
-					</tbody>
-				</table>
-			</td>
-		</tr>
-		<!--  Details container -->
-		<tr>
-			<td>
-				<!-- Details Segment -->
-				<table style="width: 100%">
-					<tbody>
-						<tr>
 							<td class="myCaption">
 								<fmt:message key="bill-category.portlet.label.bill-category-details" bundle="${bndlLang}" />
 							</td>
@@ -38,15 +21,15 @@
 												<table class="tableclass">
 													<tbody>
 														<tr>
-															<th style="width: 25%"><fmt:message key="bill-category.portlet.label.biller-id" bundle="${bndlLang}" />:</th>
-															<td style="width: 25%">${psb.partnerKey}</td>
+															<th style="width: 25%"><fmt:message key="bill-category.portlet.label.biller-id" bundle="${bndlLang}" /></th>
+															<td style="width: 25%">${psb.billerId}</td>
 														</tr>
 														<tr>
-															<th style="width: 25%"><fmt:message key="bill-category.portlet.label.bill-category" bundle="${bndlLang}" />:</th>
+															<th style="width: 25%"><fmt:message key="bill-category.portlet.label.bill-category" bundle="${bndlLang}" /></th>
 															<td style="width: 25%">${psb.selectedBillCategory.billCategory}</td>
 														</tr>
 														<tr>
-															<th style="width: 25%"><fmt:message key="bill-category.portlet.label.status" bundle="${bndlLang}" />:</th>
+															<th style="width: 25%"><fmt:message key="bill-category.portlet.label.status" bundle="${bndlLang}" /></th>
 															<td style="width: 25%">${psb.selectedBillCategory.status}</td>
 														</tr>
 														<!-- End: Data display fields -->
@@ -57,11 +40,11 @@
 												<table class="tableclass">
 													<tbody>
 														<tr>
-															<th style="width: 25%"><fmt:message key="bill-category.portlet.label.biller-name" bundle="${bndlLang}" />:</th>
-															<td style="width: 25%">${BillerList[psb.partnerKey].partnerName}</td>
+															<th style="width: 25%"><fmt:message key="bill-category.portlet.label.biller-name" bundle="${bndlLang}" /></th>
+															<td style="width: 25%">${BillerList[psb.billerId].partnerName}</td>
 														</tr>
 														<tr>
-															<th style="width: 25%"><fmt:message key="bill-category.portlet.label.description" bundle="${bndlLang}" />:</th>
+															<th style="width: 25%"><fmt:message key="bill-category.portlet.label.description" bundle="${bndlLang}" /></th>
 															<td style="width: 25%">${psb.selectedBillCategory.description}</td>
 														</tr>
 														<!-- End: Data display fields -->
@@ -69,13 +52,10 @@
 												</table>
 											</td>
 										</tr>
-										<!-- End: Data display fields -->
-										<!-- End: PageContentsContainer -->
 									</tbody>
 								</table>
 							</td>
 						</tr>
-						<!-- Buttons Group -->
 						<tr><td>
 								<input type="button" class="button"
 									value="<fmt:message key="bill-category.portlet.button.update" bundle="${bndlLang}" />"
@@ -85,7 +65,7 @@
 									<fmt:message var="btnStatusLabel" key="bill-category.portlet.button.activate" bundle="${bndlLang}" />									
 								</c:if>
 								<portlet:resourceURL id="QueryBillCategoryDetails" var="toggleStatusUrl">
-									<portlet:param name="reqAction" value="toggleStatus"/>
+									<portlet:param name="param_operation" value="callActivateOrDeActivateBillCategory"/>
 								</portlet:resourceURL>
 								<input type="button" class="button" value="${btnStatusLabel}"
 									onclick="doPostUrl('${toggleStatusUrl}', 1);" /> 
@@ -97,12 +77,9 @@
 								</form>
 							</td>
 						</tr>
-						<!-- END Buttons Group -->
 					</tbody>
-				</table> <!-- END Details Segment -->
+				</table>
 			</td>
 		</tr>
-		<!-- End Details container -->
 	</tbody>
 </table>
-<!-- END Main Table -->

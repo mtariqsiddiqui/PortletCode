@@ -44,9 +44,7 @@
 										<tr>
 											<th style="width: 25%"><fmt:message key="sadad-admin.portlet.label.account-bank-name" bundle="${bndlLang}" /></th>
 											<td style="width: 25%">${psb.accountBankName}</td>
-
 										</tr>
-
 										<tr>
 											<th style="width: 25%"><fmt:message key="sadad-admin.portlet.label.refund-max-limit" bundle="${bndlLang}" /></th>
 											<td style="width: 25%">${psb.refundMaxLimit}</td>

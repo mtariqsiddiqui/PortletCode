@@ -3,11 +3,7 @@
 	<tbody>
 		<tr>
 			<td>
-				<table style="width: 100%">
-					<tbody>
-						<tr><td><p class="attnbox"><fmt:message key="bill-category.portlet.marked-fields-are-mandatory" bundle="${bndlLang}" /></p></td></tr>
-					</tbody>
-				</table>
+				<p class="attnbox"><fmt:message key="bill-category.portlet.marked-fields-are-mandatory" bundle="${bndlLang}" /></p>
 			</td>
 		</tr>
 		<tr>
@@ -24,30 +20,30 @@
 										<tbody>
 											<tr class="DataEntryFieldRow">
 												<td class="labelCell" valign="top" nowrap height="27">
-													<label class="label" for="txtBillerId"><fmt:message key="bill-category.portlet.label.biller" bundle="${bndlLang}" />:</label>
+													<label class="label" for="txtBillerId"><fmt:message key="bill-category.portlet.label.biller" bundle="${bndlLang}" /></label>
 												</td>
 												<td class="outputDataCell" style="width: 100%" valign="top" nowrap>
-													<input id="txtBillerId" class="outputData" value="${psb.partnerKey}"  disabled="disabled"/>
-													<input name="txtPartnerKey" value="${psb.partnerKey}" type="hidden"/>
+													<input id="txtBillerId" class="outputData" value="${psb.selectedBillCategory.billerId}"  disabled="disabled" type="text"/>
+													<input name="param_billerId" value="${psb.selectedBillCategory.billerId}" type="hidden"/>
 												</td>
 											</tr>
 
 											<tr class="DataEntryFieldRow">
 												<td class="labelCell" valign="top" nowrap height="27">
-													<label class="label" for="txtBillerCategory"><fmt:message key="bill-category.portlet.label.bill-category" bundle="${bndlLang}" /> : </label>
+													<label class="label" for="txtBillerCategory"><fmt:message key="bill-category.portlet.label.bill-category" bundle="${bndlLang}" /></label>
 												</td>
 												<td class="outputDataCell" style="width: 100%" valign="top" nowrap>
-													<input class="outputData" value="${psb.selectedBillCategory.billCategory}" id="txtBillerCategory" disabled="disabled"/>
-													<input name="txtBillerCategory" value="${psb.selectedBillCategory.billCategory}" type="hidden" />
+													<input class="outputData" value="${psb.selectedBillCategory.billCategory}" id="txtBillerCategory" disabled="disabled" type="text"/>
+													<input name="param_billCategory" value="${psb.selectedBillCategory.billCategory}" type="hidden" />
 												</td>
 											</tr>
 
 											<tr class="DataEntryFieldRow">
 												<td class="labelCell" valign="top" nowrap height="27">
-													<label class="label" for="txtDescription"><fmt:message key="bill-category.portlet.label.description" bundle="${bndlLang}" /> : *</label>
+													<label class="label" for="txtDescription"><fmt:message key="bill-category.portlet.label.description" bundle="${bndlLang}" /> *</label>
 												</td>
 												<td class="outputDataCell" style="width: 100%" valign="top" nowrap>
-													<input name="txtDescription" class="outputData" value="${psb.selectedBillCategory.description}" id="txtDescription" autocomplete="off" maxlength="256" type="text">
+													<input name="param_description" class="rqf" value="${psb.selectedBillCategory.description}" id="txtDescription" autocomplete="off" maxlength="100" type="text" />
 												</td>
 											</tr>
 											<!-- End: Data entry fields -->
@@ -55,15 +51,12 @@
 									</table>
 								</td>
 							</tr>
-							<tr>
-								<td></td>
-							</tr>
 							<!-- Buttons Group -->
 							<tr>
 								<td>
-									<input type="hidden" name="reqAction" id="reqAction"/>
-									<input class="button" value="<fmt:message key="bill-category.portlet.button.save" bundle="${bndlLang}" />" onclick="$('#reqAction').val('Save');doQueryFormSubmission('frmUpdateBillCategory', 1);" type="submit" name="btnSave"/>
-									<input class="button" value="<fmt:message key="bill-category.portlet.button.cancel" bundle="${bndlLang}" />" onclick="$('#reqAction').val('Cancel');doQueryFormSubmission('frmUpdateBillCategory', 1);" type="submit" name="btnCancel"/>
+									<input type="hidden" name="param_operation" id="param_operation" value="callUpdateBillCategory"/>
+									<input class="button" value="<fmt:message key="bill-category.portlet.button.save" bundle="${bndlLang}" />" onclick="doQueryFormSubmission('frmUpdateBillCategory', 1);" type="submit" />
+									<input class="button" value="<fmt:message key="bill-category.portlet.button.cancel" bundle="${bndlLang}" />" onclick="doPostUrl('<portlet:resourceURL id="QueryBillCategoryDetails" />', 1);" type="button" />
 								</td>
 							</tr>
 						</tbody>

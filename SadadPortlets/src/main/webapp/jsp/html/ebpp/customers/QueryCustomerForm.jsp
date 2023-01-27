@@ -30,11 +30,11 @@
 												<tr class="DataEntryFieldRow">
 													<td class="labelCell" nowrap style="width:200px; vertical-align:top; height: 27;">
 														<label class="label" for="cmbOfficialIdType">
-															<fmt:message key="ebpp.portlet.label.official-id-type" bundle="${bndlLang}"/>&nbsp;:&nbsp;*
+															<fmt:message key="ebpp.portlet.label.official-id-type" bundle="${bndlLang}"/>&nbsp;*
 														</label>
 													</td>
 													<td class="outputDataCell" style="width: 100%" valign="top" nowrap>
-														<select name="param_customerIdType" class="outputData" required="true" id="cmbOfficialIdType">
+														<select name="param_customerIdType" class="rqf" id="cmbOfficialIdType">
 															<option value="">
 																<fmt:message key="ebpp.portlet.label.please-select" bundle="${bndlLang}"/>
 															</option>
@@ -48,11 +48,11 @@
 												<tr class="DataEntryFieldRow">
 													<td class="labelCell" nowrap style="width:200px; vertical-align:top; height: 27;">
 														<label class="label" for="txtOfficialIdNumber">
-															<fmt:message key="ebpp.portlet.label.official-id-number" bundle="${bndlLang}"/>&nbsp;:&nbsp;*
+															<fmt:message key="ebpp.portlet.label.official-id-number" bundle="${bndlLang}"/>&nbsp;*
 														</label>
 													</td>
 													<td class="outputDataCell" style="width: 100%; vertical-align:top" nowrap>
-														<input name="param_customerId" class="outputData" value="${psb.customerId}" required="true" id="txtOfficialIdNumber" autocomplete="off" maxlength="256" type="text">
+														<input name="param_customerId" class="rqf" value="${psb.customerId}" id="txtOfficialIdNumber" autocomplete="off" maxlength="25" type="text">
 													</td>
 												</tr>
 												<!-- End: Data entry fields -->
@@ -63,8 +63,10 @@
 								<!-- Buttons Group -->
 								<tr>
 									<td>
+										<input type="hidden" name="param_operation" value="callCustomerService_GetByKey"/>
 										<input type="submit" class="button" value='<fmt:message key="ebpp.portlet.button.submit" bundle="${bndlLang}"/>' onclick="doQueryFormSubmission('frmQueryCustomer');" />
-										<input type="reset" class="button" value='<fmt:message key="ebpp.portlet.button.clear" bundle="${bndlLang}"/>' />
+										<portlet:resourceURL id="QueryCustomerForm" var="clearURL"><portlet:param name="param_operation" value="clearSessionBeanObject"/></portlet:resourceURL>
+										<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.clear" bundle="${bndlLang}"/>" onclick="doQueryFormReset('${clearURL}');" />
 									</td>
 								</tr>
 							</tbody>

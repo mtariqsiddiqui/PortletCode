@@ -10,38 +10,46 @@
 			<th><fmt:message key="biller.portlet.label.biller-id" bundle="${bndlLang}" /></th>
 			<th><fmt:message key="biller.portlet.label.biller-name" bundle="${bndlLang}" /></th>
 			<th><fmt:message key="biller.portlet.label.status" bundle="${bndlLang}" /></th>
-			<th><fmt:message key="biller.portlet.label.action" bundle="${bndlLang}" />:</th>
+			<th><fmt:message key="biller.portlet.label.action" bundle="${bndlLang}" /></th>
 		</tr>
 	</thead>
 	<!-- End: table header row -->
 	<tbody>
 		<!-- Begin: repeated data rows -->
 	<c:choose>
-		<c:when test="${empty psb.selectedBiller}">
-			<c:forEach items="${BillerList}" var="biller">
+		<c:when test="${empty psb.billerId}">
+			<c:forEach items="${psb.billerMap}" var="biller">
 				<tr>
-					<td>${biller.value.partnerKey}</td>
-					<td>${biller.value.partnerName}</td>
-					<td>${biller.value.partnerStatus}</td>
+					<td>${biller.value.billerId}</td>
+					<td>${biller.value.billerName}</td>
+					<td>${biller.value.status}</td>
 					<td>
+					<portlet:resourceURL id="QueryBillerDetails" var="queryBillerDetailsUrl">
+						<portlet:param name="param_billerId" value="${biller.key}"/>
+						<portlet:param name="param_operation" value="callGetPartnerDetails"/>						
+					</portlet:resourceURL>					
 					<a href="#" title='<fmt:message key="biller.portlet.more-details" bundle="${bndlLang}"/>'
-						onclick='doPostUrl("<portlet:resourceURL id="QueryBillerDetails"><portlet:param name="txtBillerId" value="${biller.value.partnerKey}"/></portlet:resourceURL>", 1);'>
+						onclick='doPostUrl("${queryBillerDetailsUrl}", 1);' style="display: inline-block;">
 							<img border="0"
-							src='${thisRequest.getContextPath()}/static/images/item_details.png'/>
+							src='/static/images/item_details.png'/>
 					</a></td>
 				</tr>
 			</c:forEach>	
 		</c:when>
 		<c:otherwise>
 			<tr>
-				<td>${psb.partnerKey}</td>
-				<td>${BillerList[psb.partnerKey].partnerName}</td>
-				<td>${BillerList[psb.partnerKey].partnerStatus}</td>
+				<td>${psb.billerId}</td>
+				<td>${psb.billerMap[psb.billerId].billerName}</td>
+				<td>${psb.billerMap[psb.billerId].status}</td>
 				<td>
+				<portlet:resourceURL id="QueryBillerDetails" var="queryBillerDetailsUrl">
+					<portlet:param name="param_billerId" value="${psb.billerId}"/>
+					<portlet:param name="param_operation" value="callGetPartnerDetails"/>
+				</portlet:resourceURL>
 				<a href="#" title='<fmt:message key="biller.portlet.more-details" bundle="${bndlLang}"/>'
-					onclick='doPostUrl("<portlet:resourceURL id="QueryBillerDetails"><portlet:param name="txtBillerId" value="${psb.partnerKey}"/></portlet:resourceURL>", 1);'>
+					onclick='doPostUrl("${queryBillerDetailsUrl}", 1);' style="display: inline-block;">
 						<img border="0"
-						src='${thisRequest.getContextPath()}/static/images/item_details.png'/>
+						src='/static/images/item_details.png'/>
 				</a></td>
 			</tr>
 		</c:otherwise>

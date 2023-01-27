@@ -33,8 +33,8 @@
 					<portlet:resourceURL var="refundDetailsUrl" id="core_RefundsDetails">
 						<portlet:param name="param_refundKey" value="${rfd.key}"/>
 					</portlet:resourceURL>
-					<a href="#" title="Click to see more details" onclick='doPostUrl("${refundDetailsUrl}", 1);'>
-						<img width="25" height="25" border="0" alt="Refund Details" src='${thisRequest.getContextPath()}/static/images/option_icon.png'>
+					<a href="#" title="Click to see more details" onclick='doPostUrl("${refundDetailsUrl}", 1);' style="display: inline-block;">
+						<img width="25" height="25" border="0" alt="Refund Details" src='/static/images/option_icon.png'>
 					</a>
 				</td>
 			</tr>
@@ -42,6 +42,10 @@
 		<!-- End: repeated data rows -->
 	</tbody>
 </table>
-<p><input id="applyPaymentChanges" class="button" style="display: inline" value="<fmt:message key="ebpp.portlet.button.apply-changes" bundle="${bndlLang}"/>" onclick="" type="submit"></p>
-
+<p>
+<c:set var="showButton" value="No" scope="page"/>
+<c:if test="${psb.partnerType == 'sadad' && psb.userType == 'admin' && showButton == 'Yes'}">
+<input id="applyPaymentChanges" class="button" style="display: inline" value="<fmt:message key="ebpp.portlet.button.apply-changes" bundle="${bndlLang}"/>" onclick="" type="submit">
+</c:if>
+</p>
 </fieldset>

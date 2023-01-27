@@ -21,7 +21,7 @@
 			<c:forEach items="${psb.rejectedPayments}" var="rp">
 			<tr>				
 				<td>${BillerList[psb.billerId].partnerName}</td>
-				<td>${rp.sadadNumber}</td>
+				<td>${rp.billerTransactionNumber}</td>
 				<td>${rp.errorCode}</td>
 				<td>${rp.errorDesc}</td>
 				<td>${rp.fileName}</td>

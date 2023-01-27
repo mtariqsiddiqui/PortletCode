@@ -17,31 +17,39 @@
 	<tbody>
 		<!-- Begin: repeated data rows -->
 	<c:choose>
-		<c:when test="${empty psb.selectedBank}">
-			<c:forEach items="${BankList}" var="bank">
+		<c:when test="${empty psb.bankId}">
+			<c:forEach items="${psb.bankMap}" var="bank">
 				<tr>
-					<td>${bank.value.partnerKey}</td>
-					<td>${bank.value.partnerName}</td>
-					<td>${bank.value.partnerStatus}</td>
+					<td>${bank.value.bankId}</td>
+					<td>${bank.value.bankName}</td>
+					<td>${bank.value.status}</td>
 					<td>
+					<portlet:resourceURL id="QueryBankDetails" var="queryBankDetailsUrl">
+						<portlet:param name="param_bankId" value="${bank.key}"/>
+						<portlet:param name="param_operation" value="callGetPartnerDetails"/>
+					</portlet:resourceURL>
 					<a href="#" title='<fmt:message key="bank.portlet.more-details" bundle="${bndlLang}"/>'
-						onclick='doPostUrl("<portlet:resourceURL id="QueryBankDetails"><portlet:param name="txtBankId" value="${bank.value.partnerKey}"/></portlet:resourceURL>", 1);'>
+						onclick='doPostUrl("${queryBankDetailsUrl}", 1);' style="display: inline-block;">
 							<img border="0"
-							src='${thisRequest.getContextPath()}/static/images/item_details.png'/>
+							src='/static/images/item_details.png'/>
 					</a></td>
 				</tr>
 			</c:forEach>	
 		</c:when>
 		<c:otherwise>
 			<tr>
-				<td>${psb.partnerKey}</td>
-				<td>${BankList[psb.partnerKey].partnerName}</td>
-				<td>${BankList[psb.partnerKey].partnerStatus}</td>
+				<td>${psb.bankId}</td>
+				<td>${psb.bankMap[psb.bankId].bankName}</td>
+				<td>${psb.bankMap[psb.bankId].status}</td>
 				<td>
+				<portlet:resourceURL id="QueryBankDetails" var="queryBankDetailsUrl">
+					<portlet:param name="param_bankId" value="${psb.bankId}"/>
+					<portlet:param name="param_operation" value="callGetPartnerDetails"/>
+				</portlet:resourceURL>
 				<a href="#" title='<fmt:message key="bank.portlet.more-details" bundle="${bndlLang}"/>'
-					onclick='doPostUrl("<portlet:resourceURL id="QueryBankDetails"><portlet:param name="txtBankId" value="${psb.partnerKey}"/></portlet:resourceURL>", 1);'>
+					onclick='doPostUrl("${queryBankDetailsUrl}", 1);' style="display: inline-block;">
 						<img border="0"
-						src='${thisRequest.getContextPath()}/static/images/item_details.png'/>
+						src='/static/images/item_details.png'/>
 				</a></td>
 			</tr>
 		</c:otherwise>

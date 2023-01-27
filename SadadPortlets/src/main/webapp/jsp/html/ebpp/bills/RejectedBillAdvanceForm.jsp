@@ -16,10 +16,10 @@
 			<tbody>
 				<tr class="DataEntryFieldRow">
 					<td class="labelCell"style="width: 20%; vertical-align: top; height: 27" nowrap>
-						<label class="label" for="fpRquid"><fmt:message key="ebpp.portlet.label.rquid" bundle="${bndlLang}"/> *</label>
+						<label class="label" for="txtRquid"><fmt:message key="ebpp.portlet.label.rquid" bundle="${bndlLang}"/> *</label>
 					</td>
 					<td class="outputDataCell" style="width: 80%; vertical-align: top;" nowrap>
-						<input type="text" name="param_rquid" id="txtRquid" value="${psb.rquid}" class="outputData" autocomplete="off" maxlength="256" required="required"/>
+						<input type="text" name="param_rquid" id="txtRquid" value="${psb.rquid}" autocomplete="off" maxlength="36" class="rqf"/>
 					</td>
 				</tr>
 					<tr class="DataEntryFieldRow">
@@ -29,32 +29,65 @@
 							</label>
 						</td>
 						<td class="outputDataCell" style="width: 80%; vertical-align: top;" nowrap>
-							<select name="param_billerId" class="outputData" required="true" id="fpBillerId" onchange="onChangePartnerKey(this);">
-								<option value="">
-									<fmt:message key="ebpp.portlet.label.please-select" bundle="${bndlLang}"/>
-								</option>
-								<c:forEach items="${BillerList}" var="biller">
-									<option <c:if test="${psb.billerId == biller.value.partnerKey}">selected</c:if>
-										value="<c:out value="${biller.value.partnerKey}" />">
-										<c:out value="${biller.value.partnerName}" />
-									</option>
-								</c:forEach>
+							<select name="param_billerId" class="rqf" id="fpBillerId" onchange="onChangePartnerKey(this);">
+								<c:choose>
+									<c:when test="${psb.partnerType == 'biller' }">
+										<option selected value="<c:out value='${psb.partnerKey}' />">
+											<c:out value="${BillerList[psb.partnerKey].partnerName}" />
+										</option>
+									</c:when>
+									<c:when test="${psb.partnerType == 'aggregator' }">
+										<option value=""><fmt:message key="ebpp.portlet.label.please-select" bundle="${bndlLang}"/></option>
+										<c:forEach items="${AggregatorBillerList[psb.partnerKey]}" var="biller">
+											<option <c:if test="${psb.billerId == biller.value.partnerKey}">selected</c:if>
+												value="<c:out value="${biller.value.partnerKey}" />">
+												<c:out value="${biller.value.partnerName}" />
+											</option>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<option value="">
+											<fmt:message key="ebpp.portlet.label.please-select" bundle="${bndlLang}"/>
+										</option>
+										<c:forEach items="${BillerList}" var="biller">
+											<option <c:if test="${psb.billerId == biller.value.partnerKey}">selected</c:if>
+												value="<c:out value="${biller.value.partnerKey}" />">
+												<c:out value="${biller.value.partnerName}" />
+											</option>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</select>
+							<%--Display Search Engine to SADAD & Bank users --%>
+							<c:if test="${psb.partnerType == 'bank' or psb.partnerType == 'sadad'}">
+								<button id="callSrchEngnBtn" type="button" onclick="callSearchEngine('fpBillerId', 'e13b5b1608ad566f94ba9fe7849aca38');">
+									<img src="/static/images/search.png" height="12px" width="12px">
+								</button>
+							</c:if>
+							<c:if test="${psb.partnerType == 'aggregator'}"> <%-- Or to Aggregator Users --%>
+								<button id="callSrchEngnBtn" type="button" onclick="callSearchEngine('cmbPartnerKey', 'a5e383e5e7a87a6844dd02fa04944c35&q1=${psb.hashedPartnerKey}');">
+									<img src="/static/images/search.png" height="12px" width="12px">
+								</button>
+							</c:if>
 						</td>
 					</tr>
 					<tr class="DataEntryFieldRow">
 						<td class="labelCell"style="width: 20%; vertical-align: top; height: 27" nowrap>
-							<label class="label" for="fpAccountNumber"><fmt:message key="ebpp.portlet.label.bill-number" bundle="${bndlLang}"/> *</label>
+							<label class="label" for="txtEntityKey"><fmt:message key="ebpp.portlet.label.bill-number" bundle="${bndlLang}"/> *</label>
 						</td>
-						<td class="outputDataCell" width="100%" valign="top" nowrap="">
-							<input name="param_ebppEntityKey" class="outputData" value="${psb.ebppEntityKey}" id="fpAccountNumber" autocomplete="off" maxlength="256" type="text" required="required"/>
+						<td class="outputDataCell" width="100%" valign="top" nowrap>
+							<input name="param_ebppEntityKey" class="rqf" value="${psb.ebppEntityKey}" id="txtEntityKey" autocomplete="off" maxlength="50" type="text"/>
 						</td>
 					</tr>
 					<tr>
-						<td align="left" colspan="2">
+						<td colspan="2">
+							<input type="hidden" name="param_operation" value="callBulkUploadService_GetRejected" />
+							<input type="hidden" name="param_searchType" value="BILL" />
 							<input class="button" value="<fmt:message key="ebpp.portlet.button.search" bundle="${bndlLang}"/>" onclick="doQueryFormSubmission('frmAdvRejBill', 2)" type="submit"/>
-							<input class="button" value="<fmt:message key="ebpp.portlet.button.clear" bundle="${bndlLang}"/>" onclick=";" type="button"/>
-							<div style="display: inline;">
+							<portlet:resourceURL id="RejectedBillAdvanceForm" var="clearURL"><portlet:param name="param_operation" value="clearSessionBeanObject"/></portlet:resourceURL>
+							<input type="button" class="button" value="<fmt:message key="ebpp.portlet.button.clear" bundle="${bndlLang}"/>" onclick="doQueryFormReset('${clearURL}');" />							
+						&nbsp;&nbsp;
+							<div style="display: inline-block;">
 								<a href="#" onclick="doPostUrl('<portlet:resourceURL id="RejectedBillForm"/>', 1);"><fmt:message key="ebpp.portlet.label.simple-search" bundle="${bndlLang}"/> </a>
 							</div>	
 						</td>

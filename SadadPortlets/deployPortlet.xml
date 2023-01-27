@@ -10,7 +10,7 @@
             action="update"
             domain="rel"
             uid="SadadEBPPPortal.Sadad.Portlets.webmod">
-            <url>file:///D:/SADAD_Dev/Workspaces/S2/Portal_POC/SadadPortlets/target/SadadPortlets-0.0.1-SNAPSHOT.war</url>
+            <url>file:///T:/IBM/GIT_Portal_M720/sadadportlets/target/SadadEBPPPortal_SadadPortlets.war</url>
         </web-app>
 	</portal>
 </request>

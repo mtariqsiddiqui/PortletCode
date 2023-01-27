@@ -21,14 +21,12 @@
 											
 											<tr class="DataEntryFieldRow">
 												<td class="labelCell" valign="top" nowrap height="27">
-													<label class="label" for="txtDistrictCode"><fmt:message key="district-code.portlet.label.district-code" bundle="${bndlLang}" /> : </label>
+													<label class="label" for="txtDistrictCode"><fmt:message key="district-code.portlet.label.district-code" bundle="${bndlLang}" /> *</label>
 												</td>
 												<td class="outputDataCell" style="width: 100%" valign="top" nowrap>
-													<input name="txtDistrictCode" id="txtDistrictCode" class="outputData" value="${psb.selectedDistrictCode.districtCode}" maxlength="256" autocomplete="off"/>
+													<input type="text" name="param_districtCode" id="txtDistrictCode" class="rqf" value="${psb.districtCode}" maxlength="10" pattern="[A-Za-z0-9]{1,10}" title='<fmt:message key="district-code.portlet.title.district-code" bundle="${bndlLang}"/>' autocomplete="off"/>
 												</td>
 											</tr>
-
-											
 											<!-- End: Data entry fields -->
 										</tbody>
 									</table>
@@ -40,9 +38,10 @@
 							<!-- Buttons Group -->
 							<tr>
 								<td>
-									<input type="hidden" name="reqAction" id="reqAction"/>
+									<input type="hidden" name="param_status" value="INACTIVE"/>
+									<input type="hidden" name="param_operation" value="callCreateDistrictCode"/>
 									<input class="button" value="<fmt:message key="district-code.portlet.button.save" bundle="${bndlLang}" />" onclick="doQueryFormSubmission('frmCreateDistrictCode', 1);" type="submit" name="btnSave"/>
-									<input class="button" value="<fmt:message key="district-code.portlet.button.cancel" bundle="${bndlLang}" />" type="reset" name="btnCancel"/>
+									<input class="button" value="<fmt:message key="district-code.portlet.button.cancel" bundle="${bndlLang}" />" type="button" onclick="displayErrorOrMessage();$('#frmCreateDistrictCode').trigger('reset');"/>
 								</td>
 							</tr>
 						</tbody>

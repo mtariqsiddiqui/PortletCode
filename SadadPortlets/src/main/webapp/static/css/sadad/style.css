@@ -1,5 +1,5 @@
-@CHARSET "ISO-8859-1";
-
+@charset "UTF-8"; 
+ 
 .modal64 {
 	display: none;
 	position: fixed;
@@ -8,73 +8,111 @@
 	left: 0;
 	height: 100%;
 	width: 100%;
-	background: rgba(255, 255, 255, .8) url('../../images/ajax-loader_64.gif')
+	background: rgba(255, 255, 255, .8) url(/static/images/ajax-loader_64.gif)
 		50% 50% no-repeat;
 }
 
-img {
-	float: right;
-}
-
-.sadadbox {
-  padding-right: 15px;
-  padding-left: 15px;
-	background-color: #f5f5f5;
-	border-radius: 5px;
-	box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
-	margin: 50px auto;
-	overflow: hidden;
-	padding: 40px;
-}
-@media (min-width: 768px) {
-  .sadadbox {
-    width: 400px;
-  }
-}
-@media (min-width: 992px) {
-  .sadadbox {
-    width: 400px;
-  }
-}
-@media (min-width: 1200px) {
-  .sadadbox {
-    width: 400px;
-  }
-}
-
-.sadadbox .logo {
-	float: left;
-	margin: 10px;
-	width: 100%;
-}
-
-.gap {
-	  margin-bottom: 10px;
-}
-
 span.INFO_Message {
-	display: block;
-	border: 1px solid #00a900;
 	margin: 0px 0px 10px 0px;
-	padding: 10px 50px;
-	font-weight: bold;
-	background: #c0ff9e url(../../images/info.png) no-repeat left center;
 }
 
 span.WARNING_Message {
-	display: block;
-	border: 1px solid #ff7f00;
 	margin: 0px 0px 10px 0px;
-	padding: 10px 50px;
-	font-weight: bold;
-	background: #ff9 url(../../images/attn.png) no-repeat left center;
 }
 
 span.ERROR_Message {
-	display: block;
-	border: 1px solid #f00;
 	margin: 0px 0px 10px 0px;
-	padding: 10px 50px;
-	font-weight: bold;
-	background: #ffd3c3 url(../../images/error.png) no-repeat left center;
+}
+
+progress:not([value]) {
+   /* Styling here */
+}
+
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+   appearance: none;
+
+  width: 100%;
+  height: 20px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+#searchWindow { 
+	display: none;
+}
+
+.srchEngnWindow {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 1em;
+	border-width: 1px;
+}
+
+.srchEngnLabelInput {
+	display: inline;
+	height: auto;
+	width: auto;
+	padding-right: 25px;
+	float: none;
+}
+
+.srchEngnRadio {
+	padding-right: 25px;
+}
+
+.srchEngnSelect {
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 1em;
+	height: 100%;
+	width: 400px;
+}
+
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}
+
+input:-moz-read-only { /* For Firefox */
+  background-color: #f4f4f4;
+}
+
+input:read-only {
+  background-color: #f4f4f4;
+}
+
+textarea:-moz-read-only { /* For Firefox */
+  background-color: #f4f4f4;
+}
+
+textarea:read-only {
+  background-color: #f4f4f4;
+}
+
+td.aprvd_chng {
+    font-weight: bold;
+    color:#003300;
+	background-color:#ccffb3;
+}
+
+td.rjctd_chng {
+    text-decoration: line-through;
+}
+
+td.crnt_rcrd {
+	color:#003300;
+	background-color:#ccffb3 !important;
+}
+
+td.pndg_rcrd {
+	color:#660000;
+	background-color:#ffb3b3 !important;
 }

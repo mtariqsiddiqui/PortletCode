@@ -22,8 +22,8 @@
 			<td>${psb.customer.customerStatus}</td>
 			<td>
 				<portlet:resourceURL var="customerDetailsUrl" id="core_CustomerDetails"/>
-				<a href="#" title="Click to see more details" onclick='doPostUrl("${customerDetailsUrl}", 1);'>
-					<img width="25" height="25" border="0" alt="Account Details" src='${thisRequest.getContextPath()}/static/images/option_icon.png'>
+				<a href="#" title="Click to see more details" onclick='doPostUrl("${customerDetailsUrl}", 1);' style="display: inline-block;">
+					<img width="25" height="25" border="0" alt="Account Details" src='/static/images/option_icon.png'>
 				</a>
 			</td>
 		</tr>

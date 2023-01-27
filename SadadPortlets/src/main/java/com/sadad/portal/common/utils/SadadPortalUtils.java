@@ -19,8 +19,14 @@ import com.ibm.ws.portletcontainer.portlet.PortletUtils;
  */
 public class SadadPortalUtils
 {
+	public static ServletContext getServletContextForRequest(PortletRequest request)
+	{
+		return PortletUtils.getHttpServletRequest(request).getServletContext();
+	}
+	
 	/**
-	 * Formats the logging output, takes the input of String and desired length, then append blank space (upto desired length) in front of String and return
+	 * Formats the logging output, takes the input of String and desired length, 
+	 * then append blank space (upto desired length) in front of String and return
 	 * 
 	 * @param str
 	 * @param len

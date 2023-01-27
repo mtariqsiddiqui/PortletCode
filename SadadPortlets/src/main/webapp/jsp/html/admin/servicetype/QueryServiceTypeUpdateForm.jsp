@@ -20,40 +20,40 @@
 										<tbody>
 											<tr class="DataEntryFieldRow">
 												<td class="labelCell" valign="top" nowrap height="27">
-													<label class="label" for="txtParentServiceId"><fmt:message key="service-type.portlet.label.parent-service-type" bundle="${bndlLang}" />:</label>
+													<label class="label" for="txtParentServiceId"><fmt:message key="service-type.portlet.label.parent-service-type" bundle="${bndlLang}" /></label>
 												</td>
 												<td class="outputDataCell" style="width: 100%" valign="top" nowrap>
-													<input id="txtParentServiceId" class="outputData" value="${psb.selectedServiceType.serviceType}"  disabled="disabled"/>
-													<input name="txtParentServiceType" value="${psb.selectedServiceType.serviceType}" type="hidden"/>
+													<input id="txtParentServiceId" value="${psb.selectedServiceType.parentServiceTypeCode}"  disabled="disabled"/>
+													<input name="param_parentServiceTypeCode" value="${psb.selectedServiceType.parentServiceTypeCode}" type="hidden"/>
 												</td>
 											</tr>
 
 											<tr class="DataEntryFieldRow">
 												<td class="labelCell" valign="top" nowrap height="27">
-													<label class="label" for="txtServiceTypeTag"><fmt:message key="service-type.portlet.label.service-type-tag" bundle="${bndlLang}" /> : </label>
+													<label class="label" for="txtServiceTypeTag"><fmt:message key="service-type.portlet.label.service-type-tag" bundle="${bndlLang}" /></label>
 												</td>
 												<td class="outputDataCell" style="width: 100%" valign="top" nowrap>
-													<input class="outputData" value="${psb.selectedServiceType.serviceType}" id="txtServiceTypeTag" disabled="disabled"/>
-													<input name="txtServiceTypeTag" value="${psb.selectedServiceType.serviceType}" type="hidden" />
+													<input value="${psb.selectedServiceType.serviceTypeCode}" id="txtServiceTypeTag" disabled="disabled"/>
+													<input name="param_serviceTypeTag" value="${psb.selectedServiceType.serviceTypeTag}" type="hidden" />
 												</td>
 											</tr>
 											
 											<tr class="DataEntryFieldRow">
 												<td class="labelCell" valign="top" nowrap height="27">
-													<label class="label" for="txtServiceTypeCode"><fmt:message key="service-type.portlet.label.service-type-code" bundle="${bndlLang}" /> : </label>
+													<label class="label" for="txtServiceTypeCode"><fmt:message key="service-type.portlet.label.service-type-code" bundle="${bndlLang}" /></label>
 												</td>
 												<td class="outputDataCell" style="width: 100%" valign="top" nowrap>
-													<input class="outputData" value="${psb.selectedServiceType.serviceType}" id="txtServiceTypeCode" disabled="disabled"/>
-													<input name="txtServiceTypeCode" value="${psb.selectedServiceType.serviceType}" type="hidden" />
+													<input value="${psb.selectedServiceType.serviceTypeCode}" id="txtServiceTypeCode" disabled="disabled"/>
+													<input name="param_serviceTypeCode" value="${psb.selectedServiceType.serviceTypeCode}" type="hidden" />
 												</td>
 											</tr>
 
 											<tr class="DataEntryFieldRow">
 												<td class="labelCell" valign="top" nowrap height="27">
-													<label class="label" for="txtDescription"><fmt:message key="service-type.portlet.label.description" bundle="${bndlLang}" /> : *</label>
+													<label class="label" for="txtDescription"><fmt:message key="service-type.portlet.label.description" bundle="${bndlLang}" /> *</label>
 												</td>
 												<td class="outputDataCell" style="width: 100%" valign="top" nowrap>
-													<input name="txtDescription" class="outputData" value="${psb.selectedServiceType.description}" id="txtDescription" autocomplete="off" maxlength="256" type="text">
+													<input name="param_description" class="rqf" value="${psb.selectedServiceType.description}" id="txtDescription" autocomplete="off" maxlength="100" type="text">
 												</td>
 											</tr>
 											<!-- End: Data entry fields -->
@@ -61,15 +61,12 @@
 									</table>
 								</td>
 							</tr>
-							<tr>
-								<td></td>
-							</tr>
 							<!-- Buttons Group -->
 							<tr>
 								<td>
-									<input type="hidden" name="reqAction" id="reqAction"/>
-									<input class="button" value="<fmt:message key="service-type.portlet.button.save" bundle="${bndlLang}" />" onclick="$('#reqAction').val('Save');doQueryFormSubmission('frmUpdateServiceType', 1);" type="submit" name="btnSave"/>
-									<input class="button" value="<fmt:message key="service-type.portlet.button.cancel" bundle="${bndlLang}" />" onclick="$('#reqAction').val('Cancel');doQueryFormSubmission('frmUpdateServiceType', 1);" type="submit" name="btnCancel"/>
+									<input type="hidden" name="param_operation" id="param_operation" value="callUpdateAccountType"/>
+									<input class="button" value="<fmt:message key="service-type.portlet.button.save" bundle="${bndlLang}" />" onclick="doQueryFormSubmission('frmUpdateServiceType', 1);" type="submit" />
+									<input class="button" value="<fmt:message key="service-type.portlet.button.cancel" bundle="${bndlLang}" />" onclick="doPostUrl('<portlet:resourceURL id="QueryServiceTypeDetails" />', 1);" type="button" />
 								</td>
 							</tr>
 						</tbody>
